@@ -6,7 +6,7 @@
 
 > 但是搭建出一个好的架构并非易事，有多少人愿意选择去做，还有多少人选择努力去做好，可能寥寥无几，但是你今天看到的，正是你所想要的，一个真正能解决你开发新项目时最大痛点的架构工程，你不需要再麻木 Copy 原有旧项目的代码，只需改动少量代码就能得到想要的效果，你会发现开发新项目其实是一件很快乐的事
 
-> 已经正式投入多个公司项目实践，暂时没有发现任何问题，[点击此处下载Demo](https://raw.githubusercontent.com/getActivity/AndroidProject/master/AndroidProject.apk)
+> 已经正式投入多个公司项目实践，暂时没有发现任何问题，[点击此处下载Demo](AndroidProject.apk)
 
 ![](picture/demo_code.png)
 
