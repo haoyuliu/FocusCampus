@@ -6,7 +6,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build:gradle:3.5.1'
         // AOP 开发插件：https://mvnrepository.com/artifact/org.aspectj/aspectjtools
         classpath 'org.aspectj:aspectjtools:1.9.5'
         // AOP 配置插件：https://github.com/xuexiangjys/XAOP
