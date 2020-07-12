@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
 
-        // 无痛修改包名：https://www.jianshu.com/p/17327e191d2e
-        applicationId "com.hjq.demo"
+        // 无痛修改包名
+        applicationId "com.sam.rental"
 
         // 仅保留中文语种的资源
         resConfig 'zh'
@@ -34,7 +34,7 @@ android {
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-app.pro'
     }
 
-    // APK 签名的那些事：https://www.jianshu.com/p/a1f8e5896aa2
+    // APK 签名
     signingConfigs {
         config {
             storeFile file(StoreFile)
@@ -103,7 +103,6 @@ android {
     }
 }
 
-// api 与 implementation 的区别：https://www.jianshu.com/p/8962d6ba936e
 dependencies {
 
     // 基础库（不包任何第三方框架）
