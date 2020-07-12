@@ -20,7 +20,7 @@ import butterknife.BindView;
  *    time   : 2018/10/18
  *    desc   : 项目炫酷效果示例
  */
-public final class TestFragmentA extends MyFragment<HomeActivity>
+public final class HomeFragment extends MyFragment<HomeActivity>
         implements XCollapsingToolbarLayout.OnScrimsListener {
 
     @BindView(R.id.ctl_test_bar)
@@ -35,13 +35,13 @@ public final class TestFragmentA extends MyFragment<HomeActivity>
     @BindView(R.id.iv_test_search)
     ImageView mSearchView;
 
-    public static TestFragmentA newInstance() {
-        return new TestFragmentA();
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_test_a;
+        return R.layout.fragment_home;
     }
 
     @Override

@@ -17,9 +17,9 @@ import butterknife.BindView;
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/AndroidProject
  *    time   : 2018/10/18
- *    desc   : 项目自定义控件展示
+ *    desc   : 租车
  */
-public final class TestFragmentB extends MyFragment<HomeActivity>
+public final class RentalCarFragment extends MyFragment<HomeActivity>
         implements SwitchButton.OnCheckedChangeListener {
 
     @BindView(R.id.iv_test_circle)
@@ -30,13 +30,13 @@ public final class TestFragmentB extends MyFragment<HomeActivity>
     @BindView(R.id.cv_test_countdown)
     CountdownView mCountdownView;
 
-    public static TestFragmentB newInstance() {
-        return new TestFragmentB();
+    public static RentalCarFragment newInstance() {
+        return new RentalCarFragment();
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_test_b;
+        return R.layout.fragment_rental_car;
     }
 
     @Override

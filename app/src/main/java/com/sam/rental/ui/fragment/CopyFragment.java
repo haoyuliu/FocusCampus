@@ -12,6 +12,7 @@ import com.sam.rental.ui.activity.CopyActivity;
  */
 public final class CopyFragment extends MyFragment<CopyActivity> {
 
+
     public static CopyFragment newInstance() {
         return new CopyFragment();
     }

@@ -15,10 +15,10 @@ import com.sam.rental.common.MyFragment;
 import com.sam.rental.helper.ActivityStackManager;
 import com.sam.rental.helper.DoubleClickHelper;
 import com.sam.rental.other.KeyboardWatcher;
-import com.sam.rental.ui.fragment.TestFragmentA;
-import com.sam.rental.ui.fragment.TestFragmentB;
-import com.sam.rental.ui.fragment.TestFragmentC;
-import com.sam.rental.ui.fragment.TestFragmentD;
+import com.sam.rental.ui.fragment.HomeFragment;
+import com.sam.rental.ui.fragment.RentalCarFragment;
+import com.sam.rental.ui.fragment.MessageFragment;
+import com.sam.rental.ui.fragment.MineFragment;
 
 import butterknife.BindView;
 
@@ -54,10 +54,10 @@ public final class HomeActivity extends MyActivity
     @Override
     protected void initData() {
         mPagerAdapter = new BaseFragmentAdapter<>(this);
-        mPagerAdapter.addFragment(TestFragmentA.newInstance());
-        mPagerAdapter.addFragment(TestFragmentB.newInstance());
-        mPagerAdapter.addFragment(TestFragmentC.newInstance());
-        mPagerAdapter.addFragment(TestFragmentD.newInstance());
+        mPagerAdapter.addFragment(HomeFragment.newInstance());
+        mPagerAdapter.addFragment(RentalCarFragment.newInstance());
+        mPagerAdapter.addFragment(MessageFragment.newInstance());
+        mPagerAdapter.addFragment(MineFragment.newInstance());
 
         mViewPager.setAdapter(mPagerAdapter);
 
@@ -73,16 +73,16 @@ public final class HomeActivity extends MyActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_home:
-                mPagerAdapter.setCurrentItem(TestFragmentA.class);
+                mPagerAdapter.setCurrentItem(HomeFragment.class);
                 return true;
             case R.id.home_found:
-                mPagerAdapter.setCurrentItem(TestFragmentB.class);
+                mPagerAdapter.setCurrentItem(RentalCarFragment.class);
                 return true;
             case R.id.home_message:
-                mPagerAdapter.setCurrentItem(TestFragmentC.class);
+                mPagerAdapter.setCurrentItem(MessageFragment.class);
                 return true;
             case R.id.home_me:
-                mPagerAdapter.setCurrentItem(TestFragmentD.class);
+                mPagerAdapter.setCurrentItem(MineFragment.class);
                 return true;
             default:
                 break;
