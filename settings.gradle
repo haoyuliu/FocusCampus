@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':easeui'
 include ':base'
 include ':widget'
 include ':umeng'

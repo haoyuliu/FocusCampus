@@ -10,6 +10,9 @@ import android.widget.Toast;
 import com.billy.android.swipe.SmartSwipeBack;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.EaseUI;
 import com.sam.rental.R;
 import com.sam.rental.action.SwipeAction;
 import com.sam.rental.helper.ActivityStackManager;
@@ -33,10 +36,10 @@ import cat.ereza.customactivityoncrash.config.CaocConfig;
 import okhttp3.OkHttpClient;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 项目中的 Application 基类
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : 项目中的 Application 基类
  */
 public final class MyApplication extends Application {
 
@@ -44,6 +47,35 @@ public final class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initSDK(this);
+        EMOptions options = new EMOptions();
+        // 设置Appkey，如果配置文件已经配置，这里可以不用设置
+        // options.setAppKey("lzan13#hxsdkdemo");
+        // 设置自动登录
+        options.setAutoLogin(true);
+        // 设置是否需要发送已读回执
+        options.setRequireAck(true);
+        // 设置是否需要发送回执，TODO 这个暂时有bug，上层收不到发送回执
+        options.setRequireDeliveryAck(true);
+        // 设置是否需要服务器收到消息确认
+        options.setAutoTransferMessageAttachments(true);
+        // 收到好友申请是否自动同意，如果是自动同意就不会收到好友请求的回调，因为sdk会自动处理，默认为true
+        options.setAcceptInvitationAlways(false);
+        // 设置是否自动接收加群邀请，如果设置了当收到群邀请会自动同意加入
+        options.setAutoAcceptGroupInvitation(false);
+        // 设置（主动或被动）退出群组时，是否删除群聊聊天记录
+        options.setDeleteMessagesAsExitGroup(false);
+        // 设置是否允许聊天室的Owner 离开并删除聊天室的会话
+        options.allowChatroomOwnerLeave(true);
+        // 设置google GCM推送id，国内可以不用设置
+        // options.setGCMNumber(MLConstants.ML_GCM_NUMBER);
+        // 设置集成小米推送的appid和appkey
+        // options.setMipushConfig(MLConstants.ML_MI_APP_ID, MLConstants.ML_MI_APP_KEY);
+
+        // 调用初始化方法初始化sdk
+        EaseUI.getInstance().init(this, options);
+
+        // 设置开启debug模式
+        EMClient.getInstance().setDebugMode(true);
     }
 
     /**
