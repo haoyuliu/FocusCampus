@@ -8,34 +8,8 @@
     tools:context=".ui.fragment.HomeFragment"
     tools:ignore="HardcodedText">
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_marginTop="40dp"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="账号" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="密码" />
-
-    <Button
-        android:id="@+id/register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="注册" />
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="登录" />
-
-    <Button
-        android:id="@+id/login_out"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="退出登录" />
+        android:layout_height="match_parent" />
 </LinearLayout>

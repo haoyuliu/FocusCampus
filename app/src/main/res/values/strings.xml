@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">环球租车</string>
 
     <!-- 通用的 -->
@@ -195,5 +195,28 @@
     <string name="photo_launch_fail">无法启动相机</string>
     <string name="photo_picture_error">图片错误</string>
     <string name="home_nav_pciture">拍照</string>
+    <!-- 点赞选中 -->
+    <string name="icon_like_fill">&#xe60d;</string>
+    <!--评论-->
+    <string name="icon_comment">&#xe621;</string>
+    <!-- 微博 -->
+    <string name="icon_weibo">&#xe620;</string>
+    <!-- 微信 -->
+    <string name="icon_wechat">&#xe61d;</string>
+    <!-- 微信朋友圈 -->
+    <string name="icon_friends">&#xe61c;</string>
+    <!-- QQ -->
+    <string name="icon_qq">&#xe61e;</string>
+    <!-- QQ空间 -->
+    <string name="icon_qq_space">&#xe61f;</string>
+    <!-- 更多 -->
+    <string name="icon_more">&#xe61b;</string>
+    <!-- 地理位置 -->
+    <string name="icon_location_fill">&#xe624;</string>
+
+    <string name="trans">trans</string>
+
+    <string name="view_pager_bottom_sheet_behavior" tools:ignore="ExtraTranslation" translatable="false">
+        com.goobird.common.application.widget.bottomsheetdialog.viewpagerofbottomsheet.ViewPagerBottomSheetBehavior</string>
 
 </resources>
