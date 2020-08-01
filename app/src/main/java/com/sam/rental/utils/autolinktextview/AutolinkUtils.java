@@ -8,7 +8,7 @@ class AutolinkUtils {
         return regex != null && !regex.isEmpty() && regex.length() > 2;
     }
 
-    static String getRegexByAutoLinkMode(AutoLinkMode anAutoLinkMode, String customRegex) {
+    /*static String getRegexByAutoLinkMode(AutoLinkMode anAutoLinkMode, String customRegex) {
         switch (anAutoLinkMode) {
             case MODE_HASHTAG:
                 return RegexParser.HASHTAG_PATTERN;
@@ -30,6 +30,6 @@ class AutolinkUtils {
             default:
                 return RegexParser.URL_PATTERN;
         }
-    }
+    }*/
 
 }

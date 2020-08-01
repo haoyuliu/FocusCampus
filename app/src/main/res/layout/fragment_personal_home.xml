@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.PersonalHomeFragment"
     android:background="@color/color_bg_theme">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -83,7 +82,7 @@
                             android:visibility="gone"
                             android:gravity="center"/>
 
-                        <com.rental.sam.view.IconFontTextView
+                        <com.sam.rental.widget.IconFontTextView
                             android:id="@+id/iv_more"
                             android:layout_width="32dp"
                             android:layout_height="32dp"

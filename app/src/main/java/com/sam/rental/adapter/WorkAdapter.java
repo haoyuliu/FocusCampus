@@ -9,12 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import com.rental.sam.utils.NumUtils;
 import com.sam.rental.R;
 import com.sam.rental.bean.VideoBean;
 import com.sam.rental.ui.activity.PlayListActivity;
 import com.sam.rental.ui.adapter.BaseRvAdapter;
 import com.sam.rental.ui.adapter.BaseRvViewHolder;
+import com.sam.rental.utils.NumUtils;
 
 import java.util.List;
 import butterknife.BindView;

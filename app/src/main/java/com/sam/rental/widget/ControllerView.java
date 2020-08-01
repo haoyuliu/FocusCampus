@@ -1,4 +1,4 @@
-package com.rental.sam.view;
+package com.sam.rental.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -11,12 +11,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
-import com.rental.sam.R;
-import com.rental.sam.bean.VideoBean;
-import com.rental.sam.utils.AutoLinkHerfManager;
-import com.rental.sam.utils.NumUtils;
-import com.rental.sam.utils.OnVideoControllerListener;
-import com.rental.sam.utils.autolinktextview.AutoLinkTextView;
+import com.sam.rental.R;
+import com.sam.rental.bean.VideoBean;
+import com.sam.rental.utils.NumUtils;
+import com.sam.rental.utils.OnVideoControllerListener;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import static android.view.animation.Animation.INFINITE;
@@ -27,8 +26,8 @@ import static android.view.animation.Animation.INFINITE;
  * description
  */
 public class ControllerView extends RelativeLayout implements View.OnClickListener {
-    @BindView(R.id.tv_content)
-    AutoLinkTextView autoLinkTextView;
+    //@BindView(R.id.tv_content)
+    //AutoLinkTextView autoLinkTextView;
     @BindView(R.id.iv_head)
     CircleImageView ivHead;
     @BindView(R.id.lottie_anim)
@@ -84,7 +83,7 @@ public class ControllerView extends RelativeLayout implements View.OnClickListen
 
         ivHead.setImageResource(videoData.getUserBean().getHead());
         tvNickname.setText("@" + videoData.getUserBean().getNickName());
-        AutoLinkHerfManager.setContent(videoData.getContent(), autoLinkTextView);
+        //AutoLinkHerfManager.setContent(videoData.getContent(), autoLinkTextView);
         ivHeadAnim.setImageResource(videoData.getUserBean().getHead());
         tvLikecount.setText(NumUtils.numberFilter(videoData.getLikeCount()));
         tvCommentcount.setText(NumUtils.numberFilter(videoData.getCommentCount()));

@@ -23,11 +23,12 @@ import com.sam.rental.ui.fragment.MineFragment;
 import butterknife.BindView;
 
 /**
- *    desc   : 主页界面
+ * desc   : 项目的主页界面，包含底部的四个Fragment
+ * 拍照按钮单独设置，进行短视频的拍摄
  */
 public final class HomeActivity extends MyActivity
         implements KeyboardWatcher.SoftKeyboardStateListener,
-        BottomNavigationView.OnNavigationItemSelectedListener{
+        BottomNavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.vp_home_pager)
     ViewPager mViewPager;

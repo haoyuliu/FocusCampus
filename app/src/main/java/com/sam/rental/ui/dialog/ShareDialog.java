@@ -34,7 +34,7 @@ import java.util.List;
  */
 public final class ShareDialog {
 
-    public static final class Builder
+    /*public static final class Builder
             extends BaseDialog.Builder<Builder>
             implements BaseAdapter.OnItemClickListener {
 
@@ -97,9 +97,9 @@ public final class ShareDialog {
             return this;
         }
 
-        /**
+        *//**
          * {@link BaseAdapter.OnItemClickListener}
-         */
+         *//*
         @Override
         public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
             Platform platform = mAdapter.getItem(position).getSharePlatform();
@@ -148,11 +148,11 @@ public final class ShareDialog {
 
     private static class ShareBean {
 
-        /** 分享图标 */
+        *//** 分享图标 *//*
         private final Drawable mShareIcon;
-        /** 分享名称 */
+        *//** 分享名称 *//*
         private final String mShareName;
-        /** 分享平台 */
+        *//** 分享平台 *//*
         private final Platform mSharePlatform;
 
         private ShareBean(Drawable icon, String name, Platform platform) {
@@ -172,5 +172,5 @@ public final class ShareDialog {
         private Platform getSharePlatform() {
             return mSharePlatform;
         }
-    }
+    }*/
 }

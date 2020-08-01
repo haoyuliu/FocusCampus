@@ -1,4 +1,4 @@
-package com.rental.sam.utils;
+package com.sam.rental.utils;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.ViewCompat;
-import com.rental.sam.R;
 import com.google.android.material.appbar.AppBarLayout;
+import com.sam.rental.R;
 
 /**
  * create by libo

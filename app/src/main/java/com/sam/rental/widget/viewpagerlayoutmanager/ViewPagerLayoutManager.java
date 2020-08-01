@@ -1,4 +1,4 @@
-package com.rental.sam.view.viewpagerlayoutmanager;
+package com.sam.rental.widget.viewpagerlayoutmanager;
 
 import android.content.Context;
 import android.view.View;

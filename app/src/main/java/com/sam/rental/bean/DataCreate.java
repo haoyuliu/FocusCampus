@@ -1,6 +1,7 @@
 package com.sam.rental.bean;
 
-import com.rental.sam.R;
+import com.sam.rental.R;
+
 import java.util.ArrayList;
 
 /**

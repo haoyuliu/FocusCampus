@@ -7,14 +7,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import com.rental.sam.view.ControllerView;
-import com.rental.sam.view.LikeView;
+
 import com.sam.rental.R;
 import com.sam.rental.bean.VideoBean;
 import com.sam.rental.ui.adapter.BaseRvAdapter;
 import com.sam.rental.ui.adapter.BaseRvViewHolder;
+import com.sam.rental.widget.ControllerView;
+import com.sam.rental.widget.LikeView;
 
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

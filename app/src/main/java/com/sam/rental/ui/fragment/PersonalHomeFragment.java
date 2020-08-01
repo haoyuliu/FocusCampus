@@ -16,18 +16,20 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.androidkun.xtablayout.XTabLayout;
 import com.google.android.material.appbar.AppBarLayout;
-import com.rental.sam.utils.NumUtils;
-import com.rental.sam.utils.RxBus;
-import com.rental.sam.view.CircleImageView;
-import com.rental.sam.view.IconFontTextView;
 import com.sam.base.BaseFragment;
 import com.sam.rental.R;
 import com.sam.rental.bean.CurUserBean;
 import com.sam.rental.bean.MainPageChangeEvent;
 import com.sam.rental.bean.VideoBean;
+import com.sam.rental.common.MyFragment;
 import com.sam.rental.ui.activity.FocusActivity;
+import com.sam.rental.ui.activity.HomeActivity;
 import com.sam.rental.ui.activity.ShowImageActivity;
 import com.sam.rental.ui.adapter.CommPagerAdapter;
+import com.sam.rental.utils.NumUtils;
+import com.sam.rental.utils.RxBus;
+import com.sam.rental.widget.CircleImageView;
+import com.sam.rental.widget.IconFontTextView;
 
 import java.util.ArrayList;
 
@@ -38,7 +40,7 @@ import rx.functions.Action1;
 /**
  * 当前视频滑动到的个人主页fragment
  */
-public class PersonalHomeFragment extends BaseFragment implements View.OnClickListener {
+public class PersonalHomeFragment extends MyFragment<HomeActivity> implements View.OnClickListener {
     @BindView(R.id.iv_bg)
     ImageView ivBg;
     @BindView(R.id.iv_head)

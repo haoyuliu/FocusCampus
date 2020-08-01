@@ -17,7 +17,7 @@
             android:background="@color/color_bg_theme"
             android:layout_alignParentBottom="true"/>
 
-        <com.rental.sam.view.CircleImageView
+        <com.sam.rental.widget.CircleImageView
             android:id="@+id/iv_head"
             android:layout_width="100dp"
             android:layout_height="100dp"

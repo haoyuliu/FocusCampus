@@ -1,4 +1,4 @@
-package com.rental.sam.utils;
+package com.sam.rental.utils;
 
 /**
  * create by apple

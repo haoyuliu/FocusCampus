@@ -1,13 +1,10 @@
 package com.sam.rental.ui.fragment;
 
 import android.content.Intent;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
@@ -17,14 +14,8 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.sam.rental.R;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyFragment;
-import com.sam.rental.http.glide.GlideApp;
+import com.sam.rental.ui.activity.ChatActivity;
 import com.sam.rental.ui.activity.HomeActivity;
-import com.sam.rental.ui.activity.PhotoActivity;
-import com.hjq.permissions.OnPermission;
-import com.hjq.permissions.Permission;
-import com.hjq.permissions.XXPermissions;
-
-import java.util.List;
 
 import butterknife.BindView;
 

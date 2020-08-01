@@ -41,8 +41,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
-        tools:targetApi="n">
-        <activity android:name=".ui.fragment.ChatActivity"></activity>
+        tools:targetApi="n"
+        tools:replace="android:supportsRtl">
+        <activity android:name=".ui.activity.ChatActivity"></activity>
         <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
         <meta-data
             android:name="UMENG_CHANNEL"

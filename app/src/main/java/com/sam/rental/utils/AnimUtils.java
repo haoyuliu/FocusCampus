@@ -1,4 +1,4 @@
-package com.rental.sam.utils;
+package com.sam.rental.utils;
 
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;

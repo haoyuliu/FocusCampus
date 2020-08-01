@@ -1,4 +1,4 @@
-package com.rental.sam.view;
+package com.sam.rental.widget;
 
 import android.content.Context;
 import android.os.Handler;
@@ -10,8 +10,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import com.rental.sam.R;
-import com.rental.sam.utils.AnimUtils;
+import com.sam.rental.R;
+import com.sam.rental.utils.AnimUtils;
+
 import java.util.Random;
 
 /**

@@ -1,4 +1,4 @@
-package com.rental.sam.view;
+package com.sam.rental.widget;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rental.sam.R;
-import com.rental.sam.adapter.CommentAdapter;
-import com.rental.sam.bean.CommentBean;
-import com.rental.sam.bean.DataCreate;
+import com.sam.rental.R;
+import com.sam.rental.adapter.CommentAdapter;
+import com.sam.rental.bean.CommentBean;
+import com.sam.rental.bean.DataCreate;
 
 import java.util.ArrayList;
 

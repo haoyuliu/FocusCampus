@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.rental.sam.utils.NumUtils;
 import com.sam.rental.R;
 import com.sam.rental.bean.CommentBean;
 import com.sam.rental.ui.adapter.BaseRvAdapter;
 import com.sam.rental.ui.adapter.BaseRvViewHolder;
+import com.sam.rental.utils.NumUtils;
 import com.sam.rental.widget.CircleImageView;
 
 import java.util.List;

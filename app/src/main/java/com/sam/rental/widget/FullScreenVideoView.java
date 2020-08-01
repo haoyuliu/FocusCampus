@@ -1,4 +1,4 @@
-package com.rental.sam.view;
+package com.sam.rental.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
