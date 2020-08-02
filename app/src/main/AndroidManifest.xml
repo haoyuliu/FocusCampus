@@ -26,8 +26,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 安装包的权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".common.MyApplication"
@@ -41,8 +41,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
-        tools:targetApi="n"
-        tools:replace="android:supportsRtl">
+        tools:replace="android:supportsRtl"
+        tools:targetApi="n">
         <activity android:name=".ui.activity.ChatActivity"></activity>
         <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
         <meta-data
@@ -162,6 +162,11 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" /> <!-- 对话框案例 -->
+        <activity
+            android:name=".ui.activity.PersonalHomeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.DialogActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

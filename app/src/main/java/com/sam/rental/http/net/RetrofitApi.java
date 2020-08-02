@@ -35,6 +35,6 @@ public interface RetrofitApi {
      * @return
      */
     @GET(NetApiConstants.GET_VIDEO_LIST)
-    Call<VideoListBean> loadHomeVideoListData(@Query("pageIndex") String pageIndex, @Query("pageSize") String pageSize);
+    Call<VideoListBean> loadHomeVideoListData(@Query("pageIndex") int pageIndex, @Query("pageSize") int pageSize);
 
 }
