@@ -1,24 +1,31 @@
 package com.sam.rental.ui.activity;
 
+import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
+import com.androidkun.xtablayout.XTabLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sam.base.BaseFragmentAdapter;
 import com.sam.rental.R;
+import com.sam.rental.bean.PauseVideoEvent;
 import com.sam.rental.common.MyActivity;
 import com.sam.rental.common.MyFragment;
 import com.sam.rental.helper.ActivityStackManager;
 import com.sam.rental.helper.DoubleClickHelper;
 import com.sam.rental.other.KeyboardWatcher;
+import com.sam.rental.ui.fragment.FragmentManagerHelper;
 import com.sam.rental.ui.fragment.HomeFragment;
 import com.sam.rental.ui.fragment.RentalCarFragment;
 import com.sam.rental.ui.fragment.MessageFragment;
 import com.sam.rental.ui.fragment.MineFragment;
+import com.sam.rental.utils.RxBus;
 
 import butterknife.BindView;
 
@@ -26,16 +33,19 @@ import butterknife.BindView;
  * desc   : 项目的主页界面，包含底部的四个Fragment
  * 拍照按钮单独设置，进行短视频的拍摄
  */
-public final class HomeActivity extends MyActivity
-        implements KeyboardWatcher.SoftKeyboardStateListener,
-        BottomNavigationView.OnNavigationItemSelectedListener {
+public final class HomeActivity extends MyActivity {
 
-    @BindView(R.id.vp_home_pager)
-    ViewPager mViewPager;
-    @BindView(R.id.bv_home_navigation)
-    BottomNavigationView mBottomNavigationView;
+    private HomeFragment mHomeFragment;
+    private RentalCarFragment mRentalCarFragment;
+    private MessageFragment mMessageFragment;
+    private MineFragment mMineFragment;
 
-    private BaseFragmentAdapter<MyFragment> mPagerAdapter;
+    private FragmentManagerHelper mFragmentManagerHelper;
+    @BindView(R.id.main_tab_content)
+    FrameLayout mFrameLayout;
+    @BindView(R.id.tab_main_menu)
+    XTabLayout tabMainMenu;
+
 
     @Override
     protected int getLayoutId() {
@@ -45,72 +55,94 @@ public final class HomeActivity extends MyActivity
     @Override
     protected void initView() {
         // 不使用图标默认变色
-        mBottomNavigationView.setItemIconTintList(null);
-        mBottomNavigationView.setOnNavigationItemSelectedListener(this);
-
-        KeyboardWatcher.with(this)
-                .setListener(this);
+        mFragmentManagerHelper = new FragmentManagerHelper(getSupportFragmentManager(), R.id.main_tab_content);
+        //默认进来，加载首页
+        mHomeFragment = new HomeFragment();
+        //把第一个fragment添加进来,第一个参数是容器ID
+        mFragmentManagerHelper.add(mHomeFragment);
+        setMainMenu();
+        setOnClick();
     }
 
     @Override
     protected void initData() {
-        mPagerAdapter = new BaseFragmentAdapter<>(this);
-        mPagerAdapter.addFragment(HomeFragment.newInstance());
-        mPagerAdapter.addFragment(RentalCarFragment.newInstance());
-        mPagerAdapter.addFragment(MessageFragment.newInstance());
-        mPagerAdapter.addFragment(MineFragment.newInstance());
+    }
 
-        mViewPager.setAdapter(mPagerAdapter);
-
-        // 限制页面数量
-        mViewPager.setOffscreenPageLimit(mPagerAdapter.getCount());
+    private void setMainMenu() {
+        tabMainMenu.addTab(tabMainMenu.newTab().setText("首页"));
+        tabMainMenu.addTab(tabMainMenu.newTab().setText("租车"));
+        tabMainMenu.addTab(tabMainMenu.newTab().setText(""));
+        tabMainMenu.addTab(tabMainMenu.newTab().setText("消息"));
+        tabMainMenu.addTab(tabMainMenu.newTab().setText("我的"));
     }
 
     /**
-     * {@link BottomNavigationView.OnNavigationItemSelectedListener}
+     * 底部按钮点击事件
      */
+    private void setOnClick() {
+        tabMainMenu.setOnTabSelectedListener(new XTabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(XTabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        //首页
+                        //判断
+                        if (mHomeFragment == null) {
+                            mHomeFragment = new HomeFragment();
+                        }
+                        //替换Fragment
+                        mFragmentManagerHelper.switchFragment(mHomeFragment);
+                        RxBus.getDefault().post(new PauseVideoEvent(false));
+                        break;
+                    case 1:
+                        //租车
+                        //判断
+                        if (mRentalCarFragment == null) {
+                            mRentalCarFragment = new RentalCarFragment();
+                        }
+                        //替换Fragment
+                        mFragmentManagerHelper.switchFragment(mRentalCarFragment);
+                        RxBus.getDefault().post(new PauseVideoEvent(false));
+                        break;
+                    case 2:
+                        //拍视频
+                        startActivity(UpLoadVedioActivity.class);
+                        RxBus.getDefault().post(new PauseVideoEvent(false));
+                        break;
+                    case 3:
+                        //消息
+                        RxBus.getDefault().post(new PauseVideoEvent(false));
+                        //判断
+                        if (mMessageFragment == null) {
+                            mMessageFragment = new MessageFragment();
+                        }
+                        //替换Fragment
+                        mFragmentManagerHelper.switchFragment(mMessageFragment);
+                        break;
+                    case 4:
+                        //我的
+                        if (mMineFragment == null) {
+                            mMineFragment = new MineFragment();
+                        }
+                        //替换Fragment
+                        mFragmentManagerHelper.switchFragment(mMineFragment);
+                        RxBus.getDefault().post(new PauseVideoEvent(false));
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_home:
-                mPagerAdapter.setCurrentItem(HomeFragment.class);
-                return true;
-            case R.id.home_found:
-                mPagerAdapter.setCurrentItem(RentalCarFragment.class);
-                return true;
-            case R.id.home_message:
-                mPagerAdapter.setCurrentItem(MessageFragment.class);
-                return true;
-            case R.id.home_me:
-                mPagerAdapter.setCurrentItem(MineFragment.class);
-                return true;
-            default:
-                break;
-        }
-        return false;
-    }
+            @Override
+            public void onTabUnselected(XTabLayout.Tab tab) {
 
-    /**
-     * {@link KeyboardWatcher.SoftKeyboardStateListener}
-     */
-    @Override
-    public void onSoftKeyboardOpened(int keyboardHeight) {
-        mBottomNavigationView.setVisibility(View.GONE);
-    }
+            }
 
-    @Override
-    public void onSoftKeyboardClosed() {
-        mBottomNavigationView.setVisibility(View.VISIBLE);
-    }
+            @Override
+            public void onTabReselected(XTabLayout.Tab tab) {
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // 回调当前 Fragment 的 onKeyDown 方法
-        if (mPagerAdapter.getCurrentFragment().onKeyDown(keyCode, event)) {
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+            }
+        });
     }
 
     @Override
@@ -129,13 +161,6 @@ public final class HomeActivity extends MyActivity
         } else {
             toast(R.string.home_exit_hint);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        mViewPager.setAdapter(null);
-        mBottomNavigationView.setOnNavigationItemSelectedListener(null);
-        super.onDestroy();
     }
 
     @Override
