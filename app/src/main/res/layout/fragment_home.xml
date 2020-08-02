@@ -26,7 +26,8 @@
             app:xTabSelectedTextColor="@color/white"
             app:xTabTextBold="true"
             app:xTabTextColor="#CCCCCC"
-            app:xTabTextSize="24sp" />
+            app:xTabSelectedTextSize="22sp"
+            app:xTabTextSize="20sp" />
 
         <ImageView
             android:layout_width="20dp"
