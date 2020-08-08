@@ -83,9 +83,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         mVideoView.release();
         Utils.removeViewFormParent(mVideoView);
         VideoListBean.DataBean item = mVideoList.get(position);
-       //String playUrl = PreloadManager.getInstance(this).getPlayUrl(item.videoDownloadUrl);
         String playUrl = PreloadManager.getInstance(getContext()).getPlayUrl(item.getVideoUrl());
-        //  L.i("startPlay: " + "position: " + position + "  url: " + playUrl);
         mVideoView.setUrl(playUrl);
         mController.addControlComponent(viewHolder.mTikTokView, true);
         viewHolder.mPlayerContainer.addView(mVideoView, 0);
@@ -139,5 +137,4 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         });
 
     }
-
 }

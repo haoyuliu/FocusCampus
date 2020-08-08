@@ -8,6 +8,9 @@ import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.easeui.ui.EaseContactListFragment;
 import com.sam.rental.R;
 
+/**
+ * 聊天详情页面
+ */
 public class ChatActivity extends AppCompatActivity {
 
     @Override

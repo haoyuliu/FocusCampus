@@ -1,11 +1,14 @@
 package com.sam.rental.ui.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,9 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.sam.rental.R;
 import com.sam.rental.bean.VideoListBean;
+import com.sam.rental.ui.activity.PersonalDataActivity;
+import com.sam.rental.ui.activity.PersonalHomeActivity;
 import com.sam.rental.widget.TikTokView;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 @Deprecated
 public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolder> {
@@ -40,11 +47,19 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         Log.d(TAG, "onBindViewHolder: " + position);
         VideoListBean.DataBean item = videos.get(position);
         Glide.with(holder.thumb.getContext())
-                .load("http://p9-dy.byteimg.com/large/tos-cn-p-0015/13f8180ea2bd44779449b82702b4e47b.jpeg")
+                .load(item.getVideoImageUrl())
                 .placeholder(android.R.color.white)
                 .into(holder.thumb);
+        holder.mTitleTextView.setText(item.getVideoDescription());
+        holder.mHomeUserTextView.setText(item.getUserId()+"");
         holder.mPosition = position;
         // PreloadManager.getInstance(holder.itemView.getContext()).addPreloadTask(item.videoDownloadUrl, position);
+        holder.mCircleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.thumb.getContext().startActivity(new Intent(holder.thumb.getContext(), PersonalHomeActivity.class));
+            }
+        });
     }
 
     @Override
@@ -65,12 +80,18 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         public TikTokView mTikTokView;
         public int mPosition;
         public FrameLayout mPlayerContainer;
+        public TextView mTitleTextView;
+        public CircleImageView mCircleImageView;
+        public TextView mHomeUserTextView;
 
         VideoHolder(View itemView) {
             super(itemView);
             mTikTokView = itemView.findViewById(R.id.tiktok_View);
             thumb = mTikTokView.findViewById(R.id.iv_thumb);
             mPlayerContainer = itemView.findViewById(R.id.container);
+            mTitleTextView = itemView.findViewById(R.id.tv_title);
+            mCircleImageView = itemView.findViewById(R.id.home_user_image);
+            mHomeUserTextView = itemView.findViewById(R.id.home_user_name);
             itemView.setTag(this);
         }
     }

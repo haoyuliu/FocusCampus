@@ -11,14 +11,114 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backButton="false"
-        app:title="@string/home_nav_me" />
+        app:rightIcon="@drawable/setting" />
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/cover1"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-    </androidx.core.widget.NestedScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="夏末￥秋天"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="编辑资料" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="id1111111111" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="男—北京"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="噶UN尴尬UN光昂噶滚啊鼓囊阿㝉"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:background="#FFF5E2"
+            android:layout_width="0dp"
+            android:padding="@dimen/dp_10"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:drawableRight="@drawable/setting"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="租车订单"
+            android:textSize="18sp" />
+
+        <TextView
+            android:background="#E4F8FF"
+            android:layout_width="0dp"
+            android:padding="@dimen/dp_10"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:drawableRight="@drawable/setting"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="钱包"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <com.androidkun.xtablayout.XTabLayout
+        android:id="@+id/mine_xtab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:xTabIndicatorColor="@color/color_check_home"
+        app:xTabIndicatorWidth="20dp"
+        app:xTabSelectedTextColor="@color/black"
+        app:xTabSelectedTextSize="22sp"
+        app:xTabTextBold="true"
+        app:xTabTextColor="#CCCCCC"
+        app:xTabTextSize="20sp" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/mine_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

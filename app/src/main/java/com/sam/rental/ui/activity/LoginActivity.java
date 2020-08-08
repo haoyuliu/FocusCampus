@@ -32,6 +32,8 @@ import com.sam.umeng.Platform;
 import com.sam.umeng.UmengClient;
 import com.sam.umeng.UmengLogin;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 
 /**
