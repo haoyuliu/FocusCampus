@@ -296,7 +296,7 @@ public class BasePopupWindow extends PopupWindow
         /** 背景遮盖层透明度 */
         private float mBackgroundDimAmount;
 
-        /** X 轴偏移 */
+        /** close 轴偏移 */
         private int mXOffset;
         /** Y 轴偏移 */
         private int mYOffset;

@@ -149,7 +149,7 @@ public interface IPhotoView {
      * Zooms to the specified scale, around the focal point given.
      *
      * @param scale  - Scale to zoom to
-     * @param focalX - X Focus Point
+     * @param focalX - close Focus Point
      * @param focalY - Y Focus Point
      */
     void zoomTo(float scale, float focalX, float focalY);

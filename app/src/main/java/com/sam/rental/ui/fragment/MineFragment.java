@@ -1,6 +1,7 @@
 package com.sam.rental.ui.fragment;
 
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -9,12 +10,14 @@ import com.androidkun.xtablayout.XTabLayout;
 import com.sam.rental.R;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyFragment;
+import com.sam.rental.ui.activity.FocusActivity;
 import com.sam.rental.ui.activity.HomeActivity;
 import com.sam.rental.ui.adapter.CommPagerAdapter;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * desc: 我的
@@ -25,6 +28,7 @@ public final class MineFragment extends MyFragment<HomeActivity> {
 
     @BindView(R.id.mine_view_pager)
     ViewPager mViewPager;
+
     private MineProductionFragment mMineProductionFragment;
     private MinePraiseFragment mPraiseFragment;
     private CommPagerAdapter pagerAdapter;
@@ -54,6 +58,8 @@ public final class MineFragment extends MyFragment<HomeActivity> {
 
         mMineXtabLayout.getTabAt(0).select();
         mMineXtabLayout.setupWithViewPager(mViewPager);
+        //点击事件
+        setOnClickListener(R.id.ll_fans, R.id.ll_focus);
     }
 
     @Override
@@ -65,6 +71,12 @@ public final class MineFragment extends MyFragment<HomeActivity> {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.ll_focus:
+                startActivity(FocusActivity.class);
+                break;
+            case R.id.ll_fans:
+                startActivity(FocusActivity.class);
+                break;
 
             default:
                 break;

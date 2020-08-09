@@ -2,6 +2,7 @@ package com.sam.rental.ui.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
 import android.view.View;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -41,7 +42,7 @@ public final class SplashActivity extends MyActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                startActivity(HomeActivity.class);
+                startActivity(LoginActivity.class);
                 finish();
             }
         });

@@ -1,30 +1,18 @@
 package com.sam.rental.ui.activity;
 
-import android.content.Intent;
-import android.view.KeyEvent;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.ViewPager;
 
 import com.androidkun.xtablayout.XTabLayout;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.sam.base.BaseFragmentAdapter;
 import com.sam.rental.R;
 import com.sam.rental.bean.PauseVideoEvent;
 import com.sam.rental.common.MyActivity;
-import com.sam.rental.common.MyFragment;
 import com.sam.rental.helper.ActivityStackManager;
 import com.sam.rental.helper.DoubleClickHelper;
-import com.sam.rental.other.KeyboardWatcher;
 import com.sam.rental.ui.fragment.FragmentManagerHelper;
 import com.sam.rental.ui.fragment.HomeFragment;
-import com.sam.rental.ui.fragment.RentalCarFragment;
 import com.sam.rental.ui.fragment.MessageFragment;
 import com.sam.rental.ui.fragment.MineFragment;
+import com.sam.rental.ui.fragment.RentalCarFragment;
 import com.sam.rental.utils.RxBus;
 
 import butterknife.BindView;

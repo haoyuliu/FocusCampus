@@ -6,8 +6,10 @@ import androidx.viewpager.widget.ViewPager;
 import com.androidkun.xtablayout.XTabLayout;
 import com.sam.base.BaseActivity;
 import com.sam.rental.R;
+import com.sam.rental.common.MyActivity;
 import com.sam.rental.ui.adapter.CommPagerAdapter;
 import com.sam.rental.ui.fragment.FansFragment;
+import com.sam.rental.ui.fragment.FocusFragment;
 
 import java.util.ArrayList;
 
@@ -16,14 +18,15 @@ import butterknife.BindView;
 /**
  * description 粉丝关注人页面
  */
-public class FocusActivity extends BaseActivity {
-    @BindView(R.id.tablayout)
-    XTabLayout tabLayout;
-    @BindView(R.id.viewpager)
-    ViewPager viewPager;
-    private ArrayList<Fragment> fragments = new ArrayList<>();
+public class FocusActivity extends MyActivity {
+    @BindView(R.id.focus_tablayout)
+    XTabLayout mFocusXTabLayout;
+    @BindView(R.id.focus_viewpager)
+    ViewPager mFocusViewPager;
+    private FocusFragment mFocusFragment;
+    private FansFragment mFansFragment;
     private CommPagerAdapter pagerAdapter;
-    private String[] titles = new String[]{"关注 128", "粉丝 128", "推荐关注"};
+    private ArrayList<Fragment> fragments = new ArrayList<>();
 
 
     @Override
@@ -33,14 +36,19 @@ public class FocusActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        for (int i = 0; i < titles.length; i++) {
-            fragments.add(new FansFragment());
-            tabLayout.addTab(tabLayout.newTab().setText(titles[i]));
-        }
+        mFocusFragment = new FocusFragment();
+        mFansFragment = new FansFragment();
+        fragments.add(mFocusFragment);
+        fragments.add(mFansFragment);
+        mFocusXTabLayout.addTab(mFocusXTabLayout.newTab().setText("关注"));
+        mFocusXTabLayout.addTab(mFocusXTabLayout.newTab().setText("粉丝"));
 
-        pagerAdapter = new CommPagerAdapter(getSupportFragmentManager(), fragments, titles);
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+        pagerAdapter = new CommPagerAdapter(getSupportFragmentManager(), fragments, new String[]{"关注", "粉丝"});
+        mFocusViewPager.setAdapter(pagerAdapter);
+        mFocusXTabLayout.setupWithViewPager(mFocusViewPager);
+
+        mFocusXTabLayout.getTabAt(0).select();
+        mFocusXTabLayout.setupWithViewPager(mFocusViewPager);
     }
 
     @Override
