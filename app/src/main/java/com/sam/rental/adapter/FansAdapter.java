@@ -8,31 +8,35 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.sam.rental.R;
+import com.sam.rental.bean.FansBean;
 import com.sam.rental.bean.VideoBean;
 import com.sam.rental.ui.adapter.BaseRvAdapter;
 import com.sam.rental.ui.adapter.BaseRvViewHolder;
-import com.sam.rental.widget.CircleImageView;
 
 import java.util.List;
 
 import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * description
  */
-public class FansAdapter extends BaseRvAdapter<VideoBean.UserBean, FansAdapter.FansViewHolder> {
+public class FansAdapter extends BaseRvAdapter<FansBean.DataBean, FansAdapter.FansViewHolder> {
 
-    public FansAdapter(Context context, List<VideoBean.UserBean> datas) {
-        super(context, datas);
+
+    public FansAdapter(Context context, List<FansBean.DataBean> data) {
+        super(context, data);
     }
 
     @Override
-    protected void onBindData(FansViewHolder holder, VideoBean.UserBean userBean, int position) {
-        holder.ivHead.setImageResource(userBean.getHead());
+    protected void onBindData(FansViewHolder holder, FansBean.DataBean userBean, int position) {
+        //holder.ivHead.setImageResource(userBean.getHeadImg());
+        Glide.with(holder.itemView.getContext()).load(userBean.getHeadImg()).into(holder.ivHead);
         holder.tvNickname.setText(userBean.getNickName());
-        holder.tvFocus.setText(userBean.isFocused() ? "已关注" : "关注");
-
+        //holder.tvFocus.setText(userBean.getFollowed() ? "已关注" : "关注");
+/*
         holder.tvFocus.setOnClickListener(v -> {
             if (!userBean.isFocused()) {
                 holder.tvFocus.setText("已关注");
@@ -43,7 +47,7 @@ public class FansAdapter extends BaseRvAdapter<VideoBean.UserBean, FansAdapter.F
             }
 
             userBean.setFocused(!userBean.isFocused());
-        });
+        });*/
     }
 
     @NonNull

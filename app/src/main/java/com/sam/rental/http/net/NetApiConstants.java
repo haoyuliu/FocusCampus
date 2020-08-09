@@ -7,7 +7,7 @@ public class NetApiConstants {
     /**
      * baseurl
      */
-    static final String BASE_URL = "http://39.106.49.27:28080/";
+    public static final String BASE_URL = "http://39.106.49.27:28080/";
     /**
      * 获取验证码
      */
@@ -36,5 +36,21 @@ public class NetApiConstants {
      * 获取图片上传所需要的参数
      */
     public static final String IMAGE_PRE_UPLOAD = "image/preUpload";
+    /**
+     * 获取粉丝列表
+     */
+    public static final String GET_FANS = "user/getFans";
+    /**
+     * 获取关注列表
+     */
+    public static final String GET_FOCUS = "user/getFollowUser";
+    /**
+     * 获取用户作品的列表
+     */
+    public static final String GET_PERSONAL_PRODUCTION = "video/getMyVideoList";
+    /**
+     * 获取用户喜欢的作品列表
+     */
+    public static final String GET_PERSONAL_LOVE = "video/getCollectionVideoList";
 
 }

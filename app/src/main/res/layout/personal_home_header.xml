@@ -3,191 +3,168 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="100dp"
     android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="144dp">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="115dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/color_bg_theme" />
-
-        <com.sam.rental.widget.CircleImageView
-            android:id="@+id/iv_head"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/cover1"
-            app:es_shape_type="round" />
-        <TextView
-            android:id="@+id/tv_addfocus"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="4dp"
-            android:layout_toLeftOf="@id/rl_dropdown"
-            android:background="@drawable/shape_round_red"
-            android:gravity="center"
-            android:text="关注"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-
-        <RelativeLayout
-            android:id="@+id/rl_dropdown"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="12dp"
-            android:background="@drawable/shape_round_halfwhite">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@mipmap/ic_down_arrow" />
-        </RelativeLayout>
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_bg_theme"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10">
+
+        <com.sam.rental.widget.CircleImageView
+            android:id="@+id/iv_head"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/cover1"
+            app:es_shape_type="round" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="夏沫de秋天"
+                android:textStyle="bold"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_focus"
+                    android:paddingLeft="50dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="50dp"
+                    android:paddingBottom="8dp"
+                    android:text="关注"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="私信" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
+        android:paddingLeft="20dp"
         android:paddingBottom="12dp">
 
         <TextView
             android:id="@+id/tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="null"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
+            android:text="ID:XXXXXXXXXXX"
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="XXX"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginTop="10dp"
-            android:background="#2fff" />
+            android:text="男北京"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="保持可爱 赶快长大 \n 这里是你的衣橱间"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:text="保持可爱 赶快长大这里是你的衣橱间"
+            android:textSize="18sp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_round_halfwhite"
-                android:paddingLeft="5dp"
-                android:paddingTop="2dp"
-                android:paddingRight="5dp"
-                android:paddingBottom="2dp"
-                android:text="20岁"
-                android:textColor="@color/color_tag"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/shape_round_halfwhite"
-                android:paddingLeft="5dp"
-                android:paddingTop="2dp"
-                android:paddingRight="5dp"
-                android:paddingBottom="2dp"
-                android:text="杭州"
-                android:textColor="@color/color_tag"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:id="@+id/tv_getlike_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="14"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 获赞"
-                android:textColor="@color/color_tag"
-                android:textSize="14sp" />
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/ll_focus"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tv_focus_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="310"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="20dp"
+                android:paddingBottom="@dimen/dp_10">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 关注"
-                    android:textColor="@color/color_tag"
-                    android:textSize="14sp" />
+                    android:textSize="18sp"
+                    android:text="111w" />
+
+                <TextView
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="获赞" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_fans"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="20dp"
+                android:paddingBottom="@dimen/dp_10">
 
                 <TextView
-                    android:id="@+id/tv_fans_count"
+                    android:textSize="18sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="291"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:text="11w" />
 
                 <TextView
+                    android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 粉丝"
-                    android:textColor="@color/color_tag"
-                    android:textSize="14sp" />
+                    android:text="粉丝" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="20dp"
+                android:paddingBottom="@dimen/dp_10">
+
+                <TextView
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1w" />
+
+                <TextView
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="关注" />
+
             </LinearLayout>
 
         </LinearLayout>

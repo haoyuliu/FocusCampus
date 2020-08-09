@@ -6,19 +6,17 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:background="@color/color_bg_theme"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:gravity="center_vertical">
 
-    <com.rental.sam.view.CircleImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_head"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        app:es_shape_type="round"
-        tools:src="@mipmap/head_six"/>
+        app:es_shape_type="round" />
 
     <TextView
         android:id="@+id/tv_nickname"
@@ -27,8 +25,7 @@
         android:layout_height="wrap_content"
         tools:text="一个人的表演"
         android:textSize="15sp"
-        android:layout_margin="12dp"
-        android:textColor="@color/white"/>
+        android:layout_margin="12dp" />
 
     <TextView
         android:id="@+id/tv_focus"

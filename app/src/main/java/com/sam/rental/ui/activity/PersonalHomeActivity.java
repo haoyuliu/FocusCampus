@@ -31,47 +31,24 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * 个人主页的Activity
+ * 点击查看个人主页的Activity
  */
 public class PersonalHomeActivity extends MyActivity {
-    @BindView(R.id.iv_bg)
-    ImageView ivBg;
     @BindView(R.id.iv_head)
     CircleImageView ivHead;
-    @BindView(R.id.rl_dropdown)
-    RelativeLayout rlDropdown;
     @BindView(R.id.ll_focus)
     LinearLayout llFocus;
     @BindView(R.id.ll_fans)
     LinearLayout llFans;
-    @BindView(R.id.iv_return)
-    ImageView ivReturn;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_focus)
     TextView tvFocus;
-    @BindView(R.id.iv_more)
-    IconFontTextView ivMore;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.tablayout)
     XTabLayout tabLayout;
-    @BindView(R.id.appbarlayout)
-    AppBarLayout appBarLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
-    @BindView(R.id.tv_nickname)
-    TextView tvNickname;
-    @BindView(R.id.tv_sign)
-    TextView tvSign;
-    @BindView(R.id.tv_getlike_count)
-    TextView tvGetLikeCount;
-    @BindView(R.id.tv_focus_count)
-    TextView tvFocusCount;
-    @BindView(R.id.tv_fans_count)
-    TextView tvFansCount;
-    @BindView(R.id.tv_addfocus)
-    TextView tvAddfocus;
+
     private ArrayList<Fragment> fragments = new ArrayList<>();
     private CommPagerAdapter pagerAdapter;
     private VideoBean.UserBean curUserBean;
@@ -99,10 +76,9 @@ public class PersonalHomeActivity extends MyActivity {
 
         tabLayout.getTabAt(0).select();
         tabLayout.setupWithViewPager(viewPager);
-        tvAddfocus.setOnClickListener(new View.OnClickListener() {
+       /* tvAddfocus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvAddfocus.setText("发送消息");
 
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, "111");
@@ -110,7 +86,7 @@ public class PersonalHomeActivity extends MyActivity {
                 startActivity(intent);
 
             }
-        });
+        });*/
     }
 
     @Override

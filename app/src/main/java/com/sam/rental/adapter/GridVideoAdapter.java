@@ -9,7 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
+import com.bumptech.glide.Glide;
 import com.sam.rental.R;
+import com.sam.rental.bean.UserProductionOrLoveBean;
 import com.sam.rental.bean.VideoBean;
 import com.sam.rental.ui.activity.PlayListActivity;
 import com.sam.rental.ui.adapter.BaseRvAdapter;
@@ -24,18 +27,16 @@ import butterknife.ButterKnife;
 /**
  * description
  */
-public class GridVideoAdapter extends BaseRvAdapter<VideoBean, GridVideoAdapter.GridVideoViewHolder> {
+public class GridVideoAdapter extends BaseRvAdapter<UserProductionOrLoveBean.DataBean, GridVideoAdapter.GridVideoViewHolder> {
 
-    public GridVideoAdapter(Context context, List<VideoBean> datas) {
-        super(context, datas);
+    public GridVideoAdapter(Context context, List<UserProductionOrLoveBean.DataBean> data) {
+        super(context, data);
     }
 
     @Override
-    protected void onBindData(GridVideoViewHolder holder, VideoBean videoBean, int position) {
-        holder.ivCover.setBackgroundResource(videoBean.getCoverRes());
-        holder.tvContent.setText(videoBean.getContent());
-        holder.tvDistance.setText(videoBean.getDistance() + " km");
-        holder.ivHead.setImageResource(videoBean.getUserBean().getHead());
+    protected void onBindData(GridVideoViewHolder holder, UserProductionOrLoveBean.DataBean videoBean, int position) {
+        Glide.with(holder.itemView.getContext()).load(videoBean.getVideoImageUrl()).into(holder.ivCover);
+        holder.tvContent.setText(videoBean.getVideoTitle());
 
         holder.itemView.setOnClickListener(v -> {
             PlayListActivity.initPos = position;
@@ -55,10 +56,7 @@ public class GridVideoAdapter extends BaseRvAdapter<VideoBean, GridVideoAdapter.
         ImageView ivCover;
         @BindView(R.id.tv_content)
         TextView tvContent;
-        @BindView(R.id.tv_distance)
-        IconFontTextView tvDistance;
-        @BindView(R.id.iv_head)
-        ImageView ivHead;
+
 
         public GridVideoViewHolder(View itemView) {
             super(itemView);

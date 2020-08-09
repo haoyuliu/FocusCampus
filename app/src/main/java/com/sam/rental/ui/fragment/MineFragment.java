@@ -1,7 +1,6 @@
 package com.sam.rental.ui.fragment;
 
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -13,11 +12,12 @@ import com.sam.rental.common.MyFragment;
 import com.sam.rental.ui.activity.FocusActivity;
 import com.sam.rental.ui.activity.HomeActivity;
 import com.sam.rental.ui.adapter.CommPagerAdapter;
+import com.sam.rental.widget.CircleImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * desc: 我的
@@ -29,8 +29,11 @@ public final class MineFragment extends MyFragment<HomeActivity> {
     @BindView(R.id.mine_view_pager)
     ViewPager mViewPager;
 
-    private MineProductionFragment mMineProductionFragment;
-    private MinePraiseFragment mPraiseFragment;
+    @BindView(R.id.iv_head)
+    CircleImageView mHeadView;
+
+    private PersonalProductionFragment mMineProductionFragment;
+    private PersonalLoveFragment mPraiseFragment;
     private CommPagerAdapter pagerAdapter;
     private ArrayList<Fragment> fragments = new ArrayList<>();
 
@@ -45,8 +48,8 @@ public final class MineFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        mMineProductionFragment = new MineProductionFragment();
-        mPraiseFragment = new MinePraiseFragment();
+        mMineProductionFragment = new PersonalProductionFragment();
+        mPraiseFragment = new PersonalLoveFragment();
         fragments.add(mMineProductionFragment);
         fragments.add(mPraiseFragment);
         mMineXtabLayout.addTab(mMineXtabLayout.newTab().setText("作品"));
@@ -59,7 +62,7 @@ public final class MineFragment extends MyFragment<HomeActivity> {
         mMineXtabLayout.getTabAt(0).select();
         mMineXtabLayout.setupWithViewPager(mViewPager);
         //点击事件
-        setOnClickListener(R.id.ll_fans, R.id.ll_focus);
+        setOnClickListener(R.id.ll_fans, R.id.ll_focus,R.id.iv_head);
     }
 
     @Override
@@ -77,6 +80,10 @@ public final class MineFragment extends MyFragment<HomeActivity> {
             case R.id.ll_fans:
                 startActivity(FocusActivity.class);
                 break;
+            case R.id.iv_head:
+
+                break;
+
 
             default:
                 break;

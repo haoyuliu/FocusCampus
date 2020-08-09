@@ -1,6 +1,7 @@
 package com.sam.rental.http.server;
 
 import com.hjq.http.config.IRequestServer;
+import com.sam.rental.http.net.NetApiConstants;
 
 /**
  *    author : Android 轮子哥
@@ -12,7 +13,7 @@ public class ReleaseServer implements IRequestServer {
 
     @Override
     public String getHost() {
-        return "https://www.baidu.com/";
+        return NetApiConstants.BASE_URL;
     }
 
     @Override
