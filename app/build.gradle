@@ -211,6 +211,10 @@ dependencies {
     implementation 'com.github.dueeeke.dkplayer:videocache:3.2.6'
     // 圆角
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // 阿里云视频上传
+    implementation 'com.aliyun.video.android:upload:1.6.0'
+    // 视频，照片选择裁剪
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
     // 国际化：https://github.com/getActivity/MultiLanguages
     // 悬浮窗：https://github.com/getActivity/XToast
     // 工具类：https://github.com/Blankj/AndroidUtilCode

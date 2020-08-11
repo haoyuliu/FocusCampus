@@ -41,13 +41,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
-        tools:replace="android:supportsRtl"
+        tools:replace="android:supportsRtl,android:allowBackup"
         tools:targetApi="n">
         <activity android:name=".ui.activity.ChatActivity"></activity>
         <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="${channel}" /> <!-- 适配 Android 7.0 文件意图 -->
+            android:value="${channel}" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -177,7 +177,6 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        FocusActivity
         <activity
             android:name=".ui.activity.DialogActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

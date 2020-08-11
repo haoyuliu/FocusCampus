@@ -18,6 +18,7 @@ import com.sam.rental.http.net.RetrofitClient;
 import com.sam.rental.ui.activity.HomeActivity;
 import com.sam.rental.ui.adapter.TikTokAdapter;
 import com.sam.rental.utils.Utils;
+import com.sam.rental.widget.CommentDialog;
 import com.sam.rental.widget.viewpagerlayoutmanager.OnViewPagerListener;
 
 import java.util.ArrayList;
@@ -126,6 +127,13 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
                     public void onPageSelected(int position, boolean isBottom) {
                         if (mCurPos == position) return;
                         startPlay(position);
+                    }
+                });
+                mTikTokAdapter.setItemOnClickInterface(new TikTokAdapter.ItemCommentOnClickInterface() {
+                    @Override
+                    public void onItemClick(View view) {
+                        CommentDialog commentDialog = new CommentDialog();
+                        commentDialog.show(getChildFragmentManager(), "");
                     }
                 });
             }

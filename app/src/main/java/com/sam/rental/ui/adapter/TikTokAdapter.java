@@ -2,6 +2,7 @@ package com.sam.rental.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.sam.rental.R;
 import com.sam.rental.bean.VideoListBean;
 import com.sam.rental.ui.activity.PersonalDataActivity;
 import com.sam.rental.ui.activity.PersonalHomeActivity;
+import com.sam.rental.widget.CommentDialog;
 import com.sam.rental.widget.TikTokView;
 
 import java.util.List;
@@ -28,6 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolder> {
 
     private List<VideoListBean.DataBean> videos;
+    private ItemCommentOnClickInterface itemOnClickInterface;
 
     public TikTokAdapter(List<VideoListBean.DataBean> videos) {
         this.videos = videos;
@@ -51,7 +54,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 .placeholder(android.R.color.white)
                 .into(holder.thumb);
         holder.mTitleTextView.setText(item.getVideoDescription());
-        holder.mHomeUserTextView.setText(item.getUserId()+"");
+        holder.mHomeUserTextView.setText(item.getUserId() + "");
         holder.mPosition = position;
         // PreloadManager.getInstance(holder.itemView.getContext()).addPreloadTask(item.videoDownloadUrl, position);
         holder.mCircleImageView.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +63,21 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 holder.thumb.getContext().startActivity(new Intent(holder.thumb.getContext(), PersonalHomeActivity.class));
             }
         });
+        holder.mCommontImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemOnClickInterface.onItemClick(v);
+            }
+        });
+    }
+    //回调接口
+    public interface ItemCommentOnClickInterface {
+        void onItemClick(View view);
+    }
+
+    //定义回调方法
+    public void setItemOnClickInterface(ItemCommentOnClickInterface itemOnClickInterface) {
+        this.itemOnClickInterface = itemOnClickInterface;
     }
 
     @Override
@@ -83,6 +101,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         public TextView mTitleTextView;
         public CircleImageView mCircleImageView;
         public TextView mHomeUserTextView;
+        public ImageView mCommontImageView;
 
         VideoHolder(View itemView) {
             super(itemView);
@@ -92,6 +111,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
             mTitleTextView = itemView.findViewById(R.id.tv_title);
             mCircleImageView = itemView.findViewById(R.id.home_user_image);
             mHomeUserTextView = itemView.findViewById(R.id.home_user_name);
+            mCommontImageView = itemView.findViewById(R.id.iv_comment);
             itemView.setTag(this);
         }
     }

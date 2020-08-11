@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.activity.UpLoadVedioActivity">
+    <com.hjq.bar.TitleBar
+        android:layout_width="wrap_content"
+        app:title="视频上传"
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/but_choice_video"
