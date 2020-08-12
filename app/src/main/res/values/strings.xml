@@ -157,7 +157,7 @@
     <string name="phone_reset_commit_succeed">绑定成功，下次登录请使用新手机号登录</string>
 
     <!-- 个人资料 -->
-    <string name="personal_data_title">个人资料</string>
+    <string name="personal_data_title">编辑个人资料</string>
     <string name="personal_data_head">头像</string>
 
     <string name="personal_data_id">用户ID</string>

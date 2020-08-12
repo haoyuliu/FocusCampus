@@ -1,16 +1,21 @@
 package com.sam.rental.ui.fragment;
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.androidkun.xtablayout.XTabLayout;
+import com.hjq.bar.OnTitleBarListener;
+import com.hjq.bar.TitleBar;
 import com.sam.rental.R;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyFragment;
 import com.sam.rental.ui.activity.FocusActivity;
 import com.sam.rental.ui.activity.HomeActivity;
+import com.sam.rental.ui.activity.PersonalDataActivity;
+import com.sam.rental.ui.activity.SettingActivity;
 import com.sam.rental.ui.adapter.CommPagerAdapter;
 import com.sam.rental.widget.CircleImageView;
 
@@ -31,6 +36,10 @@ public final class MineFragment extends MyFragment<HomeActivity> {
 
     @BindView(R.id.iv_head)
     CircleImageView mHeadView;
+
+    @BindView(R.id.edit_mine_resource)
+    TextView mEidtMineTextView;
+
 
     private PersonalProductionFragment mMineProductionFragment;
     private PersonalLoveFragment mPraiseFragment;
@@ -62,7 +71,25 @@ public final class MineFragment extends MyFragment<HomeActivity> {
         mMineXtabLayout.getTabAt(0).select();
         mMineXtabLayout.setupWithViewPager(mViewPager);
         //点击事件
-        setOnClickListener(R.id.ll_fans, R.id.ll_focus,R.id.iv_head);
+        setOnClickListener(R.id.ll_fans, R.id.ll_focus, R.id.iv_head, R.id.edit_mine_resource);
+        //设置
+        TitleBar titleBar = findViewById(R.id.mine_title_bar);
+        titleBar.setOnTitleBarListener(new OnTitleBarListener() {
+            @Override
+            public void onLeftClick(View v) {
+
+            }
+
+            @Override
+            public void onTitleClick(View v) {
+
+            }
+
+            @Override
+            public void onRightClick(View v) {
+                startActivity(SettingActivity.class);
+            }
+        });
     }
 
     @Override
@@ -80,11 +107,9 @@ public final class MineFragment extends MyFragment<HomeActivity> {
             case R.id.ll_fans:
                 startActivity(FocusActivity.class);
                 break;
-            case R.id.iv_head:
-
+            case R.id.edit_mine_resource:
+                startActivity(PersonalDataActivity.class);
                 break;
-
-
             default:
                 break;
         }
