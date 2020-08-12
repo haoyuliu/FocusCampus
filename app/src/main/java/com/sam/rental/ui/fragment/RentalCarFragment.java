@@ -14,21 +14,13 @@ import com.sam.widget.view.SwitchButton;
 import butterknife.BindView;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 租车
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : 租车
  */
-public final class RentalCarFragment extends MyFragment<HomeActivity>
-        implements SwitchButton.OnCheckedChangeListener {
+public final class RentalCarFragment extends MyFragment<HomeActivity> {
 
-    @BindView(R.id.iv_test_circle)
-    ImageView mCircleView;
-
-    @BindView(R.id.sb_test_switch)
-    SwitchButton mSwitchButton;
-    @BindView(R.id.cv_test_countdown)
-    CountdownView mCountdownView;
 
     public static RentalCarFragment newInstance() {
         return new RentalCarFragment();
@@ -41,26 +33,24 @@ public final class RentalCarFragment extends MyFragment<HomeActivity>
 
     @Override
     protected void initView() {
-        mSwitchButton.setOnCheckedChangeListener(this);
-
-        setOnClickListener(R.id.cv_test_countdown);
+        //setOnClickListener(R.id.cv_test_countdown);
     }
 
     @Override
     protected void initData() {
-        GlideApp.with(this)
+       /* GlideApp.with(this)
                 .load(R.drawable.bg_launcher)
                 .circleCrop()
-                .into(mCircleView);
+                .into(mCircleView);*/
     }
 
     @SingleClick
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.cv_test_countdown) {
+       /* if (v.getId() == R.id.cv_test_countdown) {
             toast(R.string.common_code_send_hint);
             mCountdownView.start();
-        }
+        }*/
     }
 
     @Override
@@ -69,12 +59,4 @@ public final class RentalCarFragment extends MyFragment<HomeActivity>
         return !super.isStatusBarEnabled();
     }
 
-    /**
-     * {@link SwitchButton.OnCheckedChangeListener}
-     */
-
-    @Override
-    public void onCheckedChanged(SwitchButton button, boolean isChecked) {
-        toast(isChecked);
-    }
 }
