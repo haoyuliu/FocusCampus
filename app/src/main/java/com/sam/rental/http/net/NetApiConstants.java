@@ -7,7 +7,7 @@ public class NetApiConstants {
     /**
      * baseurl
      */
-    public static final String BASE_URL = "http://39.106.49.27:28080/";
+    public static final String BASE_URL = "http://39.106.49.27:28080";
     /**
      * 获取验证码
      */
@@ -15,7 +15,7 @@ public class NetApiConstants {
     /**
      * 登录
      */
-    public static final String USER_LOGIN = "user/loginByVerifcationCode";
+    public static final String USER_LOGIN = "/user/loginByVerifcationCode";
     /**
      * 获取好友列表
      */

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
@@ -18,11 +17,12 @@ import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyActivity;
 import com.sam.rental.helper.InputTextHelper;
 import com.sam.rental.http.model.HttpData;
+import com.sam.rental.http.net.RetrofitClient;
 import com.sam.rental.http.request.GetCodeApi;
-import com.sam.rental.http.request.LoginApi;
+import com.sam.rental.http.request.LoginRequestBean;
 import com.sam.rental.http.response.LoginBean;
 import com.sam.rental.other.IntentKey;
-import com.sam.rental.other.KeyboardWatcher;
+import com.sam.rental.utils.SPUtils;
 import com.sam.rental.wxapi.WXEntryActivity;
 import com.sam.umeng.Platform;
 import com.sam.umeng.UmengClient;
@@ -30,20 +30,15 @@ import com.sam.umeng.UmengLogin;
 import com.sam.widget.view.CountdownView;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * desc   : 登录界面
  */
 public final class LoginActivity extends MyActivity
         implements UmengLogin.OnLoginListener {
-
-    @DebugLog
-    public static void start(Context context, String phone, String password) {
-        Intent intent = new Intent(context, LoginActivity.class);
-        intent.putExtra(IntentKey.PHONE, phone);
-        intent.putExtra(IntentKey.PASSWORD, password);
-        context.startActivity(intent);
-    }
 
     @BindView(R.id.et_user_phone)
     EditText mPhoneView;
@@ -72,13 +67,6 @@ public final class LoginActivity extends MyActivity
 
     @Override
     protected void initView() {
-        InputTextHelper.with(this)
-                .addView(mPhoneView)
-                .addView(mCodeView)
-                .setMain(mCommitView)
-                .setListener(helper -> mPhoneView.getText().toString().length() == 11 &&
-                        mCodeView.getText().toString().length() >= 6)
-                .build();
 
         setOnClickListener(R.id.cv_password_forget_countdown, R.id.btn_login_commit, R.id.iv_login_qq, R.id.iv_login_wx);
     }
@@ -100,9 +88,6 @@ public final class LoginActivity extends MyActivity
             mOtherView.setVisibility(View.GONE);
         }
 
-        // 填充传入的手机号和密码
-        mPhoneView.setText(getString(IntentKey.PHONE));
-        mCodeView.setText(getString(IntentKey.PASSWORD));
     }
 
     @Override
@@ -122,29 +107,28 @@ public final class LoginActivity extends MyActivity
                     toast(R.string.common_phone_input_error);
                     return;
                 }
-
-                if (true) {
-                    startActivity(HomeActivity.class);
-                    finish();
-                    return;
-                }
-
-                EasyHttp.post(this)
-                        .api(new LoginApi()
-                                .setPhone(mPhoneView.getText().toString())
-                                .setPassword(mCodeView.getText().toString()))
-                        .request(new HttpCallback<HttpData<LoginBean>>(this) {
-
+                LoginRequestBean loginRequestBean = new LoginRequestBean();
+                loginRequestBean.setIp("1111");
+                loginRequestBean.setPhone(mPhoneView.getText().toString());
+                loginRequestBean.setRequestId("2222");
+                loginRequestBean.setVerifcationCode("2222");
+                RetrofitClient.getRetrofitService().loadLogin(loginRequestBean)
+                        .enqueue(new Callback<LoginBean>() {
                             @Override
-                            public void onSucceed(HttpData<LoginBean> data) {
-                                // 更新 Token
-                                EasyConfig.getInstance()
-                                        .addParam("token", data.getData().getToken());
-                                // 跳转到主页
+                            public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
+                                toast("登录成功");
+                                SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
+                                toast("保存成功"+response.body().getData().getToken());
                                 startActivity(HomeActivity.class);
                                 finish();
                             }
+
+                            @Override
+                            public void onFailure(Call<LoginBean> call, Throwable t) {
+                                toast("登录失败"+ t.getMessage().toString());
+                            }
                         });
+
                 break;
             case R.id.cv_password_forget_countdown:
                 if (mPhoneView.getText().toString().length() != 11) {
@@ -159,7 +143,7 @@ public final class LoginActivity extends MyActivity
                 }
 
                 // 获取验证码
-                EasyHttp.post(this)
+              /*  EasyHttp.post(this)
                         .api(new GetCodeApi()
                                 .setPhone(mPhoneView.getText().toString()))
                         .request(new HttpCallback<HttpData<Void>>(this) {
@@ -169,7 +153,7 @@ public final class LoginActivity extends MyActivity
                                 toast(R.string.common_code_send_hint);
                                 mCountdownView.start();
                             }
-                        });
+                        });*/
                 break;
             case R.id.iv_login_qq:
             case R.id.iv_login_wx:

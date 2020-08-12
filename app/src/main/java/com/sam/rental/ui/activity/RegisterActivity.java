@@ -117,7 +117,7 @@ public final class RegisterActivity extends MyActivity {
                 break;
             case R.id.btn_register_commit:
                 if (true) {
-                    LoginActivity.start(getActivity(), mPhoneView.getText().toString(), mPasswordView1.getText().toString());
+                   // LoginActivity.start(getActivity(), mPhoneView.getText().toString(), mPasswordView1.getText().toString());
                     setResult(RESULT_OK);
                     finish();
                     return;
@@ -132,7 +132,7 @@ public final class RegisterActivity extends MyActivity {
 
                             @Override
                             public void onSucceed(HttpData<RegisterBean> data) {
-                                LoginActivity.start(getActivity(), mPhoneView.getText().toString(), mPasswordView1.getText().toString());
+                                //LoginActivity.start(getActivity(), mPhoneView.getText().toString(), mPasswordView1.getText().toString());
                                 setResult(RESULT_OK);
                                 finish();
                             }
