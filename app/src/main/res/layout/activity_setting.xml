@@ -52,30 +52,6 @@
         app:bar_rightIcon="@drawable/ico_go_black" />
 
     <com.sam.widget.layout.SettingBar
-        android:id="@+id/sb_setting_about"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:bar_leftText="@string/setting_about"
-        app:bar_rightIcon="@drawable/ico_go_black" />
-
-    <com.sam.widget.layout.SettingBar
-        android:id="@+id/sb_setting_auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:bar_leftText="@string/setting_auto">
-
-        <com.sam.widget.view.SwitchButton
-            android:id="@+id/sb_setting_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp" />
-
-    </com.sam.widget.layout.SettingBar>
-
-    <com.sam.widget.layout.SettingBar
         android:id="@+id/sb_setting_cache"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

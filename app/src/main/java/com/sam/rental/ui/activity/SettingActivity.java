@@ -31,9 +31,6 @@ public final class SettingActivity extends MyActivity
     @BindView(R.id.sb_setting_cache)
     SettingBar mCleanCacheView;
 
-    @BindView(R.id.sb_setting_switch)
-    SwitchButton mAutoSwitchView;
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_setting;
@@ -41,11 +38,8 @@ public final class SettingActivity extends MyActivity
 
     @Override
     protected void initView() {
-        // 设置切换按钮的监听
-        mAutoSwitchView.setOnCheckedChangeListener(this);
-
-        setOnClickListener(R.id.sb_setting_language, R.id.sb_setting_update, R.id.sb_setting_agreement, R.id.sb_setting_about,
-                R.id.sb_setting_cache, R.id.sb_setting_auto, R.id.sb_setting_exit);
+        setOnClickListener(R.id.sb_setting_language, R.id.sb_setting_update, R.id.sb_setting_agreement,
+                R.id.sb_setting_cache, R.id.sb_setting_exit);
     }
 
     @Override
@@ -89,13 +83,6 @@ public final class SettingActivity extends MyActivity
                 break;
             case R.id.sb_setting_agreement:
                 BrowserActivity.start(this, "https://github.com/getActivity/Donate");
-                break;
-            case R.id.sb_setting_about:
-                startActivity(AboutActivity.class);
-                break;
-            case R.id.sb_setting_auto:
-                // 自动登录
-                mAutoSwitchView.setChecked(!mAutoSwitchView.isChecked());
                 break;
             case R.id.sb_setting_cache:
                 // 清除内存缓存（必须在主线程）
