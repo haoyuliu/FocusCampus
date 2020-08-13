@@ -34,7 +34,7 @@ import retrofit2.Response;
 public class RecommendFragment extends MyFragment<HomeActivity> {
     private int pageIndex = 1;
     private int pageSize = 10;
-    private TikTokController mController;
+    // private TikTokController mController;
     private int mCurPos;
     private RecyclerView mRecyclerView;
     private List<VideoListBean.DataBean> mVideoList = new ArrayList<>();
@@ -57,26 +57,15 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
     @Override
     protected void initView() {
         mVideoView = new VideoView(getContext());
-        //以下只能二选一，看你的需求
-        //mVideoView.setRenderViewFactory(TikTokRenderViewFactory.create());
         mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
         mVideoView.setLooping(true);
-        mController = new TikTokController(getContext());
-        mVideoView.setVideoController(mController);
+        //mController = new TikTokController(getContext());
+        // mVideoView.setVideoController(mController);
         mRecyclerView = findViewById(R.id.rv);
         getVideoData(pageIndex, pageSize);
-        addData(null);
         mRecyclerView.scrollToPosition(mIndex);
     }
 
-    private void addData(Object o) {
-
-    }
-
-    private void initRecyclerView() {
-
-
-    }
 
     private void startPlay(int position) {
         View itemView = mRecyclerView.getChildAt(0);
@@ -86,7 +75,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         VideoListBean.DataBean item = mVideoList.get(position);
         String playUrl = PreloadManager.getInstance(getContext()).getPlayUrl(item.getVideoUrl());
         mVideoView.setUrl(playUrl);
-        mController.addControlComponent(viewHolder.mTikTokView, true);
+        // mController.addControlComponent(viewHolder.mTikTokView, true);
         viewHolder.mPlayerContainer.addView(mVideoView, 0);
         mVideoView.start();
         mCurPos = position;
@@ -125,7 +114,9 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
 
                     @Override
                     public void onPageSelected(int position, boolean isBottom) {
-                        if (mCurPos == position) return;
+                        if (mCurPos == position) {
+                            return;
+                        }
                         startPlay(position);
                     }
                 });

@@ -36,7 +36,6 @@ public class GridVideoAdapter extends BaseRvAdapter<UserProductionOrLoveBean.Dat
     @Override
     protected void onBindData(GridVideoViewHolder holder, UserProductionOrLoveBean.DataBean videoBean, int position) {
         Glide.with(holder.itemView.getContext()).load(videoBean.getVideoImageUrl()).into(holder.ivCover);
-        holder.tvContent.setText(videoBean.getVideoTitle());
 
         holder.itemView.setOnClickListener(v -> {
             PlayListActivity.initPos = position;
@@ -54,8 +53,6 @@ public class GridVideoAdapter extends BaseRvAdapter<UserProductionOrLoveBean.Dat
     public class GridVideoViewHolder extends BaseRvViewHolder {
         @BindView(R.id.iv_cover)
         ImageView ivCover;
-        @BindView(R.id.tv_content)
-        TextView tvContent;
 
 
         public GridVideoViewHolder(View itemView) {

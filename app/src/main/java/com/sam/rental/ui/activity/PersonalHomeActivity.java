@@ -1,20 +1,12 @@
 package com.sam.rental.ui.activity;
 
-import android.content.Intent;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.androidkun.xtablayout.XTabLayout;
-import com.google.android.material.appbar.AppBarLayout;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.EaseConstant;
 import com.sam.rental.R;
 import com.sam.rental.bean.VideoBean;
 import com.sam.rental.common.MyActivity;
@@ -22,7 +14,6 @@ import com.sam.rental.ui.adapter.CommPagerAdapter;
 import com.sam.rental.ui.fragment.PersonalLoveFragment;
 import com.sam.rental.ui.fragment.PersonalProductionFragment;
 import com.sam.rental.widget.CircleImageView;
-import com.sam.rental.widget.IconFontTextView;
 
 import org.reactivestreams.Subscription;
 

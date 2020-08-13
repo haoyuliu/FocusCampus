@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- *    desc   : 个人资料
+ * desc   : 个人资料页面
  */
 public final class PersonalDataActivity extends MyActivity {
 
@@ -36,14 +36,22 @@ public final class PersonalDataActivity extends MyActivity {
     @BindView(R.id.sb_person_data_phone)
     SettingBar mPhoneView;
 
-    /** 省 */
+    /**
+     * 省
+     */
     private String mProvince = "广东省";
-    /** 市 */
+    /**
+     * 市
+     */
     private String mCity = "广州市";
-    /** 区 */
+    /**
+     * 区
+     */
     private String mArea = "天河区";
 
-    /** 头像地址 */
+    /**
+     * 头像地址
+     */
     private String mAvatarUrl;
 
     @Override
@@ -112,7 +120,8 @@ public final class PersonalDataActivity extends MyActivity {
                     }
 
                     @Override
-                    public void onCancel() {}
+                    public void onCancel() {
+                    }
                 });
                 break;
             case R.id.sb_person_data_name:
