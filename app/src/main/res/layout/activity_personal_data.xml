@@ -12,32 +12,29 @@
         android:layout_height="wrap_content"
         app:title="@string/personal_data_title" />
 
-    <com.sam.widget.layout.SettingBar
-        android:id="@+id/fl_person_data_head"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_white"
-        app:bar_leftText="@string/personal_data_head">
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.sam.rental.widget.CircleImageView
             android:id="@+id/iv_person_data_avatar"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_gravity="end|center_vertical"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_margin="20dp"
-            android:scaleType="centerCrop"
+            app:es_shape_type="round"
             tools:src="@drawable/ic_head_placeholder" />
 
-    </com.sam.widget.layout.SettingBar>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="点击更换头像" />
 
-    <com.sam.widget.layout.SettingBar
-        android:id="@+id/sb_person_data_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        app:bar_leftText="@string/personal_data_id"
-        app:bar_rightText="880634" />
+    </LinearLayout>
+
 
     <com.sam.widget.layout.SettingBar
         android:id="@+id/sb_person_data_name"
@@ -45,7 +42,35 @@
         android:layout_height="wrap_content"
         app:bar_leftText="@string/personal_data_name"
         app:bar_rightHint="@string/personal_data_name_hint"
+        app:bar_rightIcon="@drawable/ico_go_black"
         app:bar_rightText="Android 轮子哥" />
+
+    <com.sam.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_signature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="签名"
+        app:bar_rightHint="添加个性签名更加容易被关注"
+        app:bar_rightIcon="@drawable/ico_go_black"
+        app:bar_rightText="" />
+
+    <com.sam.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="性别"
+        app:bar_rightHint="不显示"
+        app:bar_rightIcon="@drawable/ico_go_black"
+        app:bar_rightText="" />
+
+    <com.sam.widget.layout.SettingBar
+        android:id="@+id/sb_person_data_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="生日"
+        app:bar_rightHint="点击设置"
+        app:bar_rightIcon="@drawable/ico_go_black"
+        app:bar_rightText="" />
 
     <com.sam.widget.layout.SettingBar
         android:id="@+id/sb_person_data_address"
@@ -55,13 +80,5 @@
         app:bar_rightHint="@string/personal_data_address_hint"
         app:bar_rightIcon="@drawable/ico_go_black" />
 
-    <com.sam.widget.layout.SettingBar
-        android:id="@+id/sb_person_data_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:bar_leftText="@string/personal_data_phone"
-        app:bar_rightHint="@string/personal_data_phone_hint"
-        app:bar_rightIcon="@drawable/ico_go_black" />
 
 </LinearLayout>

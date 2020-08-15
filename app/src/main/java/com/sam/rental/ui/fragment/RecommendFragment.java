@@ -34,7 +34,7 @@ import retrofit2.Response;
 public class RecommendFragment extends MyFragment<HomeActivity> {
     private int pageIndex = 1;
     private int pageSize = 10;
-    // private TikTokController mController;
+    private TikTokController mController;
     private int mCurPos;
     private RecyclerView mRecyclerView;
     private List<VideoListBean.DataBean> mVideoList = new ArrayList<>();
@@ -59,8 +59,8 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         mVideoView = new VideoView(getContext());
         mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
         mVideoView.setLooping(true);
-        //mController = new TikTokController(getContext());
-        // mVideoView.setVideoController(mController);
+        mController = new TikTokController(getContext());
+        mVideoView.setVideoController(mController);
         mRecyclerView = findViewById(R.id.rv);
         getVideoData(pageIndex, pageSize);
         mRecyclerView.scrollToPosition(mIndex);
@@ -75,7 +75,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         VideoListBean.DataBean item = mVideoList.get(position);
         String playUrl = PreloadManager.getInstance(getContext()).getPlayUrl(item.getVideoUrl());
         mVideoView.setUrl(playUrl);
-        // mController.addControlComponent(viewHolder.mTikTokView, true);
+        mController.addControlComponent(viewHolder.mTikTokView, true);
         viewHolder.mPlayerContainer.addView(mVideoView, 0);
         mVideoView.start();
         mCurPos = position;

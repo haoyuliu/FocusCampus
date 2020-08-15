@@ -3,6 +3,8 @@ package com.sam.rental.ui.activity;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.sam.rental.R;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyActivity;
@@ -11,8 +13,7 @@ import com.sam.rental.http.model.HttpData;
 import com.sam.rental.http.request.UpdateImageApi;
 import com.sam.rental.ui.dialog.AddressDialog;
 import com.sam.rental.ui.dialog.InputDialog;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
+import com.sam.rental.widget.CircleImageView;
 import com.sam.widget.layout.SettingBar;
 
 import java.io.File;
@@ -26,15 +27,19 @@ import butterknife.BindView;
 public final class PersonalDataActivity extends MyActivity {
 
     @BindView(R.id.iv_person_data_avatar)
-    ImageView mAvatarView;
-    @BindView(R.id.sb_person_data_id)
-    SettingBar mIDView;
+    CircleImageView mAvatarView;
     @BindView(R.id.sb_person_data_name)
     SettingBar mNameView;
+
+    @BindView(R.id.sb_person_data_signature)
+    SettingBar mSignatureView;
+
+    @BindView(R.id.sb_person_data_sex)
+    SettingBar mSexView;
+    @BindView(R.id.sb_person_data_birthday)
+    SettingBar mBirthdayView;
     @BindView(R.id.sb_person_data_address)
     SettingBar mAddressView;
-    @BindView(R.id.sb_person_data_phone)
-    SettingBar mPhoneView;
 
     /**
      * 省
@@ -61,8 +66,8 @@ public final class PersonalDataActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.iv_person_data_avatar, R.id.fl_person_data_head,
-                R.id.sb_person_data_name, R.id.sb_person_data_address, R.id.sb_person_data_phone);
+        setOnClickListener(R.id.iv_person_data_avatar, R.id.sb_person_data_name,
+                R.id.sb_person_data_name, R.id.sb_person_data_address, R.id.sb_person_data_signature, R.id.sb_person_data_sex, R.id.sb_person_data_birthday);
     }
 
     @Override
@@ -83,15 +88,6 @@ public final class PersonalDataActivity extends MyActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_person_data_avatar:
-                if (mAvatarUrl != null && !"".equals(mAvatarUrl)) {
-                    // 查看头像
-                    ImageActivity.start(getActivity(), mAvatarUrl);
-                } else {
-                    // 选择头像
-                    onClick(findViewById(R.id.fl_person_data_head));
-                }
-                break;
-            case R.id.fl_person_data_head:
                 PhotoActivity.start(getActivity(), new PhotoActivity.OnPhotoSelectListener() {
 
                     @Override
@@ -162,14 +158,7 @@ public final class PersonalDataActivity extends MyActivity {
                         })
                         .show();
                 break;
-            case R.id.sb_person_data_phone:
-                // 先判断有没有设置过手机号
-                if (true) {
-                    startActivity(PhoneVerifyActivity.class);
-                } else {
-                    startActivity(PhoneResetActivity.class);
-                }
-                break;
+         
             default:
                 break;
         }

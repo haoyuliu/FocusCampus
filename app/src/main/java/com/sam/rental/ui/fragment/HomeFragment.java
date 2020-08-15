@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * author : Android 轮子哥
- * time   : 2018/10/18
  * desc   : 这个是项目的HomeFragment，整体是一个ViewPager
  */
 public class HomeFragment extends MyFragment<HomeActivity> {
