@@ -53,4 +53,9 @@ public class NetApiConstants {
      */
     public static final String GET_PERSONAL_LOVE = "video/getCollectionVideoList";
 
+    /**
+     * 获取评论列表
+     */
+    public static final String GET_COMMENT_LIST = "video/videoCommonList";
+
 }

@@ -15,8 +15,10 @@ import com.sam.rental.R;
 import com.sam.rental.adapter.CommentAdapter;
 import com.sam.rental.bean.CommentBean;
 import com.sam.rental.bean.DataCreate;
+import com.sam.rental.http.response.CommentListBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,23 +34,20 @@ public class CommentDialog extends BaseBottomSheetDialog {
     @BindView(R.id.tv_title)
     TextView tvTitle;
     private CommentAdapter commentAdapter;
-    private ArrayList<CommentBean> datas = new ArrayList<>();
+    private List<CommentListBean.DataBean> datas = new ArrayList<>();
     private View view;
-    private int[] likeArray = new int[]{4919, 334, 121, 423, 221, 23};
-    private String[] commentArray = new String[]{"我就说左脚踩右脚可以上天你们还不信！", "全是评论点赞，没人关注吗", "哈哈哈哈", "像谁，没看出来", "你这西安话真好听"};
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dialog_comment, container);
         ButterKnife.bind(this, view);
-
         init();
-
         return view;
     }
 
     private void init() {
+        tvTitle.setText(datas.size() + "");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         commentAdapter = new CommentAdapter(getContext(), datas);
         recyclerView.setAdapter(commentAdapter);
@@ -57,18 +56,15 @@ public class CommentDialog extends BaseBottomSheetDialog {
     }
 
     private void loadData() {
-        for (int i = 0; i < DataCreate.userList.size(); i++) {
-            CommentBean commentBean = new CommentBean();
-            commentBean.setUserBean(DataCreate.userList.get(i));
-            commentBean.setContent(commentArray[(int) (Math.random() * commentArray.length)]);
-            commentBean.setLikeCount(likeArray[(int) (Math.random() * likeArray.length)]);
-            datas.add(commentBean);
-        }
-        commentAdapter.notifyDataSetChanged();
+
     }
 
     @Override
     protected int getHeight() {
         return getResources().getDisplayMetrics().heightPixels - 600;
+    }
+
+    public void setData(List<CommentListBean.DataBean> data) {
+        this.datas = data;
     }
 }

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.sam.rental.R;
 import com.sam.rental.bean.CommentBean;
+import com.sam.rental.http.response.CommentListBean;
 import com.sam.rental.ui.adapter.BaseRvAdapter;
 import com.sam.rental.ui.adapter.BaseRvViewHolder;
 import com.sam.rental.utils.NumUtils;
@@ -22,18 +23,18 @@ import butterknife.BindView;
 /**
  * description
  */
-public class CommentAdapter extends BaseRvAdapter<CommentBean, CommentAdapter.CommentViewHolder> {
+public class CommentAdapter extends BaseRvAdapter<CommentListBean.DataBean, CommentAdapter.CommentViewHolder> {
 
-    public CommentAdapter(Context context, List<CommentBean> datas) {
+    public CommentAdapter(Context context, List<CommentListBean.DataBean> datas) {
         super(context, datas);
     }
 
     @Override
-    protected void onBindData(CommentViewHolder holder, CommentBean commentBean, int position) {
-        holder.ivHead.setImageResource(commentBean.getUserBean().getHead());
-        holder.tvNickname.setText(commentBean.getUserBean().getNickName());
+    protected void onBindData(CommentViewHolder holder, CommentListBean.DataBean commentBean, int position) {
+        //holder.ivHead.setImageResource(commentBean.getUserImg());
+        holder.tvNickname.setText(commentBean.getUserId() + "");
         holder.tvContent.setText(commentBean.getContent());
-        holder.tvLikecount.setText(NumUtils.numberFilter(commentBean.getLikeCount()));
+        //holder.tvLikecount.setText(NumUtils.numberFilter(commentBean.getLikeCount()));
     }
 
     @NonNull

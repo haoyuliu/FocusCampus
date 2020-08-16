@@ -5,6 +5,7 @@ import com.sam.rental.bean.FansBean;
 import com.sam.rental.bean.UserProductionOrLoveBean;
 import com.sam.rental.bean.VideoListBean;
 import com.sam.rental.http.request.LoginRequestBean;
+import com.sam.rental.http.response.CommentListBean;
 import com.sam.rental.http.response.LoginBean;
 import com.sam.rental.http.response.VerficationCodeBean;
 
@@ -64,5 +65,11 @@ public interface RetrofitApi {
      */
     @GET(NetApiConstants.GET_PERSONAL_LOVE)
     Call<UserProductionOrLoveBean> getPersonalLove(@Query("userId") String userId, @Query("page") String page);
+
+    /**
+     * 获取个人作品的评论列表
+     */
+    @GET(NetApiConstants.GET_COMMENT_LIST)
+    Call<CommentListBean> getCommentList(@Query("videoId") String videoId, @Query("pageIndex") String pageIndex, @Query("pageSize") String pageSize);
 
 }

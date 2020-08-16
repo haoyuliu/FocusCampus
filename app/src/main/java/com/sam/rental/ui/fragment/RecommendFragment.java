@@ -14,12 +14,14 @@ import com.sam.rental.bean.VideoListBean;
 import com.sam.rental.common.MyFragment;
 import com.sam.rental.controller.TikTokController;
 import com.sam.rental.http.net.RetrofitClient;
+import com.sam.rental.http.response.CommentListBean;
 import com.sam.rental.ui.activity.HomeActivity;
 import com.sam.rental.ui.adapter.TikTokAdapter;
 import com.sam.rental.utils.Utils;
 import com.sam.rental.widget.CommentDialog;
 import com.sam.rental.widget.viewpagerlayoutmanager.OnViewPagerListener;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,7 +100,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
 
                 mRecyclerView.setLayoutManager(layoutManager);
                 mRecyclerView.setAdapter(mTikTokAdapter);
-                Log.d("数据", response.code() + ""+response.body().getData().toString());
+                Log.d("数据", response.code() + "" + response.body().getData().toString());
                 layoutManager.setOnViewPagerListener(new OnViewPagerListener() {
                     @Override
                     public void onInitComplete() {
@@ -124,8 +126,28 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
                 mTikTokAdapter.setItemOnClickInterface(new TikTokAdapter.ItemCommentOnClickInterface() {
                     @Override
                     public void onItemClick(View view) {
-                        CommentDialog commentDialog = new CommentDialog();
-                        commentDialog.show(getChildFragmentManager(), "");
+                        // 获取数据
+                        RetrofitClient.getRetrofitService().getCommentList("2", "1", "10")
+                                .enqueue(new Callback<CommentListBean>() {
+                                    @Override
+                                    public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
+                                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                                            CommentDialog commentDialog = new CommentDialog();
+                                            commentDialog.setData(response.body().getData());
+                                            commentDialog.show(getChildFragmentManager(), "");
+                                        } else {
+                                            toast("获取评论数据失败");
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<CommentListBean> call, Throwable t) {
+                                        toast("获取评论数据失败");
+                                    }
+                                });
+
+
                     }
                 });
             }
