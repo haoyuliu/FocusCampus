@@ -1,5 +1,7 @@
 package com.sam.rental.ui.fragment;
 
+import android.os.Bundle;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,9 +38,13 @@ public class PersonalProductionFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initData() {
-        String userId = "368415507088539643";
-        String page = "1";
-        getData(userId, page);
+        Bundle arguments = this.getArguments();
+        String userId;
+        if (arguments != null) {
+            userId = arguments.getString("userId");
+            String page = "1";
+            getData(userId, page);
+        }
     }
 
     private void getData(String userId, String page) {

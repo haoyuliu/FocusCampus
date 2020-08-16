@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.androidkun.xtablayout.XTabLayout;
+import com.rd.PageIndicatorView;
 import com.sam.rental.R;
 import com.sam.rental.common.MyFragment;
 import com.sam.rental.ui.activity.HomeActivity;

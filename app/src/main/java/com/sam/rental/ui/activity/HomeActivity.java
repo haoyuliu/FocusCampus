@@ -80,7 +80,6 @@ public final class HomeActivity extends MyActivity {
                         }
                         //替换Fragment
                         mFragmentManagerHelper.switchFragment(mHomeFragment);
-                        RxBus.getDefault().post(new PauseVideoEvent(false));
                         break;
                     case 1:
                         //租车
@@ -90,16 +89,13 @@ public final class HomeActivity extends MyActivity {
                         }
                         //替换Fragment
                         mFragmentManagerHelper.switchFragment(mRentalCarFragment);
-                        RxBus.getDefault().post(new PauseVideoEvent(false));
                         break;
                     case 2:
                         //拍视频
                         startActivity(UpLoadVedioActivity.class);
-                        RxBus.getDefault().post(new PauseVideoEvent(false));
                         break;
                     case 3:
                         //消息
-                        RxBus.getDefault().post(new PauseVideoEvent(false));
                         //判断
                         if (mMessageFragment == null) {
                             mMessageFragment = new MessageFragment();
@@ -114,7 +110,6 @@ public final class HomeActivity extends MyActivity {
                         }
                         //替换Fragment
                         mFragmentManagerHelper.switchFragment(mMineFragment);
-                        RxBus.getDefault().post(new PauseVideoEvent(false));
                         break;
                     default:
                         break;

@@ -3,17 +3,16 @@ package com.sam.rental.http.net;
 
 import com.sam.rental.bean.FansBean;
 import com.sam.rental.bean.UserProductionOrLoveBean;
-import com.sam.rental.bean.VerficationCodeBean;
 import com.sam.rental.bean.VideoListBean;
 import com.sam.rental.http.request.LoginRequestBean;
 import com.sam.rental.http.response.LoginBean;
+import com.sam.rental.http.response.VerficationCodeBean;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import retrofit2.http.Url;
 
 /**
  * 网络请求的接口
@@ -23,7 +22,7 @@ public interface RetrofitApi {
      * 获取验证码
      */
     @GET(NetApiConstants.VERFICATION_CODE)
-    Call<VerficationCodeBean> loadVerficationCode();
+    Call<VerficationCodeBean> loadVerficationCode(@Query("phone") String phone);
 
     /**
      * 根据验证码登录

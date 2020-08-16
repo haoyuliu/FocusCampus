@@ -1,17 +1,16 @@
 package com.sam.rental.http.response;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/12/07
- *    desc   : 登录返回
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/12/07
+ * desc   : 登录返回
  */
 public class LoginBean {
 
-
     /**
      * success : true
-     * data : {"userId":371321119245991940,"realName":"","nickName":"111","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","phone":"111","token":"oW2zg/5qLfi9NB9ZQsalRQ==","hxuid":"hqyc111","hxpwd":"698d51a19d8a121ce581499d7b701668"}
+     * data : {"userId":368415507088539650,"realName":"","nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","phone":"15065157316","userSex":null,"userDesc":null,"userBirthday":"","userLocation":null,"token":"kTaffxwRXzxKbQ/7Z2BGbA==","hxuid":"hqyc15065157316","hxpwd":"1278baf5833fc3c7f8b776c0ef8a0aa1"}
      * msg : success
      * code : 200
      * traceId : null
@@ -65,14 +64,18 @@ public class LoginBean {
 
     public static class DataBean {
         /**
-         * userId : 371321119245991940
+         * userId : 368415507088539650
          * realName :
-         * nickName : 111
+         * nickName : 15065157316
          * headImg : https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D
-         * phone : 111
-         * token : oW2zg/5qLfi9NB9ZQsalRQ==
-         * hxuid : hqyc111
-         * hxpwd : 698d51a19d8a121ce581499d7b701668
+         * phone : 15065157316
+         * userSex : null
+         * userDesc : null
+         * userBirthday :
+         * userLocation : null
+         * token : kTaffxwRXzxKbQ/7Z2BGbA==
+         * hxuid : hqyc15065157316
+         * hxpwd : 1278baf5833fc3c7f8b776c0ef8a0aa1
          */
 
         private long userId;
@@ -80,6 +83,10 @@ public class LoginBean {
         private String nickName;
         private String headImg;
         private String phone;
+        private String userSex;
+        private String userDesc;
+        private String userBirthday;
+        private String userLocation;
         private String token;
         private String hxuid;
         private String hxpwd;
@@ -122,6 +129,38 @@ public class LoginBean {
 
         public void setPhone(String phone) {
             this.phone = phone;
+        }
+
+        public String getUserSex() {
+            return userSex;
+        }
+
+        public void setUserSex(String userSex) {
+            this.userSex = userSex;
+        }
+
+        public String getUserDesc() {
+            return userDesc;
+        }
+
+        public void setUserDesc(String userDesc) {
+            this.userDesc = userDesc;
+        }
+
+        public String getUserBirthday() {
+            return userBirthday;
+        }
+
+        public void setUserBirthday(String userBirthday) {
+            this.userBirthday = userBirthday;
+        }
+
+        public String getUserLocation() {
+            return userLocation;
+        }
+
+        public void setUserLocation(String userLocation) {
+            this.userLocation = userLocation;
         }
 
         public String getToken() {

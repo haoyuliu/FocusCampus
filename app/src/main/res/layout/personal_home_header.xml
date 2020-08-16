@@ -29,6 +29,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_nick_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="夏沫de秋天"
@@ -71,7 +72,7 @@
         android:paddingBottom="12dp">
 
         <TextView
-            android:id="@+id/tv_nickname"
+            android:id="@+id/tv_nick_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ID:XXXXXXXXXXX"
@@ -85,7 +86,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tv_sign"
+            android:id="@+id/tv_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"

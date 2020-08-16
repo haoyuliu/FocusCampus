@@ -1,5 +1,6 @@
 package com.sam.rental.ui.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.androidkun.xtablayout.XTabLayout;
+import com.bumptech.glide.Glide;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.sam.rental.R;
@@ -14,13 +16,14 @@ import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyFragment;
 import com.sam.rental.ui.activity.FocusActivity;
 import com.sam.rental.ui.activity.HomeActivity;
+import com.sam.rental.ui.activity.LoginActivity;
 import com.sam.rental.ui.activity.PersonalDataActivity;
 import com.sam.rental.ui.activity.SettingActivity;
 import com.sam.rental.ui.adapter.CommPagerAdapter;
+import com.sam.rental.utils.SPUtils;
 import com.sam.rental.widget.CircleImageView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -34,12 +37,23 @@ public final class MineFragment extends MyFragment<HomeActivity> {
     @BindView(R.id.mine_view_pager)
     ViewPager mViewPager;
 
-    @BindView(R.id.iv_head)
+    @BindView(R.id.mine_user_head)
     CircleImageView mHeadView;
 
     @BindView(R.id.edit_mine_resource)
     TextView mEidtMineTextView;
 
+    @BindView(R.id.mine_user_id)
+    TextView mTextViewUserID;
+
+    @BindView(R.id.mine_user_nick_name)
+    TextView mTextViewUserNickName;
+
+    @BindView(R.id.mine_sex_location)
+    TextView mTextViewUserSexLocation;
+
+    @BindView(R.id.tv_mine_desc)
+    TextView mTextViewUserDesc;
 
     private PersonalProductionFragment mMineProductionFragment;
     private PersonalLoveFragment mPraiseFragment;
@@ -57,8 +71,28 @@ public final class MineFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
+        SPUtils.getInstance(getContext()).getString("token");
+        SPUtils.getInstance(getContext()).getString("UserId");
+        SPUtils.getInstance(getContext()).getString("HeadImage");
+        SPUtils.getInstance(getContext()).getString("NickName");
+        SPUtils.getInstance(getContext()).getString("userSex");
+        SPUtils.getInstance(getContext()).getString("userDesc");
+        SPUtils.getInstance(getContext()).getString("userBirthday");
+        SPUtils.getInstance(getContext()).getString("userLocation");
+
+
+        Glide.with(getContext()).load(SPUtils.getInstance(getContext()).getString("HeadImage")).into(mHeadView);
+        mTextViewUserID.setText("ID:" + SPUtils.getInstance(getContext()).getString("UserId"));
+        mTextViewUserNickName.setText(SPUtils.getInstance(getContext()).getString("NickName"));
+        mTextViewUserSexLocation.setText(SPUtils.getInstance(getContext()).getString("userSex"));
+        mTextViewUserDesc.setText(SPUtils.getInstance(getContext()).getString("userDesc"));
+
+        Bundle bundle = new Bundle();
+        bundle.putString("userId", SPUtils.getInstance(getContext()).getString("UserId"));
         mMineProductionFragment = new PersonalProductionFragment();
+        mMineProductionFragment.setArguments(bundle);
         mPraiseFragment = new PersonalLoveFragment();
+        mPraiseFragment.setArguments(bundle);
         fragments.add(mMineProductionFragment);
         fragments.add(mPraiseFragment);
         mMineXtabLayout.addTab(mMineXtabLayout.newTab().setText("作品"));
@@ -71,7 +105,7 @@ public final class MineFragment extends MyFragment<HomeActivity> {
         mMineXtabLayout.getTabAt(0).select();
         mMineXtabLayout.setupWithViewPager(mViewPager);
         //点击事件
-        setOnClickListener(R.id.ll_fans, R.id.ll_focus, R.id.iv_head, R.id.edit_mine_resource);
+        setOnClickListener(R.id.ll_fans, R.id.ll_focus, R.id.mine_user_head, R.id.edit_mine_resource);
         //设置
         TitleBar titleBar = findViewById(R.id.mine_title_bar);
         titleBar.setOnTitleBarListener(new OnTitleBarListener() {

@@ -39,7 +39,7 @@
                     android:padding="20dp">
 
                     <com.sam.rental.widget.CircleImageView
-                        android:id="@+id/iv_head"
+                        android:id="@+id/mine_user_head"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:layout_centerVertical="true"
@@ -55,6 +55,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/mine_user_nick_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="夏沫de秋天"
@@ -97,25 +98,26 @@
                     android:paddingLeft="20dp">
 
                     <TextView
-                        android:id="@+id/tv_nickname"
+                        android:id="@+id/mine_user_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ID:XXXXXXXXXXX"
+                        android:text=""
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/mine_sex_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="男北京"
+                        android:text=""
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/tv_sign"
+                        android:id="@+id/tv_mine_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="保持可爱 赶快长大这里是你的衣橱间"
+                        android:text=""
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -234,9 +236,9 @@
         <com.androidkun.xtablayout.XTabLayout
             android:id="@+id/mine_xtab_layout"
             android:layout_width="match_parent"
-            android:padding="5dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:padding="5dp"
             app:xTabIndicatorColor="@color/color_check_home"
             app:xTabIndicatorWidth="30dp"
             app:xTabSelectedTextColor="@color/black"

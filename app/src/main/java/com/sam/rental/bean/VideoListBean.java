@@ -1,5 +1,7 @@
 package com.sam.rental.bean;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -10,9 +12,10 @@ import java.util.List;
  */
 public class VideoListBean {
 
+
     /**
      * success : true
-     * data : [{"userId":368415507088539648,"videoId":null,"videoTitle":"视频测试1596288147","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/64e15ac-173aa30228f/64e15ac-173aa30228f.mp4","videoImageUrl":null,"videoLikeCount":null,"videoCommitCount":null,"videoType":null,"status":1,"createTime":"2020-08-01 21:51:11","id":2},{"userId":368415507088539648,"videoId":null,"videoTitle":"视频测试1596288180","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/2c33ba6c-173aa30a24d/2c33ba6c-173aa30a24d.mp4","videoImageUrl":null,"videoLikeCount":null,"videoCommitCount":null,"videoType":null,"status":1,"createTime":"2020-08-01 21:51:11","id":3},{"userId":368415507088539648,"videoId":null,"videoTitle":"视频测试1596288213","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/34861c1d-173aa312462/34861c1d-173aa312462.mp4","videoImageUrl":null,"videoLikeCount":null,"videoCommitCount":null,"videoType":null,"status":1,"createTime":"2020-08-01 21:51:11","id":4},{"userId":368415507088539648,"videoId":null,"videoTitle":"视频测试1596288221","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/3e60539e-173aa31414d/3e60539e-173aa31414d.mp4","videoImageUrl":null,"videoLikeCount":null,"videoCommitCount":null,"videoType":null,"status":1,"createTime":"2020-08-01 21:51:11","id":5},{"userId":368415507088539648,"videoId":null,"videoTitle":"视频测试1596288271","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/2f3eb9a7-173aa3206b4/2f3eb9a7-173aa3206b4.mp4","videoImageUrl":null,"videoLikeCount":null,"videoCommitCount":null,"videoType":null,"status":1,"createTime":"2020-08-01 21:51:11","id":6},{"userId":368415507088539648,"videoId":null,"videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":null,"videoCommitCount":null,"videoType":null,"status":1,"createTime":"2020-08-01 21:51:11","id":7},{"userId":368415507088539648,"videoId":null,"videoTitle":"视频测试1596288317","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/267a8b6a-173aa32b905/267a8b6a-173aa32b905.mp4","videoImageUrl":null,"videoLikeCount":null,"videoCommitCount":null,"videoType":null,"status":1,"createTime":"2020-08-01 21:51:11","id":8}]
+     * data : [{"userId":368415507088539650,"nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","hxuid":"hqyc15065157316","videoId":"2","videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":6,"videoCommitCount":3,"videoType":null,"status":null,"createTime":null,"id":0},{"userId":368415507088539650,"nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","hxuid":"hqyc15065157316","videoId":"3","videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":6,"videoCommitCount":3,"videoType":null,"status":null,"createTime":null,"id":0},{"userId":368415507088539650,"nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","hxuid":"hqyc15065157316","videoId":"4","videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":6,"videoCommitCount":3,"videoType":null,"status":null,"createTime":null,"id":0},{"userId":368415507088539650,"nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","hxuid":"hqyc15065157316","videoId":"5","videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":6,"videoCommitCount":3,"videoType":null,"status":null,"createTime":null,"id":0},{"userId":368415507088539650,"nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","hxuid":"hqyc15065157316","videoId":"6","videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":6,"videoCommitCount":3,"videoType":null,"status":null,"createTime":null,"id":0},{"userId":368415507088539650,"nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","hxuid":"hqyc15065157316","videoId":"7","videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":6,"videoCommitCount":3,"videoType":null,"status":null,"createTime":null,"id":0},{"userId":368415507088539650,"nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","hxuid":"hqyc15065157316","videoId":"8","videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":6,"videoCommitCount":3,"videoType":null,"status":null,"createTime":null,"id":0},{"userId":368415507088539650,"nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","hxuid":"hqyc15065157316","videoId":"9","videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":6,"videoCommitCount":3,"videoType":null,"status":null,"createTime":null,"id":0},{"userId":368415507088539650,"nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","hxuid":"hqyc15065157316","videoId":"10","videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":6,"videoCommitCount":3,"videoType":null,"status":null,"createTime":null,"id":0},{"userId":368415507088539650,"nickName":"15065157316","headImg":"https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D","hxuid":"hqyc15065157316","videoId":"11","videoTitle":"视频测试1596288294","videoDescription":"0.0","videoUrl":"https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4","videoImageUrl":null,"videoLikeCount":6,"videoCommitCount":3,"videoType":null,"status":null,"createTime":null,"id":0}]
      * msg : success
      * code : 200
      * traceId : null
@@ -64,33 +67,50 @@ public class VideoListBean {
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "VideoListBean{" +
+                "success=" + success +
+                ", msg='" + msg + '\'' +
+                ", code='" + code + '\'' +
+                ", traceId=" + traceId +
+                ", data=" + data +
+                '}';
+    }
+
     public static class DataBean {
         /**
-         * userId : 368415507088539648
-         * videoId : null
-         * videoTitle : 视频测试1596288147
+         * userId : 368415507088539650
+         * nickName : 15065157316
+         * headImg : https://worldcar.oss-cn-beijing.aliyuncs.com/default.jpg?Expires=1594610492&OSSAccessKeyId=TMP.3KdwRbfSizxtnBKhKc7m3EL1HE28hdSWL4SWb6ZDk95jVQ6Wpd4boTiVNUYakjxWAkqaUxjnwctotoeUKjk6um1wQkX1QP&Signature=rgMUTJ5ySusgvQ%2BiHUbn%2FgYKxRE%3D&nsukey=Xl%2Fux%2BRF%2FbeKNylUotdObHWHd9suyR7oZNGAznnzgYtC9ZbB47sBt%2FRNpridMuqNfAGqrpQaAZnMPk3HoAsTGKDfENivzX%2B7nATzsEyXuEE0DJR7si0JvZ7XgZLwU1M%2F1QckfxvoL7FD5KWYF3gSOuHKRezXv2%2BK6COv8ivmBIk%3D
+         * hxuid : hqyc15065157316
+         * videoId : 2
+         * videoTitle : 视频测试1596288294
          * videoDescription : 0.0
-         * videoUrl : https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/64e15ac-173aa30228f/64e15ac-173aa30228f.mp4
+         * videoUrl : https://outin-8919d46ecbe211ea89ff00163e024c6a.oss-cn-shanghai.aliyuncs.com/sv/262be57a-173aa32646b/262be57a-173aa32646b.mp4
          * videoImageUrl : null
-         * videoLikeCount : null
-         * videoCommitCount : null
+         * videoLikeCount : 6
+         * videoCommitCount : 3
          * videoType : null
-         * status : 1
-         * createTime : 2020-08-01 21:51:11
-         * id : 2
+         * status : null
+         * createTime : null
+         * id : 0
          */
 
         private long userId;
-        private Object videoId;
+        private String nickName;
+        private String headImg;
+        private String hxuid;
+        private String videoId;
         private String videoTitle;
         private String videoDescription;
         private String videoUrl;
         private Object videoImageUrl;
-        private Object videoLikeCount;
-        private Object videoCommitCount;
+        private int videoLikeCount;
+        private int videoCommitCount;
         private Object videoType;
-        private int status;
-        private String createTime;
+        private Object status;
+        private Object createTime;
         private int id;
 
         public long getUserId() {
@@ -101,11 +121,35 @@ public class VideoListBean {
             this.userId = userId;
         }
 
-        public Object getVideoId() {
+        public String getNickName() {
+            return nickName;
+        }
+
+        public void setNickName(String nickName) {
+            this.nickName = nickName;
+        }
+
+        public String getHeadImg() {
+            return headImg;
+        }
+
+        public void setHeadImg(String headImg) {
+            this.headImg = headImg;
+        }
+
+        public String getHxuid() {
+            return hxuid;
+        }
+
+        public void setHxuid(String hxuid) {
+            this.hxuid = hxuid;
+        }
+
+        public String getVideoId() {
             return videoId;
         }
 
-        public void setVideoId(Object videoId) {
+        public void setVideoId(String videoId) {
             this.videoId = videoId;
         }
 
@@ -141,19 +185,19 @@ public class VideoListBean {
             this.videoImageUrl = videoImageUrl;
         }
 
-        public Object getVideoLikeCount() {
+        public int getVideoLikeCount() {
             return videoLikeCount;
         }
 
-        public void setVideoLikeCount(Object videoLikeCount) {
+        public void setVideoLikeCount(int videoLikeCount) {
             this.videoLikeCount = videoLikeCount;
         }
 
-        public Object getVideoCommitCount() {
+        public int getVideoCommitCount() {
             return videoCommitCount;
         }
 
-        public void setVideoCommitCount(Object videoCommitCount) {
+        public void setVideoCommitCount(int videoCommitCount) {
             this.videoCommitCount = videoCommitCount;
         }
 
@@ -165,19 +209,19 @@ public class VideoListBean {
             this.videoType = videoType;
         }
 
-        public int getStatus() {
+        public Object getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(Object status) {
             this.status = status;
         }
 
-        public String getCreateTime() {
+        public Object getCreateTime() {
             return createTime;
         }
 
-        public void setCreateTime(String createTime) {
+        public void setCreateTime(Object createTime) {
             this.createTime = createTime;
         }
 
@@ -187,6 +231,27 @@ public class VideoListBean {
 
         public void setId(int id) {
             this.id = id;
+        }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "userId=" + userId +
+                    ", nickName='" + nickName + '\'' +
+                    ", headImg='" + headImg + '\'' +
+                    ", hxuid='" + hxuid + '\'' +
+                    ", videoId='" + videoId + '\'' +
+                    ", videoTitle='" + videoTitle + '\'' +
+                    ", videoDescription='" + videoDescription + '\'' +
+                    ", videoUrl='" + videoUrl + '\'' +
+                    ", videoImageUrl=" + videoImageUrl +
+                    ", videoLikeCount=" + videoLikeCount +
+                    ", videoCommitCount=" + videoCommitCount +
+                    ", videoType=" + videoType +
+                    ", status=" + status +
+                    ", createTime=" + createTime +
+                    ", id=" + id +
+                    '}';
         }
     }
 }

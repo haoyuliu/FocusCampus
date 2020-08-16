@@ -1,5 +1,7 @@
 package com.sam.rental.ui.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -7,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.androidkun.xtablayout.XTabLayout;
+import com.bumptech.glide.Glide;
 import com.sam.rental.R;
 import com.sam.rental.bean.VideoBean;
 import com.sam.rental.common.MyActivity;
@@ -39,6 +42,12 @@ public class PersonalHomeActivity extends MyActivity {
     XTabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
+    @BindView(R.id.tv_nick_id)
+    TextView tvNickId;
+    @BindView(R.id.tv_nick_name)
+    TextView tvNickName;
+    @BindView(R.id.tv_desc)
+    TextView tvDesc;
 
     private ArrayList<Fragment> fragments = new ArrayList<>();
     private CommPagerAdapter pagerAdapter;
@@ -54,8 +63,21 @@ public class PersonalHomeActivity extends MyActivity {
 
     @Override
     protected void initView() {
+        // 获取数据
+        Intent intent = getIntent();
+        Glide.with(PersonalHomeActivity.this).load(intent.getStringExtra("HeadImage")).into(ivHead);
+        tvNickId.setText("id :" + intent.getStringExtra("userId"));
+        tvNickName.setText(intent.getStringExtra("NickName"));
+        //tvDesc.setText(intent.getStringExtra("id"));
+
+        Bundle bundle = new Bundle();
+        bundle.putString("userId", intent.getStringExtra("userId"));
+
         mPersonalProductionFragment = new PersonalProductionFragment();
+        mPersonalProductionFragment.setArguments(bundle);
         mPersonalLoveFragment = new PersonalLoveFragment();
+        mPersonalLoveFragment.setArguments(bundle);
+
         fragments.add(mPersonalProductionFragment);
         fragments.add(mPersonalLoveFragment);
         tabLayout.addTab(tabLayout.newTab().setText("作品"));

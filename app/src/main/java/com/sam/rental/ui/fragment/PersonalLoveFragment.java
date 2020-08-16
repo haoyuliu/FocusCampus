@@ -1,5 +1,7 @@
 package com.sam.rental.ui.fragment;
 
+import android.os.Bundle;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +25,7 @@ import retrofit2.Response;
 public class PersonalLoveFragment extends MyFragment<HomeActivity> {
     @BindView(R.id.recycle_personal_love)
     RecyclerView mPersonalLoveRecyclerView;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_personal_love;
@@ -30,23 +33,27 @@ public class PersonalLoveFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        mPersonalLoveRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+        mPersonalLoveRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
     }
 
     @Override
     protected void initData() {
-        String userId = "368415507088539643";
-        String page = "1";
-        getData(userId,page);
+        Bundle arguments = this.getArguments();
+        String userId;
+        if (arguments != null) {
+            userId = arguments.getString("userId");
+            String page = "1";
+            getData(userId, page);
+        }
     }
 
     private void getData(String userId, String page) {
-        RetrofitClient.getRetrofitService().getPersonalProduction(userId,page)
+        RetrofitClient.getRetrofitService().getPersonalProduction(userId, page)
                 .enqueue(new Callback<UserProductionOrLoveBean>() {
                     @Override
                     public void onResponse(Call<UserProductionOrLoveBean> call, Response<UserProductionOrLoveBean> response) {
-                        if (response.code()== HttpURLConnection.HTTP_OK) {
-                            GridVideoAdapter fansAdapter = new GridVideoAdapter(getContext(),response.body().getData());
+                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                            GridVideoAdapter fansAdapter = new GridVideoAdapter(getContext(), response.body().getData());
                             mPersonalLoveRecyclerView.setAdapter(fansAdapter);
                         }
 

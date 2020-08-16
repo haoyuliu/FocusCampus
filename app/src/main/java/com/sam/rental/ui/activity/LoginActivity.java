@@ -1,33 +1,31 @@
 package com.sam.rental.ui.activity;
 
-import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
-import com.hjq.http.EasyConfig;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
 import com.sam.rental.R;
-import com.sam.rental.aop.DebugLog;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyActivity;
-import com.sam.rental.helper.InputTextHelper;
-import com.sam.rental.http.model.HttpData;
 import com.sam.rental.http.net.RetrofitClient;
-import com.sam.rental.http.request.GetCodeApi;
 import com.sam.rental.http.request.LoginRequestBean;
 import com.sam.rental.http.response.LoginBean;
-import com.sam.rental.other.IntentKey;
+import com.sam.rental.http.response.VerficationCodeBean;
+import com.sam.rental.utils.IpUtils;
 import com.sam.rental.utils.SPUtils;
 import com.sam.rental.wxapi.WXEntryActivity;
 import com.sam.umeng.Platform;
 import com.sam.umeng.UmengClient;
 import com.sam.umeng.UmengLogin;
 import com.sam.widget.view.CountdownView;
+
+import org.apache.http.protocol.HTTP;
+
+import java.net.HttpURLConnection;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -58,6 +56,8 @@ public final class LoginActivity extends MyActivity
     View mQQView;
     @BindView(R.id.iv_login_wx)
     View mWeChatView;
+
+    String traceId;
 
 
     @Override
@@ -108,24 +108,39 @@ public final class LoginActivity extends MyActivity
                     return;
                 }
                 LoginRequestBean loginRequestBean = new LoginRequestBean();
-                loginRequestBean.setIp("1111");
+                loginRequestBean.setIp(IpUtils.getHostIP());
                 loginRequestBean.setPhone(mPhoneView.getText().toString());
-                loginRequestBean.setRequestId("2222");
-                loginRequestBean.setVerifcationCode("2222");
+                loginRequestBean.setRequestId(traceId);
+                loginRequestBean.setVerifcationCode(mCodeView.getText().toString());
                 RetrofitClient.getRetrofitService().loadLogin(loginRequestBean)
                         .enqueue(new Callback<LoginBean>() {
                             @Override
                             public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
-                                toast("登录成功");
-                                SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
-                                toast("保存成功"+response.body().getData().getToken());
-                                startActivity(HomeActivity.class);
-                                finish();
+                                Log.d("login", response.code() + "");
+                                if (response.code() == HttpURLConnection.HTTP_OK) {
+                                    toast("登录成功");
+                                    SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
+                                    SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
+                                    SPUtils.getInstance(LoginActivity.this).put("NickName", response.body().getData().getNickName());
+                                    SPUtils.getInstance(LoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
+                                    SPUtils.getInstance(LoginActivity.this).put("userSex", response.body().getData().getUserSex());
+                                    SPUtils.getInstance(LoginActivity.this).put("userDesc", response.body().getData().getUserDesc());
+                                    SPUtils.getInstance(LoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
+                                    SPUtils.getInstance(LoginActivity.this).put("userLocation", response.body().getData().getUserLocation());
+
+                                    toast("保存成功" + response.body().getData().getToken());
+                                    Log.d("id", response.body().getData().getUserId() + "");
+                                    startActivity(HomeActivity.class);
+                                    finish();
+                                } else {
+                                    toast("登录失败" + response.message());
+                                }
+
                             }
 
                             @Override
                             public void onFailure(Call<LoginBean> call, Throwable t) {
-                                toast("登录失败"+ t.getMessage().toString());
+                                toast("登录失败" + t.getMessage().toString());
                             }
                         });
 
@@ -136,24 +151,27 @@ public final class LoginActivity extends MyActivity
                     return;
                 }
 
-                if (true) {
-                    toast(R.string.common_code_send_hint);
-                    mCountdownView.start();
-                    return;
-                }
 
                 // 获取验证码
-              /*  EasyHttp.post(this)
-                        .api(new GetCodeApi()
-                                .setPhone(mPhoneView.getText().toString()))
-                        .request(new HttpCallback<HttpData<Void>>(this) {
+                RetrofitClient.getRetrofitService().loadVerficationCode(mPhoneView.getText().toString()).enqueue(new Callback<VerficationCodeBean>() {
+                    @Override
+                    public void onResponse(Call<VerficationCodeBean> call, Response<VerficationCodeBean> response) {
+                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                            toast("验证码以发送" + response.message());
+                            traceId = response.body().getData();
+                            mCountdownView.start();
+                        } else {
+                            toast("验证码获取失败" + response.message());
+                            mCountdownView.stop();
+                        }
 
-                            @Override
-                            public void onSucceed(HttpData<Void> data) {
-                                toast(R.string.common_code_send_hint);
-                                mCountdownView.start();
-                            }
-                        });*/
+                    }
+
+                    @Override
+                    public void onFailure(Call<VerficationCodeBean> call, Throwable t) {
+                        toast("验证码获取失败" + t.getMessage().toString());
+                    }
+                });
                 break;
             case R.id.iv_login_qq:
             case R.id.iv_login_wx:

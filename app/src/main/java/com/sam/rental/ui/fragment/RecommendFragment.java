@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dueeeke.videoplayer.player.VideoView;
-import com.dueeeke.videoplayer.util.L;
 import com.sam.rental.R;
 import com.sam.rental.adapter.ViewPagerLayoutManager;
 import com.sam.rental.bean.VideoListBean;
@@ -29,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * 推荐页
+ * 首页中的推荐页面
  */
 public class RecommendFragment extends MyFragment<HomeActivity> {
     private int pageIndex = 1;
@@ -42,6 +41,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
 
     private static final String KEY_INDEX = "index";
     private int mIndex;
+    // 播放器
     private VideoView mVideoView;
 
 
@@ -62,6 +62,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         mController = new TikTokController(getContext());
         mVideoView.setVideoController(mController);
         mRecyclerView = findViewById(R.id.rv);
+        // 获取数据
         getVideoData(pageIndex, pageSize);
         mRecyclerView.scrollToPosition(mIndex);
     }
@@ -97,7 +98,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
 
                 mRecyclerView.setLayoutManager(layoutManager);
                 mRecyclerView.setAdapter(mTikTokAdapter);
-                Log.d("数据", response.code() + "");
+                Log.d("数据", response.code() + ""+response.body().getData().toString());
                 layoutManager.setOnViewPagerListener(new OnViewPagerListener() {
                     @Override
                     public void onInitComplete() {
@@ -134,6 +135,16 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
 
             }
         });
+
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (mVideoView != null) {
+            mVideoView.pause();
+            toast("暂停");
+        }
 
     }
 }
