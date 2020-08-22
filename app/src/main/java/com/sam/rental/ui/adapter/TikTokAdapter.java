@@ -53,7 +53,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 .load(item.getVideoImageUrl())
                 .placeholder(android.R.color.white)
                 .into(holder.thumb);
-        holder.mTitleTextView.setText(item.getVideoDescription());
+        holder.mTitleTextView.setText(item.getVideoTitle());
         holder.mHomeUserTextView.setText(item.getNickName() + "");
         holder.mLikeCount.setText(item.getVideoLikeCount() + "");
         holder.mCommentCount.setText(item.getVideoCommitCount() + "");
@@ -75,14 +75,14 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         holder.mCommontImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemOnClickInterface.onItemClick(v);
+                itemOnClickInterface.onItemClick(position);
             }
         });
     }
 
     //评论点击的回调接口
     public interface ItemCommentOnClickInterface {
-        void onItemClick(View view);
+        void onItemClick(int position);
     }
 
     //定义回调方法

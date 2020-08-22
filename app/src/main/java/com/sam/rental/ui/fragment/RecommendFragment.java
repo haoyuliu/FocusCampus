@@ -125,15 +125,17 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
                 });
                 mTikTokAdapter.setItemOnClickInterface(new TikTokAdapter.ItemCommentOnClickInterface() {
                     @Override
-                    public void onItemClick(View view) {
-                        // 获取数据
-                        RetrofitClient.getRetrofitService().getCommentList("2", "1", "10")
+                    public void onItemClick(int position) {
+                        // 获取评论数据
+                        RetrofitClient.getRetrofitService().getCommentList(mVideoList.get(position).getVideoId(), "1", "10")
                                 .enqueue(new Callback<CommentListBean>() {
                                     @Override
                                     public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
                                         if (response.code() == HttpURLConnection.HTTP_OK) {
                                             CommentDialog commentDialog = new CommentDialog();
                                             commentDialog.setData(response.body().getData());
+                                            commentDialog.setVideoid(mVideoList.get(position).getVideoId());
+                                            commentDialog.setUserid(mVideoList.get(position).getUserId());
                                             commentDialog.show(getChildFragmentManager(), "");
                                         } else {
                                             toast("获取评论数据失败");
@@ -154,7 +156,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
 
             @Override
             public void onFailure(Call<VideoListBean> call, Throwable t) {
-
+                toast("获取视频数据失败");
             }
         });
 

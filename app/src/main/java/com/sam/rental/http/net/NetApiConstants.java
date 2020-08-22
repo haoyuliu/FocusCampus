@@ -57,5 +57,9 @@ public class NetApiConstants {
      * 获取评论列表
      */
     public static final String GET_COMMENT_LIST = "video/videoCommonList";
+    /**
+     * 用户发表评论
+     */
+    public static final String POST_VIDEO_COMMON = "video/postVideoCommon";
 
 }

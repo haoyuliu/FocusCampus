@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.sam.rental.R;
 import com.sam.rental.bean.CommentBean;
 import com.sam.rental.http.response.CommentListBean;
@@ -32,9 +33,11 @@ public class CommentAdapter extends BaseRvAdapter<CommentListBean.DataBean, Comm
     @Override
     protected void onBindData(CommentViewHolder holder, CommentListBean.DataBean commentBean, int position) {
         //holder.ivHead.setImageResource(commentBean.getUserImg());
+        Glide.with(holder.itemView.getContext()).load(commentBean.getUserImg()).into(holder.ivHead);
         holder.tvNickname.setText(commentBean.getUserId() + "");
         holder.tvContent.setText(commentBean.getContent());
-        //holder.tvLikecount.setText(NumUtils.numberFilter(commentBean.getLikeCount()));
+       // holder.tvLikecount.setText(commentBean.);
+
     }
 
     @NonNull

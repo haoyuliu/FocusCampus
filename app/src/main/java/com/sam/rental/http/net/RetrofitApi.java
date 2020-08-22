@@ -5,9 +5,11 @@ import com.sam.rental.bean.FansBean;
 import com.sam.rental.bean.UserProductionOrLoveBean;
 import com.sam.rental.bean.VideoListBean;
 import com.sam.rental.http.request.LoginRequestBean;
+import com.sam.rental.http.request.VideoCommentRequestBean;
 import com.sam.rental.http.response.CommentListBean;
 import com.sam.rental.http.response.LoginBean;
 import com.sam.rental.http.response.VerficationCodeBean;
+import com.sam.rental.http.response.VideoCommentResponseBean;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -71,5 +73,14 @@ public interface RetrofitApi {
      */
     @GET(NetApiConstants.GET_COMMENT_LIST)
     Call<CommentListBean> getCommentList(@Query("videoId") String videoId, @Query("pageIndex") String pageIndex, @Query("pageSize") String pageSize);
+
+    /**
+     * 发表视频评论
+     *
+     * @param videoCommentRequestBean
+     * @return
+     */
+    @POST(NetApiConstants.POST_VIDEO_COMMON)
+    Call<VideoCommentResponseBean> postVideoCommon(@Body VideoCommentRequestBean videoCommentRequestBean);
 
 }
