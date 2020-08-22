@@ -42,7 +42,7 @@ public final class SplashActivity extends MyActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                startActivity(LoginActivity.class);
+                startActivity(HomeActivity.class);
                 finish();
             }
         });

@@ -2,6 +2,7 @@ package com.sam.rental.ui.activity;
 
 import android.widget.FrameLayout;
 
+import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.androidkun.xtablayout.XTabLayout;
 import com.sam.rental.R;
 import com.sam.rental.bean.PauseVideoEvent;
@@ -14,6 +15,7 @@ import com.sam.rental.ui.fragment.MessageFragment;
 import com.sam.rental.ui.fragment.MineFragment;
 import com.sam.rental.ui.fragment.RentalCarFragment;
 import com.sam.rental.utils.RxBus;
+import com.sam.rental.utils.SPUtils;
 
 import butterknife.BindView;
 
@@ -71,7 +73,9 @@ public final class HomeActivity extends MyActivity {
         tabMainMenu.setOnTabSelectedListener(new XTabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(XTabLayout.Tab tab) {
+                String token = SPUtils.getInstance(HomeActivity.this).getString("token");
                 switch (tab.getPosition()) {
+
                     case 0:
                         //首页
                         //判断
@@ -83,33 +87,48 @@ public final class HomeActivity extends MyActivity {
                         break;
                     case 1:
                         //租车
-                        //判断
-                        if (mRentalCarFragment == null) {
-                            mRentalCarFragment = new RentalCarFragment();
+                        if (StringUtil.isEmpty(token)) {
+                            startActivity(LoginActivity.class);
+                        } else {
+                            if (mRentalCarFragment == null) {
+                                mRentalCarFragment = new RentalCarFragment();
+                            }
+                            //替换Fragment
+                            mFragmentManagerHelper.switchFragment(mRentalCarFragment);
                         }
-                        //替换Fragment
-                        mFragmentManagerHelper.switchFragment(mRentalCarFragment);
                         break;
                     case 2:
                         //拍视频
-                        startActivity(UpLoadVedioActivity.class);
+                        if (StringUtil.isEmpty(token)) {
+                            startActivity(LoginActivity.class);
+                        } else {
+                            startActivity(UpLoadVedioActivity.class);
+                        }
                         break;
                     case 3:
                         //消息
-                        //判断
-                        if (mMessageFragment == null) {
-                            mMessageFragment = new MessageFragment();
+                        if (StringUtil.isEmpty(token)) {
+                            startActivity(LoginActivity.class);
+                        } else {
+                            if (mMessageFragment == null) {
+                                mMessageFragment = new MessageFragment();
+                            }
+                            //替换Fragment
+                            mFragmentManagerHelper.switchFragment(mMessageFragment);
                         }
-                        //替换Fragment
-                        mFragmentManagerHelper.switchFragment(mMessageFragment);
                         break;
                     case 4:
                         //我的
-                        if (mMineFragment == null) {
-                            mMineFragment = new MineFragment();
+                        if (StringUtil.isEmpty(token)) {
+                            startActivity(LoginActivity.class);
+                        } else {
+
+                            if (mMineFragment == null) {
+                                mMineFragment = new MineFragment();
+                            }
+                            //替换Fragment
+                            mFragmentManagerHelper.switchFragment(mMineFragment);
                         }
-                        //替换Fragment
-                        mFragmentManagerHelper.switchFragment(mMineFragment);
                         break;
                     default:
                         break;

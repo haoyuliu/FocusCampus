@@ -1,6 +1,7 @@
 package com.sam.rental.ui.adapter;
 
 import android.content.Intent;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +59,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         holder.mLikeCount.setText(item.getVideoLikeCount() + "");
         holder.mCommentCount.setText(item.getVideoCommitCount() + "");
         Glide.with(holder.thumb.getContext()).load(item.getHeadImg()).into(holder.mCircleImageView);
+        holder.mFollowImageView.setVisibility(item.isBfollow() ? View.INVISIBLE : View.VISIBLE);
         holder.mPosition = position;
         // PreloadManager.getInstance(holder.itemView.getContext()).addPreloadTask(item.videoDownloadUrl, position);
         holder.mCircleImageView.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +67,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
             public void onClick(View v) {
                 Log.d(TAG, "onBindViewHolderItem " + videos.get(position).toString());
                 Intent intent = new Intent(holder.thumb.getContext(), PersonalHomeActivity.class);
-                intent.putExtra("userId", item.getUserId()+"");
+                intent.putExtra("userId", item.getUserId() + "");
                 intent.putExtra("HeadImage", item.getHeadImg());
                 intent.putExtra("NickName", item.getNickName());
                 Log.d(TAG, "id" + videos.get(position).getId() + "HeadImage" + item.getHeadImg() + "NickName" + item.getNickName());
@@ -114,6 +116,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         public ImageView mCommontImageView;
         public TextView mLikeCount;
         public TextView mCommentCount;
+        public ImageView mFollowImageView;
 
         VideoHolder(View itemView) {
             super(itemView);
@@ -126,6 +129,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
             mCommontImageView = itemView.findViewById(R.id.iv_comment);
             mLikeCount = itemView.findViewById(R.id.tv_like_count);
             mCommentCount = itemView.findViewById(R.id.tv_comment_count);
+            mFollowImageView = itemView.findViewById(R.id.iv_focus);
             itemView.setTag(this);
         }
     }

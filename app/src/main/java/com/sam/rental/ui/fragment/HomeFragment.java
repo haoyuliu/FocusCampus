@@ -3,19 +3,22 @@ package com.sam.rental.ui.fragment;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.androidkun.xtablayout.XTabLayout;
 import com.rd.PageIndicatorView;
 import com.sam.rental.R;
 import com.sam.rental.common.MyFragment;
 import com.sam.rental.ui.activity.HomeActivity;
+import com.sam.rental.ui.activity.LoginActivity;
 import com.sam.rental.ui.adapter.CommPagerAdapter;
+import com.sam.rental.utils.SPUtils;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 
 /**
- * desc   : 这个是项目的HomeFragment，整体是一个ViewPager
+ * desc   : 这个是项目的HomeFragment
  */
 public class HomeFragment extends MyFragment<HomeActivity> {
 
@@ -28,6 +31,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     private RecommendFragment recommendFragment;
     private CommPagerAdapter pagerAdapter;
     private ArrayList<Fragment> fragments = new ArrayList<>();
+
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
@@ -39,6 +43,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
+
         currentLocationFragment = new CurrentLocationFragment();
         recommendFragment = new RecommendFragment();
         fragments.add(currentLocationFragment);

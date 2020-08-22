@@ -62,4 +62,8 @@ public class NetApiConstants {
      */
     public static final String POST_VIDEO_COMMON = "video/postVideoCommon";
 
+    /**
+     * 关注用户
+     */
+    public static final String FOCUS_USER = "user/followUser";
 }

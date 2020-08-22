@@ -14,6 +14,7 @@ import com.sam.rental.http.response.VideoCommentResponseBean;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -49,6 +50,12 @@ public interface RetrofitApi {
      */
     @GET(NetApiConstants.GET_FOCUS)
     Call<FansBean> getFocus(@Query("userId") String userId, @Query("page") String page);
+
+    /**
+     * 关注用户
+     */
+    @GET(NetApiConstants.FOCUS_USER)
+    Call<FansBean> FocusUser(@Header("header") String header, @Query("userId") String userId, @Query("follow") Boolean follow);
 
     /**
      * 获取粉丝列表
