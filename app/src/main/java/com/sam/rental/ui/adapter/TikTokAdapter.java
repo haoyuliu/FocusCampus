@@ -70,10 +70,13 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 intent.putExtra("userId", item.getUserId() + "");
                 intent.putExtra("HeadImage", item.getHeadImg());
                 intent.putExtra("NickName", item.getNickName());
+                intent.putExtra("isFoucs",item.isBfollow());
+                intent.putExtra("huid",item.getHxuid());
                 Log.d(TAG, "id" + videos.get(position).getId() + "HeadImage" + item.getHeadImg() + "NickName" + item.getNickName());
                 holder.thumb.getContext().startActivity(intent);
             }
         });
+        //评论的点击事件
         holder.mCommontImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

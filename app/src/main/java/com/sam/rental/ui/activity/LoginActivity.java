@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.sam.rental.R;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyActivity;
@@ -118,7 +120,6 @@ public final class LoginActivity extends MyActivity
                             public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
                                 Log.d("login", response.code() + "");
                                 if (response.code() == HttpURLConnection.HTTP_OK) {
-                                    toast("登录成功");
                                     SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
                                     SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
                                     SPUtils.getInstance(LoginActivity.this).put("NickName", response.body().getData().getNickName());
@@ -128,10 +129,26 @@ public final class LoginActivity extends MyActivity
                                     SPUtils.getInstance(LoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
                                     SPUtils.getInstance(LoginActivity.this).put("userLocation", response.body().getData().getUserLocation());
 
-                                    toast("保存成功" + response.body().getData().getToken());
                                     Log.d("id", response.body().getData().getUserId() + "");
-                                    startActivity(HomeActivity.class);
-                                    finish();
+                                    EMClient.getInstance().login(response.body().getData().getHxuid(), response.body().getData().getHxpwd(), new EMCallBack() {
+                                        @Override
+                                        public void onSuccess() {
+                                            toast("保存成功" + response.body().getData().getToken());
+                                            startActivity(HomeActivity.class);
+                                            finish();
+                                        }
+
+                                        @Override
+                                        public void onError(int i, String s) {
+                                            toast("登录失败" + s.toString());
+                                        }
+
+                                        @Override
+                                        public void onProgress(int i, String s) {
+
+                                        }
+                                    });
+
                                 } else {
                                     toast("登录失败" + response.message());
                                 }

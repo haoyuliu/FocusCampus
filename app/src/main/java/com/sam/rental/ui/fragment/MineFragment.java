@@ -1,5 +1,6 @@
 package com.sam.rental.ui.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -54,6 +55,8 @@ public final class MineFragment extends MyFragment<HomeActivity> {
 
     @BindView(R.id.tv_mine_desc)
     TextView mTextViewUserDesc;
+    @BindView(R.id.mine_add)
+    TextView mTextViewMineAdd;
 
     private PersonalProductionFragment mMineProductionFragment;
     private PersonalLoveFragment mPraiseFragment;
@@ -84,8 +87,8 @@ public final class MineFragment extends MyFragment<HomeActivity> {
         Glide.with(getContext()).load(SPUtils.getInstance(getContext()).getString("HeadImage")).into(mHeadView);
         mTextViewUserID.setText("ID:" + SPUtils.getInstance(getContext()).getString("UserId"));
         mTextViewUserNickName.setText(SPUtils.getInstance(getContext()).getString("NickName"));
-        mTextViewUserSexLocation.setText(SPUtils.getInstance(getContext()).getString("userSex"));
-        mTextViewUserDesc.setText(SPUtils.getInstance(getContext()).getString("userDesc"));
+        //mTextViewUserSexLocation.setText(SPUtils.getInstance(getContext()).getString("userSex"));
+       // mTextViewUserDesc.setText(SPUtils.getInstance(getContext()).getString("userDesc"));
 
         Bundle bundle = new Bundle();
         bundle.putString("userId", SPUtils.getInstance(getContext()).getString("UserId"));
@@ -105,7 +108,7 @@ public final class MineFragment extends MyFragment<HomeActivity> {
         mMineXtabLayout.getTabAt(0).select();
         mMineXtabLayout.setupWithViewPager(mViewPager);
         //点击事件
-        setOnClickListener(R.id.ll_fans, R.id.ll_focus, R.id.mine_user_head, R.id.edit_mine_resource);
+        setOnClickListener(R.id.ll_fans, R.id.ll_focus, R.id.mine_user_head, R.id.edit_mine_resource, R.id.mine_add);
         //设置
         TitleBar titleBar = findViewById(R.id.mine_title_bar);
         titleBar.setOnTitleBarListener(new OnTitleBarListener() {
@@ -143,6 +146,9 @@ public final class MineFragment extends MyFragment<HomeActivity> {
                 break;
             case R.id.edit_mine_resource:
                 startActivity(PersonalDataActivity.class);
+                break;
+            case R.id.mine_add:
+                startActivity(FocusActivity.class);
                 break;
             default:
                 break;

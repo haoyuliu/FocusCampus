@@ -43,7 +43,7 @@
         app:bar_leftText="@string/personal_data_name"
         app:bar_rightHint="@string/personal_data_name_hint"
         app:bar_rightIcon="@drawable/ico_go_black"
-        app:bar_rightText="Android 轮子哥" />
+        app:bar_rightText="" />
 
     <com.sam.widget.layout.SettingBar
         android:id="@+id/sb_person_data_signature"

@@ -75,7 +75,7 @@ public final class MyApplication extends Application {
         EaseUI.getInstance().init(this, options);
 
         // 设置开启debug模式
-        EMClient.getInstance().setDebugMode(true);
+      //  EMClient.getInstance().setDebugMode(true);
     }
 
     /**

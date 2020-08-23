@@ -171,4 +171,13 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         }
 
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden){
+            mVideoView.pause();
+            toast("暂停");
+        }
+    }
 }

@@ -13,15 +13,6 @@
         app:title="@string/setting_title" />
 
     <com.sam.widget.layout.SettingBar
-        android:id="@+id/sb_setting_language"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:bar_leftText="@string/setting_language"
-        app:bar_rightIcon="@drawable/ico_go_black"
-        tools:bar_rightHint="@string/setting_language_simple" />
-
-    <com.sam.widget.layout.SettingBar
         android:id="@+id/sb_setting_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

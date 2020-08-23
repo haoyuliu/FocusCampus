@@ -9,7 +9,7 @@ import com.sam.rental.ui.fragment.RecommendFragment;
  */
 public class PlayListActivity extends BaseActivity {
     public static int initPos;
-
+    private RecommendFragment mRecommendFragment;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_play_list;
@@ -17,11 +17,16 @@ public class PlayListActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        getSupportFragmentManager().beginTransaction().add(R.id.framelayout, new RecommendFragment()).commit();
+        if (mRecommendFragment ==null) {
+            mRecommendFragment = new RecommendFragment();
+        }
+        getSupportFragmentManager().beginTransaction().add(R.id.framelayout, mRecommendFragment).commit();
     }
 
     @Override
     protected void initData() {
 
     }
+
+
 }

@@ -5,11 +5,16 @@ import com.sam.rental.bean.FansBean;
 import com.sam.rental.bean.UserProductionOrLoveBean;
 import com.sam.rental.bean.VideoListBean;
 import com.sam.rental.http.request.LoginRequestBean;
+import com.sam.rental.http.request.UpLoadVideoRequestBean;
 import com.sam.rental.http.request.VideoCommentRequestBean;
+import com.sam.rental.http.request.upLoadAfterRequestBean;
 import com.sam.rental.http.response.CommentListBean;
+import com.sam.rental.http.response.FollowResponseBean;
 import com.sam.rental.http.response.LoginBean;
+import com.sam.rental.http.response.UpLoadVideoResponseBean;
 import com.sam.rental.http.response.VerficationCodeBean;
 import com.sam.rental.http.response.VideoCommentResponseBean;
+import com.sam.rental.http.response.upLoadAfterResponseBean;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -55,7 +60,7 @@ public interface RetrofitApi {
      * 关注用户
      */
     @GET(NetApiConstants.FOCUS_USER)
-    Call<FansBean> FocusUser(@Header("header") String header, @Query("userId") String userId, @Query("follow") Boolean follow);
+    Call<FollowResponseBean> FocusUser(@Header("token") String header, @Query("userId") String userId, @Query("follow") String follow);
 
     /**
      * 获取粉丝列表
@@ -89,5 +94,21 @@ public interface RetrofitApi {
      */
     @POST(NetApiConstants.POST_VIDEO_COMMON)
     Call<VideoCommentResponseBean> postVideoCommon(@Body VideoCommentRequestBean videoCommentRequestBean);
+
+    /**
+     * 获取上传视频的参数信息
+     *
+     * @return
+     */
+    @POST(NetApiConstants.PRE_UPLOAD)
+    Call<UpLoadVideoResponseBean> getUpLoadVideoParams(@Header("token") String token, @Body UpLoadVideoRequestBean upLoadVideoRequestBean);
+    /**
+     * 视频上传成功后
+     *
+     * @return
+     */
+    @POST(NetApiConstants.AFTER_UPLOAD)
+    Call<upLoadAfterResponseBean> UpLoadVideoAfter(@Header("token") String token, @Body upLoadAfterRequestBean upLoadAfterRequestBean);
+
 
 }

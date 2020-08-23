@@ -13,6 +13,7 @@ import com.sam.rental.http.model.HttpData;
 import com.sam.rental.http.request.UpdateImageApi;
 import com.sam.rental.ui.dialog.AddressDialog;
 import com.sam.rental.ui.dialog.InputDialog;
+import com.sam.rental.utils.SPUtils;
 import com.sam.rental.widget.CircleImageView;
 import com.sam.widget.layout.SettingBar;
 
@@ -81,6 +82,11 @@ public final class PersonalDataActivity extends MyActivity {
 
         String address = mProvince + mCity + mArea;
         mAddressView.setRightText(address);
+        mNameView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("NickName"));
+        mSignatureView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc"));
+        mSexView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userSex"));
+        mBirthdayView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userBirthday"));
+        mAddressView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userLocation"));
     }
 
     @SingleClick
@@ -158,7 +164,7 @@ public final class PersonalDataActivity extends MyActivity {
                         })
                         .show();
                 break;
-         
+
             default:
                 break;
         }

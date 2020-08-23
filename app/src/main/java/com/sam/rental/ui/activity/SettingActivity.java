@@ -38,7 +38,7 @@ public final class SettingActivity extends MyActivity
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.sb_setting_language, R.id.sb_setting_update, R.id.sb_setting_agreement,
+        setOnClickListener(R.id.sb_setting_update, R.id.sb_setting_agreement,
                 R.id.sb_setting_cache, R.id.sb_setting_exit);
     }
 
@@ -52,20 +52,10 @@ public final class SettingActivity extends MyActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.sb_setting_language:
-                // 底部选择框
-                new MenuDialog.Builder(this)
-                        // 设置点击按钮后不关闭对话框
-                        //.setAutoDismiss(false)
-                        .setList(R.string.setting_language_simple, R.string.setting_language_complex)
-                        .setListener((MenuDialog.OnListener<String>) (dialog, position, string) -> BrowserActivity.start(getActivity(), "https://github.com/getActivity/MultiLanguages"))
-                        .setGravity(Gravity.BOTTOM)
-                        .setAnimStyle(AnimAction.BOTTOM)
-                        .show();
-                break;
+
             case R.id.sb_setting_update:
                 // 本地的版本码和服务器的进行比较
-                if (20 > AppConfig.getVersionCode()) {
+                /*if (20 > AppConfig.getVersionCode()) {
 
                     new UpdateDialog.Builder(this)
                             // 版本名
@@ -79,10 +69,11 @@ public final class SettingActivity extends MyActivity
                             .show();
                 } else {
                     toast(R.string.update_no_update);
-                }
+                }*/
+                toast(R.string.update_no_update);
                 break;
             case R.id.sb_setting_agreement:
-                BrowserActivity.start(this, "https://github.com/getActivity/Donate");
+                //BrowserActivity.start(this, "https://github.com/getActivity/Donate");
                 break;
             case R.id.sb_setting_cache:
                 // 清除内存缓存（必须在主线程）
@@ -104,19 +95,7 @@ public final class SettingActivity extends MyActivity
                     ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
                     return;
                 }
-
                 // 退出登录
-                EasyHttp.post(this)
-                        .api(new LogoutApi())
-                        .request(new HttpCallback<HttpData<Void>>(this) {
-
-                            @Override
-                            public void onSucceed(HttpData<Void> data) {
-                                startActivity(LoginActivity.class);
-                                // 进行内存优化，销毁除登录页之外的所有界面
-                                ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
-                            }
-                        });
                 break;
             default:
                 break;

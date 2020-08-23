@@ -76,7 +76,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         mVideoView.setUrl(playUrl);
         mController.addControlComponent(viewHolder.mTikTokView, true);
         viewHolder.mPlayerContainer.addView(mVideoView, 0);
-        mVideoView.start();
+       // mVideoView.start();
         mCurPos = position;
     }
 
@@ -166,5 +166,13 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
             toast("暂停");
         }
 
+    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden){
+            mVideoView.pause();
+            toast("暂停");
+        }
     }
 }
