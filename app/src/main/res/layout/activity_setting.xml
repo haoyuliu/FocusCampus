@@ -13,6 +13,19 @@
         app:title="@string/setting_title" />
 
     <com.sam.widget.layout.SettingBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:bar_leftText="通用设置"
+        app:bar_rightIcon="@drawable/ico_go_black" />
+
+    <com.sam.widget.layout.SettingBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="消息通知"
+        app:bar_rightIcon="@drawable/ico_go_black" />
+
+    <com.sam.widget.layout.SettingBar
         android:id="@+id/sb_setting_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +51,7 @@
         android:id="@+id/sb_setting_agreement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         app:bar_leftText="@string/setting_agreement"
         app:bar_rightIcon="@drawable/ico_go_black" />
 
@@ -46,15 +59,21 @@
         android:id="@+id/sb_setting_cache"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         app:bar_leftText="@string/setting_cache"
+        app:bar_rightIcon="@drawable/ico_go_black" />
+
+    <com.sam.widget.layout.SettingBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:bar_leftText="关于"
         app:bar_rightIcon="@drawable/ico_go_black" />
 
     <com.sam.widget.layout.SettingBar
         android:id="@+id/sb_setting_exit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         app:bar_leftColor="@color/red"
         app:bar_leftText="@string/setting_exit" />
 

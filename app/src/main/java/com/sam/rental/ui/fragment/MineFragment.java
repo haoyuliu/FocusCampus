@@ -1,6 +1,5 @@
 package com.sam.rental.ui.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -17,7 +16,6 @@ import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyFragment;
 import com.sam.rental.ui.activity.FocusActivity;
 import com.sam.rental.ui.activity.HomeActivity;
-import com.sam.rental.ui.activity.LoginActivity;
 import com.sam.rental.ui.activity.PersonalDataActivity;
 import com.sam.rental.ui.activity.SettingActivity;
 import com.sam.rental.ui.adapter.CommPagerAdapter;
@@ -88,7 +86,7 @@ public final class MineFragment extends MyFragment<HomeActivity> {
         mTextViewUserID.setText("ID:" + SPUtils.getInstance(getContext()).getString("UserId"));
         mTextViewUserNickName.setText(SPUtils.getInstance(getContext()).getString("NickName"));
         //mTextViewUserSexLocation.setText(SPUtils.getInstance(getContext()).getString("userSex"));
-       // mTextViewUserDesc.setText(SPUtils.getInstance(getContext()).getString("userDesc"));
+        // mTextViewUserDesc.setText(SPUtils.getInstance(getContext()).getString("userDesc"));
 
         Bundle bundle = new Bundle();
         bundle.putString("userId", SPUtils.getInstance(getContext()).getString("UserId"));

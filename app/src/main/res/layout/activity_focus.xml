@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.hjq.bar.TitleBar
@@ -16,12 +17,12 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         app:xTabIndicatorColor="@color/color_check_home"
-        app:xTabIndicatorWidth="20dp"
+        app:xTabIndicatorWidth="40dp"
         app:xTabSelectedTextColor="@color/black"
-        app:xTabSelectedTextSize="22sp"
+        app:xTabSelectedTextSize="15sp"
         app:xTabTextBold="true"
         app:xTabTextColor="#CCCCCC"
-        app:xTabTextSize="20sp" />
+        app:xTabTextSize="15sp" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/focus_viewpager"

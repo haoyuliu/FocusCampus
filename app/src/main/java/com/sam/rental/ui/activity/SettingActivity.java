@@ -1,29 +1,20 @@
 package com.sam.rental.ui.activity;
 
-import android.view.Gravity;
 import android.view.View;
 
-import com.sam.base.action.AnimAction;
 import com.sam.rental.R;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyActivity;
 import com.sam.rental.helper.ActivityStackManager;
 import com.sam.rental.helper.CacheDataManager;
 import com.sam.rental.http.glide.GlideApp;
-import com.sam.rental.http.model.HttpData;
-import com.sam.rental.http.request.LogoutApi;
-import com.sam.rental.other.AppConfig;
-import com.sam.rental.ui.dialog.MenuDialog;
-import com.sam.rental.ui.dialog.UpdateDialog;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
 import com.sam.widget.layout.SettingBar;
 import com.sam.widget.view.SwitchButton;
 
 import butterknife.BindView;
 
 /**
- *    desc   : 设置界面
+ * desc   : 设置界面
  */
 public final class SettingActivity extends MyActivity
         implements SwitchButton.OnCheckedChangeListener {

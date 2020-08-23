@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.fragment.MineFragment">
 
@@ -33,11 +34,12 @@
                     app:rightIcon="@drawable/setting" />
 
                 <LinearLayout
-                    android:paddingLeft="@dimen/dp_10"
-                    android:paddingBottom="@dimen/dp_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10">
 
                     <com.sam.rental.widget.CircleImageView
                         android:id="@+id/mine_user_head"
@@ -51,7 +53,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginLeft="15dp"
                         android:gravity="center_vertical"
                         android:orientation="vertical">
 
@@ -59,8 +61,9 @@
                             android:id="@+id/mine_user_nick_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:singleLine="true"
                             android:text="夏沫de秋天"
-                            android:textSize="22sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <LinearLayout
@@ -73,20 +76,28 @@
                                 android:id="@+id/edit_mine_resource"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/shape_focus"
-                                android:paddingLeft="50dp"
-                                android:paddingTop="8dp"
-                                android:paddingRight="50dp"
-                                android:paddingBottom="8dp"
+                                android:background="@drawable/mine_shape_edit_data"
+                                android:paddingLeft="40dp"
+                                android:paddingTop="5dp"
+                                android:paddingRight="40dp"
+                                android:paddingBottom="5dp"
                                 android:text="编辑资料"
+                                android:textColor="#999999"
                                 android:textSize="16sp" />
 
                             <TextView
                                 android:id="@+id/mine_add"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="30dp"
-                                android:text="+好友" />
+                                android:layout_marginLeft="12dp"
+                                android:background="@drawable/mine_shape_add_friend"
+                                android:paddingLeft="@dimen/dp_10"
+                                android:paddingTop="5dp"
+                                android:paddingRight="@dimen/dp_10"
+                                android:paddingBottom="5dp"
+                                android:text="+好友"
+                                android:textColor="@color/color_check_home"
+                                android:textSize="16sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -97,7 +108,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingLeft="20dp">
+                    android:paddingLeft="20dp"
+                    android:paddingTop="@dimen/dp_10">
 
                     <TextView
                         android:id="@+id/mine_user_id"
@@ -120,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="你还没有设置签名呢？"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -203,32 +215,60 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#FFF5E2"
-                        android:drawableRight="@drawable/setting"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/mine_shape_rental_car"
                         android:gravity="center_vertical|center_horizontal"
-                        android:padding="@dimen/dp_10"
-                        android:text="租车订单"
-                        android:textSize="18sp" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/dp_10">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="租车订单"
+                            android:textColor="#794E21"
+                            android:textSize="18sp" />
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:src="@drawable/zuchedingdan" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#E4F8FF"
-                        android:drawableRight="@drawable/setting"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/mine_shape_money"
                         android:gravity="center_vertical|center_horizontal"
-                        android:padding="@dimen/dp_10"
-                        android:text="钱包"
-                        android:textSize="18sp" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/dp_10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_10"
+                            android:textColor="#1A3474"
+                            android:text="钱包"
+                            android:textSize="18sp" />
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:src="@drawable/qianbao" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -242,12 +282,12 @@
             android:layout_centerInParent="true"
             android:padding="5dp"
             app:xTabIndicatorColor="@color/color_check_home"
-            app:xTabIndicatorWidth="30dp"
+            app:xTabIndicatorWidth="35dp"
             app:xTabSelectedTextColor="@color/black"
-            app:xTabSelectedTextSize="22sp"
+            app:xTabSelectedTextSize="18sp"
             app:xTabTextBold="true"
             app:xTabTextColor="#CCCCCC"
-            app:xTabTextSize="20sp" />
+            app:xTabTextSize="18sp" />
     </com.google.android.material.appbar.AppBarLayout>
 
 
