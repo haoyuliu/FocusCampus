@@ -39,12 +39,12 @@
             android:layout_centerInParent="true"
             android:padding="5dp"
             app:xTabIndicatorColor="@color/color_check_home"
-            app:xTabIndicatorWidth="30dp"
+            app:xTabIndicatorWidth="36dp"
             app:xTabSelectedTextColor="@color/black"
-            app:xTabSelectedTextSize="22sp"
+            app:xTabSelectedTextSize="18sp"
             app:xTabTextBold="true"
             app:xTabTextColor="#CCCCCC"
-            app:xTabTextSize="20sp" />
+            app:xTabTextSize="18sp" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

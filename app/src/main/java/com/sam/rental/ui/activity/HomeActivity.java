@@ -1,11 +1,11 @@
 package com.sam.rental.ui.activity;
 
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.androidkun.xtablayout.XTabLayout;
 import com.sam.rental.R;
-import com.sam.rental.bean.PauseVideoEvent;
 import com.sam.rental.common.MyActivity;
 import com.sam.rental.helper.ActivityStackManager;
 import com.sam.rental.helper.DoubleClickHelper;
@@ -14,7 +14,6 @@ import com.sam.rental.ui.fragment.HomeFragment;
 import com.sam.rental.ui.fragment.MessageFragment;
 import com.sam.rental.ui.fragment.MineFragment;
 import com.sam.rental.ui.fragment.RentalCarFragment;
-import com.sam.rental.utils.RxBus;
 import com.sam.rental.utils.SPUtils;
 
 import butterknife.BindView;
@@ -35,6 +34,8 @@ public final class HomeActivity extends MyActivity {
     FrameLayout mFrameLayout;
     @BindView(R.id.tab_main_menu)
     XTabLayout tabMainMenu;
+    @BindView(R.id.rv_home_bottom)
+    RelativeLayout mRelativeLayout;
 
 
     @Override
@@ -44,6 +45,7 @@ public final class HomeActivity extends MyActivity {
 
     @Override
     protected void initView() {
+        //mRelativeLayout.getBackground().setAlpha(Color.TRANSPARENT);
         // 不使用图标默认变色
         mFragmentManagerHelper = new FragmentManagerHelper(getSupportFragmentManager(), R.id.main_tab_content);
         //默认进来，加载首页

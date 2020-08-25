@@ -100,7 +100,6 @@ public final class PersonalDataActivity extends MyActivity {
         switch (v.getId()) {
             case R.id.iv_person_data_avatar:
                 PhotoActivity.start(getActivity(), new PhotoActivity.OnPhotoSelectListener() {
-
                     @Override
                     public void onSelected(List<String> data) {
                         if (true) {

@@ -104,6 +104,7 @@ public class PersonalHomeActivity extends MyActivity {
                 if (StringUtil.isEmpty(token)) {
                     startActivity(LoginActivity.class);
                 } else {
+                    mPersonalHomeFocus.setText("已关注");
                     RetrofitClient.getRetrofitService().FocusUser(token, intent.getStringExtra("userId"), follow).enqueue(new Callback<FollowResponseBean>() {
                         @Override
                         public void onResponse(Call<FollowResponseBean> call, Response<FollowResponseBean> response) {

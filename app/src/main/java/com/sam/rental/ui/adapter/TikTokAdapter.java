@@ -83,6 +83,13 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 itemOnClickInterface.onItemClick(position);
             }
         });
+        holder.mImageViewXin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Glide.with(holder.thumb.getContext()).load(R.mipmap.red_xin).into(holder.mImageViewXin);
+
+            }
+        });
     }
 
     //评论点击的回调接口
@@ -120,6 +127,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         public TextView mLikeCount;
         public TextView mCommentCount;
         public ImageView mFollowImageView;
+        public ImageView mImageViewXin;
 
         VideoHolder(View itemView) {
             super(itemView);
@@ -133,6 +141,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
             mLikeCount = itemView.findViewById(R.id.tv_like_count);
             mCommentCount = itemView.findViewById(R.id.tv_comment_count);
             mFollowImageView = itemView.findViewById(R.id.iv_focus);
+            mImageViewXin = itemView.findViewById(R.id.xin);
             itemView.setTag(this);
         }
     }

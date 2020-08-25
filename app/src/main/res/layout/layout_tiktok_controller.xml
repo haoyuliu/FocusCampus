@@ -32,9 +32,10 @@
         android:padding="20dp">
 
         <ImageView
+            android:id="@+id/xin"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@mipmap/ic_like" />
+            android:src="@mipmap/white_xin" />
 
         <TextView
             android:id="@+id/tv_like_count"
@@ -113,8 +114,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:text="XXXXXX"
                 android:gravity="center_vertical"
+                android:text="XXXXXX"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 

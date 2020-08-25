@@ -21,22 +21,23 @@
         app:title="" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:text="快捷登录注册"
-        android:textSize="24sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:text="快捷登录注册"
+        android:textSize="24sp" />
+
     <androidx.appcompat.widget.AppCompatTextView
-        android:text="未注册用户成功登录后即自动注册"
-        android:textSize="14sp"
-        android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#999999"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="30dp"
+        android:text="未注册用户成功登录后即自动注册"
+        android:textColor="#999999"
+        android:textSize="14sp" />
 
     <LinearLayout
         android:id="@+id/ll_login_body"
@@ -98,13 +99,48 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login_commit"
-            style="@style/ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="40dp"
+            android:background="@drawable/shape_round_chose_car"
             android:text="@string/login_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="登录即代表同意"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《用户协议》"
+                android:textColor="#4D6DAF"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="和"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《隐私协议》"
+                android:textColor="#4D6DAF"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -1,5 +1,7 @@
 package com.sam.rental.ui.fragment;
 
+import android.util.Log;
+
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -62,5 +64,13 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     @Override
     protected void initData() {
 
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        Log.d("tag","onHiddenChanged");
+        super.onHiddenChanged(hidden);
+        recommendFragment.onPause();
+        currentLocationFragment.onPause();
     }
 }

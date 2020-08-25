@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:padding="@dimen/dp_10">
 
@@ -24,7 +25,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginLeft="15dp"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -33,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="夏沫de秋天"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -48,19 +49,25 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_focus"
                     android:paddingLeft="50dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="6dp"
                     android:paddingRight="50dp"
-                    android:paddingBottom="8dp"
+                    android:paddingBottom="6dp"
                     android:text="关注"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/personal_home_send_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/mine_shape_edit_data"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="4dp"
                     android:text="私信"
-                    />
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -72,6 +79,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="20dp"
+        android:paddingTop="@dimen/dp_10"
         android:paddingBottom="12dp">
 
         <TextView
@@ -93,8 +101,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="保持可爱 赶快长大这里是你的衣橱间"
-            android:textSize="18sp" />
+            android:text="你还没有设置签名"
+            android:textColor="#666666"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,7 +121,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="111w"
+                    android:text="10"
                     android:textSize="18sp" />
 
                 <TextView
@@ -136,7 +145,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="11w"
+                    android:text="10"
                     android:textSize="18sp" />
 
                 <TextView
@@ -160,7 +169,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1w"
+                    android:text="1"
                     android:textSize="18sp" />
 
                 <TextView

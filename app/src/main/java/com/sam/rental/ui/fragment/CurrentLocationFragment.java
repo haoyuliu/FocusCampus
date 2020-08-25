@@ -32,11 +32,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * description 关注的人fragment
+ * 首页中的关注的人fragment
  */
 public class CurrentLocationFragment extends MyFragment<HomeActivity> {
     private int pageIndex = 1;
-    private int pageSize = 10;
+    private int pageSize = 20;
     private TikTokController mController;
     private int mCurPos;
     private RecyclerView mRecyclerView;
@@ -76,7 +76,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         mVideoView.setUrl(playUrl);
         mController.addControlComponent(viewHolder.mTikTokView, true);
         viewHolder.mPlayerContainer.addView(mVideoView, 0);
-       // mVideoView.start();
+        // mVideoView.start();
         mCurPos = position;
     }
 
@@ -89,65 +89,75 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         RetrofitClient.getRetrofitService().loadHomeVideoListData(pageIndex, pageSize).enqueue(new Callback<VideoListBean>() {
             @Override
             public void onResponse(Call<VideoListBean> call, Response<VideoListBean> response) {
-
-                mVideoList = response.body().getData();
-                mTikTokAdapter = new TikTokAdapter(mVideoList);
-                ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), OrientationHelper.VERTICAL);
-
-                mRecyclerView.setLayoutManager(layoutManager);
-                mRecyclerView.setAdapter(mTikTokAdapter);
-                Log.d("数据", response.code() + "" + response.body().getData().toString());
-                layoutManager.setOnViewPagerListener(new OnViewPagerListener() {
-                    @Override
-                    public void onInitComplete() {
-                        //自动播放第index条
-                        startPlay(mIndex);
+                if (response.code() == 403) {
+                    startActivity(LoginActivity.class);
+                } else if (response.code() == HttpURLConnection.HTTP_OK) {
+                    mVideoList = response.body().getData();
+                    if (mVideoList.size() == 0) {
+                        toast("暂时没有数据");
                     }
+                    mTikTokAdapter = new TikTokAdapter(mVideoList);
+                    ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), OrientationHelper.VERTICAL);
 
-                    @Override
-                    public void onPageRelease(boolean isNext, int position) {
-                        if (mCurPos == position) {
-                            mVideoView.release();
+                    mRecyclerView.setLayoutManager(layoutManager);
+                    mRecyclerView.setAdapter(mTikTokAdapter);
+                    Log.d("数据", response.code() + "" + response.body().getData().toString());
+                    layoutManager.setOnViewPagerListener(new OnViewPagerListener() {
+                        @Override
+                        public void onInitComplete() {
+                            //自动播放第index条
+                            startPlay(mIndex);
                         }
-                    }
 
-                    @Override
-                    public void onPageSelected(int position, boolean isBottom) {
-                        if (mCurPos == position) {
-                            return;
+                        @Override
+                        public void onPageRelease(boolean isNext, int position) {
+                            if (mCurPos == position) {
+                                mVideoView.release();
+                            }
                         }
-                        startPlay(position);
-                    }
-                });
-                mTikTokAdapter.setItemOnClickInterface(new TikTokAdapter.ItemCommentOnClickInterface() {
-                    @Override
-                    public void onItemClick(int position) {
-                        // 获取评论数据
-                        RetrofitClient.getRetrofitService().getCommentList(mVideoList.get(position).getVideoId(), "1", "10")
-                                .enqueue(new Callback<CommentListBean>() {
-                                    @Override
-                                    public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
-                                        if (response.code() == HttpURLConnection.HTTP_OK) {
-                                            CommentDialog commentDialog = new CommentDialog();
-                                            commentDialog.setData(response.body().getData());
-                                            commentDialog.setVideoid(mVideoList.get(position).getVideoId());
-                                            commentDialog.setUserid(mVideoList.get(position).getUserId());
-                                            commentDialog.show(getChildFragmentManager(), "");
-                                        } else {
-                                            toast("获取评论数据失败");
+
+                        @Override
+                        public void onPageSelected(int position, boolean isBottom) {
+                            if (mCurPos == position) {
+                                return;
+                            }
+                            startPlay(position);
+                        }
+                    });
+                    mTikTokAdapter.setItemOnClickInterface(new TikTokAdapter.ItemCommentOnClickInterface() {
+                        @Override
+                        public void onItemClick(int position) {
+                            // 获取评论数据
+                            RetrofitClient.getRetrofitService().getCommentList(mVideoList.get(position).getVideoId(), "1", "10")
+                                    .enqueue(new Callback<CommentListBean>() {
+                                        @Override
+                                        public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
+                                            if (response.code() == HttpURLConnection.HTTP_OK) {
+                                                CommentDialog commentDialog = new CommentDialog();
+                                                commentDialog.setData(response.body().getData());
+                                                commentDialog.setVideoid(mVideoList.get(position).getVideoId());
+                                                commentDialog.setUserid(mVideoList.get(position).getUserId());
+                                                commentDialog.show(getChildFragmentManager(), "");
+                                            } else {
+                                                toast("获取评论数据失败");
+                                            }
+
                                         }
 
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<CommentListBean> call, Throwable t) {
-                                        toast("获取评论数据失败");
-                                    }
-                                });
+                                        @Override
+                                        public void onFailure(Call<CommentListBean> call, Throwable t) {
+                                            toast("获取评论数据失败");
+                                        }
+                                    });
 
 
-                    }
-                });
+                        }
+                    });
+                } else {
+                    toast("获取数据失败");
+                }
+
+
             }
 
             @Override
@@ -167,10 +177,17 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         }
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mVideoView.pause();
+    }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (hidden){
+        if (hidden) {
             mVideoView.pause();
             toast("暂停");
         }
