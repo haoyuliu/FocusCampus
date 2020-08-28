@@ -17,6 +17,7 @@ import com.sam.rental.http.net.RetrofitClient;
 import com.sam.rental.http.request.LoginRequestBean;
 import com.sam.rental.http.response.LoginBean;
 import com.sam.rental.http.response.VerficationCodeBean;
+import com.sam.rental.ui.fragment.HomeFragment;
 import com.sam.rental.utils.IpUtils;
 import com.sam.rental.utils.SPUtils;
 import com.sam.rental.wxapi.WXEntryActivity;
@@ -95,8 +96,15 @@ public final class LoginActivity extends MyActivity
     @Override
     public void onLeftClick(View v) {
         // 跳转到主界面
-        startActivity(HomeActivity.class);
+        //startActivity(HomeActivity.class);
+       // finish();
+        onBackPressed();
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     @SingleClick
@@ -133,8 +141,7 @@ public final class LoginActivity extends MyActivity
                                     EMClient.getInstance().login(response.body().getData().getHxuid(), response.body().getData().getHxpwd(), new EMCallBack() {
                                         @Override
                                         public void onSuccess() {
-                                            toast("保存成功" + response.body().getData().getToken());
-                                            startActivity(HomeActivity.class);
+                                          //  startActivity(HomeActivity.class);
                                             finish();
                                         }
 
@@ -192,7 +199,7 @@ public final class LoginActivity extends MyActivity
                 break;
             case R.id.iv_login_qq:
             case R.id.iv_login_wx:
-                toast("记得改好第三方 AppID 和 AppKey，否则会调不起来哦");
+                toast("第三方 AppID 和 AppKey");
                 Platform platform;
                 switch (v.getId()) {
                     case R.id.iv_login_qq:
@@ -200,7 +207,7 @@ public final class LoginActivity extends MyActivity
                         break;
                     case R.id.iv_login_wx:
                         platform = Platform.WECHAT;
-                        toast("也别忘了改微信 " + WXEntryActivity.class.getSimpleName() + " 类所在的包名哦");
+                        toast("微信 " + WXEntryActivity.class.getSimpleName() + " 类所在的包名");
                         break;
                     default:
                         throw new IllegalStateException("are you ok?");

@@ -171,25 +171,27 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (mVideoView != null) {
-            mVideoView.pause();
-            toast("暂停");
-        }
+        setVideoViewState(isVisibleToUser);
 
+    }
+
+    public void setVideoViewState(boolean isVisibleToUser) {
+        if (mVideoView == null) {
+            return;
+        }
+        if (isVisibleToUser) {
+            mVideoView.start();
+            toast("关注播放");
+        } else {
+            mVideoView.pause();
+            toast("关注暂停");
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mVideoView.pause();
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (hidden) {
-            mVideoView.pause();
-            toast("暂停");
-        }
+        toast("关注暂停");
     }
 }

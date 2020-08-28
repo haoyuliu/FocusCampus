@@ -1,10 +1,15 @@
 package com.sam.rental.ui.activity;
 
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
-import com.androidkun.xtablayout.XTabLayout;
 import com.sam.rental.R;
 import com.sam.rental.common.MyActivity;
 import com.sam.rental.helper.ActivityStackManager;
@@ -15,14 +20,16 @@ import com.sam.rental.ui.fragment.MessageFragment;
 import com.sam.rental.ui.fragment.MineFragment;
 import com.sam.rental.ui.fragment.RentalCarFragment;
 import com.sam.rental.utils.SPUtils;
+import com.superrtc.FrameEncryptor;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * desc   : 项目的主页界面，包含底部的四个Fragment
  * 拍照按钮单独设置，进行短视频的拍摄
  */
-public final class HomeActivity extends MyActivity {
+public class HomeActivity extends MyActivity {
 
     private HomeFragment mHomeFragment;
     private RentalCarFragment mRentalCarFragment;
@@ -30,12 +37,22 @@ public final class HomeActivity extends MyActivity {
     private MineFragment mMineFragment;
 
     private FragmentManagerHelper mFragmentManagerHelper;
+
     @BindView(R.id.main_tab_content)
-    FrameLayout mFrameLayout;
-    @BindView(R.id.tab_main_menu)
-    XTabLayout tabMainMenu;
-    @BindView(R.id.rv_home_bottom)
-    RelativeLayout mRelativeLayout;
+    FrameLayout mainTabContent;
+    // 底部
+    @BindView(R.id.radioGroup)
+    RadioGroup mRadioGroup;
+    @BindView(R.id.rbHome)
+    RadioButton rbHome;
+    @BindView(R.id.rbRentalCar)
+    RadioButton rbRentalCar;
+    @BindView(R.id.rbTakePhoto)
+    RadioButton rbTakePhoto;
+    @BindView(R.id.rbMessage)
+    RadioButton rbMessage;
+    @BindView(R.id.rbMine)
+    RadioButton rbMine;
 
 
     @Override
@@ -45,108 +62,117 @@ public final class HomeActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        //mRelativeLayout.getBackground().setAlpha(Color.TRANSPARENT);
+        //默认第一个是被选中的
+        rbHome.setChecked(true);
         // 不使用图标默认变色
         mFragmentManagerHelper = new FragmentManagerHelper(getSupportFragmentManager(), R.id.main_tab_content);
         //默认进来，加载首页
-        mHomeFragment = new HomeFragment();
-        //把第一个fragment添加进来,第一个参数是容器ID
-        mFragmentManagerHelper.add(mHomeFragment);
-        setMainMenu();
-        setOnClick();
+        swicthToHomeFragment();
     }
 
     @Override
     protected void initData() {
     }
 
-    private void setMainMenu() {
-        tabMainMenu.addTab(tabMainMenu.newTab().setText("首页"));
-        tabMainMenu.addTab(tabMainMenu.newTab().setText("租车"));
-        tabMainMenu.addTab(tabMainMenu.newTab().setText(""));
-        tabMainMenu.addTab(tabMainMenu.newTab().setText("消息"));
-        tabMainMenu.addTab(tabMainMenu.newTab().setText("我的"));
+    /**
+     * 点击事件
+     */
+    @OnClick({R.id.rbHome, R.id.rbRentalCar, R.id.rbMessage, R.id.rbMine, R.id.rbTakePhoto})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.rbHome:
+                //首页
+                setLayoutBottonMargin(0);
+                swicthToHomeFragment();
+                break;
+            case R.id.rbRentalCar:
+                //租车
+                if (isLogin()) {
+                    setLayoutBottonMargin(mRadioGroup.getHeight());
+                    switchToRentalCarFragment();
+                    rbRentalCar.setChecked(true);
+                }
+                break;
+            case R.id.rbMessage:
+                //消息
+                if (isLogin()) {
+                    setLayoutBottonMargin(mRadioGroup.getHeight());
+                    switchToMessageFragment();
+                    rbMessage.setChecked(true);
+                }
+                break;
+            case R.id.rbMine:
+                //我的
+                if (isLogin()) {
+                    setLayoutBottonMargin(mRadioGroup.getHeight());
+                    switchToMineFragment();
+                    rbMine.setChecked(true);
+                }
+                break;
+            case R.id.rbTakePhoto:
+                if (isLogin()) {
+                    setLayoutBottonMargin(mRadioGroup.getHeight());
+                    startActivity(UpLoadVedioActivity.class);
+                    rbHome.setChecked(true);
+                }
+
+            default:
+                break;
+        }
     }
 
-    /**
-     * 底部按钮点击事件
-     */
-    private void setOnClick() {
-        tabMainMenu.setOnTabSelectedListener(new XTabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(XTabLayout.Tab tab) {
-                String token = SPUtils.getInstance(HomeActivity.this).getString("token");
-                switch (tab.getPosition()) {
+    private void setLayoutBottonMargin(int bottom) {
+        if (bottom > 0) {
+            mRadioGroup.setBackgroundColor(getResources().getColor(R.color.white));
+        } else {
+            mRadioGroup.setBackgroundColor(getResources().getColor(R.color.transparent));
+        }
+        LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) mainTabContent.getLayoutParams();
+        layoutParams2.setMargins(0, 0, 0, bottom);
+    }
 
-                    case 0:
-                        //首页
-                        //判断
-                        if (mHomeFragment == null) {
-                            mHomeFragment = new HomeFragment();
-                        }
-                        //替换Fragment
-                        mFragmentManagerHelper.switchFragment(mHomeFragment);
-                        break;
-                    case 1:
-                        //租车
-                        if (StringUtil.isEmpty(token)) {
-                            startActivity(LoginActivity.class);
-                        } else {
-                            if (mRentalCarFragment == null) {
-                                mRentalCarFragment = new RentalCarFragment();
-                            }
-                            //替换Fragment
-                            mFragmentManagerHelper.switchFragment(mRentalCarFragment);
-                        }
-                        break;
-                    case 2:
-                        //拍视频
-                        if (StringUtil.isEmpty(token)) {
-                            startActivity(LoginActivity.class);
-                        } else {
-                            startActivity(UpLoadVedioActivity.class);
-                        }
-                        break;
-                    case 3:
-                        //消息
-                        if (StringUtil.isEmpty(token)) {
-                            startActivity(LoginActivity.class);
-                        } else {
-                            if (mMessageFragment == null) {
-                                mMessageFragment = new MessageFragment();
-                            }
-                            //替换Fragment
-                            mFragmentManagerHelper.switchFragment(mMessageFragment);
-                        }
-                        break;
-                    case 4:
-                        //我的
-                        if (StringUtil.isEmpty(token)) {
-                            startActivity(LoginActivity.class);
-                        } else {
+    private void swicthToHomeFragment() {
+        //首页
+        if (mHomeFragment == null) {
+            mHomeFragment = new HomeFragment();
+        }
+        //替换Fragment
+        mFragmentManagerHelper.switchFragment(mHomeFragment);
+    }
 
-                            if (mMineFragment == null) {
-                                mMineFragment = new MineFragment();
-                            }
-                            //替换Fragment
-                            mFragmentManagerHelper.switchFragment(mMineFragment);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
+    private void switchToRentalCarFragment() {
+        if (mRentalCarFragment == null) {
+            mRentalCarFragment = new RentalCarFragment();
+        }
+        //替换Fragment
+        mFragmentManagerHelper.switchFragment(mRentalCarFragment);
+    }
 
-            @Override
-            public void onTabUnselected(XTabLayout.Tab tab) {
+    private void switchToMessageFragment() {
+        if (mMessageFragment == null) {
+            mMessageFragment = new MessageFragment();
+        }
+        //替换Fragment
+        mFragmentManagerHelper.switchFragment(mMessageFragment);
+    }
 
-            }
+    private void switchToMineFragment() {
+        //判断
+        if (mMineFragment == null) {
+            mMineFragment = new MineFragment();
+        }
+        //替换Fragment
+        mFragmentManagerHelper.switchFragment(mMineFragment);
+    }
 
-            @Override
-            public void onTabReselected(XTabLayout.Tab tab) {
-
-            }
-        });
+    private boolean isLogin() {
+        String token = SPUtils.getInstance(HomeActivity.this).getString("token");
+        if (StringUtil.isEmpty(token)) {
+            startActivity(LoginActivity.class);
+            rbHome.setChecked(true);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -159,7 +185,7 @@ public final class HomeActivity extends MyActivity {
                 // 进行内存优化，销毁掉所有的界面
                 ActivityStackManager.getInstance().finishAllActivities();
                 // 销毁进程（注意：调用此 API 可能导致当前 Activity onDestroy 方法无法正常回调）
-                // System.exit(0);
+                System.exit(0);
 
             }, 300);
         } else {

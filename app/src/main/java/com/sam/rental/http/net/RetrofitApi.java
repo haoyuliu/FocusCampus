@@ -7,6 +7,7 @@ import com.sam.rental.bean.VideoListBean;
 import com.sam.rental.http.request.LoginRequestBean;
 import com.sam.rental.http.request.UpLoadVideoRequestBean;
 import com.sam.rental.http.request.VideoCommentRequestBean;
+import com.sam.rental.http.request.GetUpLoadImageRequestBean;
 import com.sam.rental.http.request.upLoadAfterRequestBean;
 import com.sam.rental.http.response.CommentListBean;
 import com.sam.rental.http.response.FollowResponseBean;
@@ -14,6 +15,7 @@ import com.sam.rental.http.response.LoginBean;
 import com.sam.rental.http.response.UpLoadVideoResponseBean;
 import com.sam.rental.http.response.VerficationCodeBean;
 import com.sam.rental.http.response.VideoCommentResponseBean;
+import com.sam.rental.http.response.GetUpLoadImageResponseBean;
 import com.sam.rental.http.response.upLoadAfterResponseBean;
 
 import retrofit2.Call;
@@ -109,6 +111,13 @@ public interface RetrofitApi {
      */
     @POST(NetApiConstants.AFTER_UPLOAD)
     Call<upLoadAfterResponseBean> UpLoadVideoAfter(@Header("token") String token, @Body upLoadAfterRequestBean upLoadAfterRequestBean);
+    /**
+     * 获取图片上传所需要的参数
+     *
+     * @return
+     */
+    @POST(NetApiConstants.AFTER_UPLOAD)
+    Call<GetUpLoadImageResponseBean> getUpLoadPictureParams(@Header("token") String token, @Body GetUpLoadImageRequestBean getUpLoadImageRequestBean);
 
 
 }

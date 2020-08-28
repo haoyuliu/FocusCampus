@@ -65,6 +65,17 @@ public class VideoListBean {
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "VideoListBean{" +
+                "success=" + success +
+                ", msg='" + msg + '\'' +
+                ", code='" + code + '\'' +
+                ", traceId=" + traceId +
+                ", data=" + data +
+                '}';
+    }
+
     public static class DataBean {
         /**
          * userId : 368415507088539650
@@ -238,6 +249,29 @@ public class VideoListBean {
 
         public void setBfollow(boolean bfollow) {
             this.bfollow = bfollow;
+        }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "userId=" + userId +
+                    ", nickName='" + nickName + '\'' +
+                    ", headImg='" + headImg + '\'' +
+                    ", hxuid='" + hxuid + '\'' +
+                    ", videoId='" + videoId + '\'' +
+                    ", videoTitle='" + videoTitle + '\'' +
+                    ", videoDescription='" + videoDescription + '\'' +
+                    ", videoUrl='" + videoUrl + '\'' +
+                    ", videoImageUrl=" + videoImageUrl +
+                    ", videoLikeCount=" + videoLikeCount +
+                    ", videoCommitCount=" + videoCommitCount +
+                    ", videoType=" + videoType +
+                    ", status=" + status +
+                    ", createTime=" + createTime +
+                    ", id=" + id +
+                    ", blike=" + blike +
+                    ", bfollow=" + bfollow +
+                    '}';
         }
     }
 }

@@ -68,9 +68,22 @@ public class HomeFragment extends MyFragment<HomeActivity> {
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        Log.d("tag","onHiddenChanged");
+        Log.d("tag", "onHiddenChanged");
         super.onHiddenChanged(hidden);
-        recommendFragment.onPause();
-        currentLocationFragment.onPause();
+        if (hidden) {
+            if (currentLocationFragment != null) {
+                currentLocationFragment.setVideoViewState(false);
+            }
+            if (recommendFragment != null) {
+                recommendFragment.setVideoViewState(false);
+            }
+        } else {
+            if (currentLocationFragment != null) {
+                currentLocationFragment.setVideoViewState(true);
+            }
+            if (recommendFragment != null) {
+                recommendFragment.setVideoViewState(true);
+            }
+        }
     }
 }

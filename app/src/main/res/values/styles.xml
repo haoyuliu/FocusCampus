@@ -92,6 +92,7 @@
         <item name="srlAccentColor">@color/white</item>
         <item name="srlEnablePreviewInEditMode">false</item>
     </style>
+
     <style name="MyDialog" parent="AlertDialog.AppCompat">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowFrame">@null</item>
@@ -117,6 +118,19 @@
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:backgroundDimAmount">0.6</item>
         <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    <!-- 底部tab的统一样式-->
+    <style name="home_bottom_tab_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:checked">true</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:drawablePadding">6sp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center|bottom</item>
+        <item name="android:textColor">@color/color_check_home</item>
     </style>
 
 </resources>

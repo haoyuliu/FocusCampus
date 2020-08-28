@@ -66,4 +66,8 @@ public class NetApiConstants {
      * 关注用户
      */
     public static final String FOCUS_USER = "user/followUser";
+    /**
+     * 获取图片上传所需要的参数
+     */
+    public static final String GET_UPLOAD_PICTURE = "image/preUpload";
 }

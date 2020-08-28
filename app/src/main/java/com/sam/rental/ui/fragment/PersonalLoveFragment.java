@@ -48,7 +48,7 @@ public class PersonalLoveFragment extends MyFragment<HomeActivity> {
     }
 
     private void getData(String userId, String page) {
-        RetrofitClient.getRetrofitService().getPersonalProduction(userId, page)
+        RetrofitClient.getRetrofitService().getPersonalLove(userId, page)
                 .enqueue(new Callback<UserProductionOrLoveBean>() {
                     @Override
                     public void onResponse(Call<UserProductionOrLoveBean> call, Response<UserProductionOrLoveBean> response) {
@@ -61,7 +61,7 @@ public class PersonalLoveFragment extends MyFragment<HomeActivity> {
 
                     @Override
                     public void onFailure(Call<UserProductionOrLoveBean> call, Throwable t) {
-
+                        toast("网络错误");
                     }
 
                 });

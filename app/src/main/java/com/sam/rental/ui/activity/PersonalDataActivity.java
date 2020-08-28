@@ -1,5 +1,6 @@
 package com.sam.rental.ui.activity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -11,7 +12,10 @@ import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyActivity;
 import com.sam.rental.http.glide.GlideApp;
 import com.sam.rental.http.model.HttpData;
+import com.sam.rental.http.net.RetrofitClient;
+import com.sam.rental.http.request.GetUpLoadImageRequestBean;
 import com.sam.rental.http.request.UpdateImageApi;
+import com.sam.rental.http.response.GetUpLoadImageResponseBean;
 import com.sam.rental.ui.dialog.AddressDialog;
 import com.sam.rental.ui.dialog.DateDialog;
 import com.sam.rental.ui.dialog.InputDialog;
@@ -21,11 +25,15 @@ import com.sam.rental.widget.CircleImageView;
 import com.sam.widget.layout.SettingBar;
 
 import java.io.File;
+import java.net.HttpURLConnection;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * desc   : 个人资料页面
@@ -99,6 +107,7 @@ public final class PersonalDataActivity extends MyActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_person_data_avatar:
+                getPreLoadImage();
                 PhotoActivity.start(getActivity(), new PhotoActivity.OnPhotoSelectListener() {
                     @Override
                     public void onSelected(List<String> data) {
@@ -225,5 +234,30 @@ public final class PersonalDataActivity extends MyActivity {
             default:
                 break;
         }
+    }
+
+    private void getPreLoadImage() {
+        GetUpLoadImageRequestBean getUpLoadImageRequestBean = new GetUpLoadImageRequestBean();
+        getUpLoadImageRequestBean.setImageExt("头像");
+        Log.d("PersonalDataActivity", "token" + SPUtils.getInstance(PersonalDataActivity.this).getString("token"));
+        RetrofitClient.getRetrofitService().getUpLoadPictureParams(SPUtils.getInstance(PersonalDataActivity.this).getString("token"), getUpLoadImageRequestBean)
+                .enqueue(new Callback<GetUpLoadImageResponseBean>() {
+                    @Override
+                    public void onResponse(Call<GetUpLoadImageResponseBean> call, Response<GetUpLoadImageResponseBean> response) {
+                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                            response.body().getData().getImageId();
+                            response.body().getData().getUploadAuth();
+                            response.body().getData().getUploadAddress();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetUpLoadImageResponseBean> call, Throwable t) {
+
+                    }
+                });
+
     }
 }

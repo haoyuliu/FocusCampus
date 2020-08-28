@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baidu.platform.comapi.map.E;
 import com.dueeeke.videoplayer.player.VideoView;
 import com.sam.rental.R;
 import com.sam.rental.adapter.ViewPagerLayoutManager;
@@ -16,6 +17,7 @@ import com.sam.rental.controller.TikTokController;
 import com.sam.rental.http.net.RetrofitClient;
 import com.sam.rental.http.response.CommentListBean;
 import com.sam.rental.ui.activity.HomeActivity;
+import com.sam.rental.ui.activity.LoginActivity;
 import com.sam.rental.ui.adapter.TikTokAdapter;
 import com.sam.rental.utils.Utils;
 import com.sam.rental.widget.CommentDialog;
@@ -94,6 +96,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
             @Override
             public void onResponse(Call<VideoListBean> call, Response<VideoListBean> response) {
                 if (response.code() == HttpURLConnection.HTTP_OK) {
+                    Log.d("RecommendFragment", response.body().getData().toString());
                     mVideoList = response.body().getData();
                     if (mVideoList.size() == 0) {
                         toast("暂时没有推荐内容");
@@ -170,17 +173,19 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (mVideoView != null) {
-            mVideoView.pause();
-            toast("暂停");
-        }
-
+        setVideoViewState(isVisibleToUser);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mVideoView.pause();
+    public void setVideoViewState(boolean isVisibleToUser) {
+        if (mVideoView == null)
+            return;
+        if (isVisibleToUser) {
+            mVideoView.start();
+            toast("推荐播放");
+        } else {
+            mVideoView.pause();
+            toast("推荐暂停");
+        }
     }
 
     @Override
@@ -188,7 +193,17 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         super.onHiddenChanged(hidden);
         if (hidden) {
             mVideoView.pause();
-            toast("暂停");
+            toast("推荐暂停");
+        } else {
+            mVideoView.start();
+            toast("推荐播放");
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mVideoView.pause();
+        toast("关注暂停");
     }
 }

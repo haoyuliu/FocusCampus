@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.alibaba.sdk.android.vod.upload.VODUploadCallback;
 import com.alibaba.sdk.android.vod.upload.VODUploadClient;
 import com.alibaba.sdk.android.vod.upload.VODUploadClientImpl;
+import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.alibaba.sdk.android.vod.upload.model.UploadFileInfo;
 import com.alibaba.sdk.android.vod.upload.model.VodInfo;
 import com.luck.picture.lib.PictureSelector;
@@ -60,8 +61,8 @@ public class UpLoadVedioActivity extends MyActivity {
     protected void initView() {
         UpLoadVideoRequestBean requestBean = new UpLoadVideoRequestBean();
         requestBean.setDescription("描述信息");
-        requestBean.setFileName("sss.mp4");
-        requestBean.setTitle("测试");
+        requestBean.setFileName("ssss.mp4");
+        requestBean.setTitle("测试市场食品视频视屏视频视频1真的嫩嫩嗯嗯嗯嗯嗯嗯嗯");
         RetrofitClient.getRetrofitService().getUpLoadVideoParams(SPUtils.getInstance(UpLoadVedioActivity.this).getString("token"), requestBean)
                 .enqueue(new Callback<UpLoadVideoResponseBean>() {
                     @Override
@@ -113,6 +114,9 @@ public class UpLoadVedioActivity extends MyActivity {
         mButtonUpLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (StringUtil.isEmpty(mTextViewAddress.getText().toString())) {
+                    toast("请选择视频");
+                }
                 upload();
             }
         });

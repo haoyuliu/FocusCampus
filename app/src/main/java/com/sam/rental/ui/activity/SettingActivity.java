@@ -8,6 +8,7 @@ import com.sam.rental.common.MyActivity;
 import com.sam.rental.helper.ActivityStackManager;
 import com.sam.rental.helper.CacheDataManager;
 import com.sam.rental.http.glide.GlideApp;
+import com.sam.rental.utils.SPUtils;
 import com.sam.widget.layout.SettingBar;
 import com.sam.widget.view.SwitchButton;
 
@@ -81,6 +82,8 @@ public final class SettingActivity extends MyActivity
                 break;
             case R.id.sb_setting_exit:
                 if (true) {
+                    SPUtils.getInstance(SettingActivity.this).clear();
+
                     startActivity(LoginActivity.class);
                     // 进行内存优化，销毁除登录页之外的所有界面
                     ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
