@@ -42,11 +42,13 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:supportsRtl,android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.ChatActivity"></activity>
-        <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
+        <activity android:name=".ui.activity.ModifySignatureActivity"></activity>
+        <activity android:name=".ui.activity.ModifyNickNameActivity" />
+        <activity android:name=".ui.activity.ChatActivity" /> <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${channel}" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -176,7 +178,6 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.FocusActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

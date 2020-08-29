@@ -69,5 +69,5 @@ public class NetApiConstants {
     /**
      * 获取图片上传所需要的参数
      */
-    public static final String GET_UPLOAD_PICTURE = "image/preUpload";
+    public static final String MODIFY_MESSAGE = "user/editUserInfo";
 }

@@ -5,6 +5,7 @@ import com.sam.rental.bean.FansBean;
 import com.sam.rental.bean.UserProductionOrLoveBean;
 import com.sam.rental.bean.VideoListBean;
 import com.sam.rental.http.request.LoginRequestBean;
+import com.sam.rental.http.request.ModifyMessageRequestBean;
 import com.sam.rental.http.request.UpLoadVideoRequestBean;
 import com.sam.rental.http.request.VideoCommentRequestBean;
 import com.sam.rental.http.request.GetUpLoadImageRequestBean;
@@ -12,6 +13,7 @@ import com.sam.rental.http.request.upLoadAfterRequestBean;
 import com.sam.rental.http.response.CommentListBean;
 import com.sam.rental.http.response.FollowResponseBean;
 import com.sam.rental.http.response.LoginBean;
+import com.sam.rental.http.response.ModifyMessageResponseBean;
 import com.sam.rental.http.response.UpLoadVideoResponseBean;
 import com.sam.rental.http.response.VerficationCodeBean;
 import com.sam.rental.http.response.VideoCommentResponseBean;
@@ -116,8 +118,16 @@ public interface RetrofitApi {
      *
      * @return
      */
-    @POST(NetApiConstants.AFTER_UPLOAD)
+    @POST(NetApiConstants.IMAGE_PRE_UPLOAD)
     Call<GetUpLoadImageResponseBean> getUpLoadPictureParams(@Header("token") String token, @Body GetUpLoadImageRequestBean getUpLoadImageRequestBean);
+
+    /**
+     * 修改个人资料的接口
+     *
+     * @return
+     */
+    @POST(NetApiConstants.MODIFY_MESSAGE)
+    Call<ModifyMessageResponseBean> modifyPersonalMessageParams(@Header("token") String token, @Body ModifyMessageRequestBean modifyMessageRequestBean);
 
 
 }
