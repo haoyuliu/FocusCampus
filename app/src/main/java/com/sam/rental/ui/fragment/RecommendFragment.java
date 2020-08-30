@@ -48,7 +48,6 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
     // 播放器
     private VideoView mVideoView;
 
-
     public static RecommendFragment newInstance() {
         return new RecommendFragment();
     }

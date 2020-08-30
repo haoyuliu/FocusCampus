@@ -1,7 +1,6 @@
 package com.sam.rental.ui.adapter;
 
 import android.content.Intent;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +12,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.sam.rental.R;
 import com.sam.rental.bean.VideoListBean;
+import com.sam.rental.http.net.RetrofitClient;
+import com.sam.rental.http.request.HomeVideoLikeRequestBean;
+import com.sam.rental.http.response.FollowResponseBean;
+import com.sam.rental.http.response.HomeVideoLikeResponseBean;
+import com.sam.rental.ui.activity.LoginActivity;
 import com.sam.rental.ui.activity.PersonalHomeActivity;
+import com.sam.rental.utils.SPUtils;
 import com.sam.rental.widget.TikTokView;
 
-import org.w3c.dom.Text;
-
-import java.net.NoRouteToHostException;
+import java.net.HttpURLConnection;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 @Deprecated
 public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolder> {
@@ -62,6 +68,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         holder.mFollowImageView.setVisibility(item.isBfollow() ? View.INVISIBLE : View.VISIBLE);
         holder.mPosition = position;
         // PreloadManager.getInstance(holder.itemView.getContext()).addPreloadTask(item.videoDownloadUrl, position);
+        // 头像的点击事件
         holder.mCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,8 +77,8 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 intent.putExtra("userId", item.getUserId() + "");
                 intent.putExtra("HeadImage", item.getHeadImg());
                 intent.putExtra("NickName", item.getNickName());
-                intent.putExtra("isFoucs",item.isBfollow());
-                intent.putExtra("huid",item.getHxuid());
+                intent.putExtra("isFoucs", item.isBfollow());
+                intent.putExtra("huid", item.getHxuid());
                 Log.d(TAG, "id" + videos.get(position).getId() + "HeadImage" + item.getHeadImg() + "NickName" + item.getNickName());
                 holder.thumb.getContext().startActivity(intent);
             }
@@ -83,10 +90,75 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 itemOnClickInterface.onItemClick(position);
             }
         });
+        // 点赞的点击事件
         holder.mImageViewXin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Glide.with(holder.thumb.getContext()).load(R.mipmap.red_xin).into(holder.mImageViewXin);
+                // 关注的点击事件
+                String token = SPUtils.getInstance(holder.thumb.getContext()).getString("token");
+                if (StringUtil.isEmpty(token)) {
+                    Intent intent = new Intent(holder.thumb.getContext(), LoginActivity.class);
+                    holder.thumb.getContext().startActivity(intent);
+                    return;
+                }
+                boolean blike = videos.get(position).isBlike();
+                if (blike) {
+                    Glide.with(holder.thumb.getContext()).load(R.mipmap.white_xin).into(holder.mImageViewXin);
+                    likeViewPostLike(blike, position);
+                } else {
+
+                    Glide.with(holder.thumb.getContext()).load(R.mipmap.red_xin).into(holder.mImageViewXin);
+                    likeViewPostLike(blike, position);
+                }
+            }
+        });
+
+        holder.mFollowImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 关注的点击事件
+                String token = SPUtils.getInstance(holder.thumb.getContext()).getString("token");
+                if (StringUtil.isEmpty(token)) {
+                    Intent intent = new Intent(holder.thumb.getContext(), LoginActivity.class);
+                    holder.thumb.getContext().startActivity(intent);
+                    return;
+                }
+                holder.mFollowImageView.setVisibility(View.GONE);
+                RetrofitClient.getRetrofitService().FocusUser(token, videos.get(position).getUserId() + "", 0 + "").enqueue(new Callback<FollowResponseBean>() {
+                    @Override
+                    public void onResponse(Call<FollowResponseBean> call, Response<FollowResponseBean> response) {
+                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                            holder.mFollowImageView.setVisibility(View.GONE);
+                        } else {
+                            holder.mFollowImageView.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<FollowResponseBean> call, Throwable t) {
+                        holder.mFollowImageView.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        });
+    }
+
+    private void likeViewPostLike(boolean blike, int position) {
+        HomeVideoLikeRequestBean homeVideoLikeRequestBean = new HomeVideoLikeRequestBean();
+        homeVideoLikeRequestBean.setBlike(blike);
+        homeVideoLikeRequestBean.setVideoId(videos.get(position).getVideoId()+"");
+        homeVideoLikeRequestBean.setUserId();
+        RetrofitClient.getRetrofitService().postVideoLike(homeVideoLikeRequestBean).enqueue(new Callback<HomeVideoLikeResponseBean>() {
+            @Override
+            public void onResponse(Call<HomeVideoLikeResponseBean> call, Response<HomeVideoLikeResponseBean> response) {
+                if (response.code() == HttpURLConnection.HTTP_OK){
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HomeVideoLikeResponseBean> call, Throwable t) {
 
             }
         });

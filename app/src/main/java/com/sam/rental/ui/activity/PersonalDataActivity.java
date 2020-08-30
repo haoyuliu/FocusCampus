@@ -1,9 +1,7 @@
 package com.sam.rental.ui.activity;
 
-import android.app.Activity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.alibaba.sdk.android.vod.upload.VODUploadCallback;
@@ -11,32 +9,23 @@ import com.alibaba.sdk.android.vod.upload.VODUploadClient;
 import com.alibaba.sdk.android.vod.upload.VODUploadClientImpl;
 import com.alibaba.sdk.android.vod.upload.model.UploadFileInfo;
 import com.alibaba.sdk.android.vod.upload.model.VodInfo;
-import com.bumptech.glide.Glide;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
 import com.sam.base.BaseDialog;
 import com.sam.rental.R;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyActivity;
 import com.sam.rental.http.glide.GlideApp;
-import com.sam.rental.http.model.HttpData;
 import com.sam.rental.http.net.RetrofitClient;
 import com.sam.rental.http.request.GetUpLoadImageRequestBean;
 import com.sam.rental.http.request.ModifyMessageRequestBean;
-import com.sam.rental.http.request.UpdateImageApi;
-import com.sam.rental.http.request.upLoadAfterRequestBean;
 import com.sam.rental.http.response.GetUpLoadImageResponseBean;
 import com.sam.rental.http.response.ModifyMessageResponseBean;
-import com.sam.rental.http.response.upLoadAfterResponseBean;
 import com.sam.rental.ui.dialog.AddressDialog;
 import com.sam.rental.ui.dialog.DateDialog;
-import com.sam.rental.ui.dialog.InputDialog;
 import com.sam.rental.ui.dialog.SelectDialog;
 import com.sam.rental.utils.SPUtils;
 import com.sam.rental.widget.CircleImageView;
 import com.sam.widget.layout.SettingBar;
 
-import java.io.File;
 import java.net.HttpURLConnection;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -49,7 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * desc   : 个人资料页面
+ * desc   : 编辑个人资料页面
  */
 public final class PersonalDataActivity extends MyActivity {
 
@@ -106,7 +95,7 @@ public final class PersonalDataActivity extends MyActivity {
     @Override
     protected void initData() {
         GlideApp.with(getActivity())
-                .load(R.drawable.ic_head_placeholder)
+                .load(SPUtils.getInstance(PersonalDataActivity.this).getString("HeadImage"))
                 .placeholder(R.drawable.ic_head_placeholder)
                 .error(R.drawable.ic_head_placeholder)
                 .circleCrop()
@@ -114,10 +103,16 @@ public final class PersonalDataActivity extends MyActivity {
 
         String address = mProvince + mCity + mArea;
         mAddressView.setRightText(address);
-        Glide.with(PersonalDataActivity.this).load(SPUtils.getInstance(PersonalDataActivity.this).getString("HeadImage"));
+        //Glide.with(PersonalDataActivity.this).load(SPUtils.getInstance(PersonalDataActivity.this).getString("HeadImage"));
         mNameView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("NickName"));
-        mSignatureView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc"));
-        mSexView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userSex"));
+        if (SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc") != null) {
+            mSignatureView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc"));
+        }
+        if (SPUtils.getInstance(PersonalDataActivity.this).getInt("userSex") == 1) {
+            mSexView.setRightText("女");
+        } else {
+            mSexView.setRightText("男");
+        }
         mBirthdayView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userBirthday"));
         mAddressView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userLocation"));
     }
@@ -269,13 +264,15 @@ public final class PersonalDataActivity extends MyActivity {
                             uploadAddress = response.body().getData().getUploadAddress();
                             imageURL = response.body().getData().getImageURL();
 
+                        } else {
+                            toast("网络错误");
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<GetUpLoadImageResponseBean> call, Throwable t) {
-
+                        toast("网络错误");
                     }
                 });
 
@@ -353,7 +350,21 @@ public final class PersonalDataActivity extends MyActivity {
                     public void onResponse(Call<ModifyMessageResponseBean> call, Response<ModifyMessageResponseBean> response) {
                         if (response.code() == HttpURLConnection.HTTP_OK) {
                             toast("修改成功");
-                            SPUtils.getInstance(PersonalDataActivity.this).put("HeadImage", modifyMessageRequestBean.getHeadImg());
+                            if (modifyMessageRequestBean.getHeadImg() != null) {
+                                SPUtils.getInstance(PersonalDataActivity.this).put("HeadImage", modifyMessageRequestBean.getHeadImg());
+                            }
+                            SPUtils.getInstance(PersonalDataActivity.this).put("userSex", modifyMessageRequestBean.getUserSex());
+                            GlideApp.with(getActivity())
+                                    .load(SPUtils.getInstance(PersonalDataActivity.this).getString("HeadImage"))
+                                    .placeholder(R.drawable.ic_head_placeholder)
+                                    .error(R.drawable.ic_head_placeholder)
+                                    .circleCrop()
+                                    .into(mAvatarView);
+                            if (modifyMessageRequestBean.getUserSex() == 0) {
+                                mSexView.setRightText("男");
+                            } else {
+                                mSexView.setRightText("女");
+                            }
                         }
 
                     }
@@ -364,5 +375,11 @@ public final class PersonalDataActivity extends MyActivity {
                     }
                 });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 }

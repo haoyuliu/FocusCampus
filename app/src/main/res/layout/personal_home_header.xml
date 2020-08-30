@@ -85,8 +85,8 @@
             android:id="@+id/tv_nick_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#666666"
             android:text="ID:XXXXXXXXXXX"
+            android:textColor="#666666"
             android:textSize="12sp" />
 
         <TextView
@@ -119,9 +119,10 @@
                 android:paddingBottom="@dimen/dp_10">
 
                 <TextView
+                    android:id="@+id/user_home_zan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10"
+                    android:text="0"
                     android:textSize="15sp" />
 
                 <TextView
@@ -142,9 +143,10 @@
                 android:paddingBottom="@dimen/dp_10">
 
                 <TextView
+                    android:id="@+id/user_home_fans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10"
+                    android:text="0"
                     android:textSize="15sp" />
 
                 <TextView
@@ -165,9 +167,10 @@
                 android:paddingBottom="@dimen/dp_10">
 
                 <TextView
+                    android:id="@+id/user_home_follow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
+                    android:text="0"
                     android:textSize="15sp" />
 
                 <TextView

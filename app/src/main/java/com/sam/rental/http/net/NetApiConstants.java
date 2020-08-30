@@ -61,6 +61,10 @@ public class NetApiConstants {
      * 用户发表评论
      */
     public static final String POST_VIDEO_COMMON = "video/postVideoCommon";
+    /**
+     * 用户点赞，取消点赞
+     */
+    public static final String POST_VIDEO_LIKE = "video/postVideoLike";
 
     /**
      * 关注用户
@@ -70,4 +74,8 @@ public class NetApiConstants {
      * 获取图片上传所需要的参数
      */
     public static final String MODIFY_MESSAGE = "user/editUserInfo";
+    /**
+     * 获取指定用户个人资料
+     */
+    public static final String GET_USER_HOME_MESSAGE = "user/getUserHomePage";
 }

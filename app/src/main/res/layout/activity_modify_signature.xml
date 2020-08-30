@@ -5,19 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".ui.activity.ModifyNickNameActivity">
 
     <com.hjq.bar.TitleBar
         android:id="@+id/modify_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:tooltipText="修改昵称"
-        app:rightTitle="保存" />
+        app:rightColor="@color/color_check_home"
+        app:rightTitle="保存"
+        app:titleSize="18sp"
+        app:rightSize="14sp"
+        app:title="修改签名" />
 
     <EditText
         android:id="@+id/modify_signature"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="填写个性签名更加容易获得关注" />
+        android:layout_height="140dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="15.5dp"
+        android:layout_marginRight="15.5dp"
+        android:background="@drawable/shape_modify_signature"
+        android:gravity="start"
+        android:hint="填写个性签名更加容易获得关注"
+        android:paddingLeft="5dp"
+        android:paddingTop="@dimen/dp_10" />
 
 </LinearLayout>

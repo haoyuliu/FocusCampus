@@ -20,7 +20,9 @@ import com.sam.rental.bean.VideoBean;
 import com.sam.rental.common.MyActivity;
 import com.sam.rental.http.net.RetrofitClient;
 import com.sam.rental.http.response.FollowResponseBean;
+import com.sam.rental.http.response.GetUserHomePagerMessageResponseBean;
 import com.sam.rental.ui.adapter.CommPagerAdapter;
+import com.sam.rental.ui.fragment.MineFragment;
 import com.sam.rental.ui.fragment.PersonalLoveFragment;
 import com.sam.rental.ui.fragment.PersonalProductionFragment;
 import com.sam.rental.utils.SPUtils;
@@ -37,7 +39,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * 点击查看个人主页的Activity
+ * 点击某个用户的个人主页的Activity
  */
 public class PersonalHomeActivity extends MyActivity {
     @BindView(R.id.iv_head)
@@ -65,6 +67,14 @@ public class PersonalHomeActivity extends MyActivity {
     @BindView(R.id.personal_home_send_message)
     TextView mPersonalHomeSendMessage;
 
+    @BindView(R.id.user_home_zan)
+    TextView mPersonalHomeZan;
+    @BindView(R.id.user_home_fans)
+    TextView mPersonalHomeFans;
+    @BindView(R.id.user_home_follow)
+    TextView mPersonalHomeFollow;
+
+
     private ArrayList<Fragment> fragments = new ArrayList<>();
     private CommPagerAdapter pagerAdapter;
     private VideoBean.UserBean curUserBean;
@@ -82,21 +92,9 @@ public class PersonalHomeActivity extends MyActivity {
     protected void initView() {
         // 获取数据
         Intent intent = getIntent();
-        Glide.with(PersonalHomeActivity.this).load(intent.getStringExtra("HeadImage")).into(ivHead);
-        tvNickId.setText("id :" + intent.getStringExtra("userId"));
-        tvNickName.setText(intent.getStringExtra("NickName"));
-        //tvDesc.setText(intent.getStringExtra("id"));
-        boolean isFoucs = intent.getBooleanExtra("isFoucs", false);
+        String userId = intent.getStringExtra("userId");
+        getUserData(userId);
         String token = SPUtils.getInstance(PersonalHomeActivity.this).getString("token");
-        /*if (isFoucs) {
-            mPersonalHomeFocus.setText("已关注");
-            mPersonalHomeSendMessage.setVisibility(View.VISIBLE);
-            follow = "0";
-        } else {
-            mPersonalHomeFocus.setText("关注");
-            mPersonalHomeSendMessage.setVisibility(View.INVISIBLE);
-            follow = "1";
-        }*/
 
         mPersonalHomeFocus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +154,32 @@ public class PersonalHomeActivity extends MyActivity {
 
             }
         });
+    }
+
+    private void getUserData(String userId) {
+        RetrofitClient.getRetrofitService().getPersonalHomeMessageParams(userId)
+                .enqueue(new Callback<GetUserHomePagerMessageResponseBean>() {
+                    @Override
+                    public void onResponse(Call<GetUserHomePagerMessageResponseBean> call, Response<GetUserHomePagerMessageResponseBean> response) {
+                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                            Glide.with(PersonalHomeActivity.this).load(response.body().getData().getHeadImg()).into(ivHead);
+                            tvNickName.setText(response.body().getData().getNickName());
+                            tvNickId.setText("ID:" + response.body().getData().getUserId() + "");
+                            if (response.body().getData().getUserDesc() != null) {
+                                tvDesc.setText(response.body().getData().getUserDesc());
+                            }
+                            mPersonalHomeZan.setText(response.body().getData().getLikesCount() + "");
+                            mPersonalHomeFans.setText(response.body().getData().getFansCount() + "");
+                            mPersonalHomeFollow.setText(response.body().getData().getFollowCount() + "");
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetUserHomePagerMessageResponseBean> call, Throwable t) {
+
+                    }
+                });
     }
 
     @Override

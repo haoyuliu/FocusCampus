@@ -4,6 +4,7 @@ package com.sam.rental.http.net;
 import com.sam.rental.bean.FansBean;
 import com.sam.rental.bean.UserProductionOrLoveBean;
 import com.sam.rental.bean.VideoListBean;
+import com.sam.rental.http.request.HomeVideoLikeRequestBean;
 import com.sam.rental.http.request.LoginRequestBean;
 import com.sam.rental.http.request.ModifyMessageRequestBean;
 import com.sam.rental.http.request.UpLoadVideoRequestBean;
@@ -12,6 +13,8 @@ import com.sam.rental.http.request.GetUpLoadImageRequestBean;
 import com.sam.rental.http.request.upLoadAfterRequestBean;
 import com.sam.rental.http.response.CommentListBean;
 import com.sam.rental.http.response.FollowResponseBean;
+import com.sam.rental.http.response.GetUserHomePagerMessageResponseBean;
+import com.sam.rental.http.response.HomeVideoLikeResponseBean;
 import com.sam.rental.http.response.LoginBean;
 import com.sam.rental.http.response.ModifyMessageResponseBean;
 import com.sam.rental.http.response.UpLoadVideoResponseBean;
@@ -100,12 +103,22 @@ public interface RetrofitApi {
     Call<VideoCommentResponseBean> postVideoCommon(@Body VideoCommentRequestBean videoCommentRequestBean);
 
     /**
+     * 点赞或取消点赞
+     *
+     * @param videoCommentRequestBean
+     * @return
+     */
+    @POST(NetApiConstants.POST_VIDEO_LIKE)
+    Call<HomeVideoLikeResponseBean> postVideoLike(@Body HomeVideoLikeRequestBean videoCommentRequestBean);
+
+    /**
      * 获取上传视频的参数信息
      *
      * @return
      */
     @POST(NetApiConstants.PRE_UPLOAD)
     Call<UpLoadVideoResponseBean> getUpLoadVideoParams(@Header("token") String token, @Body UpLoadVideoRequestBean upLoadVideoRequestBean);
+
     /**
      * 视频上传成功后
      *
@@ -113,6 +126,7 @@ public interface RetrofitApi {
      */
     @POST(NetApiConstants.AFTER_UPLOAD)
     Call<upLoadAfterResponseBean> UpLoadVideoAfter(@Header("token") String token, @Body upLoadAfterRequestBean upLoadAfterRequestBean);
+
     /**
      * 获取图片上传所需要的参数
      *
@@ -129,5 +143,11 @@ public interface RetrofitApi {
     @POST(NetApiConstants.MODIFY_MESSAGE)
     Call<ModifyMessageResponseBean> modifyPersonalMessageParams(@Header("token") String token, @Body ModifyMessageRequestBean modifyMessageRequestBean);
 
-
+    /**
+     * 获取指定用户资料的接口
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_USER_HOME_MESSAGE)
+    Call<GetUserHomePagerMessageResponseBean> getPersonalHomeMessageParams(@Query("userId") String userId);
 }

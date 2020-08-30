@@ -1,6 +1,7 @@
 package com.sam.rental.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ import retrofit2.Response;
  * 个人作品的Fragment
  */
 public class PersonalProductionFragment extends MyFragment<HomeActivity> {
+    private static final String TAG = "PersonalProductionFragment";
     @BindView(R.id.recycle_personal_production)
     RecyclerView mPersonalProoductionRecyclerView;
 
