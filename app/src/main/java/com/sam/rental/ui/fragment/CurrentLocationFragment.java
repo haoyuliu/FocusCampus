@@ -35,7 +35,8 @@ import retrofit2.Response;
  * 首页中的关注的人fragment
  */
 public class CurrentLocationFragment extends MyFragment<HomeActivity> {
-    private int pageIndex = 1;
+    public static final String TAG = "CurrentLocationFragment";
+    private int page = 1;
     private int pageSize = 20;
     private TikTokController mController;
     private int mCurPos;
@@ -55,6 +56,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
+        Log.d(TAG, "InitView");
         mVideoView = new VideoView(getContext());
         mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
         mVideoView.setLooping(true);
@@ -62,7 +64,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         mVideoView.setVideoController(mController);
         mRecyclerView = findViewById(R.id.follow_rv);
         // 获取数据
-        getVideoData(pageIndex, pageSize);
+        getVideoData(page);
         mRecyclerView.scrollToPosition(mIndex);
     }
 
@@ -85,13 +87,15 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
 
     }
 
-    private void getVideoData(int pageIndex, int pageSize) {
-        RetrofitClient.getRetrofitService().loadHomeVideoListData(pageIndex, pageSize).enqueue(new Callback<VideoListBean>() {
+    private void getVideoData(int page) {
+        RetrofitClient.getRetrofitService().loadHomeVideoListData(page, pageSize).enqueue(new Callback<VideoListBean>() {
             @Override
             public void onResponse(Call<VideoListBean> call, Response<VideoListBean> response) {
                 if (response.code() == 403) {
                     startActivity(LoginActivity.class);
-                } else if (response.code() == HttpURLConnection.HTTP_OK) {
+                    return;
+                }
+                if (response.code() == HttpURLConnection.HTTP_OK) {
                     mVideoList = response.body().getData();
                     if (mVideoList.size() == 0) {
                         toast("暂时没有数据");
@@ -181,10 +185,10 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         }
         if (isVisibleToUser) {
             mVideoView.start();
-            toast("关注播放");
+          //  toast("关注播放");
         } else {
             mVideoView.pause();
-            toast("关注暂停");
+           // toast("关注暂停");
         }
     }
 
@@ -192,6 +196,6 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
     public void onPause() {
         super.onPause();
         mVideoView.pause();
-        toast("关注暂停");
+       // toast("关注暂停");
     }
 }

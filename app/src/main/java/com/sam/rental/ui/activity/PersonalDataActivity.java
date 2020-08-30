@@ -162,10 +162,10 @@ public final class PersonalDataActivity extends MyActivity {
 
                             @Override
                             public void onSelected(BaseDialog dialog, HashMap<Integer, String> data) {
-                                toast("确定了：" + data.toString());
+                              //  toast("确定了：" + data.toString());
                                 Set<Integer> integers = data.keySet();
                                 for (Integer integerSex : integers) {
-                                    toast("确定了：" + integerSex);
+                                   // toast("确定了：" + integerSex);
                                     mSex = integerSex;
                                 }
                                 ModifyMessageRequestBean requestBean = new ModifyMessageRequestBean();
@@ -204,7 +204,7 @@ public final class PersonalDataActivity extends MyActivity {
                         .setListener(new DateDialog.OnListener() {
                             @Override
                             public void onSelected(BaseDialog dialog, int year, int month, int day) {
-                                toast(year + getString(R.string.common_year) + month + getString(R.string.common_month) + day + getString(R.string.common_day));
+                              //  toast(year + getString(R.string.common_year) + month + getString(R.string.common_month) + day + getString(R.string.common_day));
 
                                 // 如果不指定时分秒则默认为现在的时间
                                 Calendar calendar = Calendar.getInstance();
@@ -287,7 +287,7 @@ public final class PersonalDataActivity extends MyActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(PersonalDataActivity.this, "onsucceed ------------------" + info.getFilePath(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(PersonalDataActivity.this, "onsucceed ------------------" + info.getFilePath(), Toast.LENGTH_SHORT).show();
                         ModifyMessageRequestBean requestBean = new ModifyMessageRequestBean();
                         requestBean.setHeadImg(imageURL);
                         requestBean.setUserId(SPUtils.getInstance(PersonalDataActivity.this).getString("UserId"));
@@ -300,7 +300,7 @@ public final class PersonalDataActivity extends MyActivity {
             @Override
             public void onUploadFailed(UploadFileInfo info, String code, String message) {
                 Log.d("图片上传", "失败" + code + "message" + message);
-                Toast.makeText(PersonalDataActivity.this, "onfailed ------------------ " + info.getFilePath() + " " + code + " " + message, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(PersonalDataActivity.this, "onfailed ------------------ " + info.getFilePath() + " " + code + " " + message, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -310,25 +310,25 @@ public final class PersonalDataActivity extends MyActivity {
 
             @Override
             public void onUploadTokenExpired() {
-                Toast.makeText(PersonalDataActivity.this, "onExpired ------------- ", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(PersonalDataActivity.this, "onExpired ------------- ", Toast.LENGTH_SHORT).show();
 
                 uploader.resumeWithAuth(uploadAuth);
             }
 
             @Override
             public void onUploadRetry(String code, String message) {
-                Toast.makeText(PersonalDataActivity.this, "onUploadRetry ------------- " + code + message, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PersonalDataActivity.this, "onUploadRetry ------------- " + code + message, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onUploadRetryResume() {
-                Toast.makeText(PersonalDataActivity.this, "onUploadRetryResume ------------- ", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(PersonalDataActivity.this, "onUploadRetryResume ------------- ", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onUploadStarted(UploadFileInfo uploadFileInfo) {
                 Log.d("图片上传", "开始");
-                Toast.makeText(PersonalDataActivity.this, "onUploadStarted ------------- ", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(PersonalDataActivity.this, "onUploadStarted ------------- ", Toast.LENGTH_SHORT).show();
 
                 uploader.setUploadAuthAndAddress(uploadFileInfo, uploadAuth, uploadAddress);
             }

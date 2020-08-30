@@ -7,7 +7,9 @@ import com.sam.rental.R;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyFragment;
 import com.sam.rental.http.glide.GlideApp;
+import com.sam.rental.ui.activity.ChoiceCarActivity;
 import com.sam.rental.ui.activity.HomeActivity;
+import com.sam.rental.ui.activity.RentalCarOrderActivity;
 import com.sam.widget.view.CountdownView;
 import com.sam.widget.view.SwitchButton;
 
@@ -30,7 +32,7 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        //setOnClickListener(R.id.cv_test_countdown);
+        setOnClickListener(R.id.but_choice_car, R.id.rental_car_order);
     }
 
     @Override
@@ -44,10 +46,17 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
     @SingleClick
     @Override
     public void onClick(View v) {
-       /* if (v.getId() == R.id.cv_test_countdown) {
-            toast(R.string.common_code_send_hint);
-            mCountdownView.start();
-        }*/
+        switch (v.getId()) {
+            case R.id.but_choice_car:
+                startActivity(ChoiceCarActivity.class);
+                break;
+            case R.id.rental_car_order:
+                startActivity(RentalCarOrderActivity.class);
+                break;
+            default:
+                break;
+
+        }
     }
 
     @Override

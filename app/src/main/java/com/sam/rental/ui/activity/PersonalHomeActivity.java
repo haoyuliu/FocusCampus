@@ -81,7 +81,7 @@ public class PersonalHomeActivity extends MyActivity {
     private Subscription subscription;
     private PersonalProductionFragment mPersonalProductionFragment;
     private PersonalLoveFragment mPersonalLoveFragment;
-    private String follow;
+    private int follow;
 
     @Override
     protected int getLayoutId() {
@@ -101,25 +101,27 @@ public class PersonalHomeActivity extends MyActivity {
             public void onClick(View v) {
                 if (StringUtil.isEmpty(token)) {
                     startActivity(LoginActivity.class);
-                } else {
-                    mPersonalHomeFocus.setText("已关注");
-                    RetrofitClient.getRetrofitService().FocusUser(token, intent.getStringExtra("userId"), follow).enqueue(new Callback<FollowResponseBean>() {
-                        @Override
-                        public void onResponse(Call<FollowResponseBean> call, Response<FollowResponseBean> response) {
-                            if (response.code() == HttpURLConnection.HTTP_OK) {
-                                toast(response.message());
-                            } else {
-                                toast(response.message());
-                            }
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<FollowResponseBean> call, Throwable t) {
-                            toast(t.getMessage());
-                        }
-                    });
+                    return;
                 }
+                RetrofitClient.getRetrofitService().FocusUser(token, intent.getStringExtra("userId"), follow + "").enqueue(new Callback<FollowResponseBean>() {
+                    @Override
+                    public void onResponse(Call<FollowResponseBean> call, Response<FollowResponseBean> response) {
+                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                            toast(response.message());
+                            mPersonalHomeFocus.setText("已关注");
+                        } else {
+                            toast(response.message());
+                            mPersonalHomeFocus.setText("关注");
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<FollowResponseBean> call, Throwable t) {
+                        toast(t.getMessage());
+                        mPersonalHomeFocus.setText("关注");
+                    }
+                });
             }
         });
         Bundle bundle = new Bundle();
@@ -171,6 +173,12 @@ public class PersonalHomeActivity extends MyActivity {
                             mPersonalHomeZan.setText(response.body().getData().getLikesCount() + "");
                             mPersonalHomeFans.setText(response.body().getData().getFansCount() + "");
                             mPersonalHomeFollow.setText(response.body().getData().getFollowCount() + "");
+                            follow = response.body().getData().getHasFollowed();
+                            if (response.body().getData().getHasFollowed() == 0) {
+                                mPersonalHomeFocus.setText("关注");
+                            } else {
+                                mPersonalHomeFocus.setText("已关注");
+                            }
                         }
 
                     }

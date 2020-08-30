@@ -58,6 +58,14 @@ public interface RetrofitApi {
     Call<VideoListBean> loadHomeVideoListData(@Query("pageIndex") int pageIndex, @Query("pageSize") int pageSize);
 
     /**
+     * 获取首页我的关注的人的视频列表
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_FOLLOWED_VIDEO_LIST)
+    Call<VideoListBean> loadHomeFollowedVideoListData(@Query("token") String header, @Query("page") int page);
+
+    /**
      * 获取关注列表
      */
     @GET(NetApiConstants.GET_FOCUS)

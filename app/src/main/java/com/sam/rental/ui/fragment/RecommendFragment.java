@@ -180,10 +180,10 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
             return;
         if (isVisibleToUser) {
             mVideoView.start();
-            toast("推荐播放");
+            //toast("推荐播放");
         } else {
             mVideoView.pause();
-            toast("推荐暂停");
+            //toast("推荐暂停");
         }
     }
 
@@ -192,10 +192,10 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         super.onHiddenChanged(hidden);
         if (hidden) {
             mVideoView.pause();
-            toast("推荐暂停");
+            //toast("推荐暂停");
         } else {
             mVideoView.start();
-            toast("推荐播放");
+           // toast("推荐播放");
         }
     }
 
@@ -203,6 +203,6 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
     public void onPause() {
         super.onPause();
         mVideoView.pause();
-        toast("关注暂停");
+       // toast("关注暂停");
     }
 }

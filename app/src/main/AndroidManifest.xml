@@ -42,7 +42,11 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:supportsRtl,android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.ModifySignatureActivity"></activity>
+        <activity android:name=".ui.activity.RentalCarOrderActivity"></activity>
+        <activity android:name=".ui.activity.OrderPayActivity" />
+        <activity android:name=".ui.activity.OrderConfirmationActivity" />
+        <activity android:name=".ui.activity.ChoiceCarActivity" />
+        <activity android:name=".ui.activity.ModifySignatureActivity" />
         <activity android:name=".ui.activity.ModifyNickNameActivity" />
         <activity android:name=".ui.activity.ChatActivity" /> <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
         <meta-data

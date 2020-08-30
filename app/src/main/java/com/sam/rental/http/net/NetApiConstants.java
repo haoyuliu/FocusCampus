@@ -25,6 +25,10 @@ public class NetApiConstants {
      */
     public static final String GET_VIDEO_LIST = "video/videoList";
     /**
+     * 获取我的关注最近更新的视频列表
+     */
+    public static final String GET_FOLLOWED_VIDEO_LIST = "video/getFollowedVideoList";
+    /**
      * 获取视频上传需要的参数
      */
     public static final String PRE_UPLOAD = "video/preUpload";

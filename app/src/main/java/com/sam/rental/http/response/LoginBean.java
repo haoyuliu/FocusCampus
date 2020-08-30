@@ -22,6 +22,17 @@ public class LoginBean {
     private String code;
     private Object traceId;
 
+    @Override
+    public String toString() {
+        return "LoginBean{" +
+                "success=" + success +
+                ", data=" + data +
+                ", msg='" + msg + '\'' +
+                ", code='" + code + '\'' +
+                ", traceId=" + traceId +
+                '}';
+    }
+
     public boolean isSuccess() {
         return success;
     }
@@ -90,6 +101,24 @@ public class LoginBean {
         private String token;
         private String hxuid;
         private String hxpwd;
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "userId=" + userId +
+                    ", realName='" + realName + '\'' +
+                    ", nickName='" + nickName + '\'' +
+                    ", headImg='" + headImg + '\'' +
+                    ", phone='" + phone + '\'' +
+                    ", userSex='" + userSex + '\'' +
+                    ", userDesc='" + userDesc + '\'' +
+                    ", userBirthday='" + userBirthday + '\'' +
+                    ", userLocation='" + userLocation + '\'' +
+                    ", token='" + token + '\'' +
+                    ", hxuid='" + hxuid + '\'' +
+                    ", hxpwd='" + hxpwd + '\'' +
+                    '}';
+        }
 
         public long getUserId() {
             return userId;

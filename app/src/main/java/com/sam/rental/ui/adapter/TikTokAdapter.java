@@ -148,7 +148,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         HomeVideoLikeRequestBean homeVideoLikeRequestBean = new HomeVideoLikeRequestBean();
         homeVideoLikeRequestBean.setBlike(blike);
         homeVideoLikeRequestBean.setVideoId(videos.get(position).getVideoId()+"");
-        homeVideoLikeRequestBean.setUserId();
+        //homeVideoLikeRequestBean.setUserId();
         RetrofitClient.getRetrofitService().postVideoLike(homeVideoLikeRequestBean).enqueue(new Callback<HomeVideoLikeResponseBean>() {
             @Override
             public void onResponse(Call<HomeVideoLikeResponseBean> call, Response<HomeVideoLikeResponseBean> response) {

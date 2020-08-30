@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
+import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.sam.rental.R;
@@ -17,7 +18,6 @@ import com.sam.rental.http.net.RetrofitClient;
 import com.sam.rental.http.request.LoginRequestBean;
 import com.sam.rental.http.response.LoginBean;
 import com.sam.rental.http.response.VerficationCodeBean;
-import com.sam.rental.ui.fragment.HomeFragment;
 import com.sam.rental.utils.IpUtils;
 import com.sam.rental.utils.SPUtils;
 import com.sam.rental.wxapi.WXEntryActivity;
@@ -25,8 +25,6 @@ import com.sam.umeng.Platform;
 import com.sam.umeng.UmengClient;
 import com.sam.umeng.UmengLogin;
 import com.sam.widget.view.CountdownView;
-
-import org.apache.http.protocol.HTTP;
 
 import java.net.HttpURLConnection;
 
@@ -97,7 +95,7 @@ public final class LoginActivity extends MyActivity
     public void onLeftClick(View v) {
         // 跳转到主界面
         //startActivity(HomeActivity.class);
-       // finish();
+        // finish();
         onBackPressed();
     }
 
@@ -117,31 +115,34 @@ public final class LoginActivity extends MyActivity
                     toast(R.string.common_phone_input_error);
                     return;
                 }
+                if (StringUtil.isEmpty(mCodeView.getText().toString())) {
+                    toast("请输入验证码");
+                    return;
+                }
                 LoginRequestBean loginRequestBean = new LoginRequestBean();
                 loginRequestBean.setIp(IpUtils.getHostIP());
                 loginRequestBean.setPhone(mPhoneView.getText().toString());
-                loginRequestBean.setRequestId(traceId);
+                loginRequestBean.setRequestId("400");
                 loginRequestBean.setVerifcationCode(mCodeView.getText().toString());
                 RetrofitClient.getRetrofitService().loadLogin(loginRequestBean)
                         .enqueue(new Callback<LoginBean>() {
                             @Override
                             public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
                                 Log.d("login", response.code() + "");
-                                if (response.code() == HttpURLConnection.HTTP_OK) {
-                                    SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
-                                    SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
-                                    SPUtils.getInstance(LoginActivity.this).put("NickName", response.body().getData().getNickName());
-                                    SPUtils.getInstance(LoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
-                                    SPUtils.getInstance(LoginActivity.this).put("userSex", response.body().getData().getUserSex());
-                                    SPUtils.getInstance(LoginActivity.this).put("userDesc", response.body().getData().getUserDesc());
-                                    SPUtils.getInstance(LoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
-                                    SPUtils.getInstance(LoginActivity.this).put("userLocation", response.body().getData().getUserLocation());
-
-                                    Log.d("id", response.body().getData().getUserId() + "");
+                                int Code = Integer.parseInt(response.body().getCode());
+                                if (Code == HttpURLConnection.HTTP_OK) {
                                     EMClient.getInstance().login(response.body().getData().getHxuid(), response.body().getData().getHxpwd(), new EMCallBack() {
                                         @Override
                                         public void onSuccess() {
-                                          //  startActivity(HomeActivity.class);
+                                            //  startActivity(HomeActivity.class);
+                                            SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
+                                            SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
+                                            SPUtils.getInstance(LoginActivity.this).put("NickName", response.body().getData().getNickName());
+                                            SPUtils.getInstance(LoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
+                                            SPUtils.getInstance(LoginActivity.this).put("userSex", response.body().getData().getUserSex());
+                                            SPUtils.getInstance(LoginActivity.this).put("userDesc", response.body().getData().getUserDesc());
+                                            SPUtils.getInstance(LoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
+                                            SPUtils.getInstance(LoginActivity.this).put("userLocation", response.body().getData().getUserLocation());
                                             finish();
                                         }
 
@@ -182,6 +183,10 @@ public final class LoginActivity extends MyActivity
                     public void onResponse(Call<VerficationCodeBean> call, Response<VerficationCodeBean> response) {
                         if (response.code() == HttpURLConnection.HTTP_OK) {
                             toast("验证码以发送" + response.message());
+                            if (response.body().getTraceId() == null) {
+                                traceId = "111";
+                                return;
+                            }
                             traceId = response.body().getData();
                             mCountdownView.start();
                         } else {

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ui.fragment.RentalCarFragment"
     tools:ignore="HardcodedText">
 
@@ -157,6 +157,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/but_choice_car"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -192,7 +193,7 @@
                         android:layout_width="80dp"
                         android:layout_height="50dp"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/head1" />
+                        android:src="@drawable/car" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -218,7 +219,7 @@
                         android:layout_width="80dp"
                         android:layout_height="50dp"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/head1" />
+                        android:src="@drawable/car" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -244,7 +245,7 @@
                         android:layout_width="80dp"
                         android:layout_height="50dp"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/head1" />
+                        android:src="@drawable/car" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -273,11 +274,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginBottom="30dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="30dp">
 
                 <com.sam.widget.layout.SettingBar
-                    android:id="@+id/sb_setting_agreement"
+                    android:id="@+id/rental_car_order"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
