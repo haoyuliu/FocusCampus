@@ -240,6 +240,7 @@
                     android:paddingRight="15dp">
 
                     <LinearLayout
+                        android:id="@+id/ll_order_rental_car"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="5dp"

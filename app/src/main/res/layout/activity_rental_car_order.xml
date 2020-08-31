@@ -4,12 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+   android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.activity.RentalCarOrderActivity">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleSize="18sp"
-        app:title="我的订单" />
+        app:title="我的订单"
+        app:titleSize="18sp" />
+
+    <com.androidkun.xtablayout.XTabLayout
+        android:id="@+id/order_xtab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="5dp"
+        app:xTabIndicatorColor="@color/color_check_home"
+        app:xTabIndicatorWidth="35dp"
+        app:xTabSelectedTextColor="@color/black"
+        app:xTabSelectedTextSize="18sp"
+        app:xTabTextBold="true"
+        app:xTabTextColor="#CCCCCC"
+        app:xTabTextSize="18sp" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/order_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

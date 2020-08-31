@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import com.sam.rental.common.MyFragment;
 import com.sam.rental.ui.activity.FocusActivity;
 import com.sam.rental.ui.activity.HomeActivity;
 import com.sam.rental.ui.activity.PersonalDataActivity;
+import com.sam.rental.ui.activity.RentalCarOrderActivity;
 import com.sam.rental.ui.activity.SettingActivity;
 import com.sam.rental.ui.adapter.CommPagerAdapter;
 import com.sam.rental.utils.SPUtils;
@@ -60,6 +62,9 @@ public final class MineFragment extends MyFragment<HomeActivity> {
     @BindView(R.id.mine_add)
     TextView mTextViewMineAdd;
 
+    @BindView(R.id.ll_order_rental_car)
+    LinearLayout mLinearLayoutOrderRentalCar;
+
     private PersonalProductionFragment mMineProductionFragment;
     private PersonalLoveFragment mPraiseFragment;
     private CommPagerAdapter pagerAdapter;
@@ -95,7 +100,7 @@ public final class MineFragment extends MyFragment<HomeActivity> {
         mMineXtabLayout.getTabAt(0).select();
         mMineXtabLayout.setupWithViewPager(mViewPager);
         //点击事件
-        setOnClickListener(R.id.ll_fans, R.id.ll_focus, R.id.mine_user_head, R.id.edit_mine_resource, R.id.mine_add);
+        setOnClickListener(R.id.ll_fans, R.id.ll_focus, R.id.mine_user_head, R.id.edit_mine_resource, R.id.mine_add, R.id.ll_order_rental_car);
     }
 
     @Override
@@ -146,6 +151,9 @@ public final class MineFragment extends MyFragment<HomeActivity> {
                 break;
             case R.id.mine_add:
                 startActivity(FocusActivity.class);
+                break;
+            case R.id.ll_order_rental_car:
+                startActivity(RentalCarOrderActivity.class);
                 break;
             default:
                 break;

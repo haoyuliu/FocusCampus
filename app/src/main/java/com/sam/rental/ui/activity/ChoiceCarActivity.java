@@ -1,5 +1,8 @@
 package com.sam.rental.ui.activity;
 
+import android.view.View;
+import android.widget.RelativeLayout;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +16,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import butterknife.BindDimen;
 import butterknife.BindView;
 
 /**
@@ -27,8 +31,11 @@ public class ChoiceCarActivity extends MyActivity {
     @BindView(R.id.spinner_car_price)
     NiceSpinner mNiceSpinnerCarPrice;
 
-    @BindView(R.id.rv_choice_car)
-    RecyclerView mRecyclerViewChoiceCar;
+    // @BindView(R.id.rv_choice_car)
+
+    //RecyclerView mRecyclerViewChoiceCar;
+    @BindView(R.id.rl_item)
+    RelativeLayout mRelativeLayout;
 
     @Override
     protected int getLayoutId() {
@@ -41,14 +48,20 @@ public class ChoiceCarActivity extends MyActivity {
         mNiceSpinnerCarModel.attachDataSource(dataModel);
         List<String> dateBrand = new LinkedList<>(Arrays.asList("品牌", "大众", "奔驰", "宝马", "法拉利"));
         mNiceSpinnerCarBrand.attachDataSource(dateBrand);
-        List<String> dataPrice = new LinkedList<>(Arrays.asList("价格", "2", "2", "3", "4"));
+        List<String> dataPrice = new LinkedList<>(Arrays.asList("价格", "默认", "升序", "降序"));
         mNiceSpinnerCarPrice.attachDataSource(dataPrice);
     }
 
     @Override
     protected void initData() {
-        ChoiceCarAdapter choiceCarAdapter = new ChoiceCarAdapter();
-        mRecyclerViewChoiceCar.setAdapter(choiceCarAdapter);
-        mRecyclerViewChoiceCar.setLayoutManager(new LinearLayoutManager(ChoiceCarActivity.this));
+        //ChoiceCarAdapter choiceCarAdapter = new ChoiceCarAdapter();
+        //mRecyclerViewChoiceCar.setAdapter(choiceCarAdapter);
+        //mRecyclerViewChoiceCar.setLayoutManager(new LinearLayoutManager(ChoiceCarActivity.this));
+        mRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(OrderConfirmationActivity.class);
+            }
+        });
     }
 }

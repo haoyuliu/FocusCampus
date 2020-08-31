@@ -79,10 +79,10 @@ public class HomeFragment extends MyFragment<HomeActivity> {
             }
         } else {
             if (currentLocationFragment != null) {
-                currentLocationFragment.setVideoViewState(true);
+                currentLocationFragment.setVideoViewState(false);
             }
             if (recommendFragment != null) {
-                recommendFragment.setVideoViewState(true);
+                recommendFragment.setVideoViewState(false);
             }
         }
     }

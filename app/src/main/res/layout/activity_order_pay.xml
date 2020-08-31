@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.activity.OrderPayActivity">
 
@@ -35,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="4852"
+            android:text="￥4852"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -57,7 +58,8 @@
         android:layout_below="@+id/tv_pay_style"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/iv_weixin"
@@ -80,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:checked="true" />
+            android:checked="false" />
 
     </RelativeLayout>
 
@@ -90,7 +92,8 @@
         android:layout_below="@+id/rl_weixin"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="15dp">
+        android:layout_marginRight="15dp"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/iv_zhifubao"
@@ -113,11 +116,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:checked="true" />
+            android:checked="false" />
 
     </RelativeLayout>
 
     <Button
+        android:id="@+id/but_pay"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"

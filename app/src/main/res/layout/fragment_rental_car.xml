@@ -49,7 +49,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
-                        android:text="取车城市" />
+                        android:text="取车城市"
+                        android:textColor="#9A9A9A"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -71,7 +73,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
-                        android:text="取车地点" />
+                        android:text="取车地点"
+                        android:textColor="#9A9A9A"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -101,14 +105,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
-                        android:text="7月26"
+                        android:text="07月26日"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="今天10点" />
+                        android:text="今天10点"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -123,12 +128,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
-                        android:text="租期" />
+                        android:text="租期"
+                        android:textColor="#9A9A9A"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12天" />
+                        android:text="12天"
+                        android:textColor="#9A9A9A"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -143,14 +152,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
-                        android:text="8月29"
+                        android:text="08月29日"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="周六12点" />
+                        android:text="周六12点"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -159,116 +169,48 @@
             <Button
                 android:id="@+id/but_choice_car"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginLeft="21dp"
                 android:layout_marginTop="35dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="21dp"
                 android:layout_marginBottom="44dp"
                 android:background="@drawable/shape_round_chose_car"
                 android:text="去选车"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="20.5dp"
                 android:text="全城低价"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="14.5dp"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                <include layout="@layout/item_rental_car_home" />
 
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="50dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/car" />
+                <include layout="@layout/item_rental_car_home" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="起亚K2" />
+                <include layout="@layout/item_rental_car_home" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="128/天" />
+                <include layout="@layout/item_rental_car_home" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="50dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/car" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="起亚K2" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="128/天" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="50dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/car" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="起亚K2" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="128/天" />
-
-                </LinearLayout>
-
+                <include layout="@layout/item_rental_car_home" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginLeft="20.5dp"
+                android:layout_marginTop="30dp"
                 android:text="租车订单"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -285,6 +227,7 @@
                     android:layout_marginTop="15dp"
                     android:paddingTop="@dimen/dp_10"
                     android:paddingBottom="@dimen/dp_10"
+                    app:bar_leftSize="18px"
                     app:bar_leftText="全部订单 40"
                     app:bar_rightIcon="@drawable/ico_go_black"
                     app:bar_rightText="查看" />

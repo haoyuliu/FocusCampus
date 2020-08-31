@@ -1,16 +1,360 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".ui.activity.OrderConfirmationActivity">
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/order_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="订单确认"
         app:titleSize="18sp" />
 
-</LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/order_title_bar">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_car"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/car" />
+
+                <LinearLayout
+                    android:id="@+id/ll_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="13dp"
+                    android:layout_toRightOf="@id/iv_car"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="别克英朗"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="1.5L 自动 | 三厢五座"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="10.5dp"
+                    android:layout_height="13.5dp"
+                    android:src="@drawable/quchedidian" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="9.5dp"
+                    android:layout_marginRight="10dp"
+                    android:text="取车网点："
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="首都国际机场T1"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="10.5dp"
+                    android:layout_height="13.5dp"
+                    android:src="@drawable/huanchedidian" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="9.5dp"
+                    android:layout_marginRight="10dp"
+                    android:text="还车网点："
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="首都国际机场T1"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="10.5dp"
+                    android:layout_height="13.5dp"
+                    android:src="@drawable/yongcheshijian" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="9.5dp"
+                    android:layout_marginRight="10dp"
+                    android:text="08月01日  10:00 - 13天 -"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="08月14日  16:00"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <com.sam.widget.layout.SettingBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42.5dp"
+                app:bar_leftSize="16px"
+                app:bar_leftText="租车费用"
+                app:bar_rightText="￥4802" />
+
+            <com.sam.widget.layout.SettingBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftSize="12px"
+                app:bar_leftText="基础费用"
+                app:bar_lineVisible="false" />
+
+            <com.sam.widget.layout.SettingBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftColor="#666666"
+                app:bar_leftSize="12px"
+                app:bar_leftText="车辆租赁费"
+                app:bar_lineVisible="false"
+                app:bar_rightText="￥4502" />
+
+            <com.sam.widget.layout.SettingBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftColor="#666666"
+                app:bar_leftSize="12px"
+                app:bar_leftText="基础服务费"
+                app:bar_lineVisible="false"
+                app:bar_rightText="￥300" />
+
+            <com.sam.widget.layout.SettingBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:bar_leftSize="12px"
+                app:bar_leftText="可享优惠"
+                app:bar_lineVisible="false" />
+
+            <com.sam.widget.layout.SettingBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftColor="#666666"
+                app:bar_leftSize="12px"
+                app:bar_leftText="优惠券"
+                app:bar_rightText="暂无优惠券" />
+
+            <com.sam.widget.layout.SettingBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:bar_leftSize="12px"
+                app:bar_leftText="增值服务"
+                app:bar_lineVisible="false" />
+
+            <com.sam.widget.layout.SettingBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftColor="#666666"
+                app:bar_leftSize="12px"
+                app:bar_leftText="尊享服务费"
+                app:bar_lineVisible="false"
+                app:bar_rightText="￥100" />
+
+            <com.sam.widget.layout.SettingBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:bar_leftColor="#4B70D9"
+                app:bar_leftSize="10px"
+                app:bar_leftText="您无需承担保险理赔范围内的全部损失"
+                app:bar_lineVisible="false" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.sam.widget.layout.SettingBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:bar_leftSize="16px"
+                    app:bar_leftText="备注信息"
+                    app:bar_lineVisible="false" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.5dp"
+                    android:layout_marginTop="24.5dp"
+                    android:text="取车凭证" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.5dp"
+                    android:layout_marginTop="9.5dp"
+                    android:text="本人有效身份证+驾驶证原件。"
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.5dp"
+                    android:layout_marginTop="19.5dp"
+                    android:text="退改规则" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.5dp"
+                    android:layout_marginTop="9.5dp"
+                    android:text="1.取车时间前3小时以上取消订单，全额退还预付款。 "
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16.5dp"
+                    android:layout_marginTop="9.5dp"
+                    android:text="2.取车时间前3小时内取消订单，收取车辆租赁费和服务费10%作为违约金，剩余费用退还。
+                            "
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="80dp"
+                    android:background="#E6E6E6"
+                    android:orientation="horizontal"
+                    android:paddingTop="14.5dp"
+                    android:paddingBottom="14.5dp">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="9.5dp"
+                        android:text="我已阅读并同意" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="租车服务合同"
+                        android:textColor="#4B70D9" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="及" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="预定服务协议"
+                        android:textColor="#4B70D9" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15.5dp"
+            android:text="金额 ￥4802" />
+
+        <Button
+            android:id="@+id/confirm_order"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/shape_confirm_order"
+            android:text="确认订单"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</RelativeLayout>

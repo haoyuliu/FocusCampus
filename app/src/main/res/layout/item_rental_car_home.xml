@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="84.5dp"
+    android:layout_height="94dp"
+    android:layout_marginRight="21dp"
+    android:paddingTop="3dp"
+    android:background="@drawable/shape_home_rental_car"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="44.5dp"
+        android:src="@drawable/car" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="起亚K2"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="128/天"
+        android:textColor="#EA5858"
+        android:textSize="12sp" />
+
+</LinearLayout>

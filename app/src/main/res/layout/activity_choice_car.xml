@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.activity.ChoiceCarActivity">
 
@@ -49,9 +50,18 @@
             app:textTint="@color/black" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_choice_car"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+    <include layout="@layout/item_choice_car" />
+
+    <include layout="@layout/item_choice_car" />
+
+    <include layout="@layout/item_choice_car" />
+
+    <include layout="@layout/item_choice_car" />
+
+    <include layout="@layout/item_choice_car" />
+
+    <include layout="@layout/item_choice_car" />
+
 
 </LinearLayout>

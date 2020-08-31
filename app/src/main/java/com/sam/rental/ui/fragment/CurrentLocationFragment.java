@@ -172,6 +172,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
 
     }
 
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -185,10 +186,21 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         }
         if (isVisibleToUser) {
             mVideoView.start();
-          //  toast("关注播放");
+            //  toast("关注播放");
         } else {
             mVideoView.pause();
-           // toast("关注暂停");
+            // toast("关注暂停");
+        }
+    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+            mVideoView.pause();
+            //toast("推荐暂停");
+        } else {
+            mVideoView.start();
+            // toast("推荐播放");
         }
     }
 
@@ -196,6 +208,6 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
     public void onPause() {
         super.onPause();
         mVideoView.pause();
-       // toast("关注暂停");
+        // toast("关注暂停");
     }
 }
