@@ -52,9 +52,12 @@ public class PersonalLoveFragment extends MyFragment<HomeActivity> {
                 .enqueue(new Callback<UserProductionOrLoveBean>() {
                     @Override
                     public void onResponse(Call<UserProductionOrLoveBean> call, Response<UserProductionOrLoveBean> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                        UserProductionOrLoveBean productionOrLoveBean = response.body();
+                        if (productionOrLoveBean.getCode().equals("200")) {
                             GridVideoAdapter fansAdapter = new GridVideoAdapter(getContext(), response.body().getData());
                             mPersonalLoveRecyclerView.setAdapter(fansAdapter);
+                        } else {
+                            toast("获取数据失败");
                         }
 
                     }

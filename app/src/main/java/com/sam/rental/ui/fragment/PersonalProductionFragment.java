@@ -54,16 +54,19 @@ public class PersonalProductionFragment extends MyFragment<HomeActivity> {
                 .enqueue(new Callback<UserProductionOrLoveBean>() {
                     @Override
                     public void onResponse(Call<UserProductionOrLoveBean> call, Response<UserProductionOrLoveBean> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                        UserProductionOrLoveBean userProductionOrLoveBean = response.body();
+                        if (userProductionOrLoveBean.getCode().equals("200")) {
                             GridVideoAdapter fansAdapter = new GridVideoAdapter(getContext(), response.body().getData());
                             mPersonalProoductionRecyclerView.setAdapter(fansAdapter);
+                        } else {
+                            toast("获取数据失败");
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<UserProductionOrLoveBean> call, Throwable t) {
-
+                        toast("获取数据失败");
                     }
 
                 });

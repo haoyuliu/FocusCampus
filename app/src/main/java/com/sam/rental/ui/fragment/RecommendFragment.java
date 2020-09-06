@@ -136,7 +136,9 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
                                     .enqueue(new Callback<CommentListBean>() {
                                         @Override
                                         public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
-                                            if (response.code() == HttpURLConnection.HTTP_OK) {
+                                            CommentListBean commentListBean = response.body();
+
+                                            if (commentListBean.getCode().equals("200")) {
                                                 CommentDialog commentDialog = new CommentDialog();
                                                 commentDialog.setData(response.body().getData());
                                                 commentDialog.setVideoid(mVideoList.get(position).getVideoId());
@@ -195,7 +197,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
             //toast("推荐暂停");
         } else {
             mVideoView.start();
-           // toast("推荐播放");
+            // toast("推荐播放");
         }
     }
 
@@ -203,6 +205,6 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
     public void onPause() {
         super.onPause();
         mVideoView.pause();
-       // toast("关注暂停");
+        // toast("关注暂停");
     }
 }

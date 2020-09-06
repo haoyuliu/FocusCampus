@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *    author : Android 轮子哥
+ *    author : Android
  *    desc   : 对话框使用案例
  */
 public final class DialogActivity extends MyActivity {

@@ -294,6 +294,7 @@
                     android:paddingBottom="14.5dp">
 
                     <CheckBox
+                        android:id="@+id/order_checkbox"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/dp_10" />
@@ -333,9 +334,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:paddingTop="@dimen/dp_10"
-        android:paddingBottom="@dimen/dp_10">
+        android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
@@ -350,6 +349,8 @@
             android:layout_height="34dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="14dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
             android:background="@drawable/shape_confirm_order"
             android:text="确认订单"
             android:textColor="@color/white"

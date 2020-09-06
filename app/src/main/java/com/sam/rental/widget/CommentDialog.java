@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,9 @@ public class CommentDialog extends BaseBottomSheetDialog {
 
     @BindView(R.id.tv_comment)
     TextView mTextViewComment;
+
+    @BindView(R.id.et_comment)
+    EditText mEditTextComment;
     private CommentAdapter commentAdapter;
     private List<CommentListBean.DataBean> datas = new ArrayList<>();
     private Long mUserId = null;
@@ -65,18 +69,19 @@ public class CommentDialog extends BaseBottomSheetDialog {
             @Override
             public void onClick(View v) {
                 VideoCommentRequestBean requestBean = new VideoCommentRequestBean();
-                if (StringUtil.isEmpty(mTextViewComment.getText().toString())) {
+                if (StringUtil.isEmpty(mEditTextComment.getText().toString())) {
                     Toast.makeText(getContext(), "请输入评论内容", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                requestBean.setContent(mTextViewComment.getText().toString());
+                requestBean.setContent(mEditTextComment.getText().toString());
                 requestBean.setId(SPUtils.getInstance(getContext()).getString("UserId"));
                 requestBean.setUserId(mUserId);
                 requestBean.setVideoId(mvideoId);
                 RetrofitClient.getRetrofitService().postVideoCommon(requestBean).enqueue(new Callback<VideoCommentResponseBean>() {
                     @Override
                     public void onResponse(Call<VideoCommentResponseBean> call, Response<VideoCommentResponseBean> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                        VideoCommentResponseBean commentResponseBean = response.body();
+                        if (commentResponseBean.getCode().equals("200")) {
                             Toast.makeText(getContext(), "评论成功", Toast.LENGTH_SHORT).show();
                             commentAdapter.notifyDataSetChanged();
                         } else {

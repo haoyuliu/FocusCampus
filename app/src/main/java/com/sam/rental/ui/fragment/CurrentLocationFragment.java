@@ -91,11 +91,12 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         RetrofitClient.getRetrofitService().loadHomeVideoListData(page, pageSize).enqueue(new Callback<VideoListBean>() {
             @Override
             public void onResponse(Call<VideoListBean> call, Response<VideoListBean> response) {
-                if (response.code() == 403) {
+                VideoListBean videoListBean = response.body();
+                if (videoListBean.getCode().equals("401")) {
                     startActivity(LoginActivity.class);
                     return;
                 }
-                if (response.code() == HttpURLConnection.HTTP_OK) {
+                if (videoListBean.getCode().equals("200")) {
                     mVideoList = response.body().getData();
                     if (mVideoList.size() == 0) {
                         toast("暂时没有数据");
@@ -136,7 +137,8 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
                                     .enqueue(new Callback<CommentListBean>() {
                                         @Override
                                         public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
-                                            if (response.code() == HttpURLConnection.HTTP_OK) {
+                                            CommentListBean commentListBean = response.body();
+                                            if (commentListBean.getCode().equals("200")) {
                                                 CommentDialog commentDialog = new CommentDialog();
                                                 commentDialog.setData(response.body().getData());
                                                 commentDialog.setVideoid(mVideoList.get(position).getVideoId());
@@ -192,6 +194,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
             // toast("关注暂停");
         }
     }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);

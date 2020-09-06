@@ -14,9 +14,6 @@ import com.sam.rental.ui.pager.GuidePagerAdapter;
 import butterknife.BindView;
 
 /**
- * author : Android 轮子哥
- * github : https://github.com/getActivity/AndroidProject
- * time   : 2019/09/21
  * desc   : APP 引导页
  */
 public final class GuideActivity extends MyActivity

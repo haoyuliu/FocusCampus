@@ -2,6 +2,7 @@ package com.sam.rental.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -106,12 +107,18 @@ public class PersonalHomeActivity extends MyActivity {
                 RetrofitClient.getRetrofitService().FocusUser(token, intent.getStringExtra("userId"), follow + "").enqueue(new Callback<FollowResponseBean>() {
                     @Override
                     public void onResponse(Call<FollowResponseBean> call, Response<FollowResponseBean> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
-                            toast(response.message());
+                        FollowResponseBean followResponseBean = response.body();
+                        if (Integer.parseInt(followResponseBean.getCode()) == HttpURLConnection.HTTP_OK) {
+                            Log.d("getFollowData", intent.getStringExtra("userId") + "userId");
+                            Log.d("getFollowData", follow + "点击");
+                            toast(followResponseBean.getMsg());
                             mPersonalHomeFocus.setText("已关注");
+                            follow = 0;
                         } else {
-                            toast(response.message());
+                            Log.d("getFollowData", follow + "点击");
+                            toast(followResponseBean.getMsg());
                             mPersonalHomeFocus.setText("关注");
+                            follow = 1;
                         }
 
                     }
@@ -120,6 +127,7 @@ public class PersonalHomeActivity extends MyActivity {
                     public void onFailure(Call<FollowResponseBean> call, Throwable t) {
                         toast(t.getMessage());
                         mPersonalHomeFocus.setText("关注");
+                        follow = 0;
                     }
                 });
             }
@@ -163,7 +171,8 @@ public class PersonalHomeActivity extends MyActivity {
                 .enqueue(new Callback<GetUserHomePagerMessageResponseBean>() {
                     @Override
                     public void onResponse(Call<GetUserHomePagerMessageResponseBean> call, Response<GetUserHomePagerMessageResponseBean> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                        GetUserHomePagerMessageResponseBean getUserHomePagerMessageResponseBean = response.body();
+                        if (Integer.parseInt(getUserHomePagerMessageResponseBean.getCode()) == HttpURLConnection.HTTP_OK) {
                             Glide.with(PersonalHomeActivity.this).load(response.body().getData().getHeadImg()).into(ivHead);
                             tvNickName.setText(response.body().getData().getNickName());
                             tvNickId.setText("ID:" + response.body().getData().getUserId() + "");
@@ -174,10 +183,13 @@ public class PersonalHomeActivity extends MyActivity {
                             mPersonalHomeFans.setText(response.body().getData().getFansCount() + "");
                             mPersonalHomeFollow.setText(response.body().getData().getFollowCount() + "");
                             follow = response.body().getData().getHasFollowed();
+                            Log.d("getFollowData", follow + "");
                             if (response.body().getData().getHasFollowed() == 0) {
                                 mPersonalHomeFocus.setText("关注");
+                                follow = 0;
                             } else {
                                 mPersonalHomeFocus.setText("已关注");
+                                follow = 1;
                             }
                         }
 
@@ -185,7 +197,8 @@ public class PersonalHomeActivity extends MyActivity {
 
                     @Override
                     public void onFailure(Call<GetUserHomePagerMessageResponseBean> call, Throwable t) {
-
+                        mPersonalHomeFocus.setText("关注");
+                        follow = 0;
                     }
                 });
     }

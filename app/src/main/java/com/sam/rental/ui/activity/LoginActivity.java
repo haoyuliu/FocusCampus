@@ -95,7 +95,7 @@ public final class LoginActivity extends MyActivity
     public void onLeftClick(View v) {
         // 跳转到主界面
         //startActivity(HomeActivity.class);
-        // finish();
+        finish();
         onBackPressed();
     }
 
@@ -111,12 +111,15 @@ public final class LoginActivity extends MyActivity
         switch (v.getId()) {
             //登录
             case R.id.btn_login_commit:
+                showDialog();
                 if (mPhoneView.getText().toString().length() != 11) {
                     toast(R.string.common_phone_input_error);
+                    hideDialog();
                     return;
                 }
                 if (StringUtil.isEmpty(mCodeView.getText().toString())) {
                     toast("请输入验证码");
+                    hideDialog();
                     return;
                 }
                 LoginRequestBean loginRequestBean = new LoginRequestBean();
@@ -134,6 +137,7 @@ public final class LoginActivity extends MyActivity
                                     EMClient.getInstance().login(response.body().getData().getHxuid(), response.body().getData().getHxpwd(), new EMCallBack() {
                                         @Override
                                         public void onSuccess() {
+                                            hideDialog();
                                             //  startActivity(HomeActivity.class);
                                             SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
                                             SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
@@ -148,16 +152,18 @@ public final class LoginActivity extends MyActivity
 
                                         @Override
                                         public void onError(int i, String s) {
+                                            hideDialog();
                                             toast("登录失败" + s.toString());
                                         }
 
                                         @Override
                                         public void onProgress(int i, String s) {
-
+                                            showDialog();
                                         }
                                     });
 
                                 } else {
+                                    hideDialog();
                                     toast("登录失败" + response.message());
                                 }
 
@@ -165,6 +171,7 @@ public final class LoginActivity extends MyActivity
 
                             @Override
                             public void onFailure(Call<LoginBean> call, Throwable t) {
+                                hideDialog();
                                 toast("登录失败" + t.getMessage().toString());
                             }
                         });

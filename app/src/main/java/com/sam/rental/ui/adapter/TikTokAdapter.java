@@ -127,7 +127,8 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 RetrofitClient.getRetrofitService().FocusUser(token, videos.get(position).getUserId() + "", 0 + "").enqueue(new Callback<FollowResponseBean>() {
                     @Override
                     public void onResponse(Call<FollowResponseBean> call, Response<FollowResponseBean> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                        FollowResponseBean followResponseBean = response.body();
+                        if (followResponseBean.getCode().equals("200")) {
                             holder.mFollowImageView.setVisibility(View.GONE);
                         } else {
                             holder.mFollowImageView.setVisibility(View.VISIBLE);
@@ -147,14 +148,13 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
     private void likeViewPostLike(boolean blike, int position) {
         HomeVideoLikeRequestBean homeVideoLikeRequestBean = new HomeVideoLikeRequestBean();
         homeVideoLikeRequestBean.setBlike(blike);
-        homeVideoLikeRequestBean.setVideoId(videos.get(position).getVideoId()+"");
+        homeVideoLikeRequestBean.setVideoId(videos.get(position).getVideoId() + "");
         //homeVideoLikeRequestBean.setUserId();
         RetrofitClient.getRetrofitService().postVideoLike(homeVideoLikeRequestBean).enqueue(new Callback<HomeVideoLikeResponseBean>() {
             @Override
             public void onResponse(Call<HomeVideoLikeResponseBean> call, Response<HomeVideoLikeResponseBean> response) {
-                if (response.code() == HttpURLConnection.HTTP_OK){
+                HomeVideoLikeResponseBean homeVideoLikeResponseBean = response.body();
 
-                }
             }
 
             @Override

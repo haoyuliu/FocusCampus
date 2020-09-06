@@ -1,13 +1,10 @@
 package com.sam.rental.ui.activity;
 
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 
 import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.sam.rental.R;
@@ -20,7 +17,6 @@ import com.sam.rental.ui.fragment.MessageFragment;
 import com.sam.rental.ui.fragment.MineFragment;
 import com.sam.rental.ui.fragment.RentalCarFragment;
 import com.sam.rental.utils.SPUtils;
-import com.superrtc.FrameEncryptor;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -40,7 +36,6 @@ public class HomeActivity extends MyActivity {
 
     @BindView(R.id.main_tab_content)
     FrameLayout mainTabContent;
-    // 底部
     @BindView(R.id.radioGroup)
     RadioGroup mRadioGroup;
     @BindView(R.id.rbHome)

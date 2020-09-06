@@ -3,6 +3,7 @@ package com.sam.rental.ui.activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.alibaba.sdk.android.vod.upload.model.UploadFileInfo;
 import com.alibaba.sdk.android.vod.upload.model.VodInfo;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.config.PictureSelectionConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.sam.rental.R;
@@ -29,6 +31,7 @@ import com.sam.rental.utils.SPUtils;
 import java.net.HttpURLConnection;
 import java.util.List;
 
+import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,6 +47,8 @@ public class UpLoadVedioActivity extends MyActivity {
     private Button mButtonUpLoad;
     private Button mButtonChiose;
     private TextView mTextViewAddress;
+    @BindView(R.id.video_title)
+    EditText mEditTextVideoDescrition;
     String path;
     private String uploadAddress;
     private String uploadAuth;
@@ -62,12 +67,13 @@ public class UpLoadVedioActivity extends MyActivity {
         UpLoadVideoRequestBean requestBean = new UpLoadVideoRequestBean();
         requestBean.setDescription("描述信息");
         requestBean.setFileName("ssss.mp4");
-        requestBean.setTitle("测试市场食品视频视屏视频视频1真的嫩嫩嗯嗯嗯嗯嗯嗯嗯");
+        requestBean.setTitle("测试信息新信息信心");
         RetrofitClient.getRetrofitService().getUpLoadVideoParams(SPUtils.getInstance(UpLoadVedioActivity.this).getString("token"), requestBean)
                 .enqueue(new Callback<UpLoadVideoResponseBean>() {
                     @Override
                     public void onResponse(Call<UpLoadVideoResponseBean> call, Response<UpLoadVideoResponseBean> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                        UpLoadVideoResponseBean upLoadVideoResponseBean = response.body();
+                        if (upLoadVideoResponseBean.getCode().equals("200")) {
 
                             uploadAddress = response.body().getData().getUploadAddress();
                             uploadAuth = response.body().getData().getUploadAuth();
@@ -95,6 +101,7 @@ public class UpLoadVedioActivity extends MyActivity {
                         .openGallery(PictureMimeType.ofVideo())
                         .maxVideoSelectNum(1)
                         .isCompress(true)
+                        .isCamera(false)
                         .loadImageEngine(GlideEngine.createGlideEngine())
                         .forResult(new OnResultCallbackListener<LocalMedia>() {
                             @Override
@@ -114,8 +121,13 @@ public class UpLoadVedioActivity extends MyActivity {
         mButtonUpLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (StringUtil.isEmpty(mEditTextVideoDescrition.getText().toString())) {
+                    toast("请添加视频描述信息");
+                    return;
+                }
                 if (StringUtil.isEmpty(mTextViewAddress.getText().toString())) {
                     toast("请选择视频");
+                    return;
                 }
                 upload();
             }
