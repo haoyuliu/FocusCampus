@@ -1,13 +1,22 @@
 package com.sam.rental.ui.fragment;
 
+import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.dueeeke.videoplayer.player.VideoView;
+import com.hjq.toast.ToastUtils;
+import com.sam.rental.BaseLazyFragment;
 import com.sam.rental.R;
 import com.sam.rental.adapter.ViewPagerLayoutManager;
 import com.sam.rental.bean.VideoListBean;
@@ -34,7 +43,7 @@ import retrofit2.Response;
 /**
  * 首页中的关注的人fragment
  */
-public class CurrentLocationFragment extends MyFragment<HomeActivity> {
+public class CurrentLocationFragment extends BaseLazyFragment {
     public static final String TAG = "CurrentLocationFragment";
     private int page = 1;
     private int pageSize = 20;
@@ -49,22 +58,25 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
     // 播放器
     private VideoView mVideoView;
 
+    @Nullable
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_current_location;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_current_location, null);
+        mRecyclerView = view.findViewById(R.id.follow_rv);
+        initView();
+        return view;
     }
 
-    @Override
-    protected void initView() {
+
+    private void initView() {
         Log.d(TAG, "InitView");
         mVideoView = new VideoView(getContext());
         mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
         mVideoView.setLooping(true);
         mController = new TikTokController(getContext());
         mVideoView.setVideoController(mController);
-        mRecyclerView = findViewById(R.id.follow_rv);
         // 获取数据
-        getVideoData(page);
+        //getVideoData(page);
         mRecyclerView.scrollToPosition(mIndex);
     }
 
@@ -82,31 +94,32 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         mCurPos = position;
     }
 
-    @Override
-    protected void initData() {
-
-    }
 
     private void getVideoData(int page) {
-        RetrofitClient.getRetrofitService().loadHomeVideoListData(page, pageSize).enqueue(new Callback<VideoListBean>() {
+
+        RetrofitClient.getRetrofitService().loadHomeFollowedVideoListData(SPUtils.getInstance(getContext()).getString("token"),
+                page).enqueue(new Callback<VideoListBean>() {
             @Override
             public void onResponse(Call<VideoListBean> call, Response<VideoListBean> response) {
+
+
                 VideoListBean videoListBean = response.body();
+                Log.d(TAG, response.code() + "" + response.body());
                 if (videoListBean.getCode().equals("401")) {
-                    startActivity(LoginActivity.class);
+                    //startActivity(LoginActivity.class);
                     return;
                 }
                 if (videoListBean.getCode().equals("200")) {
                     mVideoList = response.body().getData();
                     if (mVideoList.size() == 0) {
-                        toast("暂时没有数据");
+                        Toast.makeText(getContext(), "暂时没有数据", Toast.LENGTH_SHORT).show();
                     }
                     mTikTokAdapter = new TikTokAdapter(mVideoList);
                     ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), OrientationHelper.VERTICAL);
 
                     mRecyclerView.setLayoutManager(layoutManager);
                     mRecyclerView.setAdapter(mTikTokAdapter);
-                    Log.d("数据", response.code() + "" + response.body().getData().toString());
+                    Log.d(TAG, response.code() + "" + response.body().getData().toString());
                     layoutManager.setOnViewPagerListener(new OnViewPagerListener() {
                         @Override
                         public void onInitComplete() {
@@ -145,14 +158,14 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
                                                 commentDialog.setUserid(mVideoList.get(position).getUserId());
                                                 commentDialog.show(getChildFragmentManager(), "");
                                             } else {
-                                                toast("获取评论数据失败");
+                                                Toast.makeText(getContext(), "获取评论数据失败", Toast.LENGTH_SHORT).show();
                                             }
 
                                         }
 
                                         @Override
                                         public void onFailure(Call<CommentListBean> call, Throwable t) {
-                                            toast("获取评论数据失败");
+                                            Toast.makeText(getContext(), "获取评论数据失败", Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
@@ -160,7 +173,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
                         }
                     });
                 } else {
-                    toast("获取数据失败");
+                    Toast.makeText(getContext(), "获取评论数据失败", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -168,7 +181,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
 
             @Override
             public void onFailure(Call<VideoListBean> call, Throwable t) {
-                toast("获取视频数据失败");
+                Toast.makeText(getContext(), "获取评论数据失败", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -180,6 +193,13 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         super.setUserVisibleHint(isVisibleToUser);
         setVideoViewState(isVisibleToUser);
 
+    }
+
+    @Override
+    public void fetchData() {
+        Log.d(TAG, "getVideoData");
+        // 请求网络数据
+        getVideoData(page);
     }
 
     public void setVideoViewState(boolean isVisibleToUser) {

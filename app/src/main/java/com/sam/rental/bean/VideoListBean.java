@@ -25,6 +25,8 @@ public class VideoListBean {
     private Object traceId;
     private List<DataBean> data;
 
+
+
     public boolean isSuccess() {
         return success;
     }
