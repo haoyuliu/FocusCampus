@@ -170,9 +170,10 @@
                             android:paddingBottom="@dimen/dp_10">
 
                             <TextView
+                                android:id="@+id/tv_mine_zan"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="132"
+                                android:text="0"
                                 android:textSize="15sp" />
 
                             <TextView
@@ -193,9 +194,10 @@
                             android:paddingBottom="@dimen/dp_10">
 
                             <TextView
+                                android:id="@+id/tv_mine_fans"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="12"
+                                android:text="0"
                                 android:textSize="15sp" />
 
                             <TextView
@@ -216,9 +218,10 @@
                             android:paddingBottom="@dimen/dp_10">
 
                             <TextView
+                                android:id="@+id/tv_mine_focus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1"
+                                android:text="0"
                                 android:textSize="15sp" />
 
                             <TextView

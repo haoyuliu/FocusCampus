@@ -1,7 +1,10 @@
 package com.sam.rental.ui.activity;
 
 import android.view.View;
+import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.sam.rental.R;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyActivity;
@@ -82,14 +85,43 @@ public final class SettingActivity extends MyActivity
                 break;
             case R.id.sb_setting_exit:
                 if (true) {
-                    SPUtils.getInstance(SettingActivity.this).clear();
 
-                    startActivity(LoginActivity.class);
-                    // 进行内存优化，销毁除登录页之外的所有界面
-                    ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
+                    // 退出环信
+                    EMClient.getInstance().logout(true, new EMCallBack() {
+                        @Override
+                        public void onSuccess() {
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    SPUtils.getInstance(SettingActivity.this).clear();
+                                    startActivity(LoginActivity.class);
+                                    // 进行内存优化，销毁除登录页之外的所有界面
+                                    ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
+                                    Toast.makeText(SettingActivity.this, "您已退出登录！", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(int i, String s) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(SettingActivity.this, "退出失败！", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+
+                        @Override
+                        public void onProgress(int i, String s) {
+
+                        }
+                    });
+
                     return;
                 }
-                // 退出登录
                 break;
             default:
                 break;

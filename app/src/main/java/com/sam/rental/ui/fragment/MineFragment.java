@@ -10,11 +10,14 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.androidkun.xtablayout.XTabLayout;
 import com.bumptech.glide.Glide;
 import com.sam.rental.R;
 import com.sam.rental.aop.SingleClick;
 import com.sam.rental.common.MyFragment;
+import com.sam.rental.http.net.RetrofitClient;
+import com.sam.rental.http.response.GetUserHomePagerMessageResponseBean;
 import com.sam.rental.ui.activity.FocusActivity;
 import com.sam.rental.ui.activity.HomeActivity;
 import com.sam.rental.ui.activity.PersonalDataActivity;
@@ -24,9 +27,13 @@ import com.sam.rental.ui.adapter.CommPagerAdapter;
 import com.sam.rental.utils.SPUtils;
 import com.sam.rental.widget.CircleImageView;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * desc: 我的
@@ -53,6 +60,15 @@ public final class MineFragment extends MyFragment<HomeActivity> {
 
     @BindView(R.id.mine_sex_location)
     TextView mTextViewUserSexLocation;
+
+    @BindView(R.id.tv_mine_zan)
+    TextView mTextViewMineZan;
+
+    @BindView(R.id.tv_mine_fans)
+    TextView mTextViewMineFans;
+
+    @BindView(R.id.tv_mine_focus)
+    TextView mTextViewMineFocus;
 
     @BindView(R.id.mine_sex_image)
     ImageView mImageViewSex;
@@ -112,28 +128,49 @@ public final class MineFragment extends MyFragment<HomeActivity> {
     @Override
     protected void initData() {
         Log.d(TAG, "init_data");
-        SPUtils.getInstance(getContext()).getString("token");
-        SPUtils.getInstance(getContext()).getString("UserId");
-        SPUtils.getInstance(getContext()).getString("HeadImage");
-        SPUtils.getInstance(getContext()).getString("NickName");
-        SPUtils.getInstance(getContext()).getInt("userSex");
-        SPUtils.getInstance(getContext()).getString("userDesc");
-        SPUtils.getInstance(getContext()).getString("userBirthday");
-        SPUtils.getInstance(getContext()).getString("userLocation");
+        // 获取数据
+        String userId = SPUtils.getInstance(getContext()).getString("UserId");
+        if (!StringUtil.isEmpty(userId)) {
+            getMineFragmentData(userId);
+        }
+    }
 
-        Glide.with(getContext()).load(SPUtils.getInstance(getContext()).getString("HeadImage")).into(mHeadView);
-        mTextViewUserID.setText("ID:" + SPUtils.getInstance(getContext()).getString("UserId"));
-        mTextViewUserNickName.setText(SPUtils.getInstance(getContext()).getString("NickName"));
-        if (SPUtils.getInstance(getContext()).getInt("userSex") == 1) {
-            mTextViewUserSexLocation.setText("女");
-            mImageViewSex.setBackground(getResources().getDrawable(R.drawable.nv));
-        } else {
-            mTextViewUserSexLocation.setText("男");
-            mImageViewSex.setBackground(getResources().getDrawable(R.drawable.nan));
-        }
-        if (SPUtils.getInstance(getContext()).getString("userDesc") != null) {
-            mTextViewUserDesc.setText(SPUtils.getInstance(getContext()).getString("userDesc"));
-        }
+    private void getMineFragmentData(String userId) {
+        Log.d(TAG, "getMineFragmentData");
+        RetrofitClient.getRetrofitService().getPersonalHomeMessageParams(userId)
+                .enqueue(new Callback<GetUserHomePagerMessageResponseBean>() {
+                    @Override
+                    public void onResponse(Call<GetUserHomePagerMessageResponseBean> call, Response<GetUserHomePagerMessageResponseBean> response) {
+                        GetUserHomePagerMessageResponseBean getUserHomePagerMessageResponseBean = response.body();
+                        if (Integer.parseInt(getUserHomePagerMessageResponseBean.getCode()) == HttpURLConnection.HTTP_OK) {
+                            Glide.with(getActivity()).load(response.body().getData().getHeadImg()).into(mHeadView);
+                            mTextViewUserID.setText("ID:" + response.body().getData().getUserId() + "");
+                            mTextViewUserNickName.setText(response.body().getData().getNickName());
+
+                            if (response.body().getData().getUserDesc() != null) {
+                                mTextViewUserDesc.setText(response.body().getData().getUserDesc());
+                            } else {
+                                mTextViewUserDesc.setText("你还没有设置签名");
+                            }
+                            if (response.body().getData().getUserSex() == 1) {
+                                mTextViewUserSexLocation.setText("女");
+                                mImageViewSex.setBackground(getResources().getDrawable(R.drawable.nv));
+                            } else {
+                                mTextViewUserSexLocation.setText("男");
+                                mImageViewSex.setBackground(getResources().getDrawable(R.drawable.nan));
+                            }
+                            mTextViewMineZan.setText(response.body().getData().getLikesCount() + "");
+                            mTextViewMineFans.setText(response.body().getData().getFansCount() + "");
+                            mTextViewMineFocus.setText(response.body().getData().getFollowCount() + "");
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetUserHomePagerMessageResponseBean> call, Throwable t) {
+
+                    }
+                });
     }
 
     @SingleClick

@@ -8,11 +8,18 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.billy.android.swipe.SmartSwipeBack;
+import com.bumptech.glide.Glide;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
+import com.hjq.http.EasyConfig;
+import com.hjq.http.config.IRequestServer;
+import com.hjq.toast.ToastInterceptor;
+import com.hjq.toast.ToastUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.domain.EaseAvatarOptions;
+import com.hyphenate.easeui.domain.EaseUser;
 import com.sam.rental.R;
 import com.sam.rental.action.SwipeAction;
 import com.sam.rental.helper.ActivityStackManager;
@@ -22,10 +29,6 @@ import com.sam.rental.http.server.TestServer;
 import com.sam.rental.other.AppConfig;
 import com.sam.rental.ui.activity.CrashActivity;
 import com.sam.rental.ui.activity.HomeActivity;
-import com.hjq.http.EasyConfig;
-import com.hjq.http.config.IRequestServer;
-import com.hjq.toast.ToastInterceptor;
-import com.hjq.toast.ToastUtils;
 import com.sam.umeng.UmengClient;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -47,6 +50,10 @@ public final class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initSDK(this);
+        initEaseUi();
+    }
+
+    private void initEaseUi() {
         EMOptions options = new EMOptions();
         // 设置Appkey，如果配置文件已经配置，这里可以不用设置
         // options.setAppKey("lzan13#hxsdkdemo");
@@ -73,9 +80,14 @@ public final class MyApplication extends Application {
 
         // 调用初始化方法初始化sdk
         EaseUI.getInstance().init(this, options);
-
+        //设置头像圆角
+        EaseAvatarOptions easeAvatarOptions = new EaseAvatarOptions();
+        easeAvatarOptions.setAvatarShape(1);
+        EaseUI.getInstance().setAvatarOptions(easeAvatarOptions);
+        // 设置头像和昵称
+        //EaseUI.getInstance().setUserProfileProvider(MyUserProvider.getInstance());
         // 设置开启debug模式
-      //  EMClient.getInstance().setDebugMode(true);
+        //  EMClient.getInstance().setDebugMode(true);
     }
 
     /**

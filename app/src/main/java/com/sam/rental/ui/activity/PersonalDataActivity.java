@@ -103,12 +103,11 @@ public final class PersonalDataActivity extends MyActivity {
 
         String address = mProvince + mCity + mArea;
         mAddressView.setRightText(address);
-        //Glide.with(PersonalDataActivity.this).load(SPUtils.getInstance(PersonalDataActivity.this).getString("HeadImage"));
         mNameView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("NickName"));
         if (SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc") != null) {
             mSignatureView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc"));
         }
-        if (SPUtils.getInstance(PersonalDataActivity.this).getInt("userSex") == 1) {
+        if (SPUtils.getInstance(PersonalDataActivity.this).getString("userSex").equals("1")) {
             mSexView.setRightText("女");
         } else {
             mSexView.setRightText("男");
