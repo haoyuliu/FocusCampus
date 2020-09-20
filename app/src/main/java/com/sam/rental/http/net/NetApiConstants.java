@@ -82,4 +82,49 @@ public class NetApiConstants {
      * 获取指定用户个人资料
      */
     public static final String GET_USER_HOME_MESSAGE = "user/getUserHomePage";
+    /**
+     * 获取车型列表
+     */
+    public static final String GET_CAR_TYPE_LIST = "car/carTypeList";
+    /**
+     * 获取品牌列表
+     */
+    public static final String GET_CAR_BRAND_LIST = "car/getCarBrandList";
+    /**
+     * 获取租车主页信息
+     */
+    public static final String GET_RENTAL_CAR_HOME_MESSAGE = "car/getCarHomeInfo";
+    /**
+     * 获取可用车辆列表
+     */
+    public static final String GET_CAR_LIST = "car/getCarList";
+    /**
+     * 获取用户全部优惠券列表
+     */
+    public static final String GET_USER_COUPON_LIST = "coupon/getCouponList";
+    /**
+     * 获取订单确认页信息
+     */
+    public static final String GET_USER_ORDER_CONFIRM_INFO = "order/getConfirmInfo";
+    /**
+     * 获取用户点击确认订单(返回999提示用户进行认证)
+     */
+    public static final String GET_USER_CONFIRM_ORDER = "order/confirmOrder";
+    /**
+     * 获取订单列表
+     */
+    public static final String GET_USER_ORDER_MESSAGE = "order/list";
+    /**
+     * 获取唤起支付sdk的信息
+     */
+    public static final String GET_USER_PAY_ORDER = "order/payOrder";
+    /**
+     * 根据经纬度获取城市id
+     */
+    public static final String GET_ADDRESS_BY_LL = "pickUpPoint/getAddressByLL";
+    /**
+     * 根据城市编码获取车辆门店列表
+     */
+    public static final String GET_PICKUP_POINTLIST_BY_CITY = "pickUpPoint/getPickUpPointListByCity";
+
 }

@@ -13,6 +13,10 @@ import com.sam.rental.http.request.GetUpLoadImageRequestBean;
 import com.sam.rental.http.request.upLoadAfterRequestBean;
 import com.sam.rental.http.response.CommentListBean;
 import com.sam.rental.http.response.FollowResponseBean;
+import com.sam.rental.http.response.GetCarListResponseBean;
+import com.sam.rental.http.response.GetCarTypeListResponseBean;
+import com.sam.rental.http.response.GetRentalCarHomeMessageResponseBean;
+import com.sam.rental.http.response.GetUserCouponListResponseBean;
 import com.sam.rental.http.response.GetUserHomePagerMessageResponseBean;
 import com.sam.rental.http.response.HomeVideoLikeResponseBean;
 import com.sam.rental.http.response.LoginBean;
@@ -158,4 +162,93 @@ public interface RetrofitApi {
      */
     @GET(NetApiConstants.GET_USER_HOME_MESSAGE)
     Call<GetUserHomePagerMessageResponseBean> getPersonalHomeMessageParams(@Query("userId") String userId);
+
+    /**
+     * 获取车型列表的接口
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_CAR_TYPE_LIST)
+    Call<GetCarTypeListResponseBean> getCarTypeList();
+
+    /**
+     * 获取品牌列表的接口
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_CAR_BRAND_LIST)
+    Call<GetCarTypeListResponseBean> getCarBrandList();
+
+    /**
+     * 获取租车主页的接口
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_RENTAL_CAR_HOME_MESSAGE)
+    Call<GetRentalCarHomeMessageResponseBean> getRentalCarHomeMessage(@Query("cityCode") String cityCode);
+
+    /**
+     * 获取可用车辆列表的接口
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_CAR_LIST)
+    Call<GetCarListResponseBean> getCarList(@Query("cityCode") String cityCode);
+
+    /**
+     * 获取用户全部优惠券列表(包括可用非可用)
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_USER_COUPON_LIST)
+    Call<GetUserCouponListResponseBean> getUserCouponList(@Header("Header") String header);
+
+    /**
+     * 获取订单确认页信息
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_USER_ORDER_CONFIRM_INFO)
+    Call<GetUserCouponListResponseBean> getUserOrderConfirmInfo(@Header("Header") String header);
+
+    /**
+     * 用户点击确认订单
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_USER_CONFIRM_ORDER)
+    Call<GetUserCouponListResponseBean> getUserConfirmOrder(@Header("Header") String header);
+
+    /**
+     * 获取订单列表
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_USER_ORDER_MESSAGE)
+    Call<GetUserCouponListResponseBean> getUserOrderInfo(@Query("userId") String userId);
+
+    /**
+     * 获取唤起支付sdk的信息
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_USER_PAY_ORDER)
+    Call<GetUserCouponListResponseBean> getUserPayOrder(@Query("userId") String userId);
+
+    /**
+     * 根据经纬度获取城市id
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_ADDRESS_BY_LL)
+    Call<GetUserCouponListResponseBean> getCityIdByLl(@Query("userId") String userId);
+
+    /**
+     * 根据城市编码获取车辆门店列表
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_PICKUP_POINTLIST_BY_CITY)
+    Call<GetUserCouponListResponseBean> getPickUpPointListByCity(@Query("userId") String userId);
+
 }
