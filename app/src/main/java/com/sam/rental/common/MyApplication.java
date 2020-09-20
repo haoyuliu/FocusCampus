@@ -8,14 +8,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.billy.android.swipe.SmartSwipeBack;
-import com.bumptech.glide.Glide;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
 import com.hjq.http.EasyConfig;
 import com.hjq.http.config.IRequestServer;
 import com.hjq.toast.ToastInterceptor;
 import com.hjq.toast.ToastUtils;
-import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseAvatarOptions;
@@ -46,11 +44,18 @@ import okhttp3.OkHttpClient;
  */
 public final class MyApplication extends Application {
 
+    private static MyApplication mInstance;
+
     @Override
     public void onCreate() {
+        mInstance = this;
         super.onCreate();
         initSDK(this);
         initEaseUi();
+    }
+
+    public static MyApplication getInstance() {
+        return mInstance;
     }
 
     private void initEaseUi() {
@@ -85,7 +90,15 @@ public final class MyApplication extends Application {
         easeAvatarOptions.setAvatarShape(1);
         EaseUI.getInstance().setAvatarOptions(easeAvatarOptions);
         // 设置头像和昵称
-        //EaseUI.getInstance().setUserProfileProvider(MyUserProvider.getInstance());
+        EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
+            @Override
+            public EaseUser getUser(String username) {
+                EaseUser easeUser = new EaseUser(username);
+                easeUser.setNickname("李四");
+                easeUser.setAvatar("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600016679561&di=75d0d27a11a97ff7cfa15842a2a0b3ba&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F05%2F00%2F01300000194285122188000535877.jpg");
+                return easeUser;
+            }
+        });
         // 设置开启debug模式
         //  EMClient.getInstance().setDebugMode(true);
     }

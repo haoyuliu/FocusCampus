@@ -94,7 +94,8 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         RetrofitClient.getRetrofitService().loadHomeVideoListData(pageIndex, pageSize).enqueue(new Callback<VideoListBean>() {
             @Override
             public void onResponse(Call<VideoListBean> call, Response<VideoListBean> response) {
-                if (response.code() == HttpURLConnection.HTTP_OK) {
+                VideoListBean listBean = response.body();
+                if (listBean.getCode().equals("200")) {
                     Log.d("RecommendFragment", response.body().getData().toString());
                     mVideoList = response.body().getData();
                     if (mVideoList.size() == 0) {

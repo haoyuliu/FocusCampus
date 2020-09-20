@@ -18,6 +18,8 @@ public class RetrofitClient {
         // 这个地方添加日志打印的拦截，便于查看请求和响应的数据
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
+                .addNetworkInterceptor(new RequestLoggerInterceptor())
+                .addInterceptor(new ResponseLogInterceptor())
                 .build();
         //Builder设计模式
         Retrofit retrofit = new Retrofit.Builder()

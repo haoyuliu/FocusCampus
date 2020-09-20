@@ -908,11 +908,16 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             //set extension
             chatFragmentHelper.onSetMessageAttributes(message);
         }
-        if (chatType == EaseConstant.CHATTYPE_GROUP){
+        Intent intent = getActivity().getIntent();
+        String userId = intent.getStringExtra("userId");
+        message.setAttribute("nickName", "李思思");
+        message.setAttribute("headPic", "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600016679561&di=75d0d27a11a97ff7cfa15842a2a0b3ba&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F05%2F00%2F01300000194285122188000535877.jpg");
+        message.setAttribute("userId", "368415507088539648");
+        /*if (chatType == EaseConstant.CHATTYPE_GROUP){
             message.setChatType(ChatType.GroupChat);
         }else if(chatType == EaseConstant.CHATTYPE_CHATROOM){
             message.setChatType(ChatType.ChatRoom);
-        }
+        }*/
 
         message.setMessageStatusCallback(messageStatusCallback);
 

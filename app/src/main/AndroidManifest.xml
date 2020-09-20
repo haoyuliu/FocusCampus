@@ -42,7 +42,12 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:supportsRtl,android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.RentalCarOrderActivity"></activity>
+        <activity android:name=".ui.activity.LowPriceCarActivity"></activity>
+        <activity android:name=".ui.activity.CarDetailActivity" />
+        <activity android:name=".ui.activity.OrderDetailActivity" />
+        <activity android:name=".ui.activity.UpLoadCertificatesActivity" />
+        <activity android:name=".ui.activity.IdentityAuthenticationActivity" />
+        <activity android:name=".ui.activity.RentalCarOrderActivity" />
         <activity android:name=".ui.activity.OrderPayActivity" />
         <activity android:name=".ui.activity.OrderConfirmationActivity" />
         <activity android:name=".ui.activity.ChoiceCarActivity" />

@@ -45,7 +45,7 @@ public class OrderConfirmationActivity extends MyActivity {
         mButtonConfirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(OrderPayActivity.class);
+                startActivity(IdentityAuthenticationActivity.class);
             }
         });
     }

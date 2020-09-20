@@ -1,6 +1,6 @@
 package com.sam.rental.ui.activity;
 
-import android.util.Log;
+import android.content.Intent;
 import android.view.View;
 
 import com.hyphenate.chat.EMMessage;
@@ -24,8 +24,10 @@ public class ChatActivity extends MyActivity implements EaseChatFragment.EaseCha
     @Override
     protected void initView() {
         //use EaseChatFratFragment
+
         EaseChatFragment chatFragment = new EaseChatFragment();
-        chatFragment.setChatFragmentHelper(this);
+        Intent intent = getIntent();
+        String userId = intent.getStringExtra("userId");
         // pass parameters to chat fragment
         chatFragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().add(R.id.layout_chat, chatFragment).commit();
@@ -41,14 +43,12 @@ public class ChatActivity extends MyActivity implements EaseChatFragment.EaseCha
         return false;
     }
 
+
     @Override
     public void onSetMessageAttributes(EMMessage message) {
-
-        //设置要发送扩展消息用户昵称
-        message.setAttribute("name", "nike");
-        //设置要发送扩展消息用户头像
-        message.setAttribute("image", "https://c-ssl.duitang.com/uploads/item/202006/08/20200608163837_GeLkP.thumb.1000_0.jpeg");
-        Log.d(TAG, "设置扩展属性成功" + message);
+        /*message.setAttribute("nickName", "李思思");
+        message.setAttribute("headPic", "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600016679561&di=75d0d27a11a97ff7cfa15842a2a0b3ba&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F05%2F00%2F01300000194285122188000535877.jpg");
+        message.setAttribute("userId", "22");*/
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ChatActivity extends MyActivity implements EaseChatFragment.EaseCha
 
     @Override
     public void onAvatarClick(String username) {
-        Log.d(TAG, "userNmae" + username);
+
     }
 
     @Override
