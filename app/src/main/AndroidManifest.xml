@@ -42,7 +42,8 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:supportsRtl,android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.LowPriceCarActivity"></activity>
+        <activity android:name=".ui.activity.CouponListActivity"></activity>
+        <activity android:name=".ui.activity.LowPriceCarActivity" />
         <activity android:name=".ui.activity.CarDetailActivity" />
         <activity android:name=".ui.activity.OrderDetailActivity" />
         <activity android:name=".ui.activity.UpLoadCertificatesActivity" />
