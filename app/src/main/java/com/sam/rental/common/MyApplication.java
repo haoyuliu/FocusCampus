@@ -18,6 +18,7 @@ import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.domain.EaseUser;
+import com.qiniu.pili.droid.shortvideo.PLShortVideoEnv;
 import com.sam.rental.R;
 import com.sam.rental.action.SwipeAction;
 import com.sam.rental.helper.ActivityStackManager;
@@ -52,6 +53,11 @@ public final class MyApplication extends Application {
         super.onCreate();
         initSDK(this);
         initEaseUi();
+        initPLShortVideo();
+    }
+
+    private void initPLShortVideo() {
+        PLShortVideoEnv.init(getApplicationContext());
     }
 
     public static MyApplication getInstance() {

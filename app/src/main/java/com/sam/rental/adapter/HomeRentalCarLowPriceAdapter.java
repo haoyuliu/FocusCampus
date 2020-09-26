@@ -1,6 +1,7 @@
 package com.sam.rental.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.sam.rental.R;
 import com.sam.rental.bean.FansBean;
 import com.sam.rental.http.response.GetRentalCarHomeMessageResponseBean;
+import com.sam.rental.ui.activity.LowPriceCarActivity;
 import com.sam.rental.ui.adapter.BaseRvAdapter;
 import com.sam.rental.ui.adapter.BaseRvViewHolder;
 
@@ -20,11 +22,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Interceptor;
 
 /**
  * description
+ * 获取低价车型数据
  */
-public class HomeRentalCarLowPriceAdapter extends BaseRvAdapter<GetRentalCarHomeMessageResponseBean.DataBean.LowPriceCarBean, HomeRentalCarLowPriceAdapter.RentalCarViewHolder> {
+public class HomeRentalCarLowPriceAdapter extends BaseRvAdapter<GetRentalCarHomeMessageResponseBean.DataBean.LowPriceCarBean, HomeRentalCarLowPriceAdapter.RentalCarViewHolder> implements View.OnClickListener {
 
 
     public HomeRentalCarLowPriceAdapter(Context context, List<GetRentalCarHomeMessageResponseBean.DataBean.LowPriceCarBean> lowPriceCar) {
@@ -43,7 +47,14 @@ public class HomeRentalCarLowPriceAdapter extends BaseRvAdapter<GetRentalCarHome
     @Override
     public RentalCarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_rental_car_home, parent, false);
+        view.setOnClickListener(this);
         return new RentalCarViewHolder(view);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(context, LowPriceCarActivity.class);
+        context.startActivity(intent);
     }
 
     public class RentalCarViewHolder extends BaseRvViewHolder {

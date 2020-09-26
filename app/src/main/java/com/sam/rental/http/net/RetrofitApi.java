@@ -13,6 +13,7 @@ import com.sam.rental.http.request.GetUpLoadImageRequestBean;
 import com.sam.rental.http.request.upLoadAfterRequestBean;
 import com.sam.rental.http.response.CommentListBean;
 import com.sam.rental.http.response.FollowResponseBean;
+import com.sam.rental.http.response.GetCarBrandListResponseBean;
 import com.sam.rental.http.response.GetCarListResponseBean;
 import com.sam.rental.http.response.GetCarTypeListResponseBean;
 import com.sam.rental.http.response.GetRentalCarHomeMessageResponseBean;
@@ -177,7 +178,7 @@ public interface RetrofitApi {
      * @return
      */
     @GET(NetApiConstants.GET_CAR_BRAND_LIST)
-    Call<GetCarTypeListResponseBean> getCarBrandList();
+    Call<GetCarBrandListResponseBean> getCarBrandList();
 
     /**
      * 获取租车主页的接口

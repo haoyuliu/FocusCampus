@@ -1,9 +1,5 @@
 package com.sam.rental.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import com.sam.rental.R;
 import com.sam.rental.common.MyActivity;
 
