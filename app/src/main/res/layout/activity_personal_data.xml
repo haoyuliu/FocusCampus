@@ -19,7 +19,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.sam.rental.widget.CircleImageView
+        <com.sam.rentalcar.widget.CircleImageView
             android:id="@+id/iv_person_data_avatar"
             android:layout_width="80dp"
             android:layout_height="80dp"

@@ -19,7 +19,7 @@
         android:progressDrawable="@drawable/bg_progress_gradient"
         android:visibility="gone" />
 
-    <com.sam.rental.widget.HintLayout
+    <com.sam.rentalcar.widget.HintLayout
         android:id="@+id/hl_browser_hint"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -39,6 +39,6 @@
 
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    </com.sam.rental.widget.HintLayout>
+    </com.sam.rentalcar.widget.HintLayout>
 
 </LinearLayout>

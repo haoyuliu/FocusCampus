@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lineVisible="false"
+        app:title="发布"
+        app:titleSize="18sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15.5dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@null"
+        android:hint="此时你想说点什么(最多20字)"
+        android:maxLines="2" />
+
+    <SurfaceView
+        android:id="@+id/video"
+        android:layout_width="140dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="15.5dp"
+        android:layout_marginTop="@dimen/dp_40" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#1E88E5"
+        android:maxHeight="5dp"
+        android:minHeight="5dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/upload_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15.dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="15.5dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/shape_confirm_order"
+        android:text="发布"
+        android:textColor="@color/white" />
+
+</LinearLayout>

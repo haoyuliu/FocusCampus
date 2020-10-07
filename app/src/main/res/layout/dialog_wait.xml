@@ -20,7 +20,7 @@
         android:minHeight="80dp"
         android:orientation="vertical">
 
-        <com.sam.rental.widget.ProgressView
+        <com.sam.rentalcar.widget.ProgressView
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:barColor="@color/color_check_home"

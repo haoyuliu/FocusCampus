@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sam.rental">
+    package="com.sam.rentalcar">
     <!-- Required -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,8 +26,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 安装包的权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--短视频-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 短视频 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
@@ -45,7 +44,11 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:supportsRtl,android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".ui.activity.CouponListActivity"></activity>
+        <activity android:name=".ui.activity.RentalCarActivity"></activity>
+        <activity android:name=".video.VideoEditActivity" />
+        <activity android:name=".video.PlaybackActivity" />
+        <activity android:name=".video.VideoRecordActivity" />
+        <activity android:name=".ui.activity.CouponListActivity" />
         <activity android:name=".ui.activity.LowPriceCarActivity" />
         <activity android:name=".ui.activity.CarDetailActivity" />
         <activity android:name=".ui.activity.OrderDetailActivity" />
