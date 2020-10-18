@@ -8,15 +8,8 @@
     android:orientation="vertical"
     tools:context=".ui.activity.ChoiceCarActivity">
 
-    <include layout="@layout/item_choice_car" />
-
-    <include layout="@layout/item_choice_car" />
-
-    <include layout="@layout/item_choice_car" />
-
-    <include layout="@layout/item_choice_car" />
-
-    <include layout="@layout/item_choice_car" />
-
-    <include layout="@layout/item_choice_car" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/car_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

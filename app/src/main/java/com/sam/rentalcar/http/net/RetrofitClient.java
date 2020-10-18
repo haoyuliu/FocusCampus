@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitClient {
     // 单例
-    private static com.sam.rentalcar.http.net.RetrofitApi retrofitInstance;
+    private static RetrofitApi retrofitInstance;
 
     // 如果需要设置其他信息，可以通过okhttpclient 进行设置
     static {
@@ -33,7 +33,7 @@ public class RetrofitClient {
         retrofitInstance = retrofit.create(com.sam.rentalcar.http.net.RetrofitApi.class);
     }
 
-    public static com.sam.rentalcar.http.net.RetrofitApi getRetrofitService() {
+    public static RetrofitApi getRetrofitService() {
         return retrofitInstance;
     }
 }

@@ -59,16 +59,6 @@ public final class SplashActivity extends MyActivity {
         if (true) {
             return;
         }
-        // 获取用户信息
-        EasyHttp.post(this)
-                .api(new UserInfoApi())
-                .request(new HttpCallback<HttpData<UserInfoBean>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<UserInfoBean> data) {
-
-                    }
-                });
     }
 
     @Override

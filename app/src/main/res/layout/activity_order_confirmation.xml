@@ -31,7 +31,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/iv_car"
+                    android:id="@+id/iv_confirm_car"
                     android:layout_width="95dp"
                     android:layout_height="95dp"
                     android:layout_marginLeft="15dp"
@@ -42,11 +42,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="13dp"
-                    android:layout_toRightOf="@id/iv_car"
+                    android:layout_toRightOf="@id/iv_confirm_car"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_confirm_car_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="别克英朗"
@@ -54,6 +55,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_car_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -171,6 +173,7 @@
                 app:bar_lineVisible="false" />
 
             <com.sam.widget.layout.SettingBar
+                android:id="@+id/car_rental_fee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:bar_leftColor="#666666"
@@ -180,6 +183,7 @@
                 app:bar_rightText="￥4502" />
 
             <com.sam.widget.layout.SettingBar
+                android:id="@+id/car_base_fee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:bar_leftColor="#666666"
@@ -197,6 +201,7 @@
                 app:bar_lineVisible="false" />
 
             <com.sam.widget.layout.SettingBar
+                android:id="@+id/setting_bar_coupons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:bar_leftColor="#666666"
@@ -348,9 +353,9 @@
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_marginRight="14dp"
             android:layout_marginBottom="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10"
             android:background="@drawable/shape_confirm_order"
             android:text="确认订单"
             android:textColor="@color/white"

@@ -23,6 +23,7 @@ public class CouponListActivity extends MyActivity {
 
     @BindView(R.id.rv_coupon)
     RecyclerView mRecyclerView;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_coupon_list;
@@ -30,7 +31,7 @@ public class CouponListActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
     @Override
@@ -41,15 +42,15 @@ public class CouponListActivity extends MyActivity {
             public void onResponse(Call<GetUserCouponListResponseBean> call, Response<GetUserCouponListResponseBean> response) {
                 GetUserCouponListResponseBean couponListResponseBean = response.body();
                 if (couponListResponseBean.getCode().equals("200")) {
-                    RentalCarCouponListAdapter adapter = new RentalCarCouponListAdapter(CouponListActivity.this,couponListResponseBean.getData());
+                    RentalCarCouponListAdapter adapter = new RentalCarCouponListAdapter(CouponListActivity.this, couponListResponseBean.getData());
                     mRecyclerView.setAdapter(adapter);
                 }
-
+                toast("获取数据失败");
             }
 
             @Override
             public void onFailure(Call<GetUserCouponListResponseBean> call, Throwable t) {
-
+                toast("获取数据失败");
             }
         });
     }

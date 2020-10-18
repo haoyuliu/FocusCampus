@@ -4,14 +4,22 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.adapter.ConstellationAdapter;
+import com.sam.rentalcar.adapter.GetCarListAdapter;
 import com.sam.rentalcar.adapter.ListDropDownAdapter;
 import com.sam.rentalcar.common.MyActivity;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.http.response.GetCarBrandListResponseBean;
+import com.sam.rentalcar.http.response.GetCarListResponseBean;
 import com.sam.rentalcar.http.response.GetCarTypeListResponseBean;
+import com.sam.rentalcar.ui.adapter.ChoiceCarAdapter;
 import com.sam.rentalcar.widget.DropDownMenu.DropDownMenu;
+
+import org.w3c.dom.NamedNodeMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +48,19 @@ public class ChoiceCarActivity extends MyActivity {
     private List<String> carBrandsList = new ArrayList<String>();
     private String carPrices[] = {"默认", "价格升序", "价格降序"};
 
+    private RecyclerView mRecyclerView;
+    private GetCarListAdapter mGetCarListAdapter;
     private int constellationPosition = 0;
+
+    private String brandIds;
+    private int pickUpId = 1;
+    private String startDate;
+    private String endDate;
+    private int carType = 1;
+    private String brandId;
+    private long carId = 1;
+    private int order = 0;
+
 
     @Override
     protected int getLayoutId() {
@@ -81,12 +101,40 @@ public class ChoiceCarActivity extends MyActivity {
 
         //init dropdownview
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
+
+        mRecyclerView = contentView.findViewById(R.id.car_list);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(ChoiceCarActivity.this));
     }
 
     @Override
     protected void initData() {
+        // 获取车型
         getCarTypeList();
+        // 获取品牌
         getCarBrandList();
+        // 获取选车页面数据
+        getChoiceCarData(brandIds, pickUpId, startDate, endDate, carType, brandId, carId, order);
+    }
+
+    private void getChoiceCarData(String brandIds, int pickUpId, String startDate, String endDate, int carType, String brandId, long carId, int order) {
+        RetrofitClient.getRetrofitService().getCarList(brandIds, pickUpId, startDate, endDate, carType, brandId, carId, order).enqueue(new Callback<GetCarListResponseBean>() {
+            @Override
+            public void onResponse(Call<GetCarListResponseBean> call, Response<GetCarListResponseBean> response) {
+                GetCarListResponseBean getCarListResponseBean = response.body();
+                if (getCarListResponseBean.getCode().equals("200")) {
+                    if (getCarListResponseBean.getData().size() == 0) {
+                        toast("暂无数据");
+                    }
+                    mGetCarListAdapter = new GetCarListAdapter(ChoiceCarActivity.this, getCarListResponseBean.getData());
+                    mRecyclerView.setAdapter(mGetCarListAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetCarListResponseBean> call, Throwable t) {
+                toast("获取数据失败");
+            }
+        });
     }
 
     private void getCarBrandList() {

@@ -17,6 +17,7 @@ import com.sam.rentalcar.http.response.GetCarBrandListResponseBean;
 import com.sam.rentalcar.http.response.GetCarListResponseBean;
 import com.sam.rentalcar.http.response.GetCarTypeListResponseBean;
 import com.sam.rentalcar.http.response.GetRentalCarHomeMessageResponseBean;
+import com.sam.rentalcar.http.response.GetUserConfirmInfoResponseBean;
 import com.sam.rentalcar.http.response.GetUserCouponListResponseBean;
 import com.sam.rentalcar.http.response.GetUserHomePagerMessageResponseBean;
 import com.sam.rentalcar.http.response.HomeVideoLikeResponseBean;
@@ -194,7 +195,7 @@ public interface RetrofitApi {
      * @return
      */
     @GET(NetApiConstants.GET_CAR_LIST)
-    Call<GetCarListResponseBean> getCarList(@Query("cityCode") String cityCode);
+    Call<GetCarListResponseBean> getCarList(@Query("brandIds") String brandIds, @Query("pickUpId") int pickUpId, @Query("startDate") String startDate, @Query("endDate") String endDate, @Query("carType") Integer carType, @Query("brandId") String brandId, @Query("carId") Long carId, @Query("order") Integer order);
 
     /**
      * 获取用户全部优惠券列表(包括可用非可用)
@@ -210,7 +211,7 @@ public interface RetrofitApi {
      * @return
      */
     @GET(NetApiConstants.GET_USER_ORDER_CONFIRM_INFO)
-    Call<GetUserCouponListResponseBean> getUserOrderConfirmInfo(@Header("Header") String header);
+    Call<GetUserConfirmInfoResponseBean> getUserOrderConfirmInfo(@Header("Header") String header, @Query("carId") int carId, @Query("days") int days);
 
     /**
      * 用户点击确认订单
