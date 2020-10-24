@@ -1,4 +1,4 @@
-package com.sam.rentalcar.ui.fragment;
+package com.sam.rentalcar.videoplayer;
 
 import android.os.Bundle;
 
@@ -54,7 +54,7 @@ public class PersonalLoveFragment extends MyFragment<HomeActivity> {
                     public void onResponse(Call<UserProductionOrLoveBean> call, Response<UserProductionOrLoveBean> response) {
                         UserProductionOrLoveBean productionOrLoveBean = response.body();
                         if (productionOrLoveBean.getCode().equals("200")) {
-                            GridVideoAdapter fansAdapter = new GridVideoAdapter(getContext(), response.body().getData());
+                            PersonLoveGridVideoAdapter fansAdapter = new PersonLoveGridVideoAdapter(response.body().getData());
                             mPersonalLoveRecyclerView.setAdapter(fansAdapter);
                         } else {
                             toast("获取数据失败");

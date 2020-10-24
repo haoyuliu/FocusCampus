@@ -14,6 +14,8 @@ import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.androidkun.xtablayout.XTabLayout;
 import com.bumptech.glide.Glide;
 import com.sam.rentalcar.R;
+import com.sam.rentalcar.videoplayer.PersonalLoveFragment;
+import com.sam.rentalcar.videoplayer.PersonalProductionFragment;
 import com.sam.rentalcar.aop.SingleClick;
 import com.sam.rentalcar.common.MyFragment;
 import com.sam.rentalcar.http.net.RetrofitClient;

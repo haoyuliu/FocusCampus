@@ -1,8 +1,8 @@
-package com.sam.rentalcar.widget.viewpagerlayoutmanager;
+package com.sam.rentalcar.videoplayer;
 
 
 /**
- * create by libo
+ * create by sam
  * create on 2018/11/22
  * description
  */

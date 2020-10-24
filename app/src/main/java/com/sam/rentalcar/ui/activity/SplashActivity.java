@@ -1,8 +1,10 @@
 package com.sam.rentalcar.ui.activity;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.os.Handler;
 import android.view.View;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -10,6 +12,8 @@ import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.XXPermissions;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.common.MyActivity;
 import com.sam.rentalcar.http.model.HttpData;
@@ -17,15 +21,14 @@ import com.sam.rentalcar.http.request.UserInfoApi;
 import com.sam.rentalcar.http.response.UserInfoBean;
 import com.sam.rentalcar.other.AppConfig;
 
+import java.util.List;
+
 import butterknife.BindView;
 
 /**
  * desc   : 闪屏界面
  */
 public final class SplashActivity extends MyActivity {
-
-    @BindView(R.id.iv_splash_lottie)
-    LottieAnimationView mLottieView;
 
     @BindView(R.id.tv_splash_debug)
     View mDebugView;
@@ -37,15 +40,22 @@ public final class SplashActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        // 设置动画监听
-        mLottieView.addAnimatorListener(new AnimatorListenerAdapter() {
+        new Handler().postDelayed(() -> {
+            // 权限的申请
 
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                startActivity(HomeActivity.class);
-                finish();
-            }
-        });
+            XXPermissions.with(this).permission(Manifest.permission.CAMERA).request(new OnPermission() {
+                @Override
+                public void hasPermission(List<String> granted, boolean all) {
+                    startActivity(HomeActivity.class);
+                    finish();
+                }
+
+                @Override
+                public void noPermission(List<String> denied, boolean quick) {
+                    XXPermissions.gotoPermissionSettings(SplashActivity.this);
+                }
+            });
+        }, 3000);
     }
 
     @Override

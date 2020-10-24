@@ -73,6 +73,7 @@ public class ChoiceCarActivity extends MyActivity {
         ListView modelView = new ListView(this);
         mCarModelAdapter = new ListDropDownAdapter(this, carModelsList);
         modelView.setDividerHeight(0);
+
         modelView.setAdapter(mCarModelAdapter);
 
         //init 品牌 menu

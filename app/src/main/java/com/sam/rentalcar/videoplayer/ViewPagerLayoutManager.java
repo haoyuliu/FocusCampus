@@ -1,4 +1,4 @@
-package com.sam.rentalcar.widget.viewpagerlayoutmanager;
+package com.sam.rentalcar.videoplayer;
 
 import android.content.Context;
 import android.view.View;

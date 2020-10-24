@@ -7,23 +7,21 @@ import android.view.View;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.baidu.platform.comapi.map.E;
 import com.dueeeke.videoplayer.player.VideoView;
 import com.sam.rentalcar.R;
-import com.sam.rentalcar.adapter.ViewPagerLayoutManager;
 import com.sam.rentalcar.bean.VideoListBean;
 import com.sam.rentalcar.common.MyFragment;
 import com.sam.rentalcar.controller.TikTokController;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.http.response.CommentListBean;
 import com.sam.rentalcar.ui.activity.HomeActivity;
-import com.sam.rentalcar.ui.activity.LoginActivity;
-import com.sam.rentalcar.ui.adapter.TikTokAdapter;
-import com.sam.rentalcar.utils.Utils;
+import com.sam.rentalcar.videoplayer.PreloadManager;
+import com.sam.rentalcar.videoplayer.TikTokAdapter;
+import com.sam.rentalcar.videoplayer.Utils;
+import com.sam.rentalcar.videoplayer.ViewPagerLayoutManager;
 import com.sam.rentalcar.widget.CommentDialog;
-import com.sam.rentalcar.widget.viewpagerlayoutmanager.OnViewPagerListener;
+import com.sam.rentalcar.videoplayer.OnViewPagerListener;
 
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 

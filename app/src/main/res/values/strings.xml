@@ -263,4 +263,7 @@
     <item name="selector_view" type="id"></item>
     <item name="rect_view" type="id"></item>
 
+    <string name="str_tiktok_1">抖音 (RecyclerView)</string>
+
+
 </resources>

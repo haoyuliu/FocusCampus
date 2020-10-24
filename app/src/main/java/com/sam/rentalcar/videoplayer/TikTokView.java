@@ -1,4 +1,4 @@
-package com.sam.rentalcar.widget;
+package com.sam.rentalcar.videoplayer;
 
 import android.content.Context;
 import android.util.AttributeSet;

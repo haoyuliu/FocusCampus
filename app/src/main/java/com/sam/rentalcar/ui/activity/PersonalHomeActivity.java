@@ -16,16 +16,14 @@ import com.bumptech.glide.Glide;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
 import com.sam.rentalcar.R;
-import com.sam.rentalcar.bean.FansBean;
 import com.sam.rentalcar.bean.VideoBean;
 import com.sam.rentalcar.common.MyActivity;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.http.response.FollowResponseBean;
 import com.sam.rentalcar.http.response.GetUserHomePagerMessageResponseBean;
 import com.sam.rentalcar.ui.adapter.CommPagerAdapter;
-import com.sam.rentalcar.ui.fragment.MineFragment;
-import com.sam.rentalcar.ui.fragment.PersonalLoveFragment;
-import com.sam.rentalcar.ui.fragment.PersonalProductionFragment;
+import com.sam.rentalcar.videoplayer.PersonalLoveFragment;
+import com.sam.rentalcar.videoplayer.PersonalProductionFragment;
 import com.sam.rentalcar.utils.SPUtils;
 import com.sam.rentalcar.widget.CircleImageView;
 

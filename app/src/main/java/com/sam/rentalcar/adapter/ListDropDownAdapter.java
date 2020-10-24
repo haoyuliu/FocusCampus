@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sam.rentalcar.R;
 
@@ -66,6 +67,11 @@ public class ListDropDownAdapter extends BaseAdapter {
 
     private void fillValue(int position, ViewHolder viewHolder) {
         viewHolder.mText.setText(list.get(position));
+        viewHolder.mText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
         if (checkItemPosition != -1) {
             if (checkItemPosition == position) {
                // viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_selected));

@@ -108,19 +108,19 @@ public class RentalCarActivity extends MyActivity {
                 break;
             case R.id.tv_start_date:
                 // 开始日期选择
-                choiceDate();
+                choiceStartDate();
                 break;
             case R.id.tv_start_time:
                 // 开始时间选择
-                choiceTime();
+                choiceStartTime();
                 break;
             case R.id.tv_end_date:
                 // 结束日期选择
-                choiceDate();
+                choiceEndDate();
                 break;
             case R.id.tv_end_time:
                 // 结束时间选择
-                choiceTime();
+                choiceEndTime();
                 break;
             default:
                 break;
@@ -134,7 +134,7 @@ public class RentalCarActivity extends MyActivity {
         return !super.isStatusBarEnabled();
     }
 
-    private void choiceDate() {
+    private void choiceStartDate() {
         // 日期选择对话框
         new DateDialog.Builder(RentalCarActivity.this)
                 .setTitle(getString(R.string.date_title))
@@ -157,7 +157,8 @@ public class RentalCarActivity extends MyActivity {
                 .setListener(new DateDialog.OnListener() {
                     @Override
                     public void onSelected(BaseDialog dialog, int year, int month, int day) {
-                        toast(year + getString(R.string.common_year) + month + getString(R.string.common_month) + day + getString(R.string.common_day));
+                        //toast(year + getString(R.string.common_year) + month + getString(R.string.common_month) + day + getString(R.string.common_day));
+                        mStartDateTextView.setText(month + getString(R.string.common_month) + day + getString(R.string.common_day));
 
                         // 如果不指定时分秒则默认为现在的时间
                         Calendar calendar = Calendar.getInstance();
@@ -165,7 +166,7 @@ public class RentalCarActivity extends MyActivity {
                         // 月份从零开始，所以需要减 1
                         calendar.set(Calendar.MONTH, month - 1);
                         calendar.set(Calendar.DAY_OF_MONTH, day);
-                        toast("时间戳：" + calendar.getTimeInMillis());
+                        //toast("时间戳：" + calendar.getTimeInMillis());
                         //toast(new SimpleDateFormat("yyyy年MM月dd日 kk:mm:ss").format(calendar.getTime()));
                     }
 
@@ -177,7 +178,51 @@ public class RentalCarActivity extends MyActivity {
                 .show();
     }
 
-    private void choiceTime() {
+    private void choiceEndDate() {
+        // 日期选择对话框
+        new DateDialog.Builder(RentalCarActivity.this)
+                .setTitle(getString(R.string.date_title))
+                // 确定按钮文本
+                .setConfirm(getString(R.string.common_confirm))
+                // 设置 null 表示不显示取消按钮
+                .setCancel(getString(R.string.common_cancel))
+                // 设置日期
+                //.setDate("2018-12-31")
+                //.setDate("20181231")
+                //.setDate(1546263036137)
+                // 设置年份
+                //.setYear(2018)
+                // 设置月份
+                //.setMonth(2)
+                // 设置天数
+                //.setDay(20)
+                // 不选择天数
+                //.setIgnoreDay()
+                .setListener(new DateDialog.OnListener() {
+                    @Override
+                    public void onSelected(BaseDialog dialog, int year, int month, int day) {
+                        //toast(year + getString(R.string.common_year) + month + getString(R.string.common_month) + day + getString(R.string.common_day));
+                        mEndDateTextView.setText(month + getString(R.string.common_month) + day + getString(R.string.common_day));
+
+                        // 如果不指定时分秒则默认为现在的时间
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR, year);
+                        // 月份从零开始，所以需要减 1
+                        calendar.set(Calendar.MONTH, month - 1);
+                        calendar.set(Calendar.DAY_OF_MONTH, day);
+                        //toast("时间戳：" + calendar.getTimeInMillis());
+                        //toast(new SimpleDateFormat("yyyy年MM月dd日 kk:mm:ss").format(calendar.getTime()));
+                    }
+
+                    @Override
+                    public void onCancel(BaseDialog dialog) {
+                        toast("取消了");
+                    }
+                })
+                .show();
+    }
+
+    private void choiceStartTime() {
         // 时间选择对话框
         new TimeDialog.Builder(RentalCarActivity.this)
                 .setTitle(getString(R.string.time_title))
@@ -200,14 +245,56 @@ public class RentalCarActivity extends MyActivity {
 
                     @Override
                     public void onSelected(BaseDialog dialog, int hour, int minute, int second) {
-                        toast(hour + getString(R.string.common_hour) + minute + getString(R.string.common_minute) + second + getString(R.string.common_second));
-
+                        // toast(hour + getString(R.string.common_hour) + minute + getString(R.string.common_minute) + second + getString(R.string.common_second));
+                        mStartTimeTextView.setText(hour + getString(R.string.common_hour) + minute + getString(R.string.common_minute));
                         // 如果不指定年月日则默认为今天的日期
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(Calendar.HOUR_OF_DAY, hour);
                         calendar.set(Calendar.MINUTE, minute);
                         calendar.set(Calendar.SECOND, second);
-                        toast("时间戳：" + calendar.getTimeInMillis());
+                        //toast("时间戳：" + calendar.getTimeInMillis());
+                        //toast(new SimpleDateFormat("yyyy年MM月dd日 kk:mm:ss").format(calendar.getTime()));
+                    }
+
+                    @Override
+                    public void onCancel(BaseDialog dialog) {
+                        toast("取消了");
+                    }
+                })
+                .show();
+
+    }
+    private void choiceEndTime() {
+        // 时间选择对话框
+        new TimeDialog.Builder(RentalCarActivity.this)
+                .setTitle(getString(R.string.time_title))
+                // 确定按钮文本
+                .setConfirm(getString(R.string.common_confirm))
+                // 设置 null 表示不显示取消按钮
+                .setCancel(getString(R.string.common_cancel))
+                // 设置时间
+                //.setTime("23:59:59")
+                //.setTime("235959")
+                // 设置小时
+                //.setHour(23)
+                // 设置分钟
+                //.setMinute(59)
+                // 设置秒数
+                //.setSecond(59)
+                // 不选择秒数
+                //.setIgnoreSecond()
+                .setListener(new TimeDialog.OnListener() {
+
+                    @Override
+                    public void onSelected(BaseDialog dialog, int hour, int minute, int second) {
+                        // toast(hour + getString(R.string.common_hour) + minute + getString(R.string.common_minute) + second + getString(R.string.common_second));
+                        mEndTimeTextView.setText(hour + getString(R.string.common_hour) + minute + getString(R.string.common_minute));
+                        // 如果不指定年月日则默认为今天的日期
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.HOUR_OF_DAY, hour);
+                        calendar.set(Calendar.MINUTE, minute);
+                        calendar.set(Calendar.SECOND, second);
+                        //toast("时间戳：" + calendar.getTimeInMillis());
                         //toast(new SimpleDateFormat("yyyy年MM月dd日 kk:mm:ss").format(calendar.getTime()));
                     }
 

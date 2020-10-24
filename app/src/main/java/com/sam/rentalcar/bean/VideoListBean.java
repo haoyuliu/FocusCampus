@@ -1,5 +1,6 @@
 package com.sam.rentalcar.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -24,7 +25,6 @@ public class VideoListBean {
     private String code;
     private Object traceId;
     private List<DataBean> data;
-
 
 
     public boolean isSuccess() {

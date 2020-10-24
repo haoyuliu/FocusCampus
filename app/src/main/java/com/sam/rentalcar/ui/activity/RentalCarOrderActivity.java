@@ -9,8 +9,6 @@ import com.sam.rentalcar.common.MyActivity;
 import com.sam.rentalcar.ui.adapter.CommPagerAdapter;
 import com.sam.rentalcar.ui.fragment.OrderCompleteFragment;
 import com.sam.rentalcar.ui.fragment.OrderOnGoingFragment;
-import com.sam.rentalcar.ui.fragment.PersonalLoveFragment;
-import com.sam.rentalcar.ui.fragment.PersonalProductionFragment;
 
 import java.util.ArrayList;
 

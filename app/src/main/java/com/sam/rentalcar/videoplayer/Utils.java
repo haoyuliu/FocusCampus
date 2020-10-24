@@ -1,4 +1,4 @@
-package com.sam.rentalcar.utils;
+package com.sam.rentalcar.videoplayer;
 
 import android.view.View;
 import android.view.ViewParent;

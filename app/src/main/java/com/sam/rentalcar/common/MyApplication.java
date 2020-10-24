@@ -28,6 +28,8 @@ import com.sam.rentalcar.http.server.TestServer;
 import com.sam.rentalcar.other.AppConfig;
 import com.sam.rentalcar.ui.activity.CrashActivity;
 import com.sam.rentalcar.ui.activity.HomeActivity;
+import com.sam.rentalcar.ui.activity.LoginActivity;
+import com.sam.rentalcar.utils.SPUtils;
 import com.sam.umeng.UmengClient;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -72,7 +74,7 @@ public final class MyApplication extends Application {
         // 设置自动登录
         options.setAutoLogin(true);
         // 设置是否需要发送已读回执
-        options.setRequireAck(true);
+        options.setRequireAck(false);
         // 设置是否需要发送回执，TODO 这个暂时有bug，上层收不到发送回执
         options.setRequireDeliveryAck(true);
         // 设置是否需要服务器收到消息确认
@@ -101,7 +103,7 @@ public final class MyApplication extends Application {
             @Override
             public EaseUser getUser(String username) {
                 EaseUser easeUser = new EaseUser(username);
-                easeUser.setNickname("李四");
+                easeUser.setNickname( SPUtils.getInstance(mInstance).getString("NickName"));
                 easeUser.setAvatar("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600016679561&di=75d0d27a11a97ff7cfa15842a2a0b3ba&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F05%2F00%2F01300000194285122188000535877.jpg");
                 return easeUser;
             }

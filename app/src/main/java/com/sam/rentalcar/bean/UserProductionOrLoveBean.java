@@ -1,5 +1,8 @@
 package com.sam.rentalcar.bean;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +11,7 @@ import java.util.List;
  * desc:用户喜欢和用户作品的bean
  * version:1.0
  */
-public class UserProductionOrLoveBean {
+public class UserProductionOrLoveBean implements Serializable {
 
     /**
      * success : true
@@ -64,7 +67,7 @@ public class UserProductionOrLoveBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * userId : 368415507088539650
          * nickName : 15065157316

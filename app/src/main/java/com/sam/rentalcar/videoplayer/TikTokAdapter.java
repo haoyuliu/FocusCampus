@@ -1,4 +1,4 @@
-package com.sam.rentalcar.ui.adapter;
+package com.sam.rentalcar.videoplayer;
 
 import android.content.Intent;
 import android.util.Log;
@@ -23,9 +23,7 @@ import com.sam.rentalcar.http.response.HomeVideoLikeResponseBean;
 import com.sam.rentalcar.ui.activity.LoginActivity;
 import com.sam.rentalcar.ui.activity.PersonalHomeActivity;
 import com.sam.rentalcar.utils.SPUtils;
-import com.sam.rentalcar.widget.TikTokView;
 
-import java.net.HttpURLConnection;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -203,7 +201,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
 
         VideoHolder(View itemView) {
             super(itemView);
-            mTikTokView = itemView.findViewById(R.id.tiktok_View);
+            mTikTokView = itemView.findViewById(R.id.tiktok_view);
             thumb = mTikTokView.findViewById(R.id.iv_thumb);
             mPlayerContainer = itemView.findViewById(R.id.container);
             mTitleTextView = itemView.findViewById(R.id.tv_title);

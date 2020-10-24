@@ -11,12 +11,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.hjq.bar.TitleBar;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.bean.UserProductionOrLoveBean;
 import com.sam.rentalcar.bean.VideoBean;
 import com.sam.rentalcar.ui.activity.PlayListActivity;
 import com.sam.rentalcar.ui.adapter.BaseRvAdapter;
 import com.sam.rentalcar.ui.adapter.BaseRvViewHolder;
+import com.sam.rentalcar.videoplayer.TikTokActivity;
+import com.sam.rentalcar.videoplayer.TiktokBean;
 import com.sam.rentalcar.widget.IconFontTextView;
 
 import java.util.List;
@@ -32,15 +35,11 @@ public class GridVideoAdapter extends BaseRvAdapter<UserProductionOrLoveBean.Dat
     public GridVideoAdapter(Context context, List<UserProductionOrLoveBean.DataBean> data) {
         super(context, data);
     }
-
     @Override
     protected void onBindData(GridVideoViewHolder holder, UserProductionOrLoveBean.DataBean videoBean, int position) {
         Glide.with(holder.itemView.getContext()).load(videoBean.getVideoImageUrl()).into(holder.ivCover);
 
-        holder.itemView.setOnClickListener(v -> {
-            PlayListActivity.initPos = position;
-            context.startActivity(new Intent(context, PlayListActivity.class));
-        });
+        holder.mPosition = position;
     }
 
     @NonNull
@@ -53,11 +52,14 @@ public class GridVideoAdapter extends BaseRvAdapter<UserProductionOrLoveBean.Dat
     public class GridVideoViewHolder extends BaseRvViewHolder {
         @BindView(R.id.iv_cover)
         ImageView ivCover;
-
+        public int mPosition;
 
         public GridVideoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(v -> {
+                TikTokActivity.start(itemView.getContext(), mPosition);
+            });
         }
     }
 }

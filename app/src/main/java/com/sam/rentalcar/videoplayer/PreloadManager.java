@@ -1,9 +1,10 @@
-package com.sam.rentalcar.ui.fragment;
+package com.sam.rentalcar.videoplayer;
 
 import android.content.Context;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.dueeeke.videoplayer.util.L;
+import com.sam.rentalcar.ui.fragment.ProxyVideoCacheManager;
 
 import java.io.File;
 import java.util.Iterator;

@@ -1,7 +1,7 @@
-package com.sam.rentalcar.ui.fragment;
+package com.sam.rentalcar.videoplayer;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Button;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +13,8 @@ import com.sam.rentalcar.common.MyFragment;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.ui.activity.HomeActivity;
 
-import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -21,10 +22,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * 个人作品的Fragment
+ * 个人作品的Fragment,如果当前用户是个人，需要提供删除视频的功能。
  */
 public class PersonalProductionFragment extends MyFragment<HomeActivity> {
     private static final String TAG = "PersonalProductionFragment";
+
     @BindView(R.id.recycle_personal_production)
     RecyclerView mPersonalProoductionRecyclerView;
 
@@ -36,6 +38,7 @@ public class PersonalProductionFragment extends MyFragment<HomeActivity> {
     @Override
     protected void initView() {
         mPersonalProoductionRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+
     }
 
     @Override
@@ -56,7 +59,7 @@ public class PersonalProductionFragment extends MyFragment<HomeActivity> {
                     public void onResponse(Call<UserProductionOrLoveBean> call, Response<UserProductionOrLoveBean> response) {
                         UserProductionOrLoveBean userProductionOrLoveBean = response.body();
                         if (userProductionOrLoveBean.getCode().equals("200")) {
-                            GridVideoAdapter fansAdapter = new GridVideoAdapter(getContext(), response.body().getData());
+                            PersonLoveGridVideoAdapter fansAdapter = new PersonLoveGridVideoAdapter(userProductionOrLoveBean.getData());
                             mPersonalProoductionRecyclerView.setAdapter(fansAdapter);
                         } else {
                             toast("获取数据失败");
