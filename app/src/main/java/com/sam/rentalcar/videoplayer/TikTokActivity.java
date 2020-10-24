@@ -3,6 +3,7 @@ package com.sam.rentalcar.videoplayer;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,14 +12,21 @@ import com.dueeeke.videoplayer.player.VideoView;
 import com.dueeeke.videoplayer.util.L;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.bean.UserProductionOrLoveBean;
-import com.sam.rentalcar.bean.VideoListBean;
 import com.sam.rentalcar.controller.TikTokController;
+import com.sam.rentalcar.http.net.RetrofitClient;
+import com.sam.rentalcar.http.response.CommentListBean;
+import com.sam.rentalcar.widget.CommentDialog;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
+ * 点击个人主页或者查看其他用户头像
  * 短视频播放页, 使用RecyclerView实现
  */
 @Deprecated
@@ -79,6 +87,39 @@ public class TikTokActivity extends BaseVideoViewActivity<VideoView> {
 
         mIndex = extras.getIntExtra(KEY_INDEX, 0);
         mRecyclerView.scrollToPosition(mIndex);
+
+        mTikTokAdapter.setItemOnClickInterface(new TikTokVideoViewAdapter.ItemCommentOnClickInterface() {
+            @Override
+            public void onItemClick(int position) {
+                //评论
+                // 获取评论数据
+                RetrofitClient.getRetrofitService().getCommentList(mVideoList.get(position).getVideoId(), "1", "10")
+                        .enqueue(new Callback<CommentListBean>() {
+                            @Override
+                            public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
+                                CommentListBean commentListBean = response.body();
+
+                                if (commentListBean.getCode().equals("200")) {
+                                    CommentDialog commentDialog = new CommentDialog();
+                                    commentDialog.setData(response.body().getData());
+                                    commentDialog.setVideoid(mVideoList.get(position).getVideoId());
+                                    commentDialog.setUserid(mVideoList.get(position).getUserId());
+                                    commentDialog.show(getSupportFragmentManager(), "");
+                                } else {
+                                    Toast.makeText(TikTokActivity.this, "获取评论数据失败", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<CommentListBean> call, Throwable t) {
+                                Toast.makeText(TikTokActivity.this, "获取评论数据失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+            }
+        });
     }
 
     private void initRecyclerView() {

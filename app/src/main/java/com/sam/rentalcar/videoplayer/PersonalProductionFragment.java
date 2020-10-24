@@ -30,6 +30,8 @@ public class PersonalProductionFragment extends MyFragment<HomeActivity> {
     @BindView(R.id.recycle_personal_production)
     RecyclerView mPersonalProoductionRecyclerView;
 
+    private PersonLoveGridVideoAdapter fansAdapter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_personal_production;
@@ -59,7 +61,7 @@ public class PersonalProductionFragment extends MyFragment<HomeActivity> {
                     public void onResponse(Call<UserProductionOrLoveBean> call, Response<UserProductionOrLoveBean> response) {
                         UserProductionOrLoveBean userProductionOrLoveBean = response.body();
                         if (userProductionOrLoveBean.getCode().equals("200")) {
-                            PersonLoveGridVideoAdapter fansAdapter = new PersonLoveGridVideoAdapter(userProductionOrLoveBean.getData());
+                            fansAdapter = new PersonLoveGridVideoAdapter(userProductionOrLoveBean.getData());
                             mPersonalProoductionRecyclerView.setAdapter(fansAdapter);
                         } else {
                             toast("获取数据失败");

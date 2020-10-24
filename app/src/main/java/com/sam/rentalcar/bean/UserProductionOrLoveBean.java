@@ -95,8 +95,8 @@ public class UserProductionOrLoveBean implements Serializable {
         private String videoDescription;
         private String videoUrl;
         private Object videoImageUrl;
-        private Object videoLikeCount;
-        private Object videoCommitCount;
+        private String videoLikeCount;
+        private String videoCommitCount;
         private Object videoType;
         private Object status;
         private Object createTime;
@@ -174,19 +174,19 @@ public class UserProductionOrLoveBean implements Serializable {
             this.videoImageUrl = videoImageUrl;
         }
 
-        public Object getVideoLikeCount() {
+        public String getVideoLikeCount() {
             return videoLikeCount;
         }
 
-        public void setVideoLikeCount(Object videoLikeCount) {
+        public void setVideoLikeCount(String videoLikeCount) {
             this.videoLikeCount = videoLikeCount;
         }
 
-        public Object getVideoCommitCount() {
+        public String getVideoCommitCount() {
             return videoCommitCount;
         }
 
-        public void setVideoCommitCount(Object videoCommitCount) {
+        public void setVideoCommitCount(String videoCommitCount) {
             this.videoCommitCount = videoCommitCount;
         }
 

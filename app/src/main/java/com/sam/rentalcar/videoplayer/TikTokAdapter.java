@@ -31,6 +31,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * 获取推荐或者个人作品的适配是
+ */
 @Deprecated
 public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolder> {
 

@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import com.sam.rentalcar.R;
  *
  * @param <T>
  */
-public class BaseVideoViewActivity<T extends VideoView> extends AppCompatActivity {
+public class BaseVideoViewActivity<T extends VideoView> extends FragmentActivity {
 
     protected T mVideoView;
 
@@ -54,24 +55,10 @@ public class BaseVideoViewActivity<T extends VideoView> extends AppCompatActivit
             setContentView(getContentView());
         }
 
-        //标题栏设置
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(getTitleResId());
-            if (enableBack()) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            }
-        }
+
 
         initView();
 
-    }
-
-    protected void setTitle(String title) {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(title);
-        }
     }
 
     protected void initView() {

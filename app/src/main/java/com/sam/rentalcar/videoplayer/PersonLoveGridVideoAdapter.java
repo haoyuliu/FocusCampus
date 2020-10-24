@@ -70,12 +70,7 @@ public class PersonLoveGridVideoAdapter extends RecyclerView.Adapter<PersonLoveG
             mThumb = itemView.findViewById(R.id.iv_thumb);
             mTitle = itemView.findViewById(R.id.tv_title);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    TikTokActivity.start(itemView.getContext(), mPosition,data);
-                }
-            });
+            itemView.setOnClickListener(v -> TikTokActivity.start(itemView.getContext(), mPosition,data));
         }
     }
 }

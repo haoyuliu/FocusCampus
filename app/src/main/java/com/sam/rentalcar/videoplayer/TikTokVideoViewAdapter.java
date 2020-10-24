@@ -14,10 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.bean.UserProductionOrLoveBean;
+import com.sam.rentalcar.http.net.RetrofitClient;
+import com.sam.rentalcar.http.response.CommentListBean;
+import com.sam.rentalcar.widget.CommentDialog;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * author:sam
@@ -28,6 +34,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class TikTokVideoViewAdapter extends RecyclerView.Adapter<TikTokVideoViewAdapter.VideoHolder> {
     private static final String TAG = "TikTokAdapter";
     private List<UserProductionOrLoveBean.DataBean> videos;
+
+    private ItemCommentOnClickInterface itemOnClickInterface;
+
 
     public TikTokVideoViewAdapter(List<UserProductionOrLoveBean.DataBean> videos) {
         this.videos = videos;
@@ -54,11 +63,24 @@ public class TikTokVideoViewAdapter extends RecyclerView.Adapter<TikTokVideoView
                 .load(item.getHeadImg())
                 .placeholder(android.R.color.white)
                 .into(holderHeadImage);
+
         TextView viewById = holder.mTikTokView.findViewById(R.id.tv_title);
         viewById.setText(item.getVideoTitle());
 
         TextView userName = holder.mTikTokView.findViewById(R.id.home_user_name);
         userName.setText(item.getNickName());
+
+        TextView userComment = holder.mTikTokView.findViewById(R.id.tv_comment_count);
+        userComment.setText(item.getVideoCommitCount());
+
+        TextView userLike = holder.mTikTokView.findViewById(R.id.tv_like_count);
+        userLike.setText(item.getVideoLikeCount());
+
+        ImageView userCommentImageView = holder.mTikTokView.findViewById(R.id.iv_comment);
+        userCommentImageView.setOnClickListener(v -> {
+            itemOnClickInterface.onItemClick(position);
+        });
+
         holder.mPosition = position;
         PreloadManager.getInstance(holder.itemView.getContext()).addPreloadTask(item.getVideoUrl(), position);
     }
@@ -89,5 +111,15 @@ public class TikTokVideoViewAdapter extends RecyclerView.Adapter<TikTokVideoView
             mPlayerContainer = itemView.findViewById(R.id.container);
             itemView.setTag(this);
         }
+    }
+
+    //评论点击的回调接口
+    public interface ItemCommentOnClickInterface {
+        void onItemClick(int position);
+    }
+
+    //定义回调方法
+    public void setItemOnClickInterface(ItemCommentOnClickInterface itemOnClickInterface) {
+        this.itemOnClickInterface = itemOnClickInterface;
     }
 }
