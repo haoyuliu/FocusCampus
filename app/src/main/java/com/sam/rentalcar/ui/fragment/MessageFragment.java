@@ -8,7 +8,7 @@ import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.sam.rentalcar.ui.activity.ChatActivity;
 
 /**
- * desc   : 消息页面
+ * desc   : 消息页面，顶部增加一个添加群聊
  */
 public class MessageFragment extends EaseConversationListFragment {
     @Override
@@ -20,7 +20,7 @@ public class MessageFragment extends EaseConversationListFragment {
             public void onListItemClicked(EMConversation conversation) {
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 // 设置参数
-                intent.putExtra(EaseConstant.EXTRA_USER_ID,conversation.conversationId());
+                intent.putExtra(EaseConstant.EXTRA_USER_ID, conversation.conversationId());
                 startActivity(intent);
             }
         });

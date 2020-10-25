@@ -1,4 +1,4 @@
-package com.sam.rentalcar.ui.fragment;
+package com.sam.rentalcar.videoplayer;
 
 import android.content.Context;
 
