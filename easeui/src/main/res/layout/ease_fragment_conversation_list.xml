@@ -14,7 +14,16 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         hyphenate:titleBarTitle="消息" />
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/title_bar_sam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        hyphenate:backButton="false"
+        hyphenate:rightTitle="创建群组"
+        hyphenate:title="消息" />
 
     <include layout="@layout/ease_search_bar" />
 
