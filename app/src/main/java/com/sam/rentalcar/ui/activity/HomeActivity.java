@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -15,7 +14,7 @@ import com.sam.rentalcar.helper.ActivityStackManager;
 import com.sam.rentalcar.helper.DoubleClickHelper;
 import com.sam.rentalcar.ui.fragment.FragmentManagerHelper;
 import com.sam.rentalcar.ui.fragment.HomeFragment;
-import com.sam.rentalcar.ui.fragment.MessageFragment;
+import com.sam.rentalcar.chat.MessageFragment;
 import com.sam.rentalcar.ui.fragment.MineFragment;
 import com.sam.rentalcar.ui.fragment.RentalCarFragment;
 import com.sam.rentalcar.utils.SPUtils;

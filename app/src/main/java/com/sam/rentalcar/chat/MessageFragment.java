@@ -1,4 +1,4 @@
-package com.sam.rentalcar.ui.fragment;
+package com.sam.rentalcar.chat;
 
 import android.content.Intent;
 
@@ -15,14 +15,11 @@ public class MessageFragment extends EaseConversationListFragment {
     protected void initView() {
         super.initView();
         // 点击的时候跳转到回话详情页面
-        setConversationListItemClickListener(new EaseConversationListItemClickListener() {
-            @Override
-            public void onListItemClicked(EMConversation conversation) {
-                Intent intent = new Intent(getActivity(), ChatActivity.class);
-                // 设置参数
-                intent.putExtra(EaseConstant.EXTRA_USER_ID, conversation.conversationId());
-                startActivity(intent);
-            }
+        setConversationListItemClickListener(conversation -> {
+            Intent intent = new Intent(getActivity(), ChatActivity.class);
+            // 设置参数，跳转到回话列表
+            intent.putExtra(EaseConstant.EXTRA_USER_ID, conversation.conversationId());
+            startActivity(intent);
         });
     }
 
