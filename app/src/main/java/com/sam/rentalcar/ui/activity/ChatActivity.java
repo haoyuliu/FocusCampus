@@ -23,14 +23,14 @@ public class ChatActivity extends MyActivity implements EaseChatFragment.EaseCha
 
     @Override
     protected void initView() {
-        //use EaseChatFratFragment
-
+        //创建一个回话的Fragment
         EaseChatFragment chatFragment = new EaseChatFragment();
         Intent intent = getIntent();
-        String userId = intent.getStringExtra("userId");
+        String hxId = intent.getStringExtra("userId");
         // pass parameters to chat fragment
         chatFragment.setArguments(getIntent().getExtras());
-        getSupportFragmentManager().beginTransaction().add(R.id.layout_chat, chatFragment).commit();
+        // 替换Fragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.layout_chat, chatFragment).commit();
     }
 
     @Override
