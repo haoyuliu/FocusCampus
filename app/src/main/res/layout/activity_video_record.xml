@@ -7,7 +7,7 @@
     <com.sam.rentalcar.video.SquareGLSurfaceView
         android:id="@+id/preview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="610dp" />
 
     <LinearLayout
         android:id="@+id/brightness_panel"
@@ -241,13 +241,15 @@
                 android:text="0%"
                 android:textColor="#FFFFFF" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/save_to_draft_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:text="本地"
+                android:textColor="@color/white"
+                android:gravity="center"
                 android:layout_weight="1"
-                android:onClick="onClickSaveToDraft"
-                android:src="@drawable/ic_draft" />
+                android:onClick="onClickSaveToDraft" />
 
         </LinearLayout>
     </LinearLayout>

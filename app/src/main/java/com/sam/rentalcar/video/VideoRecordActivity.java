@@ -24,6 +24,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.qiniu.pili.droid.shortvideo.PLAudioEncodeSetting;
 import com.qiniu.pili.droid.shortvideo.PLCameraSetting;
 import com.qiniu.pili.droid.shortvideo.PLCaptureFrameListener;
@@ -39,10 +43,13 @@ import com.qiniu.pili.droid.shortvideo.PLVideoEncodeSetting;
 import com.qiniu.pili.droid.shortvideo.PLVideoFrame;
 import com.qiniu.pili.droid.shortvideo.PLVideoSaveListener;
 import com.sam.rentalcar.R;
+import com.sam.rentalcar.ui.activity.UpLoadVedioActivity;
+import com.sam.rentalcar.utils.GlideEngine;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Stack;
 
 import static com.sam.rentalcar.video.RecordSettings.RECORD_SPEED_ARRAY;
@@ -407,7 +414,7 @@ public class VideoRecordActivity extends AppCompatActivity implements PLRecordSt
     }
 
     public void onClickSaveToDraft(View v) {
-        final EditText editText = new EditText(this);
+     /*   final EditText editText = new EditText(this);
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this)
                 .setView(editText)
                 .setTitle(getString(R.string.dlg_save_draft_title))
@@ -419,7 +426,31 @@ public class VideoRecordActivity extends AppCompatActivity implements PLRecordSt
                                         getString(R.string.toast_draft_save_success) : getString(R.string.toast_draft_save_fail));
                     }
                 });
-        alertDialog.show();
+        alertDialog.show();*/
+        // 改为从本地选择视频
+        // 进入选择视屏的页面
+        PictureSelector.create(VideoRecordActivity.this)
+                .openGallery(PictureMimeType.ofVideo())
+                .maxVideoSelectNum(1)
+                .isCompress(true)
+                .isCamera(false)
+                .loadImageEngine(GlideEngine.createGlideEngine())
+                .forResult(new OnResultCallbackListener<LocalMedia>() {
+                    @Override
+                    public void onResult(List<LocalMedia> result) {
+                        // onResult CallbacK
+                        String path = result.get(0).getPath();
+                        Intent intent = new Intent(VideoRecordActivity.this, PlaybackActivity.class);
+                        intent.putExtra("path",path);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // onCancel Callback
+                    }
+                });
+
     }
 
     @Override
