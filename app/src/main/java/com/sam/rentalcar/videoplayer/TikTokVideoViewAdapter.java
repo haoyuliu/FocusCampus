@@ -1,5 +1,7 @@
 package com.sam.rentalcar.videoplayer;
 
+import android.content.IntentFilter;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +18,19 @@ import com.sam.rentalcar.R;
 import com.sam.rentalcar.bean.UserProductionOrLoveBean;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.http.response.CommentListBean;
+import com.sam.rentalcar.utils.SPUtils;
 import com.sam.rentalcar.widget.CommentDialog;
 
+import java.net.NoRouteToHostException;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.baidu.location.d.j.S;
+import static com.baidu.location.d.j.i;
 
 /**
  * author:sam
@@ -54,6 +61,18 @@ public class TikTokVideoViewAdapter extends RecyclerView.Adapter<TikTokVideoView
     public void onBindViewHolder(final VideoHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: " + position);
         UserProductionOrLoveBean.DataBean item = videos.get(position);
+        String userId = SPUtils.getInstance(holder.thumb.getContext()).getString("UserId");
+        String itemUserId = String.valueOf(item.getUserId());
+        if (itemUserId .equals(userId) && !TextUtils.isEmpty(userId)) {
+            holder.mImageViewDelete.setVisibility(View.VISIBLE);
+            holder.mImageViewDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 删除个人作品
+
+                }
+            });
+        }
         Glide.with(holder.thumb.getContext())
                 .load(item.getVideoImageUrl())
                 .placeholder(android.R.color.white)
@@ -103,12 +122,14 @@ public class TikTokVideoViewAdapter extends RecyclerView.Adapter<TikTokVideoView
         public TikTokView mTikTokView;
         public int mPosition;
         public FrameLayout mPlayerContainer;
+        private ImageView mImageViewDelete;
 
         VideoHolder(View itemView) {
             super(itemView);
             mTikTokView = itemView.findViewById(R.id.tiktok_view);
             thumb = mTikTokView.findViewById(R.id.iv_thumb);
             mPlayerContainer = itemView.findViewById(R.id.container);
+            mImageViewDelete = itemView.findViewById(R.id.iv_delete);
             itemView.setTag(this);
         }
     }

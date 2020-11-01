@@ -38,7 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * desc: 我的
+ * desc: 我的页面
  */
 public final class MineFragment extends MyFragment<HomeActivity> {
     public static final String TAG = "MineFragment";
