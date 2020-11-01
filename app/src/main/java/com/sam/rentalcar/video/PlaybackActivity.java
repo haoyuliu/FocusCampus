@@ -433,7 +433,6 @@ public class PlaybackActivity extends AppCompatActivity implements MediaControll
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(PlaybackActivity.this, "onsucceed ------------------" + info.getFilePath(), Toast.LENGTH_SHORT).show();
                         upLoadAfterRequestBean requestBean = new upLoadAfterRequestBean();
                         requestBean.setVideoDesc("视频描述信息");
                         requestBean.setVideoId(videoId);
@@ -443,13 +442,14 @@ public class PlaybackActivity extends AppCompatActivity implements MediaControll
                                     public void onResponse(Call<upLoadAfterResponseBean> call, Response<upLoadAfterResponseBean> response) {
                                         Log.d("文件保存", "code" + response.code());
                                         if (response.code() == HttpURLConnection.HTTP_OK) {
-                                            Toast.makeText(PlaybackActivity.this, "保存成功 ------------------" + response.message(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(PlaybackActivity.this, "保存成功" + response.message(), Toast.LENGTH_SHORT).show();
                                         }
 
                                     }
 
                                     @Override
                                     public void onFailure(Call<upLoadAfterResponseBean> call, Throwable t) {
+                                        Toast.makeText(PlaybackActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
 
                                     }
                                 });
@@ -471,26 +471,24 @@ public class PlaybackActivity extends AppCompatActivity implements MediaControll
 
             @Override
             public void onUploadTokenExpired() {
-                Toast.makeText(PlaybackActivity.this, "onExpired ------------- ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlaybackActivity.this, "onExpired", Toast.LENGTH_SHORT).show();
 
                 uploader.resumeWithAuth(uploadAuth);
             }
 
             @Override
             public void onUploadRetry(String code, String message) {
-                Toast.makeText(PlaybackActivity.this, "onUploadRetry ------------- " + code + message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlaybackActivity.this, "onUploadRetry" + code + message, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onUploadRetryResume() {
-                Toast.makeText(PlaybackActivity.this, "onUploadRetryResume ------------- ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlaybackActivity.this, "onUploadRetryResume", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onUploadStarted(UploadFileInfo uploadFileInfo) {
                 Log.d("文件上传", "开始");
-                Toast.makeText(PlaybackActivity.this, "onUploadStarted ------------- ", Toast.LENGTH_SHORT).show();
-
                 uploader.setUploadAuthAndAddress(uploadFileInfo, uploadAuth, uploadAddress);
             }
         };
