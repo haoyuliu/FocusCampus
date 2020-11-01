@@ -441,7 +441,7 @@ public class VideoRecordActivity extends AppCompatActivity implements PLRecordSt
                         // onResult CallbacK
                         String path = result.get(0).getPath();
                         Intent intent = new Intent(VideoRecordActivity.this, PlaybackActivity.class);
-                        intent.putExtra("path",path);
+                        intent.putExtra("MP4_PATH",path);
                         startActivity(intent);
                     }
 

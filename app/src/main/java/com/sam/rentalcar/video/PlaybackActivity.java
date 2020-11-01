@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -16,27 +17,43 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alibaba.sdk.android.vod.upload.VODUploadCallback;
+import com.alibaba.sdk.android.vod.upload.VODUploadClient;
+import com.alibaba.sdk.android.vod.upload.VODUploadClientImpl;
+import com.alibaba.sdk.android.vod.upload.model.UploadFileInfo;
+import com.alibaba.sdk.android.vod.upload.model.VodInfo;
 import com.qiniu.pili.droid.shortvideo.PLShortVideoUploader;
 import com.qiniu.pili.droid.shortvideo.PLUploadProgressListener;
 import com.qiniu.pili.droid.shortvideo.PLUploadResultListener;
 import com.qiniu.pili.droid.shortvideo.PLUploadSetting;
 import com.sam.rentalcar.R;
+import com.sam.rentalcar.http.net.RetrofitClient;
+import com.sam.rentalcar.http.request.UpLoadVideoRequestBean;
+import com.sam.rentalcar.http.request.upLoadAfterRequestBean;
+import com.sam.rentalcar.http.response.UpLoadVideoResponseBean;
+import com.sam.rentalcar.http.response.upLoadAfterResponseBean;
+import com.sam.rentalcar.ui.activity.UpLoadVedioActivity;
+import com.sam.rentalcar.utils.SPUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
-public class PlaybackActivity extends AppCompatActivity implements
-        PLUploadResultListener,
-        PLUploadProgressListener,
-        MediaController.MediaPlayerControl {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class PlaybackActivity extends AppCompatActivity implements MediaController.MediaPlayerControl {
 
     private static final String TAG = "PlaybackActivity";
     private static final String MP4_PATH = "MP4_PATH";
@@ -48,12 +65,17 @@ public class PlaybackActivity extends AppCompatActivity implements
     private MediaController mMediaController;
 
     private Button mUploadBtn;
-    private PLShortVideoUploader mVideoUploadManager;
     private ProgressBar mProgressBarDeterminate;
     private boolean mIsUpload = false;
     private String mVideoPath;
     private int mPreviousOrientation;
     private int mSeekingPosition = 0;
+    private EditText mEditTextDesc;
+
+    private String uploadAddress;
+    private String uploadAuth;
+
+    private String videoId;
 
     public static void start(Activity activity, String mp4Path) {
         Intent intent = new Intent(activity, PlaybackActivity.class);
@@ -73,13 +95,8 @@ public class PlaybackActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playback);
 
-        PLUploadSetting uploadSetting = new PLUploadSetting();
-
-        mVideoUploadManager = new PLShortVideoUploader(getApplicationContext(), uploadSetting);
-        mVideoUploadManager.setUploadProgressListener(this);
-        mVideoUploadManager.setUploadResultListener(this);
-
         mUploadBtn = (Button) findViewById(R.id.upload_btn);
+        mEditTextDesc = findViewById(R.id.up_desc);
         mUploadBtn.setText(R.string.upload);
         mUploadBtn.setOnClickListener(new UploadOnClickListener());
         mProgressBarDeterminate = (ProgressBar) findViewById(R.id.progressBar);
@@ -250,59 +267,51 @@ public class PlaybackActivity extends AppCompatActivity implements
     public class UploadOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            if (!mIsUpload) {
-                mVideoUploadManager.startUpload(mVideoPath, Config.TOKEN);
-                mProgressBarDeterminate.setVisibility(View.VISIBLE);
-                mUploadBtn.setText(R.string.cancel_upload);
-                mIsUpload = true;
-            } else {
-                mVideoUploadManager.cancelUpload();
-                mProgressBarDeterminate.setVisibility(View.INVISIBLE);
-                mUploadBtn.setText(R.string.upload);
-                mIsUpload = false;
+            String desc = mEditTextDesc.getText().toString();
+
+            if (TextUtils.isEmpty(desc)) {
+                Toast.makeText(PlaybackActivity.this, "请输入描述内容", Toast.LENGTH_SHORT).show();
+                return;
             }
+            //if (!mIsUpload) {
+            //    mProgressBarDeterminate.setVisibility(View.VISIBLE);
+            //    mUploadBtn.setText(R.string.cancel_upload);
+            //    mIsUpload = true;
+            // 请求服务器获取数据
+            getUpLoadData(desc);
+            // 开始上传
+            //  } else {
+            //     mProgressBarDeterminate.setVisibility(View.INVISIBLE);
+            //     mUploadBtn.setText(R.string.upload);
+            //    mIsUpload = false;
+            //  }
         }
     }
 
-    @Override
-    public void onUploadProgress(String fileName, double percent) {
-        mProgressBarDeterminate.setProgress((int) (percent * 100));
-        if (1.0 == percent) {
-            mProgressBarDeterminate.setVisibility(View.INVISIBLE);
-        }
-    }
+    private void getUpLoadData(String desc) {
+        UpLoadVideoRequestBean requestBean = new UpLoadVideoRequestBean();
+        requestBean.setDescription("描述信息");
+        requestBean.setFileName("ssss.mp4");
+        requestBean.setTitle(desc);
+        RetrofitClient.getRetrofitService().getUpLoadVideoParams(SPUtils.getInstance(PlaybackActivity.this).getString("token"), requestBean)
+                .enqueue(new Callback<UpLoadVideoResponseBean>() {
+                    @Override
+                    public void onResponse(Call<UpLoadVideoResponseBean> call, Response<UpLoadVideoResponseBean> response) {
+                        UpLoadVideoResponseBean upLoadVideoResponseBean = response.body();
+                        if (upLoadVideoResponseBean.getCode().equals("200")) {
 
-    public void copyToClipboard(String filePath) {
-        ClipData clipData = ClipData.newPlainText("VideoFilePath", filePath);
-        ClipboardManager clipboardManager = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
-        clipboardManager.setPrimaryClip(clipData);
-    }
+                            uploadAddress = response.body().getData().getUploadAddress();
+                            uploadAuth = response.body().getData().getUploadAuth();
+                            videoId = response.body().getData().getVideoId();
+                            upload();
+                        }
+                    }
 
-    @Override
-    public void onUploadVideoSuccess(JSONObject response) {
-        try {
-            final String filePath = "http://" + Config.DOMAIN + "/" + response.getString("key");
-            copyToClipboard(filePath);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ToastUtils.l(PlaybackActivity.this, "文件上传成功，" + filePath + "已复制到粘贴板");
-                }
-            });
-            mUploadBtn.setVisibility(View.INVISIBLE);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onUploadVideoFailed(final int statusCode, final String error) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                ToastUtils.l(PlaybackActivity.this, "Upload failed, statusCode = " + statusCode + " error = " + error);
-            }
-        });
+                    @Override
+                    public void onFailure(Call<UpLoadVideoResponseBean> call, Throwable t) {
+                        Log.i(TAG, "失败" + t.getMessage());
+                    }
+                });
     }
 
     private MediaPlayer.OnInfoListener mOnInfoListener = new MediaPlayer.OnInfoListener() {
@@ -411,4 +420,87 @@ public class PlaybackActivity extends AppCompatActivity implements
             Log.i(TAG, "onVideoSizeChanged: width = " + width + ", height = " + height);
         }
     };
+
+    /**
+     * 短视频上传
+     */
+    private void upload() {
+        VODUploadClient uploader = new VODUploadClientImpl(getApplicationContext());
+        VODUploadCallback vodUploadCallback = new VODUploadCallback() {
+            @Override
+            public void onUploadSucceed(UploadFileInfo info) {
+                Log.d("文件上传", "成功");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(PlaybackActivity.this, "onsucceed ------------------" + info.getFilePath(), Toast.LENGTH_SHORT).show();
+                        upLoadAfterRequestBean requestBean = new upLoadAfterRequestBean();
+                        requestBean.setVideoDesc("视频描述信息");
+                        requestBean.setVideoId(videoId);
+                        RetrofitClient.getRetrofitService().UpLoadVideoAfter(SPUtils.getInstance(PlaybackActivity.this).getString("token"), requestBean)
+                                .enqueue(new Callback<upLoadAfterResponseBean>() {
+                                    @Override
+                                    public void onResponse(Call<upLoadAfterResponseBean> call, Response<upLoadAfterResponseBean> response) {
+                                        Log.d("文件保存", "code" + response.code());
+                                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                                            Toast.makeText(PlaybackActivity.this, "保存成功 ------------------" + response.message(), Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<upLoadAfterResponseBean> call, Throwable t) {
+
+                                    }
+                                });
+
+                    }
+                });
+            }
+
+            @Override
+            public void onUploadFailed(UploadFileInfo info, String code, String message) {
+                Log.d("文件上传", "失败" + code + "message" + message);
+                Toast.makeText(PlaybackActivity.this, "onfailed ------------------ " + info.getFilePath() + " " + code + " " + message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onUploadProgress(UploadFileInfo info, long uploadedSize, long totalSize) {
+                Log.d("文件上传中", "uploadedSize" + uploadedSize + "uploadedSize" + totalSize);
+            }
+
+            @Override
+            public void onUploadTokenExpired() {
+                Toast.makeText(PlaybackActivity.this, "onExpired ------------- ", Toast.LENGTH_SHORT).show();
+
+                uploader.resumeWithAuth(uploadAuth);
+            }
+
+            @Override
+            public void onUploadRetry(String code, String message) {
+                Toast.makeText(PlaybackActivity.this, "onUploadRetry ------------- " + code + message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onUploadRetryResume() {
+                Toast.makeText(PlaybackActivity.this, "onUploadRetryResume ------------- ", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onUploadStarted(UploadFileInfo uploadFileInfo) {
+                Log.d("文件上传", "开始");
+                Toast.makeText(PlaybackActivity.this, "onUploadStarted ------------- ", Toast.LENGTH_SHORT).show();
+
+                uploader.setUploadAuthAndAddress(uploadFileInfo, uploadAuth, uploadAddress);
+            }
+        };
+        uploader.init(vodUploadCallback);
+        String filePath = mVideoPath;
+        VodInfo vodInfo = new VodInfo();
+        vodInfo.setTitle("测试标题");
+        vodInfo.setDesc("测试描述.");
+        uploader.addFile(filePath, vodInfo);
+        uploader.start();
+    }
+
 }

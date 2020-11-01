@@ -14,6 +14,7 @@
         app:titleSize="18sp" />
 
     <EditText
+        android:id="@+id/up_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15.5dp"

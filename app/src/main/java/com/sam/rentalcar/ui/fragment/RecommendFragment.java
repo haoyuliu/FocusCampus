@@ -34,7 +34,7 @@ import retrofit2.Response;
  */
 public class RecommendFragment extends MyFragment<HomeActivity> {
     private int pageIndex = 1;
-    private int pageSize = 20;
+    private int pageSize = 50;
     private TikTokController mController;
     private int mCurPos;
     private RecyclerView mRecyclerView;
