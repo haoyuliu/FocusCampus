@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +18,9 @@ import com.bumptech.glide.Glide;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.bean.UserProductionOrLoveBean;
 import com.sam.rentalcar.http.net.RetrofitClient;
+import com.sam.rentalcar.http.request.DeleteVideoRequestBean;
 import com.sam.rentalcar.http.response.CommentListBean;
+import com.sam.rentalcar.http.response.DeleteVideoResponseBean;
 import com.sam.rentalcar.utils.SPUtils;
 import com.sam.rentalcar.widget.CommentDialog;
 
@@ -63,14 +66,27 @@ public class TikTokVideoViewAdapter extends RecyclerView.Adapter<TikTokVideoView
         UserProductionOrLoveBean.DataBean item = videos.get(position);
         String userId = SPUtils.getInstance(holder.thumb.getContext()).getString("UserId");
         String itemUserId = String.valueOf(item.getUserId());
-        if (itemUserId .equals(userId) && !TextUtils.isEmpty(userId)) {
+        if (itemUserId.equals(userId) && !TextUtils.isEmpty(userId)) {
             holder.mImageViewDelete.setVisibility(View.VISIBLE);
-            holder.mImageViewDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // 删除个人作品
+            holder.mImageViewDelete.setOnClickListener(v -> {
+                // 删除个人作品
+                DeleteVideoRequestBean deleteVideoRequestBean = new DeleteVideoRequestBean();
+                deleteVideoRequestBean.setVideoId(item.getVideoId());
+                RetrofitClient.getRetrofitService().deleteVideo(deleteVideoRequestBean).enqueue(new Callback<DeleteVideoResponseBean>() {
+                    @Override
+                    public void onResponse(Call<DeleteVideoResponseBean> call, Response<DeleteVideoResponseBean> response) {
+                        DeleteVideoResponseBean videoResponseBean = response.body();
+                        Toast.makeText(holder.thumb.getContext(), "删除成功", Toast.LENGTH_SHORT).show();
 
-                }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DeleteVideoResponseBean> call, Throwable t) {
+                        Toast.makeText(holder.thumb.getContext(), "删除成功", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
             });
         }
         Glide.with(holder.thumb.getContext())

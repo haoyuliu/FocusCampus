@@ -127,4 +127,9 @@ public class NetApiConstants {
      */
     public static final String GET_PICKUP_POINTLIST_BY_CITY = "pickUpPoint/getPickUpPointListByCity";
 
+    /**
+     * 删除视频
+     */
+    public static final String POST_DELETE_VIDEO = "video/deleteVideo";
+
 }

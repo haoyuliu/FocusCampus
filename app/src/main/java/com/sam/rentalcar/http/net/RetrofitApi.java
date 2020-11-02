@@ -4,6 +4,7 @@ package com.sam.rentalcar.http.net;
 import com.sam.rentalcar.bean.FansBean;
 import com.sam.rentalcar.bean.UserProductionOrLoveBean;
 import com.sam.rentalcar.bean.VideoListBean;
+import com.sam.rentalcar.http.request.DeleteVideoRequestBean;
 import com.sam.rentalcar.http.request.HomeVideoLikeRequestBean;
 import com.sam.rentalcar.http.request.LoginRequestBean;
 import com.sam.rentalcar.http.request.ModifyMessageRequestBean;
@@ -12,6 +13,7 @@ import com.sam.rentalcar.http.request.VideoCommentRequestBean;
 import com.sam.rentalcar.http.request.GetUpLoadImageRequestBean;
 import com.sam.rentalcar.http.request.upLoadAfterRequestBean;
 import com.sam.rentalcar.http.response.CommentListBean;
+import com.sam.rentalcar.http.response.DeleteVideoResponseBean;
 import com.sam.rentalcar.http.response.FollowResponseBean;
 import com.sam.rentalcar.http.response.GetCarBrandListResponseBean;
 import com.sam.rentalcar.http.response.GetCarListResponseBean;
@@ -252,5 +254,13 @@ public interface RetrofitApi {
      */
     @GET(NetApiConstants.GET_PICKUP_POINTLIST_BY_CITY)
     Call<GetUserCouponListResponseBean> getPickUpPointListByCity(@Query("userId") String userId);
+
+    /**
+     * 删除视频
+     *
+     * @return
+     */
+    @POST(NetApiConstants.POST_DELETE_VIDEO)
+    Call<DeleteVideoResponseBean> deleteVideo(@Body DeleteVideoRequestBean deleteVideoRequestBean);
 
 }
