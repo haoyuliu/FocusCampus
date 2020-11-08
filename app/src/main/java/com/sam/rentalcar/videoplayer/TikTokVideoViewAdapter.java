@@ -15,12 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.sam.base.BaseDialog;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.bean.UserProductionOrLoveBean;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.http.request.DeleteVideoRequestBean;
 import com.sam.rentalcar.http.response.CommentListBean;
 import com.sam.rentalcar.http.response.DeleteVideoResponseBean;
+import com.sam.rentalcar.ui.dialog.MessageDialog;
 import com.sam.rentalcar.utils.SPUtils;
 import com.sam.rentalcar.widget.CommentDialog;
 
@@ -70,23 +72,50 @@ public class TikTokVideoViewAdapter extends RecyclerView.Adapter<TikTokVideoView
             holder.mImageViewDelete.setVisibility(View.VISIBLE);
             holder.mImageViewDelete.setOnClickListener(v -> {
                 // 删除个人作品
-                DeleteVideoRequestBean deleteVideoRequestBean = new DeleteVideoRequestBean();
-                deleteVideoRequestBean.setVideoId(item.getVideoId());
-                RetrofitClient.getRetrofitService().deleteVideo(deleteVideoRequestBean).enqueue(new Callback<DeleteVideoResponseBean>() {
-                    @Override
-                    public void onResponse(Call<DeleteVideoResponseBean> call, Response<DeleteVideoResponseBean> response) {
-                        DeleteVideoResponseBean videoResponseBean = response.body();
-                        Toast.makeText(holder.thumb.getContext(), "删除成功", Toast.LENGTH_SHORT).show();
+                new MessageDialog.Builder(holder.thumb.getContext())
+                        // 标题可以不用填写
+                        .setTitle("删除视频")
+                        // 内容必须要填写
+                        .setMessage("是否删除此视频")
+                        // 确定按钮文本
+                        .setConfirm("确定")
+                        // 设置 null 表示不显示取消按钮
+                        .setCancel("取消")
+                        // 设置点击按钮后不关闭对话框
+                        //.setAutoDismiss(false)
+                        .setListener(new MessageDialog.OnListener() {
 
-                    }
+                            @Override
+                            public void onConfirm(BaseDialog dialog) {
+                                DeleteVideoRequestBean deleteVideoRequestBean = new DeleteVideoRequestBean();
+                                deleteVideoRequestBean.setVideoId(item.getVideoId());
+                                deleteVideoRequestBean.setUserId(userId);
+                                RetrofitClient.getRetrofitService().deleteVideo(deleteVideoRequestBean).enqueue(new Callback<DeleteVideoResponseBean>() {
+                                    @Override
+                                    public void onResponse(Call<DeleteVideoResponseBean> call, Response<DeleteVideoResponseBean> response) {
+                                        DeleteVideoResponseBean videoResponseBean = response.body();
+                                        if (videoResponseBean.getCode().equals("200")) {
+                                            videos.remove(item.getVideoId());
+                                            notifyDataSetChanged();
+                                            Toast.makeText(holder.thumb.getContext(), "删除成功", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(holder.thumb.getContext(), "删除失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
 
-                    @Override
-                    public void onFailure(Call<DeleteVideoResponseBean> call, Throwable t) {
-                        Toast.makeText(holder.thumb.getContext(), "删除成功", Toast.LENGTH_SHORT).show();
+                                    @Override
+                                    public void onFailure(Call<DeleteVideoResponseBean> call, Throwable t) {
+                                        Toast.makeText(holder.thumb.getContext(), "删除失败", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
+                                    }
+                                });
+                            }
 
+                            @Override
+                            public void onCancel(BaseDialog dialog) {
+                            }
+                        })
+                        .show();
             });
         }
         Glide.with(holder.thumb.getContext())
