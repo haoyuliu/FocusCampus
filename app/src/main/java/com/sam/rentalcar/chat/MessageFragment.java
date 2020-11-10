@@ -18,8 +18,11 @@ import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.hyphenate.exceptions.HyphenateException;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.ui.activity.ChatActivity;
+import com.sam.rentalcar.ui.activity.ChoiceCarActivity;
 
 import java.util.List;
+
+import static com.hjq.http.EasyUtils.runOnUiThread;
 
 /**
  * desc   : 消息页面，顶部增加一个添加群聊
@@ -87,42 +90,13 @@ public class MessageFragment extends EaseConversationListFragment {
             @Override
             public void onTitleClick(View v) {
 
-
             }
 
             @Override
             public void onRightClick(View v) {
-                //创建群组
-                Toast.makeText(getActivity(), "开始创建群组", Toast.LENGTH_SHORT).show();
-                // 进入选择群组页面
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String[] allMembers = new String[]{"15065157777"};
-                        EMGroupOptions option = new EMGroupOptions();
-                        option.maxUsers = 200;
-                        option.style = EMGroupManager.EMGroupStyle.EMGroupStylePublicOpenJoin;
-                        try {
-                            EMClient.getInstance().groupManager().createGroup("群组名称", "群描述", allMembers, "添加原因", option);
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getActivity(), "创建群组成功", Toast.LENGTH_SHORT).show();
-
-                                }
-                            });
-                        } catch (HyphenateException e) {
-                            e.printStackTrace();
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getActivity(), "创建群组失败", Toast.LENGTH_SHORT).show();
-
-                                }
-                            });
-                        }
-                    }
-                }).start();
+                //进入选择好友列表
+                ChoiceFriendFragment choiceFriendFragment = new ChoiceFriendFragment();
+                choiceFriendFragment.show(getFragmentManager(), "tag");
             }
         });
     }

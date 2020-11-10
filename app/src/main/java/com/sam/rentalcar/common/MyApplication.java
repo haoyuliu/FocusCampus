@@ -93,7 +93,8 @@ public final class MyApplication extends Application {
         // options.setMipushConfig(MLConstants.ML_MI_APP_ID, MLConstants.ML_MI_APP_KEY);
 
         // 调用初始化方法初始化sdk
-        EaseUI.getInstance().init(this, options);
+        EaseUI.getInstance().init(this, null);
+
         //设置头像圆角
         EaseAvatarOptions easeAvatarOptions = new EaseAvatarOptions();
         easeAvatarOptions.setAvatarShape(1);

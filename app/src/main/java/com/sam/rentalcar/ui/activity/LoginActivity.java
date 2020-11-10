@@ -138,7 +138,6 @@ public final class LoginActivity extends MyActivity
                                         @Override
                                         public void onSuccess() {
                                             hideDialog();
-
                                             SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
                                             SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
                                             SPUtils.getInstance(LoginActivity.this).put("NickName", response.body().getData().getNickName());

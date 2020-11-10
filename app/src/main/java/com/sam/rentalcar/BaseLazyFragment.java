@@ -7,8 +7,7 @@ import androidx.fragment.app.Fragment;
 /**
  * author:sam
  * time:2020/09/08
- * desc:
- * version:1.0
+ * desc:懒加载
  */
 public abstract class BaseLazyFragment extends Fragment {
     protected boolean isViewInitiated;
