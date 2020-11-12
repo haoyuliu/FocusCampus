@@ -22,7 +22,10 @@ import com.sam.rentalcar.http.response.FollowResponseBean;
 import com.sam.rentalcar.http.response.HomeVideoLikeResponseBean;
 import com.sam.rentalcar.ui.activity.LoginActivity;
 import com.sam.rentalcar.ui.activity.PersonalHomeActivity;
+import com.sam.rentalcar.ui.dialog.ShareDialog;
 import com.sam.rentalcar.utils.SPUtils;
+import com.sam.umeng.Platform;
+import com.sam.umeng.UmengShare;
 
 import java.util.List;
 
@@ -144,6 +147,12 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 });
             }
         });
+        holder.mImageViewShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //分享
+            }
+        });
     }
 
     private void likeViewPostLike(boolean blike, int position) {
@@ -165,12 +174,17 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         });
     }
 
-    //评论点击的回调接口
+    /**
+     * 评论点击的回调接口
+     */
     public interface ItemCommentOnClickInterface {
         void onItemClick(int position);
     }
 
-    //定义回调方法
+    /**
+     * 定义回调方法
+     */
+
     public void setItemOnClickInterface(ItemCommentOnClickInterface itemOnClickInterface) {
         this.itemOnClickInterface = itemOnClickInterface;
     }
@@ -201,6 +215,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         public TextView mCommentCount;
         public ImageView mFollowImageView;
         public ImageView mImageViewXin;
+        public ImageView mImageViewShare;
 
         VideoHolder(View itemView) {
             super(itemView);
@@ -215,6 +230,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
             mCommentCount = itemView.findViewById(R.id.tv_comment_count);
             mFollowImageView = itemView.findViewById(R.id.iv_focus);
             mImageViewXin = itemView.findViewById(R.id.xin);
+            mImageViewShare = itemView.findViewById(R.id.iv_video_share);
             itemView.setTag(this);
         }
     }

@@ -1,6 +1,5 @@
 package com.sam.rentalcar.videoplayer;
 
-import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,22 +19,16 @@ import com.sam.rentalcar.R;
 import com.sam.rentalcar.bean.UserProductionOrLoveBean;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.http.request.DeleteVideoRequestBean;
-import com.sam.rentalcar.http.response.CommentListBean;
 import com.sam.rentalcar.http.response.DeleteVideoResponseBean;
 import com.sam.rentalcar.ui.dialog.MessageDialog;
 import com.sam.rentalcar.utils.SPUtils;
-import com.sam.rentalcar.widget.CommentDialog;
 
-import java.net.NoRouteToHostException;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.baidu.location.d.j.S;
-import static com.baidu.location.d.j.i;
 
 /**
  * author:sam
@@ -179,12 +172,17 @@ public class TikTokVideoViewAdapter extends RecyclerView.Adapter<TikTokVideoView
         }
     }
 
-    //评论点击的回调接口
+    /**
+     * 评论点击的回调接口
+     */
     public interface ItemCommentOnClickInterface {
         void onItemClick(int position);
     }
 
-    //定义回调方法
+    /**
+     * 定义回调方法
+     */
+
     public void setItemOnClickInterface(ItemCommentOnClickInterface itemOnClickInterface) {
         this.itemOnClickInterface = itemOnClickInterface;
     }

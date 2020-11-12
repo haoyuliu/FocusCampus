@@ -84,8 +84,6 @@
             android:layout_alignParentRight="true"
             android:background="@null"
             android:button="@drawable/selector_checkbox"
-            android:clickable="false"
-            android:focusable="false"
             android:focusableInTouchMode="false"
             tools:checked="true" />
 
@@ -123,8 +121,6 @@
             android:layout_alignParentRight="true"
             android:background="@null"
             android:button="@drawable/selector_checkbox"
-            android:clickable="false"
-            android:focusable="false"
             android:focusableInTouchMode="false"
             tools:checked="true" />
 

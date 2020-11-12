@@ -63,13 +63,9 @@ public class TikTokListAdapter extends RecyclerView.Adapter<TikTokListAdapter.Ti
             mThumb = itemView.findViewById(R.id.iv_thumb);
             mTitle = itemView.findViewById(R.id.tv_title);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    TikTokActivity.start(itemView.getContext(), mPosition);
-
-                }
+            itemView.setOnClickListener(v -> {
+                // 跳转到播放视频的页面
+                TikTokActivity.start(itemView.getContext(), mPosition);
             });
         }
     }
