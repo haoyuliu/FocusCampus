@@ -77,12 +77,17 @@
             android:textColor="#666666"
             android:textSize="15sp" />
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/ck_we_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:checked="false" />
+            android:button="@drawable/selector_checkbox"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            tools:checked="true" />
 
     </RelativeLayout>
 
@@ -111,12 +116,17 @@
             android:textColor="#666666"
             android:textSize="15sp" />
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/ck_ali_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:checked="false" />
+            android:button="@drawable/selector_checkbox"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            tools:checked="true" />
 
     </RelativeLayout>
 

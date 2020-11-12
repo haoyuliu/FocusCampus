@@ -7,6 +7,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatCheckBox;
+
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.common.MyActivity;
 import com.sam.rentalcar.http.net.RetrofitClient;
@@ -46,7 +48,7 @@ public class OrderConfirmationActivity extends MyActivity {
     Button mButtonConfirmOrder;
 
     @BindView(R.id.order_checkbox)
-    CheckBox mCheckBox;
+    AppCompatCheckBox mCheckBox;
 
     @Override
     protected int getLayoutId() {

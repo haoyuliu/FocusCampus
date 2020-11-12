@@ -1,11 +1,14 @@
 package com.sam.rentalcar.chat;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,9 +19,11 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.bean.FansBean;
 import com.sam.rentalcar.http.net.RetrofitClient;
+import com.sam.rentalcar.widget.BaseBottomSheetDialog;
 
 import java.net.HttpURLConnection;
 
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,13 +31,14 @@ import retrofit2.Response;
 /**
  * 底部弹出选择好友的dialog
  */
-public class ChoiceFriendFragment extends BaseDialogFragment {
+public class ChoiceFriendFragment extends BaseBottomSheetDialog {
 
     private RecyclerView mRecyclerView;
     private TextView mTextButton;
 
+    @Nullable
     @Override
-    protected View createView(LayoutInflater inflater, ViewGroup container) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_choice_friend, container, false);
         mRecyclerView = view.findViewById(R.id.friend_recycleview);
         mTextButton = view.findViewById(R.id.but_creat_group);
@@ -41,6 +47,10 @@ public class ChoiceFriendFragment extends BaseDialogFragment {
         return view;
     }
 
+    @Override
+    protected int getHeight() {
+        return getResources().getDisplayMetrics().heightPixels - 600;
+    }
 
     private void initData() {
         String userId = "368499958493609284";

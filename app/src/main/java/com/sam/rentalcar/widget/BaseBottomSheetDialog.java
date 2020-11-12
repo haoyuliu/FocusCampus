@@ -14,8 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.sam.rentalcar.R;
 
 /**
- * create by libo
- * create on 2020-05-27
+ * create by sam
  * description
  */
 public class BaseBottomSheetDialog extends BottomSheetDialogFragment {

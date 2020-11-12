@@ -28,10 +28,14 @@
         android:textSize="15sp"
         tools:text="一个人的表演" />
 
-    <CheckBox
+    <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/ck_friend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@color/white" />
+        android:background="@null"
+        android:button="@drawable/selector_checkbox"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        tools:checked="true" />
 </LinearLayout>
