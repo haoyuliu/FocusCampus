@@ -44,8 +44,8 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:supportsRtl,android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".videoplayer.BaseVideoViewActivity"/>
-        <activity android:name=".videoplayer.TikTokActivity"></activity>
+        <activity android:name=".videoplayer.BaseVideoViewActivity" />
+        <activity android:name=".videoplayer.TikTokActivity" />
         <activity android:name=".ui.activity.RentalCarActivity" />
         <activity android:name=".video.VideoEditActivity" />
         <activity android:name=".video.PlaybackActivity" />

@@ -53,6 +53,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * 视频发布页面
+ */
 public class PlaybackActivity extends AppCompatActivity implements MediaController.MediaPlayerControl {
 
     private static final String TAG = "PlaybackActivity";

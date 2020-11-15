@@ -1,22 +1,25 @@
 package com.sam.rentalcar.video;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.hardware.SensorManager;
 import android.media.AudioFormat;
+import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -43,7 +46,6 @@ import com.qiniu.pili.droid.shortvideo.PLVideoEncodeSetting;
 import com.qiniu.pili.droid.shortvideo.PLVideoFrame;
 import com.qiniu.pili.droid.shortvideo.PLVideoSaveListener;
 import com.sam.rentalcar.R;
-import com.sam.rentalcar.ui.activity.UpLoadVedioActivity;
 import com.sam.rentalcar.utils.GlideEngine;
 
 import java.io.FileNotFoundException;
@@ -440,8 +442,10 @@ public class VideoRecordActivity extends AppCompatActivity implements PLRecordSt
                     public void onResult(List<LocalMedia> result) {
                         // onResult CallbacK
                         String path = result.get(0).getPath();
+
+                        // getRealPathFromUri(VideoRecordActivity.this,path);
                         Intent intent = new Intent(VideoRecordActivity.this, PlaybackActivity.class);
-                        intent.putExtra("MP4_PATH",path);
+                        intent.putExtra("MP4_PATH", path);
                         startActivity(intent);
                     }
 
@@ -450,7 +454,6 @@ public class VideoRecordActivity extends AppCompatActivity implements PLRecordSt
                         // onCancel Callback
                     }
                 });
-
     }
 
     @Override
@@ -763,6 +766,21 @@ public class VideoRecordActivity extends AppCompatActivity implements PLRecordSt
     @Override
     public void onAutoFocusStop() {
         Log.i(TAG, "auto focus stop");
+    }
+
+    public static String getRealPathFromUri(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = {MediaStore.Images.Media.DATA};
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 }
 

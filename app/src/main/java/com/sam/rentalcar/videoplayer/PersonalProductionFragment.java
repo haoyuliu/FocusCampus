@@ -40,7 +40,7 @@ public class PersonalProductionFragment extends MyFragment<HomeActivity> {
     @Override
     protected void initView() {
         mPersonalProoductionRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-
+        mPersonalProoductionRecyclerView.addItemDecoration(new MyDividerItemDecoration(getContext(), MyDividerItemDecoration.HORIZONTAL, R.drawable.border_shape_vidio));
     }
 
     @Override
