@@ -63,7 +63,7 @@ public interface RetrofitApi {
      * @return
      */
     @GET(NetApiConstants.GET_VIDEO_LIST)
-    Call<VideoListBean> loadHomeVideoListData(@Query("pageIndex") int pageIndex, @Query("pageSize") int pageSize);
+    Call<VideoListBean> loadHomeVideoListData(@Header("token") String header, @Query("pageIndex") int pageIndex, @Query("pageSize") int pageSize);
 
     /**
      * 获取首页我的关注的人的视频列表

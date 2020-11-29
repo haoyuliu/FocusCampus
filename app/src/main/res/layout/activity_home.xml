@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".ui.activity.HomeActivity">
 
-
     <FrameLayout
         android:id="@+id/main_tab_content"
         android:layout_width="match_parent"
@@ -37,7 +36,6 @@
             <RadioButton
                 android:id="@+id/rbRentalCar"
                 style="@style/home_bottom_tab_style"
-                android:padding="@dimen/dp_4"
                 android:text="服务"
                 android:textColor="@drawable/text" />
 

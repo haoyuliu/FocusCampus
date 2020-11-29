@@ -15,6 +15,7 @@ import com.sam.rentalcar.controller.TikTokController;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.http.response.CommentListBean;
 import com.sam.rentalcar.ui.activity.HomeActivity;
+import com.sam.rentalcar.utils.SPUtils;
 import com.sam.rentalcar.videoplayer.PreloadManager;
 import com.sam.rentalcar.videoplayer.TikTokAdapter;
 import com.sam.rentalcar.videoplayer.Utils;
@@ -89,7 +90,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
     }
 
     private void getVideoData(int pageIndex, int pageSize) {
-        RetrofitClient.getRetrofitService().loadHomeVideoListData(pageIndex, pageSize).enqueue(new Callback<VideoListBean>() {
+        RetrofitClient.getRetrofitService().loadHomeVideoListData(SPUtils.getInstance(getContext()).getString("token"), pageIndex, pageSize).enqueue(new Callback<VideoListBean>() {
             @Override
             public void onResponse(Call<VideoListBean> call, Response<VideoListBean> response) {
                 VideoListBean listBean = response.body();

@@ -85,6 +85,7 @@ public class GetUserHomePagerMessageResponseBean {
          */
 
         private long userId;
+        private Long userCode;
         private String userDesc;
         private String nickName;
         private String headImg;
@@ -108,6 +109,14 @@ public class GetUserHomePagerMessageResponseBean {
 
         public void setUserId(long userId) {
             this.userId = userId;
+        }
+
+        public Long getUserCode() {
+            return userCode;
+        }
+
+        public void setUserCode(Long userCode) {
+            this.userCode = userCode;
         }
 
         public String getUserDesc() {

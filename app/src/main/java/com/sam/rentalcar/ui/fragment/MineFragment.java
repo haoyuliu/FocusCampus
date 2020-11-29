@@ -146,7 +146,7 @@ public final class MineFragment extends MyFragment<HomeActivity> {
                         GetUserHomePagerMessageResponseBean getUserHomePagerMessageResponseBean = response.body();
                         if (Integer.parseInt(getUserHomePagerMessageResponseBean.getCode()) == HttpURLConnection.HTTP_OK) {
                             Glide.with(getActivity()).load(response.body().getData().getHeadImg()).into(mHeadView);
-                            mTextViewUserID.setText("ID:" + response.body().getData().getUserId() + "");
+                            mTextViewUserID.setText("ID:" + response.body().getData().getUserCode() + "");
                             mTextViewUserNickName.setText(response.body().getData().getNickName());
 
                             if (response.body().getData().getUserDesc() != null) {
