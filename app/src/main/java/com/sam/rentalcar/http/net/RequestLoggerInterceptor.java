@@ -1,6 +1,5 @@
 package com.sam.rentalcar.http.net;
 
-import com.aliyun.vod.common.utils.StringUtils;
 import com.google.android.exoplayer2.util.Log;
 import com.sam.rentalcar.common.MyApplication;
 import com.sam.rentalcar.utils.SPUtils;
@@ -32,6 +31,7 @@ public class RequestLoggerInterceptor implements Interceptor {
         Log.d(TAG, "method ---->: " + request.method());
         Log.d(TAG, "headers ---->: " + request.headers());
         Log.d(TAG, "body ---->: " + request.body());
+        Log.d(TAG, "code ---->: " + request.newBuilder().addHeader("token", token));
       /*  if (StringUtils.isEmpty(token)) {
             Request originalRequest = chain.request();
             return chain.proceed(originalRequest);

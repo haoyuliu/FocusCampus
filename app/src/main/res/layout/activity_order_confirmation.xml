@@ -139,19 +139,31 @@
                     android:src="@drawable/yongcheshijian" />
 
                 <TextView
+                    android:id="@+id/start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="9.5dp"
                     android:layout_marginRight="10dp"
-                    android:text="08月01日  10:00 - 13天 -"
+                    android:text=""
                     android:textColor="#666666"
                     android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:text="08月14日  16:00"
+                    android:layout_marginLeft="9.5dp"
+                    android:layout_marginRight="9.5dp"
+                    android:text="-"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="9.5dp"
+                    android:layout_marginRight="9.5dp"
+                    android:text=""
                     android:textColor="#666666"
                     android:textSize="14sp" />
 

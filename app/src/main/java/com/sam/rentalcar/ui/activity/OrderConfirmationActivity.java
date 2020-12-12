@@ -1,5 +1,6 @@
 package com.sam.rentalcar.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -9,14 +10,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatCheckBox;
 
+import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.common.MyActivity;
+import com.sam.rentalcar.constant.Constant;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.http.response.GetUserConfirmInfoResponseBean;
 import com.sam.rentalcar.http.response.GetUserCouponListResponseBean;
 import com.sam.rentalcar.utils.SPUtils;
 import com.sam.widget.layout.SettingBar;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,6 +55,17 @@ public class OrderConfirmationActivity extends MyActivity {
     @BindView(R.id.order_checkbox)
     AppCompatCheckBox mCheckBox;
 
+    @BindView(R.id.start_time)
+    TextView mTextViewStartTime;
+
+    @BindView(R.id.end_time)
+    TextView mTextViewEndTime;
+
+    private String stringOrderEndMonth;
+    private String stringOrderEndDay;
+    private String stringOrderEndHour;
+    private String stringOrderMin;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_order_confirmation;
@@ -57,6 +73,34 @@ public class OrderConfirmationActivity extends MyActivity {
 
     @Override
     protected void initView() {
+        // 设置获取的数据
+        Intent orderIntent = getIntent();
+        mTextViewStartTime.setText(orderIntent.getStringExtra(Constant.GET_CAR_DEFAULT_MONTH) + getString(R.string.common_month) + orderIntent.getStringExtra(Constant.GET_CAR_DEFAULT_DAY) + getString(R.string.common_day) + orderIntent.getStringExtra(Constant.GET_CAR_DEFAULT_HOUR) + ":" + orderIntent.getStringExtra(Constant.GET_CAR_DEFAULT_MIN));
+
+        stringOrderEndMonth = orderIntent.getStringExtra(Constant.GET_CAR_END_MONTH);
+        stringOrderEndDay = orderIntent.getStringExtra(Constant.GET_CAR_END_DAY);
+        stringOrderEndHour = orderIntent.getStringExtra(Constant.GET_CAR_END_HOUR);
+        stringOrderMin = orderIntent.getStringExtra(Constant.GET_CAR_END_MIN);
+
+        SimpleDateFormat alldate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat yearDate = new SimpleDateFormat("yyyy");
+        SimpleDateFormat monthDate = new SimpleDateFormat("MM");
+        SimpleDateFormat dayDate = new SimpleDateFormat("dd");
+        SimpleDateFormat hourDate = new SimpleDateFormat("HH");
+        SimpleDateFormat minuteData = new SimpleDateFormat("mm");
+
+        if (StringUtil.isEmpty(stringOrderEndMonth) || StringUtil.isEmpty(stringOrderEndDay)) {
+            stringOrderEndMonth = monthDate.format(new Date());
+            stringOrderEndDay = dayDate.format(new Date());
+        }
+        if (StringUtil.isEmpty(stringOrderEndHour) || StringUtil.isEmpty(stringOrderMin)) {
+            stringOrderEndHour = hourDate.format(new Date());
+            stringOrderMin = minuteData.format(new Date());
+        }
+
+        mTextViewEndTime.setText(stringOrderEndMonth + getString(R.string.common_month) + stringOrderEndDay + getString(R.string.common_day) + stringOrderEndHour + ":" + stringOrderMin);
+
+
         //默认设置不可点击
         mButtonConfirmOrder.setEnabled(false);
         mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -74,7 +118,8 @@ public class OrderConfirmationActivity extends MyActivity {
         mButtonConfirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(IdentityAuthenticationActivity.class);
+                // 确认订单，需要先调用接口，如果返回999则需要提示用户进行认证，否则进入订单支付界面
+                confirmOrder();
             }
         });
         // 优惠券
@@ -87,8 +132,37 @@ public class OrderConfirmationActivity extends MyActivity {
         });
     }
 
+    private void confirmOrder() {
+        //获取订单确认页的信息
+        String token = SPUtils.getInstance(OrderConfirmationActivity.this).getString("token");
+
+        RetrofitClient.getRetrofitService().getUserOrderConfirmInfo(token, 1, 2).enqueue(new Callback<GetUserConfirmInfoResponseBean>() {
+            @Override
+            public void onResponse(Call<GetUserConfirmInfoResponseBean> call, Response<GetUserConfirmInfoResponseBean> response) {
+                GetUserConfirmInfoResponseBean getUserConfirmInfoResponseBean = response.body();
+                if (getUserConfirmInfoResponseBean.getCode().equals("200")) {
+                    // 进入支付页面
+                    startActivity(OrderPayActivity.class);
+                } else if (getUserConfirmInfoResponseBean.getCode().equals("999")) {
+                    //进入认证界面
+                    startActivity(IdentityAuthenticationActivity.class);
+                } else {
+                    toast("获取数据失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetUserConfirmInfoResponseBean> call, Throwable t) {
+                toast("网络错误");
+            }
+        });
+
+    }
+    
+
     @Override
     protected void initData() {
+        //获取订单确认页的信息
         String token = SPUtils.getInstance(OrderConfirmationActivity.this).getString("token");
 
         RetrofitClient.getRetrofitService().getUserOrderConfirmInfo(token, 1, 2).enqueue(new Callback<GetUserConfirmInfoResponseBean>() {
@@ -106,8 +180,9 @@ public class OrderConfirmationActivity extends MyActivity {
 
             @Override
             public void onFailure(Call<GetUserConfirmInfoResponseBean> call, Throwable t) {
-
+                toast("网络错误");
             }
+
         });
 
     }

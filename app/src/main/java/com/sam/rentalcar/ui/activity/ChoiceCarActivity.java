@@ -1,5 +1,6 @@
 package com.sam.rentalcar.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ import com.sam.rentalcar.adapter.ConstellationAdapter;
 import com.sam.rentalcar.adapter.GetCarListAdapter;
 import com.sam.rentalcar.adapter.ListDropDownAdapter;
 import com.sam.rentalcar.common.MyActivity;
+import com.sam.rentalcar.constant.Constant;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.http.response.GetCarBrandListResponseBean;
 import com.sam.rentalcar.http.response.GetCarListResponseBean;
@@ -61,6 +63,16 @@ public class ChoiceCarActivity extends MyActivity {
     private long carId = 1;
     private int order = 0;
 
+    // 开始时间
+    private String defaultMonth;
+    private String defaultDay;
+    private String defaultHour;
+    private String defaultMinute;
+    // 结束时间
+    private String endMonth;
+    private String endDay;
+    private String endHour;
+    private String endMinute;
 
     @Override
     protected int getLayoutId() {
@@ -69,6 +81,19 @@ public class ChoiceCarActivity extends MyActivity {
 
     @Override
     protected void initView() {
+        // 获取上一界面传递的参数
+        Intent intent = getIntent();
+        defaultMonth = intent.getStringExtra(Constant.GET_CAR_DEFAULT_MONTH);
+        defaultDay = intent.getStringExtra(Constant.GET_CAR_DEFAULT_DAY);
+        defaultHour = intent.getStringExtra(Constant.GET_CAR_DEFAULT_HOUR);
+        defaultMinute = intent.getStringExtra(Constant.GET_CAR_DEFAULT_MIN);
+
+        endMonth = intent.getStringExtra(Constant.GET_CAR_END_MONTH);
+        endDay = intent.getStringExtra(Constant.GET_CAR_END_DAY);
+        endHour = intent.getStringExtra(Constant.GET_CAR_END_HOUR);
+        endMinute = intent.getStringExtra(Constant.GET_CAR_END_MIN);
+
+
         //init 车型 menu
         ListView modelView = new ListView(this);
         mCarModelAdapter = new ListDropDownAdapter(this, carModelsList);
@@ -115,6 +140,7 @@ public class ChoiceCarActivity extends MyActivity {
         getCarBrandList();
         // 获取选车页面数据
         getChoiceCarData(brandIds, pickUpId, startDate, endDate, carType, brandId, carId, order);
+
     }
 
     private void getChoiceCarData(String brandIds, int pickUpId, String startDate, String endDate, int carType, String brandId, long carId, int order) {
@@ -128,6 +154,21 @@ public class ChoiceCarActivity extends MyActivity {
                     }
                     mGetCarListAdapter = new GetCarListAdapter(ChoiceCarActivity.this, getCarListResponseBean.getData());
                     mRecyclerView.setAdapter(mGetCarListAdapter);
+                    mGetCarListAdapter.setChoiceCarOnclickListener(() -> {
+
+                        Intent choiceIntent = new Intent(ChoiceCarActivity.this, OrderConfirmationActivity.class);
+                        choiceIntent.putExtra(Constant.GET_CAR_DEFAULT_MONTH, defaultMonth);
+                        choiceIntent.putExtra(Constant.GET_CAR_DEFAULT_DAY, defaultDay);
+                        choiceIntent.putExtra(Constant.GET_CAR_DEFAULT_HOUR, defaultHour);
+                        choiceIntent.putExtra(Constant.GET_CAR_DEFAULT_MIN, defaultMinute);
+
+                        choiceIntent.putExtra(Constant.GET_CAR_END_MONTH, endMonth);
+                        choiceIntent.putExtra(Constant.GET_CAR_END_DAY, endDay);
+                        choiceIntent.putExtra(Constant.GET_CAR_END_HOUR, endHour);
+                        choiceIntent.putExtra(Constant.GET_CAR_END_MIN, endMinute);
+                        startActivity(choiceIntent);
+
+                    });
                 }
             }
 

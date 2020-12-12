@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.google.android.exoplayer2.extractor.VorbisUtil;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.http.response.GetCarListResponseBean;
 import com.sam.rentalcar.ui.activity.ChoiceCarActivity;
@@ -28,6 +29,9 @@ import butterknife.BindView;
 public class GetCarListAdapter extends BaseRvAdapter<GetCarListResponseBean.DataBean, GetCarListAdapter.FansViewHolder> {
 
 
+    private ChoiceCarOnclickListener mChoiceCarOnclickListener;
+
+
     public GetCarListAdapter(ChoiceCarActivity context, List<GetCarListResponseBean.DataBean> data) {
         super(context, data);
     }
@@ -39,7 +43,8 @@ public class GetCarListAdapter extends BaseRvAdapter<GetCarListResponseBean.Data
         holder.tvCarPrice.setText(userBean.getPrice() + "");
         holder.tvCarType.setText(userBean.getVolume() + " " + userBean.getTransmission() + " | " + userBean.getBodyType() + userBean.getSeat());
         holder.mButton.setOnClickListener(v -> {
-            holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(), OrderConfirmationActivity.class));
+            //订单确认
+            mChoiceCarOnclickListener.onChoiceClick();
         });
     }
 
@@ -66,5 +71,14 @@ public class GetCarListAdapter extends BaseRvAdapter<GetCarListResponseBean.Data
         public FansViewHolder(View itemView) {
             super(itemView);
         }
+    }
+
+
+    public void setChoiceCarOnclickListener(ChoiceCarOnclickListener choiceCarOnclickListener) {
+        this.mChoiceCarOnclickListener = choiceCarOnclickListener;
+    }
+
+    public interface ChoiceCarOnclickListener {
+        void onChoiceClick();
     }
 }
