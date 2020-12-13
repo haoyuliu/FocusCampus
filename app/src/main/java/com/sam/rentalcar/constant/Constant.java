@@ -44,5 +44,8 @@ public class Constant {
      */
     public static final String QUERY_REGULATIONS_URL = "https://pc.cx580.com/#/?user_from=2020BDH5";
 
-
+    /**
+     * 跳转订单详情页的order-id
+     */
+    public static final String ORDER_ID = "order_id";
 }

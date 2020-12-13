@@ -115,6 +115,14 @@ public class NetApiConstants {
      */
     public static final String GET_USER_ORDER_MESSAGE = "order/list";
     /**
+     * 获取订单详情页数据
+     */
+    public static final String GET_USER_ORDER_DETAIL = "order/detail";
+    /**
+     * 取消订单
+     */
+    public static final String CANCEL_USER_ORDER = "order/cancel";
+    /**
      * 获取唤起支付sdk的信息
      */
     public static final String GET_USER_PAY_ORDER = "order/payOrder";

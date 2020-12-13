@@ -28,6 +28,7 @@ import com.sam.rentalcar.http.response.GetUserHomePagerMessageResponseBean;
 import com.sam.rentalcar.http.response.HomeVideoLikeResponseBean;
 import com.sam.rentalcar.http.response.LoginBean;
 import com.sam.rentalcar.http.response.ModifyMessageResponseBean;
+import com.sam.rentalcar.http.response.OrderDetailResponseBean;
 import com.sam.rentalcar.http.response.OrderListResponseBean;
 import com.sam.rentalcar.http.response.PayOrderResponseBean;
 import com.sam.rentalcar.http.response.UpLoadVideoResponseBean;
@@ -235,6 +236,22 @@ public interface RetrofitApi {
      */
     @GET(NetApiConstants.GET_USER_ORDER_MESSAGE)
     Call<OrderListResponseBean> getUserOrderListInfo(@Query("userId") String userId, @Query("status") int status);
+
+    /**
+     * 获取订单详情页接口
+     *
+     * @return OrderListResponseBean
+     */
+    @GET(NetApiConstants.GET_USER_ORDER_DETAIL)
+    Call<OrderDetailResponseBean> getUserOrderDetail(@Query("userId") String userId, @Query("orderCode") String orderCode);
+
+    /**
+     * 取消订单
+     *
+     * @return OrderListResponseBean
+     */
+    @POST(NetApiConstants.CANCEL_USER_ORDER)
+    Call<OrderListResponseBean> cancelUserOrder(@Query("userId") String userId, @Query("status") int status);
 
     /**
      * 获取唤起支付sdk的信息

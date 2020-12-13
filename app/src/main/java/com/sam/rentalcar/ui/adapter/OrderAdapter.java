@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.sam.rentalcar.R;
+import com.sam.rentalcar.constant.Constant;
 import com.sam.rentalcar.http.response.OrderListResponseBean;
 import com.sam.rentalcar.ui.activity.OrderDetailActivity;
 
@@ -51,7 +52,7 @@ public class OrderAdapter extends BaseRvAdapter<OrderListResponseBean.DataBean, 
             public void onClick(View v) {
                 // 进入订单详情页面
                 Intent orderDetailIntent = new Intent(holder.itemView.getContext(), OrderDetailActivity.class);
-
+                orderDetailIntent.putExtra(Constant.ORDER_ID, userBean.getId() + "");
                 holder.itemView.getContext().startActivity(orderDetailIntent);
             }
         });
