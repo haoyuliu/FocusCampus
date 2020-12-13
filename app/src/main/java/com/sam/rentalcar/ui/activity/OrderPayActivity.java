@@ -26,6 +26,8 @@ import retrofit2.Response;
 
 /**
  * 订单支付界面
+ *
+ * @author Sam
  */
 public class OrderPayActivity extends MyActivity {
     @BindView(R.id.but_pay)
@@ -41,6 +43,9 @@ public class OrderPayActivity extends MyActivity {
 
     }
 
+    /**
+     * 订单支付成功后， 三秒进入订单列表页面
+     */
     Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {

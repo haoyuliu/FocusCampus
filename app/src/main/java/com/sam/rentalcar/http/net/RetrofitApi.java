@@ -28,6 +28,7 @@ import com.sam.rentalcar.http.response.GetUserHomePagerMessageResponseBean;
 import com.sam.rentalcar.http.response.HomeVideoLikeResponseBean;
 import com.sam.rentalcar.http.response.LoginBean;
 import com.sam.rentalcar.http.response.ModifyMessageResponseBean;
+import com.sam.rentalcar.http.response.OrderListResponseBean;
 import com.sam.rentalcar.http.response.PayOrderResponseBean;
 import com.sam.rentalcar.http.response.UpLoadVideoResponseBean;
 import com.sam.rentalcar.http.response.VerficationCodeBean;
@@ -230,10 +231,10 @@ public interface RetrofitApi {
     /**
      * 获取订单列表
      *
-     * @return
+     * @return OrderListResponseBean
      */
     @GET(NetApiConstants.GET_USER_ORDER_MESSAGE)
-    Call<GetUserCouponListResponseBean> getUserOrderInfo(@Query("userId") String userId);
+    Call<OrderListResponseBean> getUserOrderListInfo(@Query("userId") String userId, @Query("status") int status);
 
     /**
      * 获取唤起支付sdk的信息
