@@ -73,6 +73,10 @@ public class OrderConfirmationActivity extends MyActivity {
     @BindView(R.id.end_time)
     TextView mTextViewEndTime;
 
+    @BindView(R.id.pay_price)
+    TextView mTextViewPayPrice;
+
+
     private String stringOrderEndMonth;
     private String stringOrderEndDay;
     private String stringOrderEndHour;
@@ -197,6 +201,7 @@ public class OrderConfirmationActivity extends MyActivity {
                     mSettingBarRentalFee.setRightText("￥" + userConfirmInfoResponseBeanData.getBasicCost().get(0).getCostMoney());
                     mSettingBarBaseFee.setRightText("￥" + userConfirmInfoResponseBeanData.getBasicCost().get(1).getCostMoney());
                     mSettingBarServiceFee.setRightText("￥" + userConfirmInfoResponseBeanData.getVipCost().get(0).getCostMoney());
+                    mTextViewPayPrice.setText("金额￥" + userConfirmInfoResponseBeanData.getBasicCost().get(0).getCostMoney());
                 } else {
                     toast("获取数据失败");
                 }

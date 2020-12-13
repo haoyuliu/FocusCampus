@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatCheckBox;
 
 import com.alipay.sdk.app.PayTask;
 import com.sam.rentalcar.R;
@@ -32,6 +33,9 @@ import retrofit2.Response;
 public class OrderPayActivity extends MyActivity {
     @BindView(R.id.but_pay)
     Button mButtonPay;
+
+    @BindView(R.id.ck_ali_pay)
+    AppCompatCheckBox mAppCompatCheckBox;
 
     @Override
     protected int getLayoutId() {
@@ -80,10 +84,15 @@ public class OrderPayActivity extends MyActivity {
 
     @Override
     protected void initData() {
+
         String orderId = getIntent().getStringExtra(Constant.GET_ORDER_ID);
         mButtonPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!mAppCompatCheckBox.isChecked()) {
+                    toast("请选择支付方式");
+                    return;
+                }
                 // 先获取payorderinfo信息
                 String token = SPUtils.getInstance(OrderPayActivity.this).getString("token");
                 PayOrderRequestBean payOrderRequestBean = new PayOrderRequestBean();
