@@ -175,7 +175,7 @@
                 android:layout_marginTop="42.5dp"
                 app:bar_leftSize="16px"
                 app:bar_leftText="租车费用"
-                app:bar_rightText="￥4802" />
+                app:bar_rightText="" />
 
             <com.sam.widget.layout.SettingBar
                 android:layout_width="match_parent"
@@ -192,7 +192,7 @@
                 app:bar_leftSize="12px"
                 app:bar_leftText="车辆租赁费"
                 app:bar_lineVisible="false"
-                app:bar_rightText="￥4502" />
+                app:bar_rightText="" />
 
             <com.sam.widget.layout.SettingBar
                 android:id="@+id/car_base_fee"
@@ -202,7 +202,7 @@
                 app:bar_leftSize="12px"
                 app:bar_leftText="基础服务费"
                 app:bar_lineVisible="false"
-                app:bar_rightText="￥300" />
+                app:bar_rightText="" />
 
             <com.sam.widget.layout.SettingBar
                 android:layout_width="match_parent"
@@ -230,13 +230,14 @@
                 app:bar_lineVisible="false" />
 
             <com.sam.widget.layout.SettingBar
+                android:id="@+id/service_fee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:bar_leftColor="#666666"
                 app:bar_leftSize="12px"
                 app:bar_leftText="尊享服务费"
                 app:bar_lineVisible="false"
-                app:bar_rightText="￥100" />
+                app:bar_rightText="" />
 
             <com.sam.widget.layout.SettingBar
                 android:layout_width="match_parent"

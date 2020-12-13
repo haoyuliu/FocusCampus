@@ -4,6 +4,7 @@ package com.sam.rentalcar.http.net;
 import com.sam.rentalcar.bean.FansBean;
 import com.sam.rentalcar.bean.UserProductionOrLoveBean;
 import com.sam.rentalcar.bean.VideoListBean;
+import com.sam.rentalcar.http.request.ConfirmOrderRequestBean;
 import com.sam.rentalcar.http.request.DeleteVideoRequestBean;
 import com.sam.rentalcar.http.request.HomeVideoLikeRequestBean;
 import com.sam.rentalcar.http.request.LoginRequestBean;
@@ -13,6 +14,7 @@ import com.sam.rentalcar.http.request.VideoCommentRequestBean;
 import com.sam.rentalcar.http.request.GetUpLoadImageRequestBean;
 import com.sam.rentalcar.http.request.upLoadAfterRequestBean;
 import com.sam.rentalcar.http.response.CommentListBean;
+import com.sam.rentalcar.http.response.ConfirmOrderResponseBean;
 import com.sam.rentalcar.http.response.DeleteVideoResponseBean;
 import com.sam.rentalcar.http.response.FollowResponseBean;
 import com.sam.rentalcar.http.response.GetCarBrandListResponseBean;
@@ -205,7 +207,7 @@ public interface RetrofitApi {
      * @return
      */
     @GET(NetApiConstants.GET_USER_COUPON_LIST)
-    Call<GetUserCouponListResponseBean> getUserCouponList(@Header("Header") String header);
+    Call<GetUserCouponListResponseBean> getUserCouponList(@Header("token") String token);
 
     /**
      * 获取订单确认页信息
@@ -213,15 +215,15 @@ public interface RetrofitApi {
      * @return
      */
     @GET(NetApiConstants.GET_USER_ORDER_CONFIRM_INFO)
-    Call<GetUserConfirmInfoResponseBean> getUserOrderConfirmInfo(@Header("Header") String header, @Query("carId") int carId, @Query("days") int days);
+    Call<GetUserConfirmInfoResponseBean> getUserOrderConfirmInfo(@Header("token") String token, @Query("carId") String carId, @Query("days") String days);
 
     /**
      * 用户点击确认订单
      *
      * @return
      */
-    @GET(NetApiConstants.GET_USER_CONFIRM_ORDER)
-    Call<GetUserCouponListResponseBean> getUserConfirmOrder(@Header("Header") String header);
+    @POST(NetApiConstants.GET_USER_CONFIRM_ORDER)
+    Call<ConfirmOrderResponseBean> getUserConfirmOrder(@Header("token") String token, @Body ConfirmOrderRequestBean confirmOrderRequestBean);
 
     /**
      * 获取订单列表

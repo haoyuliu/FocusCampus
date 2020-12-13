@@ -60,15 +60,7 @@ public final class SplashActivity extends MyActivity {
 
     @Override
     protected void initData() {
-        if (AppConfig.isDebug()) {
-            mDebugView.setVisibility(View.VISIBLE);
-        } else {
-            mDebugView.setVisibility(View.INVISIBLE);
-        }
 
-        if (true) {
-            return;
-        }
     }
 
     @Override

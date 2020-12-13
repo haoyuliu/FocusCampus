@@ -219,6 +219,8 @@ dependencies {
     implementation 'com.qiniu:qiniu-android-sdk:7.3.11'
     //短视频核心库依赖
     implementation files('libs/pldroid-shortvideo-3.1.1.jar')
+    // 支付宝，和libs上面的名字一模一样
+    //implementation (name:'aalipaysdk-noutdid-15.8.00.201112210139', ext: 'aar')
     // 国际化：https://github.com/getActivity/MultiLanguages
     // 悬浮窗：https://github.com/getActivity/XToast
     // 工具类：https://github.com/Blankj/AndroidUtilCode

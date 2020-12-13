@@ -18,6 +18,10 @@ allprojects {
     repositories {
         jcenter()
         google()
+        // 支付宝支付添加下面的内容
+        flatDir {
+            dirs 'libs'
+        }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }

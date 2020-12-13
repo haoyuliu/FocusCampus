@@ -15,6 +15,8 @@ import com.sam.rentalcar.R;
 import com.sam.rentalcar.common.MyActivity;
 import com.sam.rentalcar.constant.Constant;
 import com.sam.rentalcar.http.net.RetrofitClient;
+import com.sam.rentalcar.http.request.ConfirmOrderRequestBean;
+import com.sam.rentalcar.http.response.ConfirmOrderResponseBean;
 import com.sam.rentalcar.http.response.GetUserConfirmInfoResponseBean;
 import com.sam.rentalcar.http.response.GetUserCouponListResponseBean;
 import com.sam.rentalcar.utils.SPUtils;
@@ -38,12 +40,22 @@ public class OrderConfirmationActivity extends MyActivity {
 
     @BindView(R.id.iv_confirm_car)
     ImageView mImageViewConfirmCar;
-
+    /**
+     * 车辆租赁费
+     */
     @BindView(R.id.car_rental_fee)
     SettingBar mSettingBarRentalFee;
-
+    /**
+     * 基础服务费
+     */
     @BindView(R.id.car_base_fee)
     SettingBar mSettingBarBaseFee;
+
+    /**
+     * 尊享服务费
+     */
+    @BindView(R.id.service_fee)
+    SettingBar mSettingBarServiceFee;
 
     @BindView(R.id.setting_bar_coupons)
     SettingBar mSettingBarCoupons;
@@ -115,6 +127,7 @@ public class OrderConfirmationActivity extends MyActivity {
                 }
             }
         });
+        // 确认订单
         mButtonConfirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +139,7 @@ public class OrderConfirmationActivity extends MyActivity {
         mSettingBarCoupons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 选择优惠券
+                // 选择优惠券,默认不给，需要用户手动选择优惠券
                 startActivity(CouponListActivity.class);
             }
         });
@@ -135,15 +148,22 @@ public class OrderConfirmationActivity extends MyActivity {
     private void confirmOrder() {
         //获取订单确认页的信息
         String token = SPUtils.getInstance(OrderConfirmationActivity.this).getString("token");
-
-        RetrofitClient.getRetrofitService().getUserOrderConfirmInfo(token, 1, 2).enqueue(new Callback<GetUserConfirmInfoResponseBean>() {
+        ConfirmOrderRequestBean confirmOrderRequestBean = new ConfirmOrderRequestBean();
+        confirmOrderRequestBean.setBackPickUpId(1);
+        confirmOrderRequestBean.setBeginDate("2020-12-01 09:00:00");
+        confirmOrderRequestBean.setCarId(1);
+        confirmOrderRequestBean.setCouponId(1);
+        confirmOrderRequestBean.setEndDate("2020-12-02 09:00:00");
+        confirmOrderRequestBean.setTakePickUpId(1);
+        confirmOrderRequestBean.setVipService(1);
+        RetrofitClient.getRetrofitService().getUserConfirmOrder(token, confirmOrderRequestBean).enqueue(new Callback<ConfirmOrderResponseBean>() {
             @Override
-            public void onResponse(Call<GetUserConfirmInfoResponseBean> call, Response<GetUserConfirmInfoResponseBean> response) {
-                GetUserConfirmInfoResponseBean getUserConfirmInfoResponseBean = response.body();
-                if (getUserConfirmInfoResponseBean.getCode().equals("200")) {
+            public void onResponse(Call<ConfirmOrderResponseBean> call, Response<ConfirmOrderResponseBean> response) {
+                ConfirmOrderResponseBean confirmOrderResponseBean = response.body();
+                if (confirmOrderResponseBean.getCode().equals("200")) {
                     // 进入支付页面
                     startActivity(OrderPayActivity.class);
-                } else if (getUserConfirmInfoResponseBean.getCode().equals("999")) {
+                } else if (confirmOrderResponseBean.getCode().equals("999")) {
                     //进入认证界面
                     startActivity(IdentityAuthenticationActivity.class);
                 } else {
@@ -152,27 +172,28 @@ public class OrderConfirmationActivity extends MyActivity {
             }
 
             @Override
-            public void onFailure(Call<GetUserConfirmInfoResponseBean> call, Throwable t) {
+            public void onFailure(Call<ConfirmOrderResponseBean> call, Throwable t) {
                 toast("网络错误");
             }
         });
 
     }
-    
+
 
     @Override
     protected void initData() {
         //获取订单确认页的信息
         String token = SPUtils.getInstance(OrderConfirmationActivity.this).getString("token");
 
-        RetrofitClient.getRetrofitService().getUserOrderConfirmInfo(token, 1, 2).enqueue(new Callback<GetUserConfirmInfoResponseBean>() {
+        RetrofitClient.getRetrofitService().getUserOrderConfirmInfo(token, 1+"", 1+"").enqueue(new Callback<GetUserConfirmInfoResponseBean>() {
             @Override
             public void onResponse(Call<GetUserConfirmInfoResponseBean> call, Response<GetUserConfirmInfoResponseBean> response) {
                 GetUserConfirmInfoResponseBean getUserConfirmInfoResponseBean = response.body();
-                if (getUserConfirmInfoResponseBean.getCode().equals("200")) {
+                if ("200".equals(getUserConfirmInfoResponseBean.getCode())) {
                     GetUserConfirmInfoResponseBean.DataBean userConfirmInfoResponseBeanData = getUserConfirmInfoResponseBean.getData();
                     mSettingBarRentalFee.setRightText("￥" + userConfirmInfoResponseBeanData.getBasicCost().get(0).getCostMoney());
                     mSettingBarBaseFee.setRightText("￥" + userConfirmInfoResponseBeanData.getBasicCost().get(1).getCostMoney());
+                    mSettingBarServiceFee.setRightText("￥" + userConfirmInfoResponseBeanData.getVipCost().get(0).getCostMoney());
                 } else {
                     toast("获取数据失败");
                 }
