@@ -23,10 +23,10 @@ import retrofit2.Response;
 /**
  * desc:订单已完成页面
  */
-public final class OrderCompleteFragment extends MyFragment<HomeActivity> {
+public class OrderCompleteFragment extends MyFragment<HomeActivity> {
     public static final String TAG = "OrderCompleteFragment";
 
-    public static final String status = "2";
+    public static final int status = 2;
 
     @BindView(R.id.order_complete_recyclerview)
     RecyclerView mRecyclerViewComplete;
@@ -49,7 +49,7 @@ public final class OrderCompleteFragment extends MyFragment<HomeActivity> {
     @Override
     protected void initData() {
         String userId = SPUtils.getInstance(getActivity()).getString("UserId");
-        RetrofitClient.getRetrofitService().getUserOrderListInfo(userId, 1).enqueue(new Callback<OrderListResponseBean>() {
+        RetrofitClient.getRetrofitService().getUserOrderListInfo(userId, status).enqueue(new Callback<OrderListResponseBean>() {
             @Override
             public void onResponse(Call<OrderListResponseBean> call, Response<OrderListResponseBean> response) {
                 OrderListResponseBean orderListResponseBean = response.body();

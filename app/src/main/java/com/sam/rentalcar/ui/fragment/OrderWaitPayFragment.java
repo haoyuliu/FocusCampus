@@ -3,6 +3,7 @@ package com.sam.rentalcar.ui.fragment;
 import android.util.Log;
 import android.view.View;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sam.rentalcar.R;
@@ -21,10 +22,10 @@ import retrofit2.Response;
 /**
  * desc:订单待付款页面
  */
-public final class OrderWaitPayFragment extends MyFragment<HomeActivity> {
+public class OrderWaitPayFragment extends MyFragment<HomeActivity> {
     public static final String TAG = "OrderCompleteFragment";
 
-    public static final String status = "0";
+    public static final int status = 0;
 
     @BindView(R.id.order_wait_recyclerview)
     RecyclerView mRecyclerViewWait;
@@ -36,7 +37,7 @@ public final class OrderWaitPayFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-
+        mRecyclerViewWait.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
@@ -47,7 +48,7 @@ public final class OrderWaitPayFragment extends MyFragment<HomeActivity> {
     @Override
     protected void initData() {
         String userId = SPUtils.getInstance(getActivity()).getString("UserId");
-        RetrofitClient.getRetrofitService().getUserOrderListInfo(userId, 1).enqueue(new Callback<OrderListResponseBean>() {
+        RetrofitClient.getRetrofitService().getUserOrderListInfo(userId, status).enqueue(new Callback<OrderListResponseBean>() {
             @Override
             public void onResponse(Call<OrderListResponseBean> call, Response<OrderListResponseBean> response) {
                 OrderListResponseBean orderListResponseBean = response.body();

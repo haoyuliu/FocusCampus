@@ -38,4 +38,11 @@ public class Constant {
      * 订单id
      */
     public static final String GET_ORDER_ID = "get_order_id";
+
+    /**
+     * 违章查新的url
+     */
+    public static final String QUERY_REGULATIONS_URL = "https://pc.cx580.com/#/?user_from=2020BDH5";
+
+
 }

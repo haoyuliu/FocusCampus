@@ -1,5 +1,7 @@
 package com.sam.rentalcar.ui.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +15,7 @@ import com.sam.rentalcar.R;
 import com.sam.rentalcar.adapter.HomeRentalCarLowPriceAdapter;
 import com.sam.rentalcar.aop.SingleClick;
 import com.sam.rentalcar.common.MyFragment;
+import com.sam.rentalcar.constant.Constant;
 import com.sam.rentalcar.http.glide.GlideApp;
 import com.sam.rentalcar.http.net.RetrofitClient;
 import com.sam.rentalcar.http.response.GetRentalCarHomeMessageResponseBean;
@@ -49,6 +52,9 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
     @BindView(R.id.ll_financial)
     LinearLayout mLinearLayoutFinanical;
 
+    @BindView(R.id.ll_query)
+    LinearLayout mLinearLayoutQuery;
+
     public static RentalCarFragment newInstance() {
         return new RentalCarFragment();
     }
@@ -60,7 +66,7 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.ll_rental_car, R.id.ll_buy_car, R.id.ll_maintain, R.id.ll_financial);
+        setOnClickListener(R.id.ll_rental_car, R.id.ll_buy_car, R.id.ll_maintain, R.id.ll_financial, R.id.ll_query);
     }
 
     @Override
@@ -85,6 +91,14 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
                 break;
             case R.id.ll_financial:
                 // 金融服务
+                break;
+            case R.id.ll_query:
+                // 违章查询
+                Uri uri = Uri.parse(Constant.QUERY_REGULATIONS_URL);
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                intent.setData(uri);
+                startActivity(intent);
                 break;
             default:
                 break;

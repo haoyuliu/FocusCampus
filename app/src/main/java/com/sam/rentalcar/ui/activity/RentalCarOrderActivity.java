@@ -41,15 +41,16 @@ public class RentalCarOrderActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        mOrderCompleteFragment = new OrderCompleteFragment();
-        mOrderOnGoingFragment = new OrderOnGoingFragment();
-        mOrderCancelFragment = new OrderCancelFragment();
         mOrderWaitPayFragment = new OrderWaitPayFragment();
+        mOrderOnGoingFragment = new OrderOnGoingFragment();
+        mOrderCompleteFragment = new OrderCompleteFragment();
+        mOrderCancelFragment = new OrderCancelFragment();
 
-        fragments.add(mOrderCompleteFragment);
-        fragments.add(mOrderOnGoingFragment);
-        fragments.add(mOrderCancelFragment);
         fragments.add(mOrderWaitPayFragment);
+        fragments.add(mOrderOnGoingFragment);
+        fragments.add(mOrderCompleteFragment);
+        fragments.add(mOrderCancelFragment);
+
 
         mOrderXtabLayout.addTab(mOrderXtabLayout.newTab().setText("待付款"));
         mOrderXtabLayout.addTab(mOrderXtabLayout.newTab().setText("进行中"));
