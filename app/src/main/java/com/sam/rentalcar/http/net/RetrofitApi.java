@@ -4,6 +4,7 @@ package com.sam.rentalcar.http.net;
 import com.sam.rentalcar.bean.FansBean;
 import com.sam.rentalcar.bean.UserProductionOrLoveBean;
 import com.sam.rentalcar.bean.VideoListBean;
+import com.sam.rentalcar.http.request.CancelOrderRequestBean;
 import com.sam.rentalcar.http.request.ConfirmOrderRequestBean;
 import com.sam.rentalcar.http.request.DeleteVideoRequestBean;
 import com.sam.rentalcar.http.request.HomeVideoLikeRequestBean;
@@ -251,7 +252,7 @@ public interface RetrofitApi {
      * @return OrderListResponseBean
      */
     @POST(NetApiConstants.CANCEL_USER_ORDER)
-    Call<OrderListResponseBean> cancelUserOrder(@Query("userId") String userId, @Query("status") int status);
+    Call<OrderListResponseBean> cancelUserOrder(@Body CancelOrderRequestBean cancelOrderRequestBean);
 
     /**
      * 获取唤起支付sdk的信息

@@ -48,4 +48,8 @@ public class Constant {
      * 跳转订单详情页的order-id
      */
     public static final String ORDER_ID = "order_id";
+    /**
+     * 订单类型
+     */
+    public static final String ORDER_TYPE = "order_type";
 }

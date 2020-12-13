@@ -1,12 +1,15 @@
 package com.sam.rentalcar.ui.activity;
 
+import android.view.View;
 import android.widget.TextView;
 
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.common.MyActivity;
 import com.sam.rentalcar.constant.Constant;
 import com.sam.rentalcar.http.net.RetrofitClient;
+import com.sam.rentalcar.http.request.CancelOrderRequestBean;
 import com.sam.rentalcar.http.response.OrderDetailResponseBean;
+import com.sam.rentalcar.http.response.OrderListResponseBean;
 import com.sam.rentalcar.utils.SPUtils;
 import com.sam.widget.layout.SettingBar;
 
@@ -47,6 +50,9 @@ public class OrderDetailActivity extends MyActivity {
     @BindView(R.id.order_detail_service_fee)
     SettingBar mSettingBarServiceFee;
 
+    @BindView(R.id.cancel_order)
+    TextView mTextViewCancelOrder;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_order_detail;
@@ -54,7 +60,48 @@ public class OrderDetailActivity extends MyActivity {
 
     @Override
     protected void initView() {
+        String stringExtra = getIntent().getStringExtra(Constant.ORDER_TYPE);
+        if (stringExtra.equals("0")) {
+            mTextViewCancelOrder.setText("去支付");
+        } else if (stringExtra.equals("1")) {
+            mTextViewCancelOrder.setText("取消订单");
+        } else {
+            mTextViewCancelOrder.setVisibility(View.GONE);
+        }
+        mTextViewCancelOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (stringExtra.equals("0")) {
 
+                } else if (stringExtra.equals("1")) {
+                    // 取消订单
+                    cancelOrder();
+                }
+            }
+        });
+    }
+
+    private void cancelOrder() {
+        CancelOrderRequestBean cancelOrderRequestBean = new CancelOrderRequestBean();
+        cancelOrderRequestBean.setOrderCode(getIntent().getStringExtra(Constant.ORDER_ID));
+        cancelOrderRequestBean.setPayWay(1);
+        RetrofitClient.getRetrofitService().cancelUserOrder(cancelOrderRequestBean).enqueue(new Callback<OrderListResponseBean>() {
+            @Override
+            public void onResponse(Call<OrderListResponseBean> call, Response<OrderListResponseBean> response) {
+                OrderListResponseBean orderListResponseBean = response.body();
+                if (orderListResponseBean.getCode().equals("200")) {
+                    toast("订单取消成功");
+                } else {
+                    toast("取消订单失败");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<OrderListResponseBean> call, Throwable t) {
+                toast("取消订单失败");
+            }
+        });
     }
 
     @Override

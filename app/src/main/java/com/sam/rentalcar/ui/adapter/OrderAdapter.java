@@ -53,6 +53,7 @@ public class OrderAdapter extends BaseRvAdapter<OrderListResponseBean.DataBean, 
                 // 进入订单详情页面
                 Intent orderDetailIntent = new Intent(holder.itemView.getContext(), OrderDetailActivity.class);
                 orderDetailIntent.putExtra(Constant.ORDER_ID, userBean.getId() + "");
+                orderDetailIntent.putExtra(Constant.ORDER_TYPE, mStatus + "");
                 holder.itemView.getContext().startActivity(orderDetailIntent);
             }
         });
