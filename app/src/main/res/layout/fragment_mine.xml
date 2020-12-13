@@ -14,7 +14,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/main.collapsing"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
@@ -39,6 +39,7 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/dp_10"
+                    android:paddingTop="10dp"
                     android:paddingBottom="@dimen/dp_10">
 
                     <com.sam.rentalcar.widget.CircleImageView
@@ -52,7 +53,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:gravity="center_vertical"
                         android:orientation="vertical">
@@ -79,9 +80,18 @@
                                 android:src="@mipmap/level_one" />
                         </LinearLayout>
 
+                        <TextView
+                            android:id="@+id/mine_user_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:layout_marginTop="5dp"
+                            android:textColor="#EE3239"
+                            android:textSize="12sp" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/dp_10"
                             android:orientation="horizontal">
 
@@ -91,9 +101,9 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/mine_shape_edit_data"
                                 android:paddingLeft="40.5dp"
-                                android:paddingTop="7dp"
                                 android:paddingRight="40.5dp"
                                 android:paddingBottom="7dp"
+                               android:paddingTop="7dp"
                                 android:text="编辑资料"
                                 android:textColor="#999999"
                                 android:textSize="14sp" />
@@ -107,7 +117,7 @@
                                 android:paddingLeft="11dp"
                                 android:paddingTop="7dp"
                                 android:paddingRight="11dp"
-                                android:paddingBottom="7.5dp"
+                                android:paddingBottom="7dp"
                                 android:text="+好友"
                                 android:textColor="@color/color_check_home"
                                 android:textSize="14sp" />
@@ -123,14 +133,6 @@
                     android:orientation="vertical"
                     android:paddingLeft="15.5dp"
                     android:paddingTop="5dp">
-
-                    <TextView
-                        android:id="@+id/mine_user_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="#EE3239"
-                        android:textSize="12sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

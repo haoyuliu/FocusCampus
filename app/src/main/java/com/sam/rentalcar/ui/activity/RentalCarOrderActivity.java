@@ -7,8 +7,10 @@ import com.androidkun.xtablayout.XTabLayout;
 import com.sam.rentalcar.R;
 import com.sam.rentalcar.common.MyActivity;
 import com.sam.rentalcar.ui.adapter.CommPagerAdapter;
+import com.sam.rentalcar.ui.fragment.OrderCancelFragment;
 import com.sam.rentalcar.ui.fragment.OrderCompleteFragment;
 import com.sam.rentalcar.ui.fragment.OrderOnGoingFragment;
+import com.sam.rentalcar.ui.fragment.OrderWaitPayFragment;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,8 @@ public class RentalCarOrderActivity extends MyActivity {
 
     private OrderCompleteFragment mOrderCompleteFragment;
     private OrderOnGoingFragment mOrderOnGoingFragment;
+    private OrderCancelFragment mOrderCancelFragment;
+    private OrderWaitPayFragment mOrderWaitPayFragment;
     private CommPagerAdapter pagerAdapter;
     private ArrayList<Fragment> fragments = new ArrayList<>();
 
@@ -38,15 +42,21 @@ public class RentalCarOrderActivity extends MyActivity {
     @Override
     protected void initView() {
         mOrderCompleteFragment = new OrderCompleteFragment();
-
         mOrderOnGoingFragment = new OrderOnGoingFragment();
+        mOrderCancelFragment = new OrderCancelFragment();
+        mOrderWaitPayFragment = new OrderWaitPayFragment();
 
         fragments.add(mOrderCompleteFragment);
         fragments.add(mOrderOnGoingFragment);
-        mOrderXtabLayout.addTab(mOrderXtabLayout.newTab().setText("已完成"));
-        mOrderXtabLayout.addTab(mOrderXtabLayout.newTab().setText("进行中"));
+        fragments.add(mOrderCancelFragment);
+        fragments.add(mOrderWaitPayFragment);
 
-        pagerAdapter = new CommPagerAdapter(getSupportFragmentManager(), fragments, new String[]{"已完成", "进行中"});
+        mOrderXtabLayout.addTab(mOrderXtabLayout.newTab().setText("待付款"));
+        mOrderXtabLayout.addTab(mOrderXtabLayout.newTab().setText("进行中"));
+        mOrderXtabLayout.addTab(mOrderXtabLayout.newTab().setText("已完成"));
+        mOrderXtabLayout.addTab(mOrderXtabLayout.newTab().setText("已取消"));
+
+        pagerAdapter = new CommPagerAdapter(getSupportFragmentManager(), fragments, new String[]{"待付款", "进行中", "已完成", "已取消"});
         mOrderViewPager.setAdapter(pagerAdapter);
         mOrderXtabLayout.setupWithViewPager(mOrderViewPager);
 

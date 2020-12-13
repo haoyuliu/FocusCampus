@@ -21,11 +21,11 @@
         android:layout_centerInParent="true"
         android:padding="5dp"
         app:xTabIndicatorColor="@color/color_check_home"
-        app:xTabIndicatorWidth="35dp"
-        app:xTabSelectedTextColor="@color/black"
+        app:xTabIndicatorWidth="55dp"
+        app:xTabSelectedTextColor="@color/color_check_home"
         app:xTabSelectedTextSize="18sp"
         app:xTabTextBold="true"
-        app:xTabTextColor="#CCCCCC"
+        app:xTabTextColor="#333333"
         app:xTabTextSize="18sp" />
 
     <androidx.viewpager.widget.ViewPager

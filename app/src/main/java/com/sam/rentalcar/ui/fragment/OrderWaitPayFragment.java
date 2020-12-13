@@ -8,18 +8,18 @@ import com.sam.rentalcar.common.MyFragment;
 import com.sam.rentalcar.ui.activity.HomeActivity;
 
 /**
- * desc:订单已完成页面
+ * desc:订单待付款页面
  */
-public final class OrderCompleteFragment extends MyFragment<HomeActivity> {
+public final class OrderWaitPayFragment extends MyFragment<HomeActivity> {
     public static final String TAG = "OrderCompleteFragment";
 
-    public static OrderCompleteFragment newInstance() {
-        return new OrderCompleteFragment();
+    public static OrderWaitPayFragment newInstance() {
+        return new OrderWaitPayFragment();
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_order_complete;
+        return R.layout.fragment_wait_pay;
     }
 
     @Override

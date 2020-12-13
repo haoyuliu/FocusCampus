@@ -9,6 +9,7 @@ import com.sam.rentalcar.http.request.DeleteVideoRequestBean;
 import com.sam.rentalcar.http.request.HomeVideoLikeRequestBean;
 import com.sam.rentalcar.http.request.LoginRequestBean;
 import com.sam.rentalcar.http.request.ModifyMessageRequestBean;
+import com.sam.rentalcar.http.request.PayOrderRequestBean;
 import com.sam.rentalcar.http.request.UpLoadVideoRequestBean;
 import com.sam.rentalcar.http.request.VideoCommentRequestBean;
 import com.sam.rentalcar.http.request.GetUpLoadImageRequestBean;
@@ -27,6 +28,7 @@ import com.sam.rentalcar.http.response.GetUserHomePagerMessageResponseBean;
 import com.sam.rentalcar.http.response.HomeVideoLikeResponseBean;
 import com.sam.rentalcar.http.response.LoginBean;
 import com.sam.rentalcar.http.response.ModifyMessageResponseBean;
+import com.sam.rentalcar.http.response.PayOrderResponseBean;
 import com.sam.rentalcar.http.response.UpLoadVideoResponseBean;
 import com.sam.rentalcar.http.response.VerficationCodeBean;
 import com.sam.rentalcar.http.response.VideoCommentResponseBean;
@@ -238,8 +240,8 @@ public interface RetrofitApi {
      *
      * @return
      */
-    @GET(NetApiConstants.GET_USER_PAY_ORDER)
-    Call<GetUserCouponListResponseBean> getUserPayOrder(@Query("userId") String userId);
+    @POST(NetApiConstants.GET_USER_PAY_ORDER)
+    Call<PayOrderResponseBean> getUserPayOrder(@Header("token") String token, @Body PayOrderRequestBean payOrderRequestBean);
 
     /**
      * 根据经纬度获取城市id

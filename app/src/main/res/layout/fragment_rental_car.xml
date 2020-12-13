@@ -11,10 +11,10 @@
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleSize="18sp"
         app:backButton="false"
         app:lineVisible="false"
-        app:title="服务" />
+        app:title="服务"
+        app:titleSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -178,6 +178,49 @@
                 android:textColor="@color/white" />
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17.5dp"
+        android:layout_marginTop="10.5dp"
+        android:layout_marginRight="17.5dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@mipmap/weizhang"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="违章查询"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5.5dp"
+                android:text="违章记录实时更新 罚单处理不丢不漏"
+                android:textColor="#999999"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35.5dp"
+                android:background="@drawable/shape_service_item"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="快速查询"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

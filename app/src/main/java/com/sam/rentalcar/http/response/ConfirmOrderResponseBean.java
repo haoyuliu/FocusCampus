@@ -64,7 +64,7 @@ public class ConfirmOrderResponseBean {
         this.traceId = traceId;
     }
 
-    public static class DataBean {
+    public class DataBean {
         /**
          * id : 416674548570783744
          * carId : 1

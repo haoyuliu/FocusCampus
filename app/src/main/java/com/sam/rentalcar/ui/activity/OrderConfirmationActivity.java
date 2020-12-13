@@ -161,8 +161,11 @@ public class OrderConfirmationActivity extends MyActivity {
             public void onResponse(Call<ConfirmOrderResponseBean> call, Response<ConfirmOrderResponseBean> response) {
                 ConfirmOrderResponseBean confirmOrderResponseBean = response.body();
                 if (confirmOrderResponseBean.getCode().equals("200")) {
+                    String orderId = confirmOrderResponseBean.getData().getId() + "";
+                    Intent orderIntent = new Intent(OrderConfirmationActivity.this, OrderPayActivity.class);
+                    orderIntent.putExtra(Constant.GET_ORDER_ID, orderId);
                     // 进入支付页面
-                    startActivity(OrderPayActivity.class);
+                    startActivity(orderIntent);
                 } else if (confirmOrderResponseBean.getCode().equals("999")) {
                     //进入认证界面
                     startActivity(IdentityAuthenticationActivity.class);
@@ -185,7 +188,7 @@ public class OrderConfirmationActivity extends MyActivity {
         //获取订单确认页的信息
         String token = SPUtils.getInstance(OrderConfirmationActivity.this).getString("token");
 
-        RetrofitClient.getRetrofitService().getUserOrderConfirmInfo(token, 1+"", 1+"").enqueue(new Callback<GetUserConfirmInfoResponseBean>() {
+        RetrofitClient.getRetrofitService().getUserOrderConfirmInfo(token, 1 + "", 1 + "").enqueue(new Callback<GetUserConfirmInfoResponseBean>() {
             @Override
             public void onResponse(Call<GetUserConfirmInfoResponseBean> call, Response<GetUserConfirmInfoResponseBean> response) {
                 GetUserConfirmInfoResponseBean getUserConfirmInfoResponseBean = response.body();
