@@ -20,9 +20,6 @@ import butterknife.BindView;
  */
 public final class SplashActivity extends MyActivity {
 
-    @BindView(R.id.tv_splash_debug)
-    View mDebugView;
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_splash;
