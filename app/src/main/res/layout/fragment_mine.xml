@@ -42,7 +42,7 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="@dimen/dp_10">
 
-                    <com.sam.rentalcar.widget.CircleImageView
+                    <com.sam.globalRentalCar.widget.CircleImageView
                         android:id="@+id/mine_user_head"
                         android:layout_width="80dp"
                         android:layout_height="80dp"

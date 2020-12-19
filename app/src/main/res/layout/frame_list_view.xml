@@ -6,7 +6,7 @@
     android:layout_marginTop="5dp"
     android:gravity="center_vertical">
 
-    <com.sam.rentalcar.video.ObservableHorizontalScrollView
+    <com.sam.globalRentalCar.video.ObservableHorizontalScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content" />
 
         </RelativeLayout>
-    </com.sam.rentalcar.video.ObservableHorizontalScrollView>
+    </com.sam.globalRentalCar.video.ObservableHorizontalScrollView>
 
     <ImageView
         android:id="@+id/middle_line_image"

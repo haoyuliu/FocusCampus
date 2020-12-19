@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sam.rentalcar.videoplayer.TikTokView
+    <com.sam.globalRentalCar.videoplayer.TikTokView
         android:id="@+id/tiktok_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

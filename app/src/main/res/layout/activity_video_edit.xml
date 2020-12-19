@@ -36,13 +36,13 @@
             android:onClick="onSaveEdit" />
     </LinearLayout>
 
-    <com.sam.rentalcar.video.SquareRelativeLayout
+    <com.sam.globalRentalCar.video.SquareRelativeLayout
         android:id="@+id/preview_wrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_layout">
 
-        <com.sam.rentalcar.video.SquareGLSurfaceView
+        <com.sam.globalRentalCar.video.SquareGLSurfaceView
             android:id="@+id/preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -65,13 +65,13 @@
             android:layout_height="match_parent"
             android:background="@color/transparent" />
 
-        <com.sam.rentalcar.video.FrameListView
+        <com.sam.globalRentalCar.video.FrameListView
             android:id="@+id/frame_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/preview">
 
-        </com.sam.rentalcar.video.FrameListView>
+        </com.sam.globalRentalCar.video.FrameListView>
 
         <LinearLayout
             android:id="@+id/speed_panel"
@@ -165,16 +165,16 @@
                 android:textColor="@color/speedTextNormal"
                 android:textSize="15sp" />
         </LinearLayout>
-    </com.sam.rentalcar.video.SquareRelativeLayout>
+    </com.sam.globalRentalCar.video.SquareRelativeLayout>
 
 
-    <com.sam.rentalcar.video.TextSelectorPanel
+    <com.sam.globalRentalCar.video.TextSelectorPanel
         android:id="@+id/text_selector_panel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
 
-    <com.sam.rentalcar.video.PaintSelectorPanel
+    <com.sam.globalRentalCar.video.PaintSelectorPanel
         android:id="@+id/paint_selector_panel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -326,7 +326,7 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <com.sam.rentalcar.video.ImageSelectorPanel
+        <com.sam.globalRentalCar.video.ImageSelectorPanel
             android:id="@+id/image_selector_panel"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -335,7 +335,7 @@
             android:background="@android:color/background_dark"
             android:visibility="gone" />
 
-        <com.sam.rentalcar.video.GifSelectorPanel
+        <com.sam.globalRentalCar.video.GifSelectorPanel
             android:id="@+id/gif_selector_panel"
             android:layout_width="match_parent"
             android:layout_height="0dp"

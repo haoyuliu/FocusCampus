@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false">
 
-    <com.sam.rentalcar.video.SquareGLSurfaceView
+    <com.sam.globalRentalCar.video.SquareGLSurfaceView
         android:id="@+id/preview"
         android:layout_width="match_parent"
         android:layout_height="610dp" />
@@ -26,7 +26,7 @@
             android:onClick="onClickBrightness"
             android:src="@mipmap/btn_brightness" />
 
-        <com.sam.rentalcar.video.VerticalSeekBar
+        <com.sam.globalRentalCar.video.VerticalSeekBar
             android:id="@+id/adjust_brightness"
             android:layout_width="wrap_content"
             android:layout_height="400dp"
@@ -119,7 +119,7 @@
         android:layout_height="0dp"
         android:clipChildren="false">
 
-        <com.sam.rentalcar.video.FocusIndicator
+        <com.sam.globalRentalCar.video.FocusIndicator
             android:id="@+id/focus_indicator"
             android:layout_width="100dp"
             android:layout_height="100dp" />
@@ -176,7 +176,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <com.sam.rentalcar.video.SectionProgressBar
+        <com.sam.globalRentalCar.video.SectionProgressBar
             android:id="@+id/record_progressbar"
             android:layout_width="match_parent"
             android:layout_height="8dp" />

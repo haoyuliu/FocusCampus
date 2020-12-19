@@ -7,7 +7,7 @@ android {
     defaultConfig {
 
         // 无痛修改包名
-        applicationId "com.sam.rentalcar"
+        applicationId "com.sam.globalRentalCar"
 
         // 仅保留中文语种的资源
         resConfig 'zh'

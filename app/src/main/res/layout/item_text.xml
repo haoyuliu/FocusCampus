@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:layout_marginTop="20dp">
 
-    <com.sam.rentalcar.video.StrokedTextView
+    <com.sam.globalRentalCar.video.StrokedTextView
         android:id="@+id/TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
