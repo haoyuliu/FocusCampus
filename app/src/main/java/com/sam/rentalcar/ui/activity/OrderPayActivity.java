@@ -62,6 +62,7 @@ public class OrderPayActivity extends MyActivity {
                         case AliPayResultStatus.PAY_SUCCESS:
                             Toast.makeText(OrderPayActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                             //通知接口支付成功
+                            //startActivity(OrderDetailActivity.class);
                             //getPresenter().alipayVerify(new VerifyBody(InfoUtils.getUserId(), rs, r, result.getExtraParam()));
                             break;
                         case AliPayResultStatus.PAY_PROCESSING:

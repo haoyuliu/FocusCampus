@@ -27,20 +27,12 @@ public class RequestLoggerInterceptor implements Interceptor {
         Request request = chain.request();
         String token = SPUtils.getInstance(MyApplication.getInstance()).getString("token");
         Log.d(TAG, "本地token ---->: " + token);
+        request.newBuilder().header("token", token);
         Log.d(TAG, "url ---->: " + request.url());
         Log.d(TAG, "method ---->: " + request.method());
         Log.d(TAG, "headers ---->: " + request.headers());
         Log.d(TAG, "body ---->: " + request.body());
-        Log.d(TAG, "code ---->: " + request.newBuilder().addHeader("token", token));
-      /*  if (StringUtils.isEmpty(token)) {
-            Request originalRequest = chain.request();
-            return chain.proceed(originalRequest);
-        } else {
-            Request originalRequest = chain.request();
-            Request updateRequest = originalRequest.newBuilder().header("token", token).build();
-            Log.d(TAG, "Header ---->" + originalRequest.headers());
-            return chain.proceed(updateRequest);
-        }*/
+
         return chain.proceed(request);
     }
 }

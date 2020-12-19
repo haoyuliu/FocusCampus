@@ -2,6 +2,7 @@ package com.sam.rentalcar.ui.activity;
 
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -9,14 +10,16 @@ import android.widget.RadioGroup;
 
 import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.sam.rentalcar.R;
+import com.sam.rentalcar.chat.MessageFragment;
 import com.sam.rentalcar.common.MyActivity;
 import com.sam.rentalcar.helper.ActivityStackManager;
 import com.sam.rentalcar.helper.DoubleClickHelper;
+import com.sam.rentalcar.http.net.BaseResponse;
 import com.sam.rentalcar.ui.fragment.FragmentManagerHelper;
 import com.sam.rentalcar.ui.fragment.HomeFragment;
-import com.sam.rentalcar.chat.MessageFragment;
 import com.sam.rentalcar.ui.fragment.MineFragment;
 import com.sam.rentalcar.ui.fragment.RentalCarFragment;
+import com.sam.rentalcar.utils.RxBus;
 import com.sam.rentalcar.utils.SPUtils;
 import com.sam.rentalcar.video.PermissionChecker;
 import com.sam.rentalcar.video.ToastUtils;
@@ -24,6 +27,7 @@ import com.sam.rentalcar.video.VideoRecordActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 /**
  * desc   : 项目的主页界面，包含底部的四个Fragment
@@ -31,6 +35,7 @@ import butterknife.OnClick;
  */
 public class HomeActivity extends MyActivity {
 
+    private static final String TAG = "ResponseLogInterceptor";
     private HomeFragment mHomeFragment;
     private RentalCarFragment mRentalCarFragment;
     private MessageFragment mMessageFragment;
@@ -71,6 +76,17 @@ public class HomeActivity extends MyActivity {
 
     @Override
     protected void initData() {
+        Log.d(TAG, "HomeActivity ---->:initData");
+        RxBus.getDefault().toObservable(BaseResponse.class)
+                .subscribe(new Action1<BaseResponse>() {
+                    @Override
+                    public void call(BaseResponse o) {
+                        Log.d(TAG, "HomeActivity ---->:baseResponse+收到发送的消息了");
+                        if (o.getCode().equals("401")) {
+                            startActivity(LoginActivity.class);
+                        }
+                    }
+                });
     }
 
     /**
@@ -95,7 +111,7 @@ public class HomeActivity extends MyActivity {
             case R.id.rbMessage:
                 //消息
                 if (isLogin()) {
-                   // setLayoutBottonMargin(mRadioGroup.getHeight());
+                    // setLayoutBottonMargin(mRadioGroup.getHeight());
                     switchToMessageFragment();
                     rbMessage.setChecked(true);
                 }
@@ -110,7 +126,7 @@ public class HomeActivity extends MyActivity {
                 break;
             case R.id.rbTakePhoto:
                 if (isLogin()) {
-                   // setLayoutBottonMargin(mRadioGroup.getHeight());
+                    // setLayoutBottonMargin(mRadioGroup.getHeight());
                     //startActivity(UpLoadVedioActivity.class);
                     //短视频拍摄
                     if (isPermissionOK()) {
