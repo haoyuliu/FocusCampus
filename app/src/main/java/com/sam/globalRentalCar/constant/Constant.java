@@ -42,7 +42,7 @@ public class Constant {
     /**
      * 违章查新的url
      */
-    public static final String QUERY_REGULATIONS_URL = "https://pc.cx580.com/#/?user_from=2020BDH5";
+    public static final String QUERY_REGULATIONS_URL = "https://sd.122.gov.cn/?hpzl=02&hphm=%E9%B2%81AV8A56&fdjh=170807393&captcha=CE34&submit=%E5%BC%80%E5%A7%8B%E6%9F%A5%E8%AF%A2#/inquiry";
 
     /**
      * 跳转订单详情页的order-id

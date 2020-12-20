@@ -9,6 +9,7 @@ import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.common.MyFragment;
 import com.sam.globalRentalCar.constant.Constant;
+import com.sam.globalRentalCar.ui.activity.BrowserActivity;
 import com.sam.globalRentalCar.ui.activity.HomeActivity;
 import com.sam.globalRentalCar.ui.activity.RentalCarActivity;
 
@@ -72,11 +73,7 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
                 break;
             case R.id.ll_query:
                 // 违章查询
-                Uri uri = Uri.parse(Constant.QUERY_REGULATIONS_URL);
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                intent.setData(uri);
-                startActivity(intent);
+                BrowserActivity.start(getContext(), Constant.QUERY_REGULATIONS_URL);
                 break;
             default:
                 break;

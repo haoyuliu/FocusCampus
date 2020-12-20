@@ -32,7 +32,7 @@
             app:srlEnableLoadMore="false"
             app:srlPrimaryColor="#444444">
 
-            <com.sam.rental.widget.BrowserView
+            <com.sam.globalRentalCar.widget.BrowserView
                 android:id="@+id/wv_browser_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
