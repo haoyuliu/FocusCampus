@@ -168,12 +168,6 @@ public class RentalCarActivity extends MyActivity {
         }
     }
 
-    @Override
-    public boolean isStatusBarEnabled() {
-        // 使用沉浸式状态栏
-        return !super.isStatusBarEnabled();
-    }
-
     private void choiceStartDate() {
         // 日期选择对话框
         new DateDialog.Builder(RentalCarActivity.this)
