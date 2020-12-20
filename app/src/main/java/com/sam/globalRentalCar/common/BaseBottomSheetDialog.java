@@ -1,4 +1,4 @@
-package com.sam.globalRentalCar.widget;
+package com.sam.globalRentalCar.common;
 
 import android.content.Context;
 import android.os.Bundle;

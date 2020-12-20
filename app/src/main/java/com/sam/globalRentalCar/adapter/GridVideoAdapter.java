@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.bean.UserProductionOrLoveBean;
-import com.sam.globalRentalCar.ui.adapter.BaseRvAdapter;
-import com.sam.globalRentalCar.ui.adapter.BaseRvViewHolder;
+import com.sam.globalRentalCar.common.BaseRvAdapter;
+import com.sam.globalRentalCar.common.BaseRvViewHolder;
 import com.sam.globalRentalCar.videoplayer.TikTokActivity;
 
 import java.util.List;

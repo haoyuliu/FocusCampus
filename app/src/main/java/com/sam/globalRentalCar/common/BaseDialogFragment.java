@@ -1,4 +1,4 @@
-package com.sam.globalRentalCar.chat;
+package com.sam.globalRentalCar.common;
 
 import android.os.Bundle;
 import android.view.Gravity;

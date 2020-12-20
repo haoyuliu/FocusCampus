@@ -15,7 +15,7 @@ import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.helper.ActivityStackManager;
 import com.sam.globalRentalCar.helper.DoubleClickHelper;
 import com.sam.globalRentalCar.http.net.BaseResponse;
-import com.sam.globalRentalCar.ui.fragment.FragmentManagerHelper;
+import com.sam.globalRentalCar.common.FragmentManagerHelper;
 import com.sam.globalRentalCar.ui.fragment.HomeFragment;
 import com.sam.globalRentalCar.ui.fragment.MineFragment;
 import com.sam.globalRentalCar.ui.fragment.RentalCarFragment;

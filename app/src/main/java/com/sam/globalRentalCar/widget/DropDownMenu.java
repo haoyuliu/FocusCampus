@@ -1,4 +1,4 @@
-package com.sam.globalRentalCar.widget.DropDownMenu;
+package com.sam.globalRentalCar.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.sam.globalRentalCar.R;
+import com.sam.globalRentalCar.utils.DeviceUtils;
 
 import java.util.List;
 

@@ -11,7 +11,7 @@ import com.sam.globalRentalCar.common.MyFragment;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.response.OrderListResponseBean;
 import com.sam.globalRentalCar.ui.activity.HomeActivity;
-import com.sam.globalRentalCar.ui.adapter.OrderAdapter;
+import com.sam.globalRentalCar.adapter.OrderAdapter;
 import com.sam.globalRentalCar.utils.SPUtils;
 
 import butterknife.BindView;

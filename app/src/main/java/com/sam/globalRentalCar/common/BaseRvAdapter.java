@@ -1,8 +1,9 @@
-package com.sam.globalRentalCar.ui.adapter;
+package com.sam.globalRentalCar.common;
 
 import android.content.Context;
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 /**

@@ -21,7 +21,7 @@ import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.response.FollowResponseBean;
 import com.sam.globalRentalCar.http.response.GetUserHomePagerMessageResponseBean;
-import com.sam.globalRentalCar.ui.adapter.CommPagerAdapter;
+import com.sam.globalRentalCar.adapter.CommPagerAdapter;
 import com.sam.globalRentalCar.videoplayer.PersonalLoveFragment;
 import com.sam.globalRentalCar.videoplayer.PersonalProductionFragment;
 import com.sam.globalRentalCar.utils.SPUtils;

@@ -1,4 +1,4 @@
-package com.sam.globalRentalCar.ui.fragment;
+package com.sam.globalRentalCar.common;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;

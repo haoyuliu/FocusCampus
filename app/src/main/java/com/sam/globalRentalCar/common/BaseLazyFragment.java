@@ -1,4 +1,4 @@
-package com.sam.globalRentalCar;
+package com.sam.globalRentalCar.common;
 
 import android.os.Bundle;
 

@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.bean.VideoBean;
 import com.sam.globalRentalCar.ui.activity.PlayListActivity;
-import com.sam.globalRentalCar.ui.adapter.BaseRvAdapter;
-import com.sam.globalRentalCar.ui.adapter.BaseRvViewHolder;
+import com.sam.globalRentalCar.common.BaseRvAdapter;
+import com.sam.globalRentalCar.common.BaseRvViewHolder;
 import com.sam.globalRentalCar.utils.NumUtils;
 
 import java.util.List;

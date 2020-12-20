@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dueeeke.videoplayer.player.VideoView;
-import com.sam.globalRentalCar.BaseLazyFragment;
+import com.sam.globalRentalCar.common.BaseLazyFragment;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.bean.VideoListBean;
 import com.sam.globalRentalCar.controller.TikTokController;

@@ -11,7 +11,7 @@ import com.sam.base.BaseAdapter;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.action.StatusAction;
 import com.sam.globalRentalCar.common.MyActivity;
-import com.sam.globalRentalCar.ui.adapter.StatusAdapter;
+import com.sam.globalRentalCar.adapter.StatusAdapter;
 import com.sam.globalRentalCar.ui.dialog.MenuDialog;
 import com.sam.globalRentalCar.widget.HintLayout;
 import com.sam.widget.layout.WrapRecyclerView;

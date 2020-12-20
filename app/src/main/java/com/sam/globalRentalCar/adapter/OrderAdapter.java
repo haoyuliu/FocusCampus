@@ -1,4 +1,4 @@
-package com.sam.globalRentalCar.ui.adapter;
+package com.sam.globalRentalCar.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.sam.globalRentalCar.R;
+import com.sam.globalRentalCar.common.BaseRvAdapter;
+import com.sam.globalRentalCar.common.BaseRvViewHolder;
 import com.sam.globalRentalCar.constant.Constant;
 import com.sam.globalRentalCar.http.response.OrderListResponseBean;
 import com.sam.globalRentalCar.ui.activity.OrderDetailActivity;

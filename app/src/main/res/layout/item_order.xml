@@ -7,7 +7,7 @@
     android:layout_marginTop="15dp"
     android:layout_marginRight="15dp"
     android:orientation="vertical"
-    tools:context=".ui.adapter.PhotoAdapter">
+    tools:context=".adapter.PhotoAdapter">
 
     <RelativeLayout
         android:layout_width="match_parent"

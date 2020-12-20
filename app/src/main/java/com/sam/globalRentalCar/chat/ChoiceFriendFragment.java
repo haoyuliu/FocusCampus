@@ -19,7 +19,7 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.bean.FansBean;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
-import com.sam.globalRentalCar.widget.BaseBottomSheetDialog;
+import com.sam.globalRentalCar.common.BaseBottomSheetDialog;
 
 import java.net.HttpURLConnection;
 

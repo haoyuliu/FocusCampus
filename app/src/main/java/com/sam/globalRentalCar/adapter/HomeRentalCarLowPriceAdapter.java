@@ -14,8 +14,8 @@ import com.bumptech.glide.Glide;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.http.response.GetRentalCarHomeMessageResponseBean;
 import com.sam.globalRentalCar.ui.activity.LowPriceCarActivity;
-import com.sam.globalRentalCar.ui.adapter.BaseRvAdapter;
-import com.sam.globalRentalCar.ui.adapter.BaseRvViewHolder;
+import com.sam.globalRentalCar.common.BaseRvAdapter;
+import com.sam.globalRentalCar.common.BaseRvViewHolder;
 
 import java.util.List;
 

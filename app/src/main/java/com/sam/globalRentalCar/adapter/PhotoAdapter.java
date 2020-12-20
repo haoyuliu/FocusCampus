@@ -1,4 +1,4 @@
-package com.sam.globalRentalCar.ui.adapter;
+package com.sam.globalRentalCar.adapter;
 
 import android.content.Context;
 import android.view.ViewGroup;

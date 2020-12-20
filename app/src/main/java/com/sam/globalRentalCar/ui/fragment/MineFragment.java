@@ -25,7 +25,7 @@ import com.sam.globalRentalCar.ui.activity.HomeActivity;
 import com.sam.globalRentalCar.ui.activity.PersonalDataActivity;
 import com.sam.globalRentalCar.ui.activity.RentalCarOrderActivity;
 import com.sam.globalRentalCar.ui.activity.SettingActivity;
-import com.sam.globalRentalCar.ui.adapter.CommPagerAdapter;
+import com.sam.globalRentalCar.adapter.CommPagerAdapter;
 import com.sam.globalRentalCar.utils.SPUtils;
 import com.sam.globalRentalCar.widget.CircleImageView;
 

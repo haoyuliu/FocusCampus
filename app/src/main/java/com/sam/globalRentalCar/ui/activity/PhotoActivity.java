@@ -23,7 +23,7 @@ import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.other.GridSpaceDecoration;
 import com.sam.globalRentalCar.constant.IntentKey;
-import com.sam.globalRentalCar.ui.adapter.PhotoAdapter;
+import com.sam.globalRentalCar.adapter.PhotoAdapter;
 import com.sam.globalRentalCar.ui.dialog.AlbumDialog;
 import com.sam.globalRentalCar.widget.HintLayout;
 import com.hjq.permissions.Permission;

@@ -1,4 +1,4 @@
-package com.sam.globalRentalCar.ui.adapter;
+package com.sam.globalRentalCar.common;
 
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;

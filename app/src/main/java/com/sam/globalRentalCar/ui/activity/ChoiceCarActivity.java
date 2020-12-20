@@ -18,7 +18,7 @@ import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.response.GetCarBrandListResponseBean;
 import com.sam.globalRentalCar.http.response.GetCarListResponseBean;
 import com.sam.globalRentalCar.http.response.GetCarTypeListResponseBean;
-import com.sam.globalRentalCar.widget.DropDownMenu.DropDownMenu;
+import com.sam.globalRentalCar.widget.DropDownMenu;
 
 import java.util.ArrayList;
 import java.util.Arrays;

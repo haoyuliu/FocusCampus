@@ -16,7 +16,7 @@
         app:titleSize="18sp" />
 
 
-    <com.sam.globalRentalCar.widget.DropDownMenu.DropDownMenu
+    <com.sam.globalRentalCar.widget.DropDownMenu
         android:id="@+id/dropDownMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

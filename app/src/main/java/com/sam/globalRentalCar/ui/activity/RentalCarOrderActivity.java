@@ -6,7 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.androidkun.xtablayout.XTabLayout;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.common.MyActivity;
-import com.sam.globalRentalCar.ui.adapter.CommPagerAdapter;
+import com.sam.globalRentalCar.adapter.CommPagerAdapter;
 import com.sam.globalRentalCar.ui.fragment.OrderCancelFragment;
 import com.sam.globalRentalCar.ui.fragment.OrderCompleteFragment;
 import com.sam.globalRentalCar.ui.fragment.OrderOnGoingFragment;

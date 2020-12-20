@@ -9,7 +9,7 @@ import com.androidkun.xtablayout.XTabLayout;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.common.MyFragment;
 import com.sam.globalRentalCar.ui.activity.HomeActivity;
-import com.sam.globalRentalCar.ui.adapter.CommPagerAdapter;
+import com.sam.globalRentalCar.adapter.CommPagerAdapter;
 
 import java.util.ArrayList;
 
