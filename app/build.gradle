@@ -65,11 +65,11 @@ android {
             debuggable false
             jniDebuggable false
             // 移除无用的资源文件
-            shrinkResources true
+            shrinkResources false
             // ZipAlign 优化
-            zipAlignEnabled true
+            zipAlignEnabled false
             // 设置混淆
-            minifyEnabled true
+            minifyEnabled false
             // 正式环境下的 BuglyId
             buildConfigField "String", "BUGLY_ID", "\"请自行替换 Bugly 上面的 AppID\""
             signingConfig signingConfigs.config
@@ -114,10 +114,6 @@ dependencies {
 
     // Dex 分包，解决 64k 方法问题
     //implementation 'androidx.multidex:multidex:2.0.1'
-
-    // 网络请求框架：https://github.com/getActivity/EasyHttp
-    implementation 'com.hjq:http:5.0'
-
     // 权限请求框架：https://github.com/getActivity/XXPermissions
     implementation 'com.hjq:xxpermissions:6.2'
 

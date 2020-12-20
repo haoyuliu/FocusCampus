@@ -9,23 +9,26 @@ import com.hjq.bar.TitleBar;
 import com.sam.base.BaseFragment;
 import com.sam.globalRentalCar.action.TitleBarAction;
 import com.sam.globalRentalCar.action.ToastAction;
-import com.hjq.http.EasyHttp;
 import com.sam.umeng.UmengClient;
 
 import butterknife.ButterKnife;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 项目中 Fragment 懒加载基类
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : 项目中 Fragment 懒加载基类
  */
 public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A>
         implements ToastAction, TitleBarAction {
 
-    /** 标题栏对象 */
+    /**
+     * 标题栏对象
+     */
     private TitleBar mTitleBar;
-    /** 状态栏沉浸 */
+    /**
+     * 状态栏沉浸
+     */
     private ImmersionBar mImmersionBar;
 
     @Override
@@ -137,7 +140,6 @@ public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A>
 
     @Override
     public void onDetach() {
-        EasyHttp.cancel(this);
         super.onDetach();
     }
 }

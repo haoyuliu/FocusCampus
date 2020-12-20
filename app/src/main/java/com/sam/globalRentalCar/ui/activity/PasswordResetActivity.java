@@ -11,16 +11,12 @@ import com.sam.globalRentalCar.aop.DebugLog;
 import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.helper.InputTextHelper;
-import com.sam.globalRentalCar.http.model.HttpData;
-import com.sam.globalRentalCar.http.request.PasswordApi;
 import com.sam.globalRentalCar.other.IntentKey;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
 
 import butterknife.BindView;
 
 /**
- *    desc   : 重置密码
+ * desc   : 重置密码
  */
 public final class PasswordResetActivity extends MyActivity {
 
@@ -39,9 +35,13 @@ public final class PasswordResetActivity extends MyActivity {
     @BindView(R.id.btn_password_reset_commit)
     Button mCommitView;
 
-    /** 手机号 */
+    /**
+     * 手机号
+     */
     private String mPhone;
-    /** 验证码 */
+    /**
+     * 验证码
+     */
     private String mCode;
 
     @Override
@@ -76,21 +76,6 @@ public final class PasswordResetActivity extends MyActivity {
                 finish();
                 return;
             }
-
-            // 重置密码
-            EasyHttp.post(this)
-                    .api(new PasswordApi()
-                    .setPhone(mPhone)
-                    .setCode(mCode)
-                    .setPassword(mPasswordView1.getText().toString()))
-                    .request(new HttpCallback<HttpData<Void>>(this) {
-
-                        @Override
-                        public void onSucceed(HttpData<Void> data) {
-                            toast(R.string.password_reset_success);
-                            finish();
-                        }
-                    });
         }
     }
 }

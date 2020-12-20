@@ -15,33 +15,37 @@ import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.action.SwipeAction;
 import com.sam.globalRentalCar.action.TitleBarAction;
 import com.sam.globalRentalCar.action.ToastAction;
-import com.sam.globalRentalCar.http.model.HttpData;
 import com.sam.globalRentalCar.ui.dialog.WaitDialog;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.OnHttpListener;
 import com.sam.umeng.UmengClient;
 
 import butterknife.ButterKnife;
-import okhttp3.Call;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/10/18
- *    desc   : 项目中的 Activity 基类
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/10/18
+ * desc   : 项目中的 Activity 基类
  */
 public abstract class MyActivity extends BaseActivity
         implements ToastAction, TitleBarAction,
-        SwipeAction, OnHttpListener {
+        SwipeAction {
 
-    /** 标题栏对象 */
+    /**
+     * 标题栏对象
+     */
     private TitleBar mTitleBar;
-    /** 状态栏沉浸 */
+    /**
+     * 状态栏沉浸
+     */
     private ImmersionBar mImmersionBar;
 
-    /** 加载对话框 */
+    /**
+     * 加载对话框
+     */
     private BaseDialog mDialog;
-    /** 对话框数量 */
+    /**
+     * 对话框数量
+     */
     private int mDialogTotal;
 
     /**
@@ -197,35 +201,9 @@ public abstract class MyActivity extends BaseActivity
         overridePendingTransition(R.anim.activity_left_in, R.anim.activity_left_out);
     }
 
-    /**
-     * {@link OnHttpListener}
-     */
-
-    @Override
-    public void onStart(Call call) {
-        showDialog();
-    }
-
-    @Override
-    public void onSucceed(Object result) {
-        if (result instanceof HttpData) {
-            toast(((HttpData) result).getMessage());
-        }
-    }
-
-    @Override
-    public void onFail(Exception e) {
-        toast(e.getMessage());
-    }
-
-    @Override
-    public void onEnd(Call call) {
-        hideDialog();
-    }
 
     @Override
     protected void onDestroy() {
-        EasyHttp.cancel(this);
         if (isShowDialog()) {
             mDialog.dismiss();
         }

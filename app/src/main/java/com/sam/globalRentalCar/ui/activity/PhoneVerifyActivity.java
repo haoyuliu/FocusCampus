@@ -9,17 +9,12 @@ import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.helper.InputTextHelper;
-import com.sam.globalRentalCar.http.model.HttpData;
-import com.sam.globalRentalCar.http.request.GetCodeApi;
-import com.sam.globalRentalCar.http.request.VerifyCodeApi;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
 import com.sam.widget.view.CountdownView;
 
 import butterknife.BindView;
 
 /**
- *    desc   : 校验手机号
+ * desc   : 校验手机号
  */
 public final class PhoneVerifyActivity extends MyActivity {
 
@@ -62,18 +57,6 @@ public final class PhoneVerifyActivity extends MyActivity {
                     toast(R.string.common_code_send_hint);
                     return;
                 }
-
-                // 获取验证码
-                EasyHttp.post(this)
-                        .api(new GetCodeApi()
-                        .setPhone(mPhoneView.getText().toString()))
-                        .request(new HttpCallback<HttpData<Void>>(this) {
-
-                            @Override
-                            public void onSucceed(HttpData<Void> data) {
-                                toast(R.string.common_code_send_hint);
-                            }
-                        });
                 break;
             case R.id.btn_phone_verify_commit:
                 if (true) {
@@ -82,21 +65,6 @@ public final class PhoneVerifyActivity extends MyActivity {
                     finish();
                     return;
                 }
-
-                // 验证码校验
-                EasyHttp.post(this)
-                        .api(new VerifyCodeApi()
-                        .setPhone(mPhoneView.getText().toString())
-                        .setCode(mCodeView.getText().toString()))
-                        .request(new HttpCallback<HttpData<Void>>(this) {
-
-                            @Override
-                            public void onSucceed(HttpData<Void> data) {
-                                // 跳转到绑定手机号页面
-                                PhoneResetActivity.start(getActivity(), mCodeView.getText().toString());
-                                finish();
-                            }
-                        });
                 break;
             default:
                 break;

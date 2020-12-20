@@ -11,27 +11,21 @@ import android.widget.TextView;
 
 import androidx.core.content.FileProvider;
 
+import com.hjq.permissions.Permission;
 import com.sam.base.BaseDialog;
 import com.sam.base.action.AnimAction;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.aop.Permissions;
 import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.other.AppConfig;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.OnDownloadListener;
-import com.hjq.http.model.DownloadInfo;
-import com.hjq.http.model.HttpMethod;
-import com.hjq.permissions.Permission;
 
 import java.io.File;
 
-import okhttp3.Call;
-
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2019/03/20
- *    desc   : 升级对话框
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2019/03/20
+ * desc   : 升级对话框
  */
 public final class UpdateDialog {
 
@@ -45,15 +39,25 @@ public final class UpdateDialog {
         private final TextView mUpdateView;
         private final TextView mCloseView;
 
-        /** Apk 文件 */
+        /**
+         * Apk 文件
+         */
         private File mApkFile;
-        /** 下载地址 */
+        /**
+         * 下载地址
+         */
         private String mDownloadUrl;
-        /** 文件 MD5 */
+        /**
+         * 文件 MD5
+         */
         private String mFileMD5;
-        /** 当前是否下载中 */
+        /**
+         * 当前是否下载中
+         */
         private boolean mDownloading;
-        /** 当前是否下载完毕 */
+        /**
+         * 当前是否下载完毕
+         */
         private boolean mDownloadComplete;
 
         public Builder(Context context) {
@@ -141,58 +145,6 @@ public final class UpdateDialog {
             mApkFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), getString(R.string.app_name) + "_v" + mNameView.getText().toString() + ".apk");
             // 设置对话框不能被取消
             setCancelable(false);
-
-            EasyHttp.download(getActivity())
-                    .method(HttpMethod.GET)
-                    .file(mApkFile)
-                    .url(mDownloadUrl)
-                    .md5(mFileMD5)
-                    .listener(new OnDownloadListener() {
-
-                        @Override
-                        public void onStart(Call call) {
-                            // 标记为下载中
-                            mDownloading = true;
-                            // 标记成未下载完成
-                            mDownloadComplete = false;
-                            // 后台更新
-                            mCloseView.setText(R.string.update_background);
-                            // 显示进度条
-                            mProgressView.setVisibility(View.VISIBLE);
-                        }
-
-                        @Override
-                        public void onProgress(DownloadInfo info) {
-                            mUpdateView.setText(String.format(getString(R.string.update_status_running), info.getDownloadProgress()));
-                            mProgressView.setProgress(info.getDownloadProgress());
-                        }
-
-                        @Override
-                        public void onComplete(DownloadInfo info) {
-                            mCloseView.setText(R.string.update_no);
-                            mUpdateView.setText(R.string.update_status_successful);
-                            // 标记成下载完成
-                            mDownloadComplete = true;
-                            // 安装 Apk
-                            installApk();
-                        }
-
-                        @SuppressWarnings("ResultOfMethodCallIgnored")
-                        @Override
-                        public void onError(DownloadInfo info, Exception e) {
-                            mUpdateView.setText(R.string.update_status_failed);
-                            // 删除下载的文件
-                            info.getFile().delete();
-                        }
-
-                        @Override
-                        public void onEnd(Call call) {
-                            // 隐藏进度条
-                            mProgressView.setVisibility(View.GONE);
-                            // 标记当前不是下载
-                            mDownloading = false;
-                        }
-                    }).start();
         }
 
         /**

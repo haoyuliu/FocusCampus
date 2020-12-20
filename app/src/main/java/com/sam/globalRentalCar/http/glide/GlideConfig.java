@@ -12,22 +12,21 @@ import com.bumptech.glide.load.engine.bitmap_recycle.LruBitmapPool;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
-import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.request.RequestOptions;
-import com.hjq.http.EasyConfig;
 import com.sam.globalRentalCar.R;
 
 import java.io.File;
-import java.io.InputStream;
 
 /**
- *    desc   : Glide 全局配置
+ * desc   : Glide 全局配置
  */
 @GlideModule
 public class GlideConfig extends AppGlideModule {
 
-    /** 本地图片缓存文件最大值 */
+    /**
+     * 本地图片缓存文件最大值
+     */
     private static final int IMAGE_DISK_CACHE_MAX_SIZE = 300 * 1024 * 1024;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -64,7 +63,7 @@ public class GlideConfig extends AppGlideModule {
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
         // Glide 默认采用的是 HttpURLConnection 来做网络请求，这里切换成更高效的 OkHttp
-        registry.replace(GlideUrl.class, InputStream.class, new OkHttpLoader.Factory(EasyConfig.getInstance().getClient()));
+        //registry.replace(GlideUrl.class, InputStream.class, new OkHttpLoader.Factory(EasyConfig.getInstance().getClient()));
     }
 
     @Override

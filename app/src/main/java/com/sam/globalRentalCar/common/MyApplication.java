@@ -10,8 +10,6 @@ import android.widget.Toast;
 import com.billy.android.swipe.SmartSwipeBack;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
-import com.hjq.http.EasyConfig;
-import com.hjq.http.config.IRequestServer;
 import com.hjq.toast.ToastInterceptor;
 import com.hjq.toast.ToastUtils;
 import com.hyphenate.chat.EMOptions;
@@ -22,10 +20,6 @@ import com.qiniu.pili.droid.shortvideo.PLShortVideoEnv;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.action.SwipeAction;
 import com.sam.globalRentalCar.helper.ActivityStackManager;
-import com.sam.globalRentalCar.http.model.RequestHandler;
-import com.sam.globalRentalCar.http.server.ReleaseServer;
-import com.sam.globalRentalCar.http.server.TestServer;
-import com.sam.globalRentalCar.other.AppConfig;
 import com.sam.globalRentalCar.ui.activity.CrashActivity;
 import com.sam.globalRentalCar.ui.activity.HomeActivity;
 import com.sam.globalRentalCar.utils.SPUtils;
@@ -36,7 +30,6 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import cat.ereza.customactivityoncrash.config.CaocConfig;
-import okhttp3.OkHttpClient;
 
 /**
  * author : Android 轮子哥
@@ -103,7 +96,7 @@ public final class MyApplication extends Application {
             @Override
             public EaseUser getUser(String username) {
                 EaseUser easeUser = new EaseUser(username);
-                easeUser.setNickname( SPUtils.getInstance(mInstance).getString("NickName"));
+                easeUser.setNickname(SPUtils.getInstance(mInstance).getString("NickName"));
                 easeUser.setAvatar("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600016679561&di=75d0d27a11a97ff7cfa15842a2a0b3ba&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F05%2F00%2F01300000194285122188000535877.jpg");
                 return easeUser;
             }
@@ -174,30 +167,6 @@ public final class MyApplication extends Application {
 
         // Activity 栈管理初始化
         ActivityStackManager.getInstance().init(application);
-
-        // 网络请求框架初始化
-        IRequestServer server;
-        if (AppConfig.isDebug()) {
-            server = new TestServer();
-        } else {
-            server = new ReleaseServer();
-        }
-
-        EasyConfig.with(new OkHttpClient())
-                // 是否打印日志
-                .setLogEnabled(AppConfig.isDebug())
-                // 设置服务器配置
-                .setServer(server)
-                // 设置请求处理策略
-                .setHandler(new RequestHandler())
-                // 设置请求重试次数
-                .setRetryCount(3)
-                // 添加全局请求参数
-                //.addParam("token", "6666666")
-                // 添加全局请求头
-                //.addHeader("time", "20191030")
-                // 启用配置
-                .into();
 
         // Activity 侧滑返回
         SmartSwipeBack.activitySlidingBack(application, activity -> {

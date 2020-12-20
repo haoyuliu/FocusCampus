@@ -17,8 +17,6 @@ import com.sam.globalRentalCar.ui.activity.ChatActivity;
 
 import java.util.List;
 
-import static com.hjq.http.EasyUtils.runOnUiThread;
-
 /**
  * desc   : 消息页面，顶部增加一个添加群聊
  */

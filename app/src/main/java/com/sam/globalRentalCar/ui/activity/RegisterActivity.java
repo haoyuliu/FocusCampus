@@ -10,18 +10,12 @@ import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.helper.InputTextHelper;
-import com.sam.globalRentalCar.http.model.HttpData;
-import com.sam.globalRentalCar.http.request.GetCodeApi;
-import com.sam.globalRentalCar.http.request.RegisterApi;
-import com.sam.globalRentalCar.http.response.RegisterBean;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.listener.HttpCallback;
 import com.sam.widget.view.CountdownView;
 
 import butterknife.BindView;
 
 /**
- *    desc   : 注册界面
+ * desc   : 注册界面
  */
 public final class RegisterActivity extends MyActivity {
 
@@ -95,48 +89,14 @@ public final class RegisterActivity extends MyActivity {
                     mCountdownView.start();
                     return;
                 }
-
-                // 获取验证码
-                EasyHttp.post(this)
-                        .api(new GetCodeApi()
-                        .setPhone(mPhoneView.getText().toString()))
-                        .request(new HttpCallback<HttpData<Void>>(this) {
-
-                            @Override
-                            public void onSucceed(HttpData<Void> data) {
-                                toast(R.string.common_code_send_hint);
-                                mCountdownView.start();
-                            }
-
-                            @Override
-                            public void onFail(Exception e) {
-                                super.onFail(e);
-                                mCountdownView.start();
-                            }
-                        });
                 break;
             case R.id.btn_register_commit:
                 if (true) {
-                   // LoginActivity.start(getActivity(), mPhoneView.getText().toString(), mPasswordView1.getText().toString());
+                    // LoginActivity.start(getActivity(), mPhoneView.getText().toString(), mPasswordView1.getText().toString());
                     setResult(RESULT_OK);
                     finish();
                     return;
                 }
-                // 提交注册
-                EasyHttp.post(this)
-                        .api(new RegisterApi()
-                        .setPhone(mPhoneView.getText().toString())
-                        .setCode(mCodeView.getText().toString())
-                        .setPassword(mPasswordView1.getText().toString()))
-                        .request(new HttpCallback<HttpData<RegisterBean>>(this) {
-
-                            @Override
-                            public void onSucceed(HttpData<RegisterBean> data) {
-                                //LoginActivity.start(getActivity(), mPhoneView.getText().toString(), mPasswordView1.getText().toString());
-                                setResult(RESULT_OK);
-                                finish();
-                            }
-                        });
                 break;
             default:
                 break;
