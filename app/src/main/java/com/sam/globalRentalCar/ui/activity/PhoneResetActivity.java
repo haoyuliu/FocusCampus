@@ -11,7 +11,7 @@ import com.sam.globalRentalCar.aop.DebugLog;
 import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.helper.InputTextHelper;
-import com.sam.globalRentalCar.other.IntentKey;
+import com.sam.globalRentalCar.constant.IntentKey;
 import com.sam.widget.view.CountdownView;
 
 import butterknife.BindView;

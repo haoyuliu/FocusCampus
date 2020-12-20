@@ -1,4 +1,4 @@
-package com.sam.globalRentalCar.other;
+package com.sam.globalRentalCar.constant;
 
 /**
  *    desc   : Intent Key 管理

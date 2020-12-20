@@ -16,7 +16,7 @@ import com.sam.globalRentalCar.aop.CheckNet;
 import com.sam.globalRentalCar.aop.DebugLog;
 import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.common.MyActivity;
-import com.sam.globalRentalCar.other.IntentKey;
+import com.sam.globalRentalCar.constant.IntentKey;
 import com.sam.globalRentalCar.widget.BrowserView;
 import com.sam.globalRentalCar.widget.HintLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;

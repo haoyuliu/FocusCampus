@@ -11,7 +11,7 @@ import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.aop.CheckNet;
 import com.sam.globalRentalCar.aop.DebugLog;
 import com.sam.globalRentalCar.common.MyActivity;
-import com.sam.globalRentalCar.other.IntentKey;
+import com.sam.globalRentalCar.constant.IntentKey;
 import com.sam.globalRentalCar.ui.pager.ImagePagerAdapter;
 import com.rd.PageIndicatorView;
 

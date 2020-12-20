@@ -16,7 +16,7 @@ import com.sam.globalRentalCar.aop.DebugLog;
 import com.sam.globalRentalCar.aop.Permissions;
 import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.other.AppConfig;
-import com.sam.globalRentalCar.other.IntentKey;
+import com.sam.globalRentalCar.constant.IntentKey;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 
