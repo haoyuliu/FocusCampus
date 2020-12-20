@@ -29,8 +29,6 @@ import com.sam.globalRentalCar.ui.dialog.MessageDialog;
 import com.sam.globalRentalCar.ui.dialog.ToastDialog;
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
  *    time   : 2019/09/24
  *    desc   : 基于 WebView 封装
  */

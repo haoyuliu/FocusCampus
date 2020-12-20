@@ -21,10 +21,11 @@ import com.sam.globalRentalCar.utils.DeviceUtils;
 import java.util.List;
 
 /**
- * author:sam
  * time:2020/09/26
  * desc:
  * version:1.0
+ *
+ * @author dell
  */
 public class DropDownMenu extends LinearLayout {
     //顶部菜单布局

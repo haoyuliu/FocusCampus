@@ -33,8 +33,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * create sam
  * description 评论弹框
+ * @author dell
  */
 public class CommentDialog extends BaseBottomSheetDialog {
     @BindView(R.id.recyclerview)

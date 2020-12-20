@@ -4,12 +4,15 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
 /**
- * create by libo
  * create on 2020-05-21
  * description 跑马灯textview
+ *
+ * @author dell
  */
-public class MarqueeTextView extends TextView {
+public class MarqueeTextView extends AppCompatTextView {
 
     public MarqueeTextView(Context context) {
         super(context);
@@ -24,7 +27,7 @@ public class MarqueeTextView extends TextView {
     }
 
     @Override
-    public boolean isFocused(){
+    public boolean isFocused() {
         return true;
     }
 

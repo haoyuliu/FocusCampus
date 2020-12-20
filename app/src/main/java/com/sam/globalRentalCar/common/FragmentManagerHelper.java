@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Fragment的帮助类
+ * @author dell
  */
 public class FragmentManagerHelper {
     private FragmentManager mFragmentManager;

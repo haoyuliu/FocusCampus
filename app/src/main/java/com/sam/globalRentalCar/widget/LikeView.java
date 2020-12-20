@@ -16,9 +16,9 @@ import com.sam.globalRentalCar.utils.AnimUtils;
 import java.util.Random;
 
 /**
- * create by libo
  * create on 2020-05-20
  * description 点赞动画view
+ * @author dell
  */
 public class LikeView extends RelativeLayout {
     private GestureDetector gestureDetector;

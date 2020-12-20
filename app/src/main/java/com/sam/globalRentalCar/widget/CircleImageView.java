@@ -14,11 +14,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.sam.globalRentalCar.R;
 
 
+/**
+ * @author dell
+ */
 public class CircleImageView extends AppCompatImageView {
     // paint when user press
     private Paint pressPaint;
@@ -128,8 +132,7 @@ public class CircleImageView extends AppCompatImageView {
         paint.setAntiAlias(true); //smooths out the edges of what is being drawn
         PorterDuffXfermode xfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
         // set flags
-        int saveFlags = Canvas.ALL_SAVE_FLAG
-               ;
+        int saveFlags = Canvas.ALL_SAVE_FLAG;
         canvas.saveLayer(0, 0, width, height, null, saveFlags);
 
         if (shapeType == 1) {
