@@ -44,25 +44,101 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:supportsRtl,android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".videoplayer.BaseVideoViewActivity" />
-        <activity android:name=".videoplayer.TikTokActivity" />
-        <activity android:name=".ui.activity.RentalCarActivity" />
-        <activity android:name=".video.VideoEditActivity" />
-        <activity android:name=".video.PlaybackActivity" />
-        <activity android:name=".video.VideoRecordActivity" />
-        <activity android:name=".ui.activity.CouponListActivity" />
-        <activity android:name=".ui.activity.LowPriceCarActivity" />
-        <activity android:name=".ui.activity.CarDetailActivity" />
-        <activity android:name=".ui.activity.OrderDetailActivity" />
-        <activity android:name=".ui.activity.UpLoadCertificatesActivity" />
-        <activity android:name=".ui.activity.IdentityAuthenticationActivity" />
-        <activity android:name=".ui.activity.RentalCarOrderActivity" />
-        <activity android:name=".ui.activity.OrderPayActivity" />
-        <activity android:name=".ui.activity.OrderConfirmationActivity" />
-        <activity android:name=".ui.activity.ChoiceCarActivity" />
-        <activity android:name=".ui.activity.ModifySignatureActivity" />
-        <activity android:name=".ui.activity.ModifyNickNameActivity" />
-        <activity android:name=".ui.activity.ChatActivity" /> <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
+        <activity
+            android:name=".videoplayer.BaseVideoViewActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".videoplayer.TikTokActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.RentalCarActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".video.VideoEditActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".video.PlaybackActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".video.VideoRecordActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CouponListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.LowPriceCarActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CarDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.OrderDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.UpLoadCertificatesActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.IdentityAuthenticationActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.RentalCarOrderActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.OrderPayActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.OrderConfirmationActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ChoiceCarActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ModifySignatureActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ModifyNickNameActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ChatActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" /> <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${channel}" />
