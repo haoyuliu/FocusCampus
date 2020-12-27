@@ -121,6 +121,7 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/user_protocol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="《用户协议》"
@@ -134,6 +135,7 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/privacy_protocol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="《隐私协议》"

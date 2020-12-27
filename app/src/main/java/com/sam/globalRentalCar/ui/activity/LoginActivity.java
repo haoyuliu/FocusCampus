@@ -14,6 +14,7 @@ import com.hyphenate.chat.EMClient;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.common.MyActivity;
+import com.sam.globalRentalCar.constant.Constant;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.request.LoginRequestBean;
 import com.sam.globalRentalCar.http.response.LoginBean;
@@ -69,7 +70,7 @@ public final class LoginActivity extends MyActivity
     @Override
     protected void initView() {
 
-        setOnClickListener(R.id.cv_password_forget_countdown, R.id.btn_login_commit, R.id.iv_login_qq, R.id.iv_login_wx);
+        setOnClickListener(R.id.cv_password_forget_countdown, R.id.btn_login_commit, R.id.iv_login_qq, R.id.iv_login_wx, R.id.privacy_protocol, R.id.user_protocol);
     }
 
     @Override
@@ -225,6 +226,15 @@ public final class LoginActivity extends MyActivity
                 }
                 UmengClient.login(this, platform, this);
                 break;
+            case R.id.user_protocol:
+                // 用户协议
+                BrowserActivity.start(LoginActivity.this, Constant.USER_PROTOTAL);
+                break;
+            case R.id.privacy_protocol:
+                //隐私协议
+                BrowserActivity.start(LoginActivity.this, Constant.RRICACY_PROTOCOL);
+                break;
+
             default:
                 break;
         }
