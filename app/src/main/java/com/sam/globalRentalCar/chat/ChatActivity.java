@@ -1,4 +1,4 @@
-package com.sam.globalRentalCar.ui.activity;
+package com.sam.globalRentalCar.chat;
 
 import android.content.Intent;
 import android.view.View;

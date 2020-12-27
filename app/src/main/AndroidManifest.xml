@@ -135,7 +135,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.ChatActivity"
+            android:name=".chat.ChatActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" /> <!-- 友盟多渠道（在 App Gradle 中配置，请不要在此处修改） -->

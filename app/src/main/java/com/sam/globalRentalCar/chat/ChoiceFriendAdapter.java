@@ -21,7 +21,7 @@ import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * description
+ * description：选好友
  */
 public class ChoiceFriendAdapter extends BaseRvAdapter<FansBean.DataBean, ChoiceFriendAdapter.FansViewHolder> {
 

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 /**
- * desc   : 这个是项目的HomeFragment
+ * desc   : 项目的HomeFragment
  */
 public class HomeFragment extends MyFragment<HomeActivity> {
 

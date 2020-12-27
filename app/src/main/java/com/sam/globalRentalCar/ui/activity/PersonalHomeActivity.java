@@ -17,6 +17,7 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.bean.VideoBean;
+import com.sam.globalRentalCar.chat.ChatActivity;
 import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.response.FollowResponseBean;
@@ -154,8 +155,9 @@ public class PersonalHomeActivity extends MyActivity {
         mPersonalHomeSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // 進入聊天会话页面
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
+                // 需要传递环信ID
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, getIntent().getStringExtra("huid"));
                 intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
                 startActivity(intent);

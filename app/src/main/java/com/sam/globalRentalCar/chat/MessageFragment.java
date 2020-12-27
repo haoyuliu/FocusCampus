@@ -13,7 +13,6 @@ import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.sam.globalRentalCar.R;
-import com.sam.globalRentalCar.ui.activity.ChatActivity;
 
 import java.util.List;
 

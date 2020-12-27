@@ -1,5 +1,6 @@
 package com.sam.globalRentalCar.chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroupManager;
 import com.hyphenate.chat.EMGroupOptions;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.exceptions.HyphenateException;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.bean.FansBean;
@@ -90,20 +93,24 @@ public class ChoiceFriendFragment extends BaseBottomSheetDialog {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String[] allMembers = new String[]{"hqyc15065157322"};
+                String[] allMembers = new String[]{"hqyc15065157322","hqyc15065158888","hqyc15553153392"};
                 EMGroupOptions option = new EMGroupOptions();
                 option.maxUsers = 200;
                 option.style = EMGroupManager.EMGroupStyle.EMGroupStylePublicOpenJoin;
                 try {
-                    EMClient.getInstance().groupManager().createGroup("群组名称", "群描述", allMembers, "添加原因", option);
+                    EMClient.getInstance().groupManager().createGroup("隔壁翠花交流群", "描述个同", allMembers, "隔壁老万加入", option);
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getActivity(), "创建群组成功", Toast.LENGTH_SHORT).show();
-                            //Intent intent = new Intent(getActivity(),ChatGroupActivity.class);
-                            //intent.putExtra(EaseConstant.EXTRA_USER_ID, "222");
-                            //intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.GroupChat);
-                            //startActivity(intent);
+                            Intent intent = new Intent(getActivity(), ChatActivity.class);
+                            // 传递回话类型
+                            intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.GroupChat);
+                            // 获取群信息
+                           // EMClient.getInstance().groupManager().getAllGroups().get()
+                            //传递群ID
+                            intent.putExtra(EaseConstant.EXTRA_USER_ID, "134719484264452");
+                            startActivity(intent);
 
                         }
                     });
