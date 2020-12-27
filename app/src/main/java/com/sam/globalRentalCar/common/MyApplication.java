@@ -49,6 +49,12 @@ public final class MyApplication extends Application {
         initShortVideo();
     }
 
+    @Override
+    public Context getApplicationContext() {
+
+        return this;
+    }
+
     private void initShortVideo() {
         PLShortVideoEnv.init(getApplicationContext());
     }

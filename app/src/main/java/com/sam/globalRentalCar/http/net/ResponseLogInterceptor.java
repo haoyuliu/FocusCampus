@@ -1,7 +1,11 @@
 package com.sam.globalRentalCar.http.net;
 
+import android.content.Intent;
+
 import com.google.android.exoplayer2.util.Log;
 import com.google.gson.Gson;
+import com.sam.globalRentalCar.common.MyApplication;
+import com.sam.globalRentalCar.ui.activity.LoginActivity;
 import com.sam.globalRentalCar.utils.RxBus;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,6 +47,8 @@ public class ResponseLogInterceptor implements Interceptor {
                 Log.d(TAG, "response ---->:" + code);
                 Log.d(TAG, "response ---->:发送Token失效的消息");
                 RxBus.getDefault().post(BaseResponse.class);
+                Intent intent = new Intent(MyApplication.getInstance().getApplicationContext(),LoginActivity.class);
+                MyApplication.getInstance().getApplicationContext().startActivity(intent);
             }
             ResponseBody responseBody = ResponseBody.create(mediaType, string);
             return response.newBuilder().body(responseBody).build();
