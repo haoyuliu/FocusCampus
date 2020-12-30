@@ -1,12 +1,20 @@
 package com.sam.globalRentalCar.http.net;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.util.Log;
 import com.google.gson.Gson;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.sam.globalRentalCar.common.MyApplication;
+import com.sam.globalRentalCar.helper.ActivityStackManager;
 import com.sam.globalRentalCar.ui.activity.LoginActivity;
+import com.sam.globalRentalCar.ui.activity.SettingActivity;
 import com.sam.globalRentalCar.utils.RxBus;
+import com.sam.globalRentalCar.utils.SPUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +33,8 @@ import okhttp3.ResponseBody;
  */
 public class ResponseLogInterceptor implements Interceptor {
     private static final String TAG = "ResponseLogInterceptor";
+
+    private Handler mHander = new Handler(Looper.myLooper());
 
     @NotNull
     @Override
@@ -46,9 +56,7 @@ public class ResponseLogInterceptor implements Interceptor {
             if (code.equals("401")) {
                 Log.d(TAG, "response ---->:" + code);
                 Log.d(TAG, "response ---->:发送Token失效的消息");
-                RxBus.getDefault().post(BaseResponse.class);
-                Intent intent = new Intent(MyApplication.getInstance().getApplicationContext(),LoginActivity.class);
-                MyApplication.getInstance().getApplicationContext().startActivity(intent);
+                loginOut();
             }
             ResponseBody responseBody = ResponseBody.create(mediaType, string);
             return response.newBuilder().body(responseBody).build();
@@ -56,4 +64,44 @@ public class ResponseLogInterceptor implements Interceptor {
             return response;
         }
     }
+
+    private void loginOut() {
+        // 退出环信
+        EMClient.getInstance().logout(true, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                mHander.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //主线程
+                        SPUtils.getInstance(MyApplication.getInstance().getApplicationContext()).clear();
+                        Intent intent = new Intent(MyApplication.getInstance().getApplicationContext(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        MyApplication.getContext().startActivity(intent);
+                        // 进行内存优化，销毁除登录页之外的所有界面
+                        ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
+                        Toast.makeText(MyApplication.getInstance().getApplicationContext(), "您已退出登录！", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                mHander.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MyApplication.getInstance().getApplicationContext(), "退出失败！", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
+
+    }
+
+
 }

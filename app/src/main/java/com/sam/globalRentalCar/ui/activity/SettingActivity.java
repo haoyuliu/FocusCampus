@@ -65,7 +65,7 @@ public final class SettingActivity extends MyActivity
                 } else {
                     toast(R.string.update_no_update);
                 }*/
-                toast(R.string.update_no_update);
+                //toast(R.string.update_no_update);
                 break;
             case R.id.sb_setting_agreement:
                 //BrowserActivity.start(this, "https://github.com/getActivity/Donate");

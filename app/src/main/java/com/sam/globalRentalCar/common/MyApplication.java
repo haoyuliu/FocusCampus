@@ -39,6 +39,8 @@ public final class MyApplication extends Application {
 
     private static MyApplication mInstance;
 
+    private static Context mContext;
+
     @Override
     public void onCreate() {
         mInstance = this;
@@ -47,6 +49,17 @@ public final class MyApplication extends Application {
         initEaseUi();
         // 初始化七牛云短视频sdk
         initShortVideo();
+        setContext(getApplicationContext());
+    }
+
+    public static Context getContext() {
+        return mContext;
+    }
+
+    public void setContext(Context context) {
+        if (mContext == null) {
+            mContext = context;
+        }
     }
 
     @Override
