@@ -66,17 +66,12 @@ public class ListDropDownAdapter extends BaseAdapter {
 
     private void fillValue(int position, ViewHolder viewHolder) {
         viewHolder.mText.setText(list.get(position));
-        viewHolder.mText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
         if (checkItemPosition != -1) {
             if (checkItemPosition == position) {
-               // viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_selected));
-              //  viewHolder.mText.setBackgroundResource(R.color.check_bg);
+                viewHolder.mText.setTextColor(context.getResources().getColor(R.color.color_check_home));
+                viewHolder.mText.setBackgroundResource(R.color.black);
             } else {
-             //   viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_unselected));
+                viewHolder.mText.setTextColor(context.getResources().getColor(R.color.color_check_home));
                 viewHolder.mText.setBackgroundResource(R.color.white);
             }
         }

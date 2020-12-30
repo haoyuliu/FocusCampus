@@ -2,6 +2,7 @@ package com.sam.globalRentalCar.ui.activity;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -95,9 +96,15 @@ public class ChoiceCarActivity extends MyActivity {
         ListView modelView = new ListView(this);
         mCarModelAdapter = new ListDropDownAdapter(this, carModelsList);
         modelView.setDividerHeight(0);
-
         modelView.setAdapter(mCarModelAdapter);
-
+        modelView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                mCarModelAdapter.setCheckItem(position);
+                mDropDownMenu.setTabText(position == 0 ? headers[0] : carModelsList.get(position));
+                mDropDownMenu.closeMenu();
+            }
+        });
         //init 品牌 menu
         LinearLayout constellationView = (LinearLayout) getLayoutInflater().inflate(R.layout.custom_layout, null);
         ListView constellation = constellationView.findViewById(R.id.constellation);
@@ -109,6 +116,14 @@ public class ChoiceCarActivity extends MyActivity {
         priceView.setDividerHeight(0);
         mCarPriceAdapter = new ListDropDownAdapter(this, Arrays.asList(carPrices));
         priceView.setAdapter(mCarPriceAdapter);
+        priceView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                mCarPriceAdapter.setCheckItem(position);
+                mDropDownMenu.setTabText(position == 0 ? headers[0] : carPrices[position]);
+                mDropDownMenu.closeMenu();
+            }
+        });
 
         //init popupViews
         popupViews.add(modelView);
