@@ -140,4 +140,9 @@ public class NetApiConstants {
      */
     public static final String POST_DELETE_VIDEO = "video/deleteVideo";
 
+    /**
+     * 开关
+     */
+    public static final String GET_SWITCH = "user/swith";
+
 }

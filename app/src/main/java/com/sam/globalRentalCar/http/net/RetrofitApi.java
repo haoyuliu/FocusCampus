@@ -32,6 +32,7 @@ import com.sam.globalRentalCar.http.response.ModifyMessageResponseBean;
 import com.sam.globalRentalCar.http.response.OrderDetailResponseBean;
 import com.sam.globalRentalCar.http.response.OrderListResponseBean;
 import com.sam.globalRentalCar.http.response.PayOrderResponseBean;
+import com.sam.globalRentalCar.http.response.SwitchResponseBean;
 import com.sam.globalRentalCar.http.response.UpLoadVideoResponseBean;
 import com.sam.globalRentalCar.http.response.VerficationCodeBean;
 import com.sam.globalRentalCar.http.response.VideoCommentResponseBean;
@@ -285,5 +286,13 @@ public interface RetrofitApi {
      */
     @POST(NetApiConstants.POST_DELETE_VIDEO)
     Call<DeleteVideoResponseBean> deleteVideo(@Body DeleteVideoRequestBean deleteVideoRequestBean);
+
+    /**
+     * 开关
+     *
+     * @return
+     */
+    @POST(NetApiConstants.GET_SWITCH)
+    Call<SwitchResponseBean> getSwitch();
 
 }
