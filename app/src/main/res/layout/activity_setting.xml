@@ -16,17 +16,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         app:bar_leftText="通用设置"
         app:bar_rightIcon="@drawable/ico_go_black" />
 
     <com.sam.widget.layout.SettingBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:bar_leftText="消息通知"
         app:bar_rightIcon="@drawable/ico_go_black" />
 
     <com.sam.widget.layout.SettingBar
         android:id="@+id/sb_setting_update"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:bar_leftText="@string/setting_update">
@@ -50,6 +53,7 @@
     <com.sam.widget.layout.SettingBar
         android:id="@+id/sb_setting_agreement"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:bar_leftText="@string/setting_agreement"
@@ -66,6 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         app:bar_leftText="关于"
         app:bar_rightIcon="@drawable/ico_go_black" />
 
