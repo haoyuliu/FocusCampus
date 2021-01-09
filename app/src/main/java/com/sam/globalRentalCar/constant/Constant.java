@@ -56,6 +56,7 @@ public class Constant {
      * 个人协议
      */
     public static final String USER_PROTOTAL = "http://39.106.49.27:28080/userPrototal.html";
+
     /**
      * 租车协议
      */

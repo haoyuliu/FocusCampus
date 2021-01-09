@@ -191,6 +191,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
+            android:visibility="gone"
             android:layout_marginBottom="25dp"
             android:layout_weight="1"
             android:src="@drawable/ic_login_qq"
@@ -199,6 +200,7 @@
         <com.sam.widget.view.ScaleImageView
             android:id="@+id/iv_login_wx"
             android:layout_width="35dp"
+            android:visibility="gone"
             android:layout_height="35dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"

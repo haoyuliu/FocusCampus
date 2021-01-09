@@ -232,7 +232,7 @@ public final class LoginActivity extends MyActivity
                 break;
             case R.id.privacy_protocol:
                 //隐私协议
-                BrowserActivity.start(LoginActivity.this, Constant.RRICACY_PROTOCOL);
+                BrowserActivity.start(LoginActivity.this, Constant.USER_PROTOTAL);
                 break;
 
             default:
