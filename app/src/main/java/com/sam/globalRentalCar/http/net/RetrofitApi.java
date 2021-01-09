@@ -292,7 +292,7 @@ public interface RetrofitApi {
      *
      * @return
      */
-    @POST(NetApiConstants.GET_SWITCH)
+    @GET(NetApiConstants.GET_SWITCH)
     Call<SwitchResponseBean> getSwitch();
 
 }

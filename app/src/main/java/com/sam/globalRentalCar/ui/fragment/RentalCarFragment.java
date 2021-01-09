@@ -62,7 +62,7 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
             public void onResponse(Call<SwitchResponseBean> call, Response<SwitchResponseBean> response) {
                 SwitchResponseBean body = response.body();
                 if (body.getCode().equals("200")) {
-                    if (body.isData()) {
+                    if (!body.isData()) {
                         //打开
                         mLinearLayoutBuyCar.setVisibility(View.VISIBLE);
                         mLinearLayoutMaintain.setVisibility(View.VISIBLE);
