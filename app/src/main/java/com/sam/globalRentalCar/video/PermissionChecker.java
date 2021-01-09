@@ -48,18 +48,18 @@ public class PermissionChecker {
         List<String> permissionsNeeded = new ArrayList<String>();
         final List<String> permissionsList = new ArrayList<String>();
         if (!addPermission(permissionsList, Manifest.permission.CAMERA)) {
-            permissionsNeeded.add("CAMERA");
+            permissionsNeeded.add("相机");
         }
         if (!addPermission(permissionsList, Manifest.permission.RECORD_AUDIO)) {
-            permissionsNeeded.add("MICROPHONE");
+            permissionsNeeded.add("麦克风");
         }
         if (!addPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            permissionsNeeded.add("Write external storage");
+            permissionsNeeded.add("写入外部存储");
         }
 
         if (permissionsNeeded.size() > 0) {
             // Need Rationale
-            String message = "You need to grant access to " + permissionsNeeded.get(0);
+            String message = "使用此功能需要获取以下权限，" + permissionsNeeded.get(0);
             for (int i = 1; i < permissionsNeeded.size(); i++) {
                 message = message + ", " + permissionsNeeded.get(i);
             }
@@ -87,8 +87,8 @@ public class PermissionChecker {
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(mActivity)
                 .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton("同意", okListener)
+                .setNegativeButton("取消", null)
                 .create()
                 .show();
     }

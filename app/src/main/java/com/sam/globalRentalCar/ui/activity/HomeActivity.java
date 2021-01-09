@@ -221,7 +221,7 @@ public class HomeActivity extends MyActivity {
         PermissionChecker checker = new PermissionChecker(this);
         boolean isPermissionOK = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || checker.checkPermission();
         if (!isPermissionOK) {
-            ToastUtils.s(this, "Some permissions is not approved !!!");
+            ToastUtils.s(this, "请同意权限!!!");
         }
         return isPermissionOK;
     }
