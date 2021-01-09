@@ -12,6 +12,7 @@ import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
 import com.hjq.toast.ToastInterceptor;
 import com.hjq.toast.ToastUtils;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseAvatarOptions;
@@ -85,7 +86,7 @@ public final class MyApplication extends Application {
         // 设置是否需要发送已读回执
         options.setRequireAck(false);
         // 设置是否需要发送回执，TODO 这个暂时有bug，上层收不到发送回执
-        options.setRequireDeliveryAck(true);
+        options.setRequireDeliveryAck(false);
         // 设置是否需要服务器收到消息确认
         options.setAutoTransferMessageAttachments(true);
         // 收到好友申请是否自动同意，如果是自动同意就不会收到好友请求的回调，因为sdk会自动处理，默认为true
@@ -112,10 +113,24 @@ public final class MyApplication extends Application {
         EaseUI.getInstance().setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
             @Override
             public EaseUser getUser(String username) {
-                EaseUser easeUser = new EaseUser(username);
-                easeUser.setNickname(SPUtils.getInstance(mInstance).getString("NickName"));
-                easeUser.setAvatar("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600016679561&di=75d0d27a11a97ff7cfa15842a2a0b3ba&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F05%2F00%2F01300000194285122188000535877.jpg");
-                return easeUser;
+                Log.d("username", username);
+                EaseUser easeUser = null;
+                //if (username.equals(EMClient.getInstance().getCurrentUser())) {
+                    // 如果用户是本人，就设置自己的头像和昵称
+                    easeUser = new EaseUser(username);
+                    easeUser.setNickname(SPUtils.getInstance(mInstance).getString("NickName"));
+                    easeUser.setAvatar(SPUtils.getInstance(mInstance).getString("headPic"));
+                    return easeUser;
+               // } else {
+                    // 收到别人的消息，就设置别人的头像和昵称
+                 //   easeUser = new EaseUser(username);
+                //    easeUser.setNickname(SPUtils.getInstance(mInstance).getString("OtherNickName"));
+                 //   easeUser.setAvatar(SPUtils.getInstance(mInstance).getString("OtherHeadImage"));
+               // }
+
+                //easeUser.setAvatar(e);
+                //return easeUser;
+                //return getus
             }
         });
         // 设置开启debug模式

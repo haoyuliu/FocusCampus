@@ -12,7 +12,10 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
+import com.hyphenate.exceptions.HyphenateException;
 import com.sam.globalRentalCar.R;
+import com.sam.globalRentalCar.ui.activity.LoginActivity;
+import com.sam.globalRentalCar.utils.SPUtils;
 
 import java.util.List;
 
@@ -27,6 +30,17 @@ public class MessageFragment extends EaseConversationListFragment {
         EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
             @Override
             public void onMessageReceived(List<EMMessage> list) {
+                for (EMMessage emMessage : list) {
+                    try {
+                        SPUtils.getInstance(getContext()).put("OtherHeadImage", emMessage.getStringAttribute("NickName",""));
+                        SPUtils.getInstance(getContext()).put("OtherNickName", emMessage.getStringAttribute("HeadImage",""));
+                        SPUtils.getInstance(getContext()).put("OtherUserId", emMessage.getStringAttribute("UserId") + "");
+                    } catch (HyphenateException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
                 //设置数据
                 EaseUI.getInstance().getNotifier().notify(list);
                 //刷新页面

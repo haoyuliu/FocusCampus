@@ -8,6 +8,7 @@ import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.common.MyActivity;
+import com.sam.globalRentalCar.utils.SPUtils;
 
 /**
  * 聊天详情页面
@@ -31,6 +32,7 @@ public class ChatActivity extends MyActivity implements EaseChatFragment.EaseCha
         chatFragment.setArguments(getIntent().getExtras());
         // 替换Fragment
         getSupportFragmentManager().beginTransaction().replace(R.id.layout_chat, chatFragment).commit();
+        chatFragment.setChatFragmentHelper(this);
     }
 
     @Override
@@ -46,9 +48,13 @@ public class ChatActivity extends MyActivity implements EaseChatFragment.EaseCha
 
     @Override
     public void onSetMessageAttributes(EMMessage message) {
-        /*message.setAttribute("nickName", "李思思");
-        message.setAttribute("headPic", "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600016679561&di=75d0d27a11a97ff7cfa15842a2a0b3ba&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F05%2F00%2F01300000194285122188000535877.jpg");
-        message.setAttribute("userId", "22");*/
+        //获取当前用户的信息
+        String userId = SPUtils.getInstance(ChatActivity.this).getString("UserId");
+        String nickName = SPUtils.getInstance(ChatActivity.this).getString("NickName");
+        String headPic = SPUtils.getInstance(ChatActivity.this).getString("HeadImage");
+        message.setAttribute("nickName", nickName);
+        message.setAttribute("headPic", headPic);
+        message.setAttribute("userId", userId);
     }
 
     @Override
