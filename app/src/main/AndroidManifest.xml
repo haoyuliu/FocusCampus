@@ -44,6 +44,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:supportsRtl,android:allowBackup"
         tools:targetApi="n">
+        <activity android:name=".chat.SearchActivity"></activity>
         <activity
             android:name=".videoplayer.BaseVideoViewActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

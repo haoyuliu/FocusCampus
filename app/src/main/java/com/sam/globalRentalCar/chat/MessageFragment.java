@@ -1,7 +1,10 @@
 package com.sam.globalRentalCar.chat;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -11,6 +14,7 @@ import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.hyphenate.exceptions.HyphenateException;
 import com.sam.globalRentalCar.R;
@@ -30,11 +34,15 @@ public class MessageFragment extends EaseConversationListFragment {
         EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
             @Override
             public void onMessageReceived(List<EMMessage> list) {
+                Log.d("用户信息", "onMessageReceived" + "list--->" + list.toString());
                 for (EMMessage emMessage : list) {
                     try {
-                        SPUtils.getInstance(getContext()).put("OtherHeadImage", emMessage.getStringAttribute("NickName",""));
-                        SPUtils.getInstance(getContext()).put("OtherNickName", emMessage.getStringAttribute("HeadImage",""));
+                        SPUtils.getInstance(getContext()).put("OtherHeadImage", emMessage.getStringAttribute("NickName", ""));
+                        SPUtils.getInstance(getContext()).put("OtherNickName", emMessage.getStringAttribute("HeadImage", ""));
                         SPUtils.getInstance(getContext()).put("OtherUserId", emMessage.getStringAttribute("UserId") + "");
+                        EaseUser easeUI = new EaseUser(emMessage.getStringAttribute("UserId") + "");
+                        easeUI.setNickname(emMessage.getStringAttribute("NickName", ""));
+                        easeUI.setAvatar(emMessage.getStringAttribute("HeadImage", ""));
                     } catch (HyphenateException e) {
                         e.printStackTrace();
                     }
@@ -103,6 +111,17 @@ public class MessageFragment extends EaseConversationListFragment {
                 //进入选择好友列表
                 ChoiceFriendFragment choiceFriendFragment = new ChoiceFriendFragment();
                 choiceFriendFragment.show(getFragmentManager(), "tag");
+            }
+        });
+
+        // 搜索
+        TextView editTextSearch = getActivity().findViewById(R.id.query);
+        editTextSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //获取焦点
+                Intent searchIntent = new Intent(getContext(), SearchActivity.class);
+                startActivity(searchIntent);
             }
         });
     }
