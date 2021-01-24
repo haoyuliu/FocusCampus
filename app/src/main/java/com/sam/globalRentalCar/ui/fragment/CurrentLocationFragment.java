@@ -26,6 +26,9 @@ import com.sam.globalRentalCar.videoplayer.Utils;
 import com.sam.globalRentalCar.videoplayer.ViewPagerLayoutManager;
 import com.sam.globalRentalCar.widget.CommentDialog;
 import com.sam.globalRentalCar.videoplayer.OnViewPagerListener;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +42,11 @@ import retrofit2.Response;
  */
 public class CurrentLocationFragment extends BaseLazyFragment {
     public static final String TAG = "CurrentLocationFragment";
-    private int page = 1;
+    private int pageIndex = 1;
     private int pageSize = 20;
     private TikTokController mController;
     private int mCurPos;
+    private RefreshLayout mCurrentRefreshLayout;
     private RecyclerView mRecyclerView;
     private List<VideoListBean.DataBean> mVideoList = new ArrayList<>();
     private TikTokAdapter mTikTokAdapter;
@@ -57,8 +61,33 @@ public class CurrentLocationFragment extends BaseLazyFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_current_location, null);
         mRecyclerView = view.findViewById(R.id.follow_rv);
+        mCurrentRefreshLayout = view.findViewById(R.id.current_smart);
+        mTikTokAdapter = new TikTokAdapter();
         initView();
+        initData();
         return view;
+    }
+
+    private void initData() {
+        mCurrentRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                // 下拉刷新
+                pageIndex = 1;
+                mVideoList.clear();
+                getVideoData(true);
+                Log.d("RecommendFragment", "onRefreshPageIndex----->" + pageIndex);
+            }
+        });
+        mCurrentRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                // 上拉加载更多
+                pageIndex++;
+                getVideoData(false);
+                Log.d("RecommendFragment", "onLoadMorePageIndex----->" + pageIndex);
+            }
+        });
     }
 
 
@@ -69,8 +98,10 @@ public class CurrentLocationFragment extends BaseLazyFragment {
         mVideoView.setLooping(true);
         mController = new TikTokController(getContext());
         mVideoView.setVideoController(mController);
+        mTikTokAdapter = new TikTokAdapter();
+        mRecyclerView.setAdapter(mTikTokAdapter);
         // 获取数据
-        //getVideoData(page);
+        getVideoData(true);
         mRecyclerView.scrollToPosition(mIndex);
     }
 
@@ -84,93 +115,96 @@ public class CurrentLocationFragment extends BaseLazyFragment {
         mVideoView.setUrl(playUrl);
         mController.addControlComponent(viewHolder.mTikTokView, true);
         viewHolder.mPlayerContainer.addView(mVideoView, 0);
-        // mVideoView.start();
+        mVideoView.start();
         mCurPos = position;
     }
 
-
-    private void getVideoData(int page) {
-
+    private void getVideoData(boolean isRefresh) {
         RetrofitClient.getRetrofitService().loadHomeFollowedVideoListData(SPUtils.getInstance(getContext()).getString("token"),
-                page).enqueue(new Callback<VideoListBean>() {
+                pageIndex).enqueue(new Callback<VideoListBean>() {
             @Override
             public void onResponse(Call<VideoListBean> call, Response<VideoListBean> response) {
-
-
+                if (isRefresh) {
+                    // 如果是刷新
+                    mCurrentRefreshLayout.finishRefresh(true);
+                } else {
+                    // 上拉加载
+                    mCurrentRefreshLayout.finishLoadMore(true);
+                }
                 VideoListBean videoListBean = response.body();
                 Log.d(TAG, response.code() + "" + response.body());
-                if (videoListBean.getCode().equals("401")) {
-                    //startActivity(LoginActivity.class);
-                    return;
-                }
                 if (videoListBean.getCode().equals("200")) {
-                    mVideoList = response.body().getData();
-                    if (mVideoList.size() == 0) {
-                        Toast.makeText(getContext(), "暂时没有数据", Toast.LENGTH_SHORT).show();
-                    }
-                    mTikTokAdapter = new TikTokAdapter(mVideoList);
-                    ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), OrientationHelper.VERTICAL);
-
-                    mRecyclerView.setLayoutManager(layoutManager);
-                    mRecyclerView.setAdapter(mTikTokAdapter);
-                    Log.d(TAG, response.code() + "" + response.body().getData().toString());
-                    layoutManager.setOnViewPagerListener(new OnViewPagerListener() {
-                        @Override
-                        public void onInitComplete() {
-                            //自动播放第index条
-                            startPlay(mIndex);
+                    List<VideoListBean.DataBean> responseList = response.body().getData();
+                    if (responseList.size() == 0) {
+                        if (isRefresh) {
+                            Toast.makeText(getContext(), "暂时没有数据", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "没有更多数据", Toast.LENGTH_SHORT).show();
                         }
-
-                        @Override
-                        public void onPageRelease(boolean isNext, int position) {
-                            if (mCurPos == position) {
-                                mVideoView.release();
+                    } else {
+                        if (isRefresh) {
+                            mVideoList = responseList;
+                        } else {
+                            mVideoList.addAll(responseList);
+                        }
+                        mRecyclerView.setOnFlingListener(null);
+                        ViewPagerLayoutManager layoutManager = new ViewPagerLayoutManager(getContext(), OrientationHelper.VERTICAL);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mTikTokAdapter.setVideos(mVideoList);
+                        mTikTokAdapter.notifyDataSetChanged();
+                        Log.d(TAG, response.code() + "" + response.body().getData().toString());
+                        layoutManager.setOnViewPagerListener(new OnViewPagerListener() {
+                            @Override
+                            public void onInitComplete() {
+                                //自动播放第index条
+                                startPlay(mIndex);
                             }
-                        }
 
-                        @Override
-                        public void onPageSelected(int position, boolean isBottom) {
-                            if (mCurPos == position) {
-                                return;
+                            @Override
+                            public void onPageRelease(boolean isNext, int position) {
+                                if (mCurPos == position) {
+                                    mVideoView.release();
+                                }
                             }
-                            startPlay(position);
-                        }
-                    });
-                    mTikTokAdapter.setItemOnClickInterface(new TikTokAdapter.ItemCommentOnClickInterface() {
-                        @Override
-                        public void onItemClick(int position) {
-                            // 获取评论数据
-                            RetrofitClient.getRetrofitService().getCommentList(mVideoList.get(position).getVideoId(), "1", "10")
-                                    .enqueue(new Callback<CommentListBean>() {
-                                        @Override
-                                        public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
-                                            CommentListBean commentListBean = response.body();
-                                            if (commentListBean.getCode().equals("200")) {
-                                                CommentDialog commentDialog = new CommentDialog();
-                                                commentDialog.setData(response.body().getData());
-                                                commentDialog.setVideoid(mVideoList.get(position).getVideoId());
-                                                commentDialog.setUserid(mVideoList.get(position).getUserId());
-                                                commentDialog.show(getChildFragmentManager(), "");
-                                            } else {
-                                                Toast.makeText(getContext(), "获取评论数据失败", Toast.LENGTH_SHORT).show();
+
+                            @Override
+                            public void onPageSelected(int position, boolean isBottom) {
+                                if (mCurPos == position) {
+                                    return;
+                                }
+                                startPlay(position);
+                            }
+                        });
+                        mTikTokAdapter.setItemOnClickInterface(new TikTokAdapter.ItemCommentOnClickInterface() {
+                            @Override
+                            public void onItemClick(int position) {
+                                // 获取评论数据
+                                RetrofitClient.getRetrofitService().getCommentList(mVideoList.get(position).getVideoId(), "1", "10")
+                                        .enqueue(new Callback<CommentListBean>() {
+                                            @Override
+                                            public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
+                                                CommentListBean commentListBean = response.body();
+                                                if (commentListBean.getCode().equals("200")) {
+                                                    CommentDialog commentDialog = new CommentDialog();
+                                                    commentDialog.setData(response.body().getData());
+                                                    commentDialog.setVideoid(mVideoList.get(position).getVideoId());
+                                                    commentDialog.setUserid(mVideoList.get(position).getUserId());
+                                                    commentDialog.show(getChildFragmentManager(), "");
+                                                } else {
+                                                    Toast.makeText(getContext(), "获取评论数据失败", Toast.LENGTH_SHORT).show();
+                                                }
+
                                             }
 
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<CommentListBean> call, Throwable t) {
-                                            Toast.makeText(getContext(), "获取评论数据失败", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-
-
-                        }
-                    });
-                } else {
-                    Toast.makeText(getContext(), "获取评论数据失败", Toast.LENGTH_SHORT).show();
+                                            @Override
+                                            public void onFailure(Call<CommentListBean> call, Throwable t) {
+                                                Toast.makeText(getContext(), "获取评论数据失败", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        });
+                    }
                 }
-
-
             }
 
             @Override
@@ -186,14 +220,13 @@ public class CurrentLocationFragment extends BaseLazyFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         setVideoViewState(isVisibleToUser);
-
     }
 
     @Override
     public void fetchData() {
         Log.d(TAG, "getVideoData");
         // 请求网络数据
-        getVideoData(page);
+        getVideoData(false);
     }
 
     public void setVideoViewState(boolean isVisibleToUser) {

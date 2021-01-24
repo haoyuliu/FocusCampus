@@ -40,8 +40,11 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
     private List<VideoListBean.DataBean> videos;
     private ItemCommentOnClickInterface itemOnClickInterface;
 
-    public TikTokAdapter(List<VideoListBean.DataBean> videos) {
+    public void setVideos(List<VideoListBean.DataBean> videos) {
         this.videos = videos;
+    }
+
+    public TikTokAdapter() {
     }
 
     private static final String TAG = "TikTokAdapter";
@@ -189,13 +192,17 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
     @Override
     public void onViewDetachedFromWindow(@NonNull VideoHolder holder) {
         super.onViewDetachedFromWindow(holder);
-        VideoListBean.DataBean item = videos.get(holder.mPosition);
+        //VideoListBean.DataBean item = videos.get(holder.mPosition);
         //PreloadManager.getInstance(holder.itemView.getContext()).removePreloadTask(item.videoDownloadUrl);
     }
 
     @Override
     public int getItemCount() {
-        return videos.size();
+        if (videos.size() > 0 && videos != null) {
+            return videos.size();
+        } else {
+            return 0;
+        }
     }
 
     public static class VideoHolder extends RecyclerView.ViewHolder {
