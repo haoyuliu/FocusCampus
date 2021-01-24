@@ -145,4 +145,9 @@ public class NetApiConstants {
      */
     public static final String GET_SWITCH = "user/swith";
 
+    /**
+     * 查找好友
+     */
+    public static final String GET_FIND_USER = "user/findUsers";
+
 }

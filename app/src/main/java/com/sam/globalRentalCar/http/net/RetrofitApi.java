@@ -18,6 +18,7 @@ import com.sam.globalRentalCar.http.request.upLoadAfterRequestBean;
 import com.sam.globalRentalCar.http.response.CommentListBean;
 import com.sam.globalRentalCar.http.response.ConfirmOrderResponseBean;
 import com.sam.globalRentalCar.http.response.DeleteVideoResponseBean;
+import com.sam.globalRentalCar.http.response.FindUserListBean;
 import com.sam.globalRentalCar.http.response.FollowResponseBean;
 import com.sam.globalRentalCar.http.response.GetCarBrandListResponseBean;
 import com.sam.globalRentalCar.http.response.GetCarListResponseBean;
@@ -288,11 +289,19 @@ public interface RetrofitApi {
     Call<DeleteVideoResponseBean> deleteVideo(@Body DeleteVideoRequestBean deleteVideoRequestBean);
 
     /**
-     * 开关
+     * 服务页面展示条目开关
      *
      * @return
      */
     @GET(NetApiConstants.GET_SWITCH)
     Call<SwitchResponseBean> getSwitch();
+
+    /**
+     * 查找好友
+     *
+     * @return
+     */
+    @GET(NetApiConstants.GET_FIND_USER)
+    Call<FindUserListBean> findUser(@Query("userNameOrIdOrPhone") String key);
 
 }
