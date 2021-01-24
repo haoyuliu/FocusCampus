@@ -19,6 +19,7 @@
         android:background="@drawable/ease_seabar_input"
         android:drawableLeft="@drawable/ease_search_bar_icon_normal"
         android:textColorHint="#8C8C8C"
+        android:gravity="center_vertical"
         android:textSize="16sp"
         android:hint="输入你想搜索的内容？"
         android:layout_marginLeft="4dp"
