@@ -80,7 +80,7 @@ public class ResponseLogInterceptor implements Interceptor {
                         MyApplication.getContext().startActivity(intent);
                         // 进行内存优化，销毁除登录页之外的所有界面
                         ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
-                        Toast.makeText(MyApplication.getInstance().getApplicationContext(), "您已退出登录！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyApplication.getInstance().getApplicationContext(), "请重新登录！", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
