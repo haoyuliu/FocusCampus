@@ -30,7 +30,7 @@ public final class SplashActivity extends MyActivity {
         new Handler().postDelayed(() -> {
             // 权限的申请
 
-            XXPermissions.with(this).permission(Manifest.permission.CAMERA).request(new OnPermission() {
+            XXPermissions.with(this).permission(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE).request(new OnPermission() {
                 @Override
                 public void hasPermission(List<String> granted, boolean all) {
                     startActivity(HomeActivity.class);

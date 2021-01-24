@@ -270,7 +270,7 @@ public interface RetrofitApi {
      * @return
      */
     @GET(NetApiConstants.GET_ADDRESS_BY_LL)
-    Call<GetUserCouponListResponseBean> getCityIdByLl(@Query("userId") String userId);
+    Call<GetUserCouponListResponseBean> getCityIdByLl(@Query("lng") String lng, @Query("lng") String lat);
 
     /**
      * 根据城市编码获取车辆门店列表

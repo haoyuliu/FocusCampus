@@ -1,12 +1,17 @@
 package com.sam.globalRentalCar.ui.activity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.hyphenate.easeui.ui.EaseBaiduMapActivity;
 import com.sam.base.BaseDialog;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.adapter.HomeRentalCarLowPriceAdapter;
@@ -15,6 +20,7 @@ import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.constant.Constant;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.response.GetRentalCarHomeMessageResponseBean;
+import com.sam.globalRentalCar.http.response.GetUserCouponListResponseBean;
 import com.sam.globalRentalCar.ui.dialog.DateDialog;
 import com.sam.globalRentalCar.ui.dialog.TimeDialog;
 
@@ -62,6 +68,9 @@ public class RentalCarActivity extends MyActivity {
     private String endHour;
     private String endMinute;
 
+    // 定位
+    public LocationClient mLocationClient;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_rental_car;
@@ -69,6 +78,10 @@ public class RentalCarActivity extends MyActivity {
 
     @Override
     protected void initView() {
+        mLocationClient = new LocationClient(RentalCarActivity.this);
+        mLocationClient.registerLocationListener(new MyLocationListener());
+        mLocationClient.start();
+        getCityData();
         // 获取默认的年月日天
         SimpleDateFormat alldate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat yearDate = new SimpleDateFormat("yyyy");
@@ -90,6 +103,10 @@ public class RentalCarActivity extends MyActivity {
         // 设置低价的布局管理器
         mLowPriceRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         setOnClickListener(R.id.but_choice_car, R.id.rental_car_order, R.id.tv_start_date, R.id.tv_start_time, R.id.tv_end_date, R.id.tv_end_time);
+    }
+
+    private void getCityData() {
+        // 根据经纬度获取当前城市信息
     }
 
     @Override
@@ -348,6 +365,30 @@ public class RentalCarActivity extends MyActivity {
                 })
                 .show();
 
+    }
+
+    public class MyLocationListener implements BDLocationListener {
+
+        @Override
+        public void onReceiveLocation(BDLocation bdLocation) {
+            String altitude = bdLocation.getAltitude() + "";
+            String longitude = bdLocation.getLongitude() + "";
+            Log.d("RentalCarActivity", "altitude---->" + altitude);
+            Log.d("RentalCarActivity", "longitude---->" + longitude);
+            //根据金纬度获取城市id
+            RetrofitClient.getRetrofitService().getCityIdByLl(longitude, altitude).enqueue(new Callback<GetUserCouponListResponseBean>() {
+                @Override
+                public void onResponse(Call<GetUserCouponListResponseBean> call, Response<GetUserCouponListResponseBean> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<GetUserCouponListResponseBean> call, Throwable t) {
+
+                }
+            });
+
+        }
     }
 
 }
