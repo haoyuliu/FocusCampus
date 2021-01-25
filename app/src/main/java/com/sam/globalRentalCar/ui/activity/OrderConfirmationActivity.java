@@ -79,6 +79,8 @@ public class OrderConfirmationActivity extends MyActivity {
     private String stringOrderEndHour;
     private String stringOrderMin;
 
+    private String days;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_order_confirmation;
@@ -94,6 +96,7 @@ public class OrderConfirmationActivity extends MyActivity {
         stringOrderEndDay = orderIntent.getStringExtra(Constant.GET_CAR_END_DAY);
         stringOrderEndHour = orderIntent.getStringExtra(Constant.GET_CAR_END_HOUR);
         stringOrderMin = orderIntent.getStringExtra(Constant.GET_CAR_END_MIN);
+        days = orderIntent.getStringExtra(Constant.GET_CAR_DAYS);
 
         SimpleDateFormat alldate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat yearDate = new SimpleDateFormat("yyyy");

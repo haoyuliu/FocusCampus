@@ -34,6 +34,7 @@ public class Constant {
     public static final String GET_CAR_END_DAY = "get_car_end_day";
     public static final String GET_CAR_END_HOUR = "get_car_end_hour";
     public static final String GET_CAR_END_MIN = "get_car_end_min";
+    public static final String GET_CAR_DAYS = "get_car_days";
     /**
      * 订单id
      */

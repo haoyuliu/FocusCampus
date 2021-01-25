@@ -64,7 +64,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 .load(item.getVideoImageUrl())
                 .placeholder(android.R.color.white)
                 .into(holder.thumb);
-        holder.mTitleTextView.setText(item.getVideoTitle());
+        holder.mTitleTextView.setText(item.getVideoTitle()+"");
         holder.mHomeUserTextView.setText(item.getNickName() + "");
         holder.mLikeCount.setText(item.getVideoLikeCount() + "");
         holder.mCommentCount.setText(item.getVideoCommitCount() + "");

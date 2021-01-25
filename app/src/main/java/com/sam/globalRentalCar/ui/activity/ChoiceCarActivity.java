@@ -72,6 +72,9 @@ public class ChoiceCarActivity extends MyActivity {
     private String endHour;
     private String endMinute;
 
+    //多少天
+    private String days;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_choice_car;
@@ -90,6 +93,8 @@ public class ChoiceCarActivity extends MyActivity {
         endDay = intent.getStringExtra(Constant.GET_CAR_END_DAY);
         endHour = intent.getStringExtra(Constant.GET_CAR_END_HOUR);
         endMinute = intent.getStringExtra(Constant.GET_CAR_END_MIN);
+
+        days = intent.getIntExtra(Constant.GET_CAR_DAYS, 1) + "";
 
 
         //init 车型 menu
@@ -178,6 +183,8 @@ public class ChoiceCarActivity extends MyActivity {
                         choiceIntent.putExtra(Constant.GET_CAR_END_DAY, endDay);
                         choiceIntent.putExtra(Constant.GET_CAR_END_HOUR, endHour);
                         choiceIntent.putExtra(Constant.GET_CAR_END_MIN, endMinute);
+
+                        choiceIntent.putExtra(Constant.GET_CAR_DAYS, days);
                         startActivity(choiceIntent);
 
                     });

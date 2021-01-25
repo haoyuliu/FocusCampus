@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.google.android.exoplayer2.source.MediaSourceEventListener;
 import com.hyphenate.easeui.ui.EaseBaiduMapActivity;
 import com.sam.base.BaseDialog;
 import com.sam.globalRentalCar.R;
@@ -23,6 +25,7 @@ import com.sam.globalRentalCar.http.response.GetRentalCarHomeMessageResponseBean
 import com.sam.globalRentalCar.http.response.GetUserCouponListResponseBean;
 import com.sam.globalRentalCar.ui.dialog.DateDialog;
 import com.sam.globalRentalCar.ui.dialog.TimeDialog;
+import com.sam.widget.layout.SettingBar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -54,15 +57,23 @@ public class RentalCarActivity extends MyActivity {
     @BindView(R.id.tv_end_time)
     TextView mEndTimeTextView;
 
+    @BindView(R.id.tv_days)
+    TextView mTextViewDays;
+
+    @BindView(R.id.rental_car_order)
+    SettingBar orderSettingBar;
+
     private long startTime;
     private long endTime;
-    private String days;
+    private int gapCount;
     // 开始时间
+    private String defaultStartYears;
     private String defaultMonth;
     private String defaultDay;
     private String defaultHour;
     private String defaultMinute;
     // 结束时间
+    private String defaultEndYears;
     private String endMonth;
     private String endDay;
     private String endHour;
@@ -78,9 +89,6 @@ public class RentalCarActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        mLocationClient = new LocationClient(RentalCarActivity.this);
-        mLocationClient.registerLocationListener(new MyLocationListener());
-        mLocationClient.start();
         getCityData();
         // 获取默认的年月日天
         SimpleDateFormat alldate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -89,7 +97,7 @@ public class RentalCarActivity extends MyActivity {
         SimpleDateFormat dayDate = new SimpleDateFormat("dd");
         SimpleDateFormat hourDate = new SimpleDateFormat("HH");
         SimpleDateFormat minuteData = new SimpleDateFormat("mm");
-        String defaultYears = yearDate.format(new Date());
+        defaultStartYears = yearDate.format(new Date());
         defaultMonth = monthDate.format(new Date());
         defaultDay = dayDate.format(new Date());
         defaultHour = hourDate.format(new Date());
@@ -107,6 +115,12 @@ public class RentalCarActivity extends MyActivity {
 
     private void getCityData() {
         // 根据经纬度获取当前城市信息
+        mLocationClient = new LocationClient(getApplicationContext());
+        mLocationClient.registerLocationListener(new MyLocationListener());
+        LocationClientOption locationClientOption = new LocationClientOption();
+        locationClientOption.setScanSpan(5000);
+        mLocationClient.setLocOption(locationClientOption);
+        mLocationClient.start();
     }
 
     @Override
@@ -126,8 +140,12 @@ public class RentalCarActivity extends MyActivity {
                             if (lowPriceCar.size() > 0) {
                                 HomeRentalCarLowPriceAdapter homeRentalCarLowPriceAdapter = new HomeRentalCarLowPriceAdapter(RentalCarActivity.this, lowPriceCar);
                                 mLowPriceRecyclerView.setAdapter(homeRentalCarLowPriceAdapter);
+                                orderSettingBar.setLeftText("全部订单:  " + rentalCarHomeMessageResponseBean.getData().getMyOrderCount());
+                            } else {
+                                toast("暂无数据");
                             }
-                            toast("暂无数据");
+                        } else {
+                            toast("获取数据失败");
                         }
 
                     }
@@ -145,6 +163,7 @@ public class RentalCarActivity extends MyActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.but_choice_car:
+                // 先判断时间是否合理
                 // 将用户选择的时间，取车城市，取车地点携带到下一个页面
                 Intent intent = new Intent(RentalCarActivity.this, ChoiceCarActivity.class);
                 intent.putExtra(Constant.GET_CAR_DEFAULT_MONTH, defaultMonth);
@@ -156,7 +175,7 @@ public class RentalCarActivity extends MyActivity {
                 intent.putExtra(Constant.GET_CAR_END_DAY, endDay);
                 intent.putExtra(Constant.GET_CAR_END_HOUR, endHour);
                 intent.putExtra(Constant.GET_CAR_END_MIN, endMinute);
-
+                intent.putExtra(Constant.GET_CAR_DAYS, gapCount);
                 startActivity(intent);
                 break;
             case R.id.rental_car_order:
@@ -209,10 +228,22 @@ public class RentalCarActivity extends MyActivity {
                     @Override
                     public void onSelected(BaseDialog dialog, int year, int month, int day) {
                         //toast(year + getString(R.string.common_year) + month + getString(R.string.common_month) + day + getString(R.string.common_day));
+                        defaultStartYears = year + "";
                         defaultMonth = month + "";
                         defaultDay = day + "";
                         mStartDateTextView.setText(defaultMonth + getString(R.string.common_month) + defaultDay + getString(R.string.common_day));
 
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date_start = null;
+                        Date date_end = null;
+                        try {
+                            date_start = sdf.parse(defaultStartYears + "-" + defaultMonth + "-" + defaultDay);
+                            date_end = sdf.parse(defaultStartYears + "-" + endMonth + "-" + endDay);
+                        } catch (java.text.ParseException e) {
+                            e.printStackTrace();
+                        }
+                        gapCount = getGapCount(date_start, date_end);
+                        mTextViewDays.setText(gapCount + "天");
                         // 如果不指定时分秒则默认为现在的时间
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(Calendar.YEAR, year);
@@ -258,7 +289,17 @@ public class RentalCarActivity extends MyActivity {
                         endDay = day + "";
                         //toast(year + getString(R.string.common_year) + month + getString(R.string.common_month) + day + getString(R.string.common_day));
                         mEndDateTextView.setText(endMonth + getString(R.string.common_month) + endDay + getString(R.string.common_day));
-
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date_start = null;
+                        Date date_end = null;
+                        try {
+                            date_start = sdf.parse(defaultStartYears + "-" + defaultMonth + "-" + defaultDay);
+                            date_end = sdf.parse(defaultStartYears + "-" + endMonth + "-" + endDay);
+                        } catch (java.text.ParseException e) {
+                            e.printStackTrace();
+                        }
+                        int gapCount = getGapCount(date_start, date_end);
+                        mTextViewDays.setText(gapCount + "天");
                         // 如果不指定时分秒则默认为现在的时间
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(Calendar.YEAR, year);
@@ -391,4 +432,32 @@ public class RentalCarActivity extends MyActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLocationClient.stop();
+    }
+
+    /**
+     * 获取两个日期之间的间隔天数
+     *
+     * @return
+     */
+    public static int getGapCount(Date startDate, Date endDate) {
+        Calendar fromCalendar = Calendar.getInstance();
+        fromCalendar.setTime(startDate);
+        fromCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        fromCalendar.set(Calendar.MINUTE, 0);
+        fromCalendar.set(Calendar.SECOND, 0);
+        fromCalendar.set(Calendar.MILLISECOND, 0);
+
+        Calendar toCalendar = Calendar.getInstance();
+        toCalendar.setTime(endDate);
+        toCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        toCalendar.set(Calendar.MINUTE, 0);
+        toCalendar.set(Calendar.SECOND, 0);
+        toCalendar.set(Calendar.MILLISECOND, 0);
+
+        return (int) ((toCalendar.getTime().getTime() - fromCalendar.getTime().getTime()) / (1000 * 60 * 60 * 24));
+    }
 }
