@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">环球车行</string>
+    <string name="app_name">焦点校园 </string>
 
     <!-- 通用的 -->
     <string name="common_phone_input_hint">请输入手机号码</string>

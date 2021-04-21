@@ -24,7 +24,7 @@
             android:layout_height="110dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="200dp"
-            android:src="@mipmap/launch_image" />
+            android:src="@mipmap/launch" />
     </LinearLayout>
 
     <ImageView

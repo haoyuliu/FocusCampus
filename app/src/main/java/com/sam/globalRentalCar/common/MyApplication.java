@@ -115,21 +115,22 @@ public final class MyApplication extends Application {
             public EaseUser getUser(String username) {
                 Log.d("username", username);
                 EaseUser easeUser = null;
-                //if (username.equals(EMClient.getInstance().getCurrentUser())) {
+                if (username.equals(EMClient.getInstance().getCurrentUser())) {
                     // 如果用户是本人，就设置自己的头像和昵称
                     easeUser = new EaseUser(username);
+
                     easeUser.setNickname(SPUtils.getInstance(mInstance).getString("NickName"));
-                    easeUser.setAvatar(SPUtils.getInstance(mInstance).getString("headPic"));
-                    return easeUser;
-               // } else {
+                   // easeUser.setAvatar(SPUtils.getInstance(mInstance).getString("headPic"));
+                   // return easeUser;
+                } else {
                     // 收到别人的消息，就设置别人的头像和昵称
-                 //   easeUser = new EaseUser(username);
-                //    easeUser.setNickname(SPUtils.getInstance(mInstance).getString("OtherNickName"));
-                 //   easeUser.setAvatar(SPUtils.getInstance(mInstance).getString("OtherHeadImage"));
-               // }
+                    easeUser = new EaseUser(username);
+                    easeUser.setNickname(SPUtils.getInstance(mInstance).getString("OtherNickName"));
+                    easeUser.setAvatar(SPUtils.getInstance(mInstance).getString("OtherHeadImage"));
+                }
 
                 //easeUser.setAvatar(e);
-                //return easeUser;
+                return easeUser;
                 //return getus
             }
         });
