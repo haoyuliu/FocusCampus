@@ -83,6 +83,15 @@ public class FansBean {
         private Object userDesc;
         private String hxuid;
         private int followed;
+        private boolean isChecked; //本地添加，是否选中
+
+        public boolean isChecked() {
+            return isChecked;
+        }
+
+        public void setChecked(boolean checked) {
+            isChecked = checked;
+        }
 
         public long getUserId() {
             return userId;

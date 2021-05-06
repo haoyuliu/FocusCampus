@@ -114,23 +114,24 @@ public final class MyApplication extends Application {
             @Override
             public EaseUser getUser(String username) {
                 Log.d("username", username);
-                EaseUser easeUser = null;
-                if (username.equals(EMClient.getInstance().getCurrentUser())) {
-                    // 如果用户是本人，就设置自己的头像和昵称
-                    easeUser = new EaseUser(username);
-
-                    easeUser.setNickname(SPUtils.getInstance(mInstance).getString("NickName"));
-                   // easeUser.setAvatar(SPUtils.getInstance(mInstance).getString("headPic"));
-                   // return easeUser;
-                } else {
-                    // 收到别人的消息，就设置别人的头像和昵称
-                    easeUser = new EaseUser(username);
-                    easeUser.setNickname(SPUtils.getInstance(mInstance).getString("OtherNickName"));
-                    easeUser.setAvatar(SPUtils.getInstance(mInstance).getString("OtherHeadImage"));
-                }
+//                EaseUser easeUser = null;
+//                if (username.equals(EMClient.getInstance().getCurrentUser())) {
+//                    // 如果用户是本人，就设置自己的头像和昵称
+//                    easeUser = new EaseUser(username);
+//
+//                    easeUser.setNickname(SPUtils.getInstance(mInstance).getString("NickName"));
+//                   easeUser.setAvatar("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fp9.itc.cn%2Fq_70%2Fimages03%2F20200618%2F46a8c11bfe9e4d75859493227184f6b7.jpeg&refer=http%3A%2F%2Fp9.itc.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1622788028&t=140aa7a9f441581604cae138940f6c92");
+//                   // return easeUser;
+//                } else {
+//                    // 收到别人的消息，就设置别人的头像和昵称
+//                    easeUser = new EaseUser(username);
+//                    easeUser.setNickname(SPUtils.getInstance(mInstance).getString("OtherNickName"));
+//                    easeUser.setAvatar(SPUtils.getInstance(mInstance).getString("OtherHeadImage"));
+//                }
 
                 //easeUser.setAvatar(e);
-                return easeUser;
+                //直接从存下下来的EaseUser里面获取
+                return MyEMUserHelper.getEaseUser(getContext(),username);
                 //return getus
             }
         });

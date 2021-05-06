@@ -35,6 +35,8 @@ public class ChoiceFriendAdapter extends BaseRvAdapter<FansBean.DataBean, Choice
         //holder.ivHead.setImageResource(userBean.getHeadImg());
         Glide.with(holder.itemView.getContext()).load(userBean.getHeadImg()).into(holder.ivHead);
         holder.tvNickname.setText(userBean.getNickName());
+        holder.mChoiceFrendCheckBox.setChecked(userBean.isChecked());
+
         //holder.tvFocus.setText(userBean.getFollowed() ? "已关注" : "关注");
 /*
         holder.tvFocus.setOnClickListener(v -> {
@@ -48,6 +50,12 @@ public class ChoiceFriendAdapter extends BaseRvAdapter<FansBean.DataBean, Choice
 
             userBean.setFocused(!userBean.isFocused());
         });*/
+        holder.mChoiceFrendCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDatas().get(position).setChecked(holder.mChoiceFrendCheckBox.isChecked());
+            }
+        });
     }
 
     @NonNull
@@ -68,5 +76,10 @@ public class ChoiceFriendAdapter extends BaseRvAdapter<FansBean.DataBean, Choice
         public FansViewHolder(View itemView) {
             super(itemView);
         }
+    }
+
+    @Override
+    public List<FansBean.DataBean> getDatas() {
+        return super.getDatas();
     }
 }

@@ -1,9 +1,14 @@
 buildscript {
+
     repositories {
-        maven { url 'https://maven.aliyun.com/repository/google/' }
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin/' }
+        maven{ url 'http://maven.aliyun.com/repository/public/'}
+        maven{ url 'http://maven.aliyun.com/repository/google/'}
+        maven{ url 'http://maven.aliyun.com/repository/gradle-plugin/'}
+        maven{ url 'http://maven.aliyun.com/repository/central/'}
+        jcenter()
+        google()
         maven { url "https://jitpack.io" }
+       
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.1'
@@ -11,22 +16,32 @@ buildscript {
         classpath 'org.aspectj:aspectjtools:1.9.5'
         // AOP 配置插件：https://github.com/xuexiangjys/XAOP
         classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.5'
+
     }
 }
 
 allprojects {
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/central/' }
+        jcenter()
+        google()
         // 支付宝支付添加下面的内容
         flatDir {
             dirs 'libs'
         }
-        maven { url 'https://maven.aliyun.com/repository/google/' }
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin/' }
+
         maven { url 'https://dl.bintray.com/getactivity/maven/' }
+        mavenCentral()
+
+        //maven { url 'https://maven.google.com' }
         maven { url "https://jitpack.io" }
     }
 }
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

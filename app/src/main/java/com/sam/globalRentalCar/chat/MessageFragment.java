@@ -30,58 +30,59 @@ public class MessageFragment extends EaseConversationListFragment {
     @Override
     protected void initView() {
         super.initView();
-        // 监听消息回话
-        EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
-            @Override
-            public void onMessageReceived(List<EMMessage> list) {
-                Log.d("用户信息", "onMessageReceived" + "list--->" + list.toString());
-                for (EMMessage emMessage : list) {
-                    try {
-                        SPUtils.getInstance(getContext()).put("OtherHeadImage", emMessage.getStringAttribute("NickName", ""));
-                        SPUtils.getInstance(getContext()).put("OtherNickName", emMessage.getStringAttribute("HeadImage", ""));
-                        SPUtils.getInstance(getContext()).put("OtherUserId", emMessage.getStringAttribute("UserId") + "");
-                        EaseUser easeUI = new EaseUser(emMessage.getStringAttribute("UserId") + "");
-                        easeUI.setNickname(emMessage.getStringAttribute("NickName", ""));
-                        easeUI.setAvatar(emMessage.getStringAttribute("HeadImage", ""));
-                    } catch (HyphenateException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-                //设置数据
-                EaseUI.getInstance().getNotifier().notify(list);
-                //刷新页面
-                refresh();
-
-            }
-
-            @Override
-            public void onCmdMessageReceived(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageRead(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageDelivered(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageRecalled(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageChanged(EMMessage emMessage, Object o) {
-
-            }
-        });
-        // 点击的时候跳转到回话详情页面
+         //监听消息回话
+//        EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
+//            @Override
+//            public void onMessageReceived(List<EMMessage> list) {
+//                Log.d("用户信息", "onMessageReceived" + "list--->" + list.toString());
+//                for (EMMessage emMessage : list) {
+//
+//                    try {
+//                        SPUtils.getInstance(getContext()).put("OtherHeadImage", emMessage.getStringAttribute("NickName", ""));
+//                        SPUtils.getInstance(getContext()).put("OtherNickName", emMessage.getStringAttribute("HeadImage", ""));
+//                        SPUtils.getInstance(getContext()).put("OtherUserId", emMessage.getStringAttribute("UserId") + "");
+//                        EaseUser easeUI = new EaseUser(emMessage.getStringAttribute("UserId") + "");
+//                        easeUI.setNickname(emMessage.getStringAttribute("NickName", ""));
+//                        easeUI.setAvatar(emMessage.getStringAttribute("HeadImage", ""));
+//                    } catch (HyphenateException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//
+//                //设置数据
+//                EaseUI.getInstance().getNotifier().notify(list);
+//                //刷新页面
+//                refresh();
+//
+//            }
+//
+//            @Override
+//            public void onCmdMessageReceived(List<EMMessage> list) {
+//
+//            }
+//
+//            @Override
+//            public void onMessageRead(List<EMMessage> list) {
+//
+//            }
+//
+//            @Override
+//            public void onMessageDelivered(List<EMMessage> list) {
+//
+//            }
+//
+//            @Override
+//            public void onMessageRecalled(List<EMMessage> list) {
+//
+//            }
+//
+//            @Override
+//            public void onMessageChanged(EMMessage emMessage, Object o) {
+//
+//            }
+//        });
+         //点击的时候跳转到回话详情页面
         setConversationListItemClickListener(conversation -> {
             Intent intent = new Intent(getActivity(), ChatActivity.class);
             // 设置参数，跳转到回话列表
