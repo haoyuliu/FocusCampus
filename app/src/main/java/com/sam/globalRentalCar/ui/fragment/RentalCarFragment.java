@@ -1,7 +1,5 @@
 package com.sam.globalRentalCar.ui.fragment;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -9,7 +7,6 @@ import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.common.MyFragment;
 import com.sam.globalRentalCar.constant.Constant;
-import com.sam.globalRentalCar.http.net.RetrofitApi;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.response.SwitchResponseBean;
 import com.sam.globalRentalCar.ui.activity.BrowserActivity;
@@ -97,7 +94,7 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
         switch (v.getId()) {
             case R.id.ll_rental_car:
                 //租车服务
-                startActivity(RentalCarActivity.class);
+                //startActivity(RentalCarActivity.class);
                 break;
             case R.id.ll_buy_car:
                 //新车购买

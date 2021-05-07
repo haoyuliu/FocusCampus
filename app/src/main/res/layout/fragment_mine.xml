@@ -254,6 +254,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp">
 

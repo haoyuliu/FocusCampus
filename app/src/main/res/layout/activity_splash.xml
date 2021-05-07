@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".ui.activity.SplashActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -20,8 +21,8 @@
 
         <ImageView
             android:id="@+id/iv_launch"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
+            android:layout_width="203dp"
+            android:layout_height="203dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="200dp"
             android:src="@mipmap/launch" />
@@ -29,6 +30,7 @@
 
     <ImageView
         android:id="@+id/iv_bottom"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

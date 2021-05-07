@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="租车服务"
+                android:text="校园商场"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -73,7 +73,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="新车购买"
+                android:text="校园兼职"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5.5dp"
-                android:text="正规渠道 品质保证"
+                android:text="闲暇时光 赚个外快"
                 android:textColor="#999999"
                 android:textSize="12sp" />
 
@@ -119,7 +119,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="维修服务"
+                android:text="校园霸墙"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5.5dp"
-                android:text="正规渠道 品质保证"
+                android:text="新鲜事  早知道"
                 android:textColor="#999999"
                 android:textSize="12sp" />
 
@@ -155,7 +155,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="金融服务"
+                android:text="校园跑腿"
                 android:textColor="#333333"
                 android:textSize="16sp" />
 
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5.5dp"
-                android:text="金融分期 先开车后付款"
+                android:text="专业跑腿  省时省力  "
                 android:textColor="#999999"
                 android:textSize="12sp" />
 
