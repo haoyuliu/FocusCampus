@@ -9,6 +9,7 @@ import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.common.MyActivity;
+import com.sam.globalRentalCar.constant.Constant;
 import com.sam.globalRentalCar.utils.SPUtils;
 
 /**
@@ -17,6 +18,8 @@ import com.sam.globalRentalCar.utils.SPUtils;
 public class ChatActivity extends MyActivity implements EaseChatFragment.EaseChatFragmentHelper {
 
     public static final String TAG = "ChatActivity";
+    EaseChatFragment chatFragment;
+    String hxId;
 
     @Override
     protected int getLayoutId() {
@@ -26,9 +29,9 @@ public class ChatActivity extends MyActivity implements EaseChatFragment.EaseCha
     @Override
     protected void initView() {
         //创建一个回话的Fragment
-        EaseChatFragment chatFragment = new EaseChatFragment();
+        chatFragment = new EaseChatFragment();
         Intent intent = getIntent();
-        String hxId = intent.getStringExtra("userId");
+        hxId = intent.getStringExtra("userId");
         // pass parameters to chat fragment
         chatFragment.setArguments(getIntent().getExtras());
         // 替换Fragment
@@ -38,7 +41,50 @@ public class ChatActivity extends MyActivity implements EaseChatFragment.EaseCha
 
     @Override
     protected void initData() {
+        chatFragment.setChatFragmentHelper(new EaseChatFragment.EaseChatFragmentHelper() {
+            @Override
+            public void onSetMessageAttributes(EMMessage message) {
 
+            }
+
+            @Override
+            public void onEnterToChatDetails() {
+                // 进入群组详情页面
+                Intent intent = new Intent(ChatActivity.this, GroupDetailActivity.class);
+                intent.putExtra(Constant.GROUP_ID, hxId);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onAvatarClick(String username) {
+
+            }
+
+            @Override
+            public void onAvatarLongClick(String username) {
+
+            }
+
+            @Override
+            public boolean onMessageBubbleClick(EMMessage message) {
+                return false;
+            }
+
+            @Override
+            public void onMessageBubbleLongClick(EMMessage message) {
+
+            }
+
+            @Override
+            public boolean onExtendMenuItemClick(int itemId, View view) {
+                return false;
+            }
+
+            @Override
+            public EaseCustomChatRowProvider onSetCustomChatRowProvider() {
+                return null;
+            }
+        });
     }
 
     @Override

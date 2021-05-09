@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.activity.ModifyNickNameActivity">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/modify_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rightColor="@color/color_check_home"
+        app:rightSize="14sp"
+        app:rightTitle="保存"
+        app:title="修改群昵称"
+        app:titleSize="18sp" />
+
+    <EditText
+        android:id="@+id/modify_group_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15.5dp"
+        android:layout_marginTop="25.5dp"
+        android:background="@null"
+        android:hint="修改群组名称"
+        android:maxLength="10"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

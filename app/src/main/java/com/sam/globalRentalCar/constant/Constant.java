@@ -62,4 +62,10 @@ public class Constant {
      * 租车协议
      */
     public static final String RRICACY_PROTOCOL = "http://39.106.49.27:28080/userPrototal";
+
+    /**
+     * 群组id
+     */
+    public static final String GROUP_ID = "group_id";
+    public static final String GROUP_NAME = "group_name";
 }
