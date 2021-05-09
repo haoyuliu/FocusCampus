@@ -83,14 +83,14 @@ public class ChoiceFriendFragment extends BaseBottomSheetDialog {
         mTextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (choiceFriendAdapter != null){
+                if (choiceFriendAdapter != null) {
                     List<String> selectMembers = new ArrayList<>();
-                    for (FansBean.DataBean userBean: choiceFriendAdapter.getDatas()){
-                        if (userBean.isChecked()){
+                    for (FansBean.DataBean userBean : choiceFriendAdapter.getDatas()) {
+                        if (userBean.isChecked()) {
                             selectMembers.add(userBean.getHxuid());
                         }
                     }
-                    if (selectMembers.size() > 0){
+                    if (selectMembers.size() > 0) {
                         String[] allMembers = (String[]) selectMembers.toArray(new String[selectMembers.size()]);
                         clickCreateGroup(allMembers);
                     }
@@ -107,9 +107,9 @@ public class ChoiceFriendFragment extends BaseBottomSheetDialog {
                     @Override
                     public void onResponse(Call<FansBean> call, Response<FansBean> response) {
                         if (response.code() == HttpURLConnection.HTTP_OK) {
-                            for (FansBean.DataBean userBean: response.body().getData()){
+                            for (FansBean.DataBean userBean : response.body().getData()) {
                                 //保存EaseUser,可以认为这就是改变环信用户头像和昵称方法
-                                MyEMUserHelper.putUser(getContext(),userBean.getHxuid(),userBean.getNickName(),userBean.getHeadImg());
+                                MyEMUserHelper.putUser(getContext(), userBean.getHxuid(), userBean.getNickName(), userBean.getHeadImg());
                             }
 
                             choiceFriendAdapter = new ChoiceFriendAdapter(getContext(), response.body().getData());
@@ -138,8 +138,14 @@ public class ChoiceFriendFragment extends BaseBottomSheetDialog {
                         EMGroupOptions option = new EMGroupOptions();
                         option.maxUsers = 200;
                         option.style = EMGroupManager.EMGroupStyle.EMGroupStylePublicOpenJoin;
+                        // 群组名称根据好友名称
+                        StringBuffer sb = new StringBuffer();
+                        for (int i = 0; i < allMembers.length; i++) {
+                            sb.append(allMembers[i]);
+                        }
+                        String groupName = sb.toString();
                         //创建群组返回群id
-                        return EMClient.getInstance().groupManager().createGroup("隔壁翠233", "描述个同", allMembers, "隔壁老万加入", option);
+                        return EMClient.getInstance().groupManager().createGroup(groupName, "描述信息", allMembers, "邀请加入", option);
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -147,7 +153,7 @@ public class ChoiceFriendFragment extends BaseBottomSheetDialog {
                 .subscribe(new Consumer<EMGroup>() {
                     @Override
                     public void accept(EMGroup emGroup) throws Exception {
-                        Log.v("clickCreateGroup1",emGroup.getGroupId());
+                        Log.v("clickCreateGroup1", emGroup.getGroupId());
                         Toast.makeText(getActivity(), "创建群组成功", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getActivity(), ChatActivity.class);
                         // 传递回话类型

@@ -5,13 +5,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.bumptech.glide.Glide;
 import com.sam.globalRentalCar.R;
@@ -23,13 +28,18 @@ import com.sam.globalRentalCar.http.response.HomeVideoLikeResponseBean;
 import com.sam.globalRentalCar.ui.activity.LoginActivity;
 import com.sam.globalRentalCar.ui.activity.PersonalHomeActivity;
 import com.sam.globalRentalCar.utils.SPUtils;
+import com.sam.globalRentalCar.widget.CircleImageView;
+import com.sam.globalRentalCar.widget.IconFontTextView;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
+import static android.view.animation.Animation.INFINITE;
 
 /**
  * 获取推荐或者个人作品的适配是
@@ -64,13 +74,24 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 .load(item.getVideoImageUrl())
                 .placeholder(android.R.color.white)
                 .into(holder.thumb);
-        holder.mTitleTextView.setText(item.getVideoTitle()+"");
+        holder.mTitleTextView.setText(item.getVideoTitle() + "");
         holder.mHomeUserTextView.setText(item.getNickName() + "");
         holder.mLikeCount.setText(item.getVideoLikeCount() + "");
         holder.mCommentCount.setText(item.getVideoCommitCount() + "");
         Glide.with(holder.thumb.getContext()).load(item.getHeadImg()).into(holder.mCircleImageView);
-        holder.mFollowImageView.setVisibility(item.isBfollow() ? View.INVISIBLE : View.VISIBLE);
+        Glide.with(holder.thumb.getContext()).load(item.getHeadImg()).into(holder.mCircleBottomView);
+        holder.mFollowImageView.setVisibility(item.isBfollow() ? INVISIBLE : VISIBLE);
         holder.mPosition = position;
+        //默认进来判断点赞状态
+        boolean blike = item.isBlike();
+        if (blike) {
+            // 默认是非点赞状态
+            holder.mLottieAnimationView.setVisibility(VISIBLE);
+            holder.homeIconFont.setTextColor(holder.thumb.getContext().getResources().getColor(R.color.color_FF0041));
+        } else {
+            holder.mLottieAnimationView.setVisibility(INVISIBLE);
+            holder.homeIconFont.setTextColor(holder.thumb.getContext().getResources().getColor(R.color.white));
+        }
         // PreloadManager.getInstance(holder.itemView.getContext()).addPreloadTask(item.videoDownloadUrl, position);
         // 头像的点击事件
         holder.mCircleImageView.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +116,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
             }
         });
         // 点赞的点击事件
-        holder.mImageViewXin.setOnClickListener(new View.OnClickListener() {
+        holder.homeRlLke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 关注的点击事件
@@ -107,16 +128,22 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 }
                 boolean blike = videos.get(position).isBlike();
                 if (blike) {
-                    Glide.with(holder.thumb.getContext()).load(R.mipmap.white_xin).into(holder.mImageViewXin);
+                    //Glide.with(holder.thumb.getContext()).load(R.mipmap.white_xin).into(holder.mImageViewXin);
+                    //取消点赞
+                    holder.mLottieAnimationView.setVisibility(INVISIBLE);
+                    holder.homeIconFont.setTextColor(holder.thumb.getContext().getResources().getColor(R.color.white));
                     likeViewPostLike(blike, position);
                 } else {
-
-                    Glide.with(holder.thumb.getContext()).load(R.mipmap.red_xin).into(holder.mImageViewXin);
+                    //Glide.with(holder.thumb.getContext()).load(R.mipmap.red_xin).into(holder.mImageViewXin);
+                    //点赞
+                    holder.mLottieAnimationView.setVisibility(VISIBLE);
+                    holder.mLottieAnimationView.playAnimation();
+                    holder.homeIconFont.setTextColor(holder.thumb.getContext().getResources().getColor(R.color.color_FF0041));
                     likeViewPostLike(blike, position);
                 }
             }
         });
-
+        holder.mLottieAnimationView.setAnimation("like.json");
         holder.mFollowImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,14 +162,14 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                         if (followResponseBean.getCode().equals("200")) {
                             holder.mFollowImageView.setVisibility(View.GONE);
                         } else {
-                            holder.mFollowImageView.setVisibility(View.VISIBLE);
+                            holder.mFollowImageView.setVisibility(VISIBLE);
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<FollowResponseBean> call, Throwable t) {
-                        holder.mFollowImageView.setVisibility(View.VISIBLE);
+                        holder.mFollowImageView.setVisibility(VISIBLE);
                     }
                 });
             }
@@ -153,6 +180,23 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 //分享
             }
         });
+
+        // 图标动态展示
+        setRotateAnim(holder.mRecordLayout);
+    }
+
+    /**
+     * 循环旋转动画
+     *
+     * @param recordLayout
+     */
+    private void setRotateAnim(RelativeLayout recordLayout) {
+        RotateAnimation rotateAnimation = new RotateAnimation(0, 359,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setRepeatCount(INFINITE);
+        rotateAnimation.setDuration(8000);
+        rotateAnimation.setInterpolator(new LinearInterpolator());
+        recordLayout.startAnimation(rotateAnimation);
     }
 
     private void likeViewPostLike(boolean blike, int position) {
@@ -218,8 +262,13 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         public TextView mLikeCount;
         public TextView mCommentCount;
         public ImageView mFollowImageView;
-        public ImageView mImageViewXin;
+        //public ImageView mImageViewXin;
+        public RelativeLayout homeRlLke;
+        public IconFontTextView homeIconFont;
+        public LottieAnimationView mLottieAnimationView;
         public ImageView mImageViewShare;
+        public RelativeLayout mRecordLayout;
+        public CircleImageView mCircleBottomView;
 
         VideoHolder(View itemView) {
             super(itemView);
@@ -233,8 +282,13 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
             mLikeCount = itemView.findViewById(R.id.tv_like_count);
             mCommentCount = itemView.findViewById(R.id.tv_comment_count);
             mFollowImageView = itemView.findViewById(R.id.iv_focus);
-            mImageViewXin = itemView.findViewById(R.id.xin);
+            // mImageViewXin = itemView.findViewById(R.id.xin);
+            homeRlLke = itemView.findViewById(R.id.home_rl_like);
+            homeIconFont = itemView.findViewById(R.id.home_iv_like);
+            mLottieAnimationView = itemView.findViewById(R.id.home_lottie_anim);
             mImageViewShare = itemView.findViewById(R.id.iv_video_share);
+            mRecordLayout = itemView.findViewById(R.id.rl_record_view);
+            mCircleBottomView = itemView.findViewById(R.id.iv_head_anim_bottom);
             itemView.setTag(this);
         }
     }
