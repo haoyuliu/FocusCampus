@@ -22,10 +22,10 @@ import com.sam.globalRentalCar.http.request.DeleteVideoRequestBean;
 import com.sam.globalRentalCar.http.response.DeleteVideoResponseBean;
 import com.sam.globalRentalCar.ui.dialog.MessageDialog;
 import com.sam.globalRentalCar.utils.SPUtils;
+import com.sam.globalRentalCar.widget.CircleImageView;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

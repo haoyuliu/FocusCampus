@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         app:backButton="false"
         app:lineVisible="false"
-        app:title="服务"
+        app:title="校园"
         app:titleSize="18sp" />
 
     <LinearLayout
