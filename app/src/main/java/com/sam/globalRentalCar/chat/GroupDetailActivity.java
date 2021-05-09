@@ -3,6 +3,8 @@ package com.sam.globalRentalCar.chat;
 import android.content.Intent;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroup;
 import com.sam.globalRentalCar.R;
@@ -31,9 +33,6 @@ public class GroupDetailActivity extends MyActivity {
 
     @BindView(R.id.group_out)
     SettingBar mGroupOut;
-
-    String groupId;
-    String groupName;
 
     @Override
     protected int getLayoutId() {
@@ -65,10 +64,10 @@ public class GroupDetailActivity extends MyActivity {
             @Override
             public void onClick(View v) {
                 // 进去修改群组昵称界面
-                Intent GroupDescIntent = new Intent(GroupDetailActivity.this, ModifyGroupNameActivity.class);
-                intent.putExtra(Constant.GROUP_ID, groupId);
-                intent.putExtra(Constant.GROUP_NAME, groupName);
-                startActivity(GroupDescIntent);
+                Intent groupDetailIntent = new Intent(GroupDetailActivity.this, ModifyGroupNameActivity.class);
+                groupDetailIntent.putExtra(Constant.GROUP_ID, groupId);
+                setResult(RESULT_OK,groupDetailIntent);
+                startActivityForResult(groupDetailIntent, Constant.REQUEST_GROUP_CODE);
             }
         });
     }
@@ -76,5 +75,13 @@ public class GroupDetailActivity extends MyActivity {
     @Override
     protected void initData() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //得到新Activity 关闭后返回的数据
+        String stringExtra = data.getStringExtra(Constant.GROUP_NAME);
+        mGroupDescChange.setRightText(stringExtra);
     }
 }

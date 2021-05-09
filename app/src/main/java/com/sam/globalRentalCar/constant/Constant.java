@@ -64,8 +64,9 @@ public class Constant {
     public static final String RRICACY_PROTOCOL = "http://39.106.49.27:28080/userPrototal";
 
     /**
-     * 群组id
+     * 群组聊天相关
      */
     public static final String GROUP_ID = "group_id";
     public static final String GROUP_NAME = "group_name";
+    public static final int REQUEST_GROUP_CODE = 11111;
 }
