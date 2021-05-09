@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:bar_leftText="改变群名称" />
+        app:bar_leftText="修改群名称" />
 
     <com.sam.widget.layout.SettingBar
         android:id="@+id/group_out"
