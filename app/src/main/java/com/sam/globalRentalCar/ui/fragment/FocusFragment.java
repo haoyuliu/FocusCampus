@@ -8,6 +8,7 @@ import com.sam.globalRentalCar.bean.FansBean;
 import com.sam.globalRentalCar.common.MyFragment;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.ui.activity.HomeActivity;
+import com.sam.globalRentalCar.utils.SPUtils;
 
 import java.net.HttpURLConnection;
 
@@ -35,7 +36,7 @@ public class FocusFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initData() {
-        String userId = "368499958493609284";
+        String userId = SPUtils.getInstance(getContext()).getString("UserId");;
         String page = "1";
         getData(userId,page);
     }

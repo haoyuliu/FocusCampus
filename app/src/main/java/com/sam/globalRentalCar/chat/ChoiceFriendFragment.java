@@ -73,7 +73,7 @@ public class ChoiceFriendFragment extends BaseBottomSheetDialog {
     }
 
     private void initData() {
-        String userId = "368499958493609284";
+        String userId = SPUtils.getInstance(getContext()).getString("UserId");
         String page = "1";
         getData(userId, page);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

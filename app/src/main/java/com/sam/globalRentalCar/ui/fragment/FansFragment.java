@@ -9,6 +9,7 @@ import com.sam.globalRentalCar.bean.FansBean;
 import com.sam.globalRentalCar.common.MyFragment;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.ui.activity.HomeActivity;
+import com.sam.globalRentalCar.utils.SPUtils;
 
 import java.net.HttpURLConnection;
 
@@ -21,10 +22,9 @@ import retrofit2.Response;
  * 粉丝列表的Fragment
  */
 public class FansFragment extends MyFragment<HomeActivity> {
-
-
     @BindView(R.id.recycle_fans)
     RecyclerView mRecyclerView;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_fans;
@@ -37,19 +37,18 @@ public class FansFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initData() {
-        String userId = "368499958493609284";
+        String userId = SPUtils.getInstance(getContext()).getString("UserId");
         String page = "1";
-        getData(userId,page);
-
+        getData(userId, page);
     }
 
     private void getData(String userId, String page) {
-        RetrofitClient.getRetrofitService().getFans(userId,page)
+        RetrofitClient.getRetrofitService().getFans(userId, page)
                 .enqueue(new Callback<FansBean>() {
                     @Override
                     public void onResponse(Call<FansBean> call, Response<FansBean> response) {
-                        if (response.code()== HttpURLConnection.HTTP_OK) {
-                            FansAdapter fansAdapter = new FansAdapter(getContext(),response.body().getData());
+                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                            FansAdapter fansAdapter = new FansAdapter(getContext(), response.body().getData());
                             mRecyclerView.setAdapter(fansAdapter);
                         }
 
