@@ -179,13 +179,15 @@
 
                         <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:paddingRight="20dp"
+                            android:gravity="center"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
                             android:paddingBottom="@dimen/dp_10">
 
                             <TextView
-                                android:id="@+id/tv_mine_zan"
+                                android:id="@+id/tv_mine_friends"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -194,7 +196,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="获赞"
+                                android:text="好友"
                                 android:textSize="12sp" />
 
                         </LinearLayout>
@@ -204,8 +206,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
+                            android:gravity="center"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
                             android:paddingBottom="@dimen/dp_10">
 
                             <TextView
@@ -228,8 +231,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
+                            android:gravity="center"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
                             android:paddingBottom="@dimen/dp_10">
 
                             <TextView
@@ -247,6 +251,29 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingRight="10dp"
+                            android:gravity="center"
+                            android:paddingLeft="10dp"
+                            android:paddingBottom="@dimen/dp_10">
+
+                            <TextView
+                                android:id="@+id/tv_mine_zan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="获赞"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -254,9 +281,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:orientation="horizontal"
-                    android:visibility="gone"
                     android:paddingLeft="15dp"
-                    android:paddingRight="15dp">
+                    android:paddingRight="15dp"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:id="@+id/ll_order_rental_car"

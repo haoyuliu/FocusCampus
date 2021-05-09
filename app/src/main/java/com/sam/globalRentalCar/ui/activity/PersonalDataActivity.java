@@ -26,6 +26,7 @@ import com.sam.globalRentalCar.widget.CircleImageView;
 import com.sam.widget.layout.SettingBar;
 
 import java.net.HttpURLConnection;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -210,8 +211,9 @@ public final class PersonalDataActivity extends MyActivity {
                                 // 月份从零开始，所以需要减 1
                                 calendar.set(Calendar.MONTH, month - 1);
                                 calendar.set(Calendar.DAY_OF_MONTH, day);
-                                toast("时间戳：" + calendar.getTimeInMillis());
+                                //toast("时间戳：" + calendar.getTimeInMillis());
                                 //toast(new SimpleDateFormat("yyyy年MM月dd日 kk:mm:ss").format(calendar.getTime()));
+                                mBirthdayView.setRightText(new SimpleDateFormat("yyyy年MM月dd日").format(calendar.getTime()));
                             }
 
                             @Override

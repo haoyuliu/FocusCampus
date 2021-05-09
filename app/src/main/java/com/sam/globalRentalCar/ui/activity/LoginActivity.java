@@ -143,7 +143,7 @@ public final class LoginActivity extends MyActivity
                                             SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
                                             SPUtils.getInstance(LoginActivity.this).put("NickName", response.body().getData().getNickName());
                                             SPUtils.getInstance(LoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
-                                            SPUtils.getInstance(LoginActivity.this).put("userSex", response.body().getData().getUserSex());
+                                            SPUtils.getInstance(LoginActivity.this).put("userSex", response.body().getData().getUserSex()+"");
                                             SPUtils.getInstance(LoginActivity.this).put("userDesc", response.body().getData().getUserDesc());
                                             SPUtils.getInstance(LoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
                                             SPUtils.getInstance(LoginActivity.this).put("userLocation", response.body().getData().getUserLocation());

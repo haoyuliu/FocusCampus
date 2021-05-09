@@ -34,9 +34,6 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
     @BindView(R.id.ll_financial)
     LinearLayout mLinearLayoutFinanical;
 
-    @BindView(R.id.ll_query)
-    LinearLayout mLinearLayoutQuery;
-
     public static RentalCarFragment newInstance() {
         return new RentalCarFragment();
     }
@@ -48,12 +45,12 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.ll_rental_car, R.id.ll_buy_car, R.id.ll_maintain, R.id.ll_financial, R.id.ll_query);
+        setOnClickListener(R.id.ll_rental_car, R.id.ll_buy_car, R.id.ll_maintain, R.id.ll_financial);
     }
 
     @Override
     protected void initData() {
-        // 开关
+       /* // 开关
         RetrofitClient.getRetrofitService().getSwitch().enqueue(new Callback<SwitchResponseBean>() {
             @Override
             public void onResponse(Call<SwitchResponseBean> call, Response<SwitchResponseBean> response) {
@@ -84,7 +81,7 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
 
             }
         });
-
+*/
     }
 
 
@@ -104,10 +101,6 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
                 break;
             case R.id.ll_financial:
                 // 金融服务
-                break;
-            case R.id.ll_query:
-                // 违章查询
-                BrowserActivity.start(getContext(), Constant.QUERY_REGULATIONS_URL);
                 break;
             default:
                 break;
