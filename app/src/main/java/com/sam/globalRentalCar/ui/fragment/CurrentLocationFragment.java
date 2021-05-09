@@ -1,31 +1,28 @@
 package com.sam.globalRentalCar.ui.fragment;
 
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dueeeke.videoplayer.player.VideoView;
-import com.sam.globalRentalCar.common.BaseLazyFragment;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.bean.VideoListBean;
+import com.sam.globalRentalCar.common.MyFragment;
 import com.sam.globalRentalCar.controller.TikTokController;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.response.CommentListBean;
+import com.sam.globalRentalCar.ui.activity.HomeActivity;
+import com.sam.globalRentalCar.utils.SPUtils;
+import com.sam.globalRentalCar.videoplayer.OnViewPagerListener;
 import com.sam.globalRentalCar.videoplayer.PreloadManager;
 import com.sam.globalRentalCar.videoplayer.TikTokAdapter;
-import com.sam.globalRentalCar.utils.SPUtils;
 import com.sam.globalRentalCar.videoplayer.Utils;
 import com.sam.globalRentalCar.videoplayer.ViewPagerLayoutManager;
 import com.sam.globalRentalCar.widget.CommentDialog;
-import com.sam.globalRentalCar.videoplayer.OnViewPagerListener;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -39,8 +36,9 @@ import retrofit2.Response;
 
 /**
  * 首页中的关注的人fragment
+ * 这个默认第一次不加载，当对用户可见的时候再去加载
  */
-public class CurrentLocationFragment extends BaseLazyFragment {
+public class CurrentLocationFragment extends MyFragment<HomeActivity> {
     public static final String TAG = "CurrentLocationFragment";
     private int pageIndex = 1;
     private int pageSize = 20;
@@ -55,20 +53,34 @@ public class CurrentLocationFragment extends BaseLazyFragment {
     private int mIndex;
     // 播放器
     private VideoView mVideoView;
+    //初始化变量
+    private boolean isFirstLoad = true;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_current_location, null);
-        mRecyclerView = view.findViewById(R.id.follow_rv);
-        mCurrentRefreshLayout = view.findViewById(R.id.current_smart);
-        mTikTokAdapter = new TikTokAdapter();
-        initView();
-        initData();
-        return view;
+    protected int getLayoutId() {
+        return R.layout.fragment_current_location;
     }
 
-    private void initData() {
+    @Override
+    protected void initView() {
+        Log.d(TAG, "InitView");
+        mVideoView = new VideoView(getContext());
+        mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
+        mVideoView.setLooping(true);
+        mController = new TikTokController(getContext());
+        mVideoView.setVideoController(mController);
+        mRecyclerView = findViewById(R.id.follow_rv);
+        mCurrentRefreshLayout = findViewById(R.id.current_smart);
+        mTikTokAdapter = new TikTokAdapter();
+        mRecyclerView.setAdapter(mTikTokAdapter);
+        // 默认进来不获取数据
+        //getVideoData(true);
+        mRecyclerView.scrollToPosition(mIndex);
+        isFirstLoad = true;
+    }
+
+    @Override
+    protected void initData() {
         mCurrentRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
@@ -90,20 +102,6 @@ public class CurrentLocationFragment extends BaseLazyFragment {
         });
     }
 
-
-    private void initView() {
-        Log.d(TAG, "InitView");
-        mVideoView = new VideoView(getContext());
-        mVideoView.setScreenScaleType(VideoView.SCREEN_SCALE_CENTER_CROP);
-        mVideoView.setLooping(true);
-        mController = new TikTokController(getContext());
-        mVideoView.setVideoController(mController);
-        mTikTokAdapter = new TikTokAdapter();
-        mRecyclerView.setAdapter(mTikTokAdapter);
-        // 获取数据
-        getVideoData(true);
-        mRecyclerView.scrollToPosition(mIndex);
-    }
 
     private void startPlay(int position) {
         View itemView = mRecyclerView.getChildAt(0);
@@ -222,23 +220,21 @@ public class CurrentLocationFragment extends BaseLazyFragment {
         setVideoViewState(isVisibleToUser);
     }
 
-    @Override
-    public void fetchData() {
-        Log.d(TAG, "getVideoData");
-        // 请求网络数据
-        getVideoData(false);
-    }
-
     public void setVideoViewState(boolean isVisibleToUser) {
         if (mVideoView == null) {
             return;
         }
-        if (isVisibleToUser) {
+        if (isFirstLoad && isVisibleToUser) {
+            // 对用户可见并且是第一次加载的时候
+            getVideoData(true);
             mVideoView.start();
-            //  toast("关注播放");
+            //改变变量的值
+            isFirstLoad = false;
+        } else if (isVisibleToUser) {
+            // 非第一次，对用户可见的时候，开始播放
+            mVideoView.start();
         } else {
             mVideoView.pause();
-            // toast("关注暂停");
         }
     }
 
@@ -247,10 +243,8 @@ public class CurrentLocationFragment extends BaseLazyFragment {
         super.onHiddenChanged(hidden);
         if (hidden) {
             mVideoView.pause();
-            //toast("推荐暂停");
         } else {
             mVideoView.start();
-            // toast("推荐播放");
         }
     }
 
@@ -258,6 +252,5 @@ public class CurrentLocationFragment extends BaseLazyFragment {
     public void onPause() {
         super.onPause();
         mVideoView.pause();
-        // toast("关注暂停");
     }
 }

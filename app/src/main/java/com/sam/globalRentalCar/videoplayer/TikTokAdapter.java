@@ -50,6 +50,8 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
     private List<VideoListBean.DataBean> videos;
     private ItemCommentOnClickInterface itemOnClickInterface;
 
+    private boolean isClick = false;
+
     public void setVideos(List<VideoListBean.DataBean> videos) {
         this.videos = videos;
     }
