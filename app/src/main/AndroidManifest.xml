@@ -213,6 +213,12 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" /> <!-- 注册界面 -->
         <activity
+            android:name=".ui.activity.AccountLoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" /> <!-- 账号登录界面 -->
+
+        <activity
             android:name=".ui.activity.RegisterActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"

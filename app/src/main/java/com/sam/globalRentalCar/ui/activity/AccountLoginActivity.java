@@ -5,13 +5,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
-import com.hjq.bar.OnTitleBarListener;
-import com.hjq.bar.TitleBar;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.sam.globalRentalCar.R;
@@ -38,42 +35,32 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * desc   : 登录界面
+ * desc   : 账号登录界面
  */
-public final class LoginActivity extends MyActivity
+public final class AccountLoginActivity extends MyActivity
         implements UmengLogin.OnLoginListener {
 
     @BindView(R.id.et_user_phone)
     EditText mPhoneView;
-
-    @BindView(R.id.login_title)
-    TitleBar mTitleBar;
-
     @BindView(R.id.et_user_code)
     EditText mCodeView;
-
     @BindView(R.id.cv_password_forget_countdown)
     CountdownView mCountdownView;
-
     @BindView(R.id.btn_login_commit)
     Button mCommitView;
-
-    @BindView(R.id.password_login)
-    TextView mTextViewPasswordLogin;
 
     @BindView(R.id.v_login_blank)
     View mBlankView;
 
     @BindView(R.id.ll_login_other)
     View mOtherView;
-
     @BindView(R.id.iv_login_qq)
     View mQQView;
-
     @BindView(R.id.iv_login_wx)
     View mWeChatView;
 
     String traceId;
+
 
     @Override
     protected int getLayoutId() {
@@ -82,23 +69,8 @@ public final class LoginActivity extends MyActivity
 
     @Override
     protected void initView() {
-        mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
-            @Override
-            public void onLeftClick(View v) {
 
-            }
-
-            @Override
-            public void onTitleClick(View v) {
-
-            }
-
-            @Override
-            public void onRightClick(View v) {
-                startActivity(RegisterActivity.class);
-            }
-        });
-        setOnClickListener(R.id.cv_password_forget_countdown, R.id.btn_login_commit, R.id.iv_login_qq, R.id.iv_login_wx, R.id.privacy_protocol, R.id.user_protocol, R.id.password_login);
+        setOnClickListener(R.id.cv_password_forget_countdown, R.id.btn_login_commit, R.id.iv_login_qq, R.id.iv_login_wx, R.id.privacy_protocol, R.id.user_protocol);
     }
 
     @Override
@@ -167,15 +139,15 @@ public final class LoginActivity extends MyActivity
                                         @Override
                                         public void onSuccess() {
                                             hideDialog();
-                                            SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
-                                            SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
-                                            SPUtils.getInstance(LoginActivity.this).put("NickName", response.body().getData().getNickName());
-                                            SPUtils.getInstance(LoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
-                                            SPUtils.getInstance(LoginActivity.this).put("userSex", response.body().getData().getUserSex() + "");
-                                            SPUtils.getInstance(LoginActivity.this).put("userDesc", response.body().getData().getUserDesc());
-                                            SPUtils.getInstance(LoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
-                                            SPUtils.getInstance(LoginActivity.this).put("userLocation", response.body().getData().getUserLocation());
-                                            startActivity(com.sam.globalRentalCar.ui.activity.HomeActivity.class);
+                                            SPUtils.getInstance(AccountLoginActivity.this).put("token", response.body().getData().getToken());
+                                            SPUtils.getInstance(AccountLoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
+                                            SPUtils.getInstance(AccountLoginActivity.this).put("NickName", response.body().getData().getNickName());
+                                            SPUtils.getInstance(AccountLoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
+                                            SPUtils.getInstance(AccountLoginActivity.this).put("userSex", response.body().getData().getUserSex()+"");
+                                            SPUtils.getInstance(AccountLoginActivity.this).put("userDesc", response.body().getData().getUserDesc());
+                                            SPUtils.getInstance(AccountLoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
+                                            SPUtils.getInstance(AccountLoginActivity.this).put("userLocation", response.body().getData().getUserLocation());
+                                            startActivity(HomeActivity.class);
                                         }
 
                                         @Override
@@ -256,17 +228,13 @@ public final class LoginActivity extends MyActivity
                 break;
             case R.id.user_protocol:
                 // 用户协议
-                BrowserActivity.start(LoginActivity.this, Constant.USER_PROTOTAL);
+                BrowserActivity.start(AccountLoginActivity.this, Constant.USER_PROTOTAL);
                 break;
             case R.id.privacy_protocol:
                 //隐私协议
-                BrowserActivity.start(LoginActivity.this, Constant.USER_PROTOTAL);
+                BrowserActivity.start(AccountLoginActivity.this, Constant.USER_PROTOTAL);
                 break;
-            case R.id.password_login:
-                //进入账号密码登录界面
-                //隐私协议
-                startActivity(new Intent(LoginActivity.this, AccountLoginActivity.class));
-                break;
+
             default:
                 break;
         }

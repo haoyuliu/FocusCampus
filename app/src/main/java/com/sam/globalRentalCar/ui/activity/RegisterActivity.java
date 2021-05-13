@@ -5,6 +5,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatButton;
+
 import com.gyf.immersionbar.ImmersionBar;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.aop.SingleClick;
@@ -32,11 +34,15 @@ public final class RegisterActivity extends MyActivity {
 
     @BindView(R.id.et_register_password1)
     EditText mPasswordView1;
-    @BindView(R.id.et_register_password2)
-    EditText mPasswordView2;
 
     @BindView(R.id.btn_register_commit)
-    Button mCommitView;
+    AppCompatButton mCommitView;
+
+    @BindView(R.id.user_protocol)
+    TextView mUserProtocol;
+
+    @BindView(R.id.privacy_protocol)
+    TextView mPrivacyProtocol;
 
     @Override
     protected int getLayoutId() {
@@ -47,18 +53,6 @@ public final class RegisterActivity extends MyActivity {
     protected void initView() {
         // 给这个 View 设置沉浸式，避免状态栏遮挡
         ImmersionBar.setTitleBar(this, mTitleView);
-
-        InputTextHelper.with(this)
-                .addView(mPhoneView)
-                .addView(mCodeView)
-                .addView(mPasswordView1)
-                .addView(mPasswordView2)
-                .setMain(mCommitView)
-                .setListener(helper -> mPhoneView.getText().toString().length() == 11 &&
-                        mPasswordView1.getText().toString().length() >= 6 &&
-                        mPasswordView1.getText().toString().equals(mPasswordView2.getText().toString()))
-                .build();
-
         setOnClickListener(R.id.cv_register_countdown, R.id.btn_register_commit);
     }
 

@@ -28,11 +28,11 @@ public final class PasswordResetActivity extends MyActivity {
         context.startActivity(intent);
     }
 
-    @BindView(R.id.et_password_reset_password1)
+    @BindView(R.id.et_reset_phone)
     EditText mPasswordView1;
-    @BindView(R.id.et_password_reset_password2)
+    @BindView(R.id.et_reset_code)
     EditText mPasswordView2;
-    @BindView(R.id.btn_password_reset_commit)
+    @BindView(R.id.et_reset_password)
     Button mCommitView;
 
     /**
@@ -58,7 +58,7 @@ public final class PasswordResetActivity extends MyActivity {
                 .setListener(helper -> mPasswordView1.getText().toString().length() >= 6 &&
                         mPasswordView1.getText().toString().equals(mPasswordView2.getText().toString()))
                 .build();
-        setOnClickListener(R.id.btn_password_reset_commit);
+        setOnClickListener(R.id.btn_reset_commit);
     }
 
     @Override
@@ -70,7 +70,7 @@ public final class PasswordResetActivity extends MyActivity {
     @SingleClick
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btn_password_reset_commit) {
+        if (v.getId() == R.id.btn_reset_commit) {
             if (true) {
                 toast(R.string.password_reset_success);
                 finish();

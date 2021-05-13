@@ -12,7 +12,6 @@
     tools:layoutAnimation="@null">
 
     <com.hjq.bar.TitleBar
-        android:id="@+id/login_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:backButton="true"
@@ -29,18 +28,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
-        android:text="快捷登录注册"
+        android:text="密码登录"
         android:textSize="24sp" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
-        android:text="未注册用户成功登录后即自动注册"
-        android:textColor="#999999"
-        android:textSize="14sp" />
 
     <LinearLayout
         android:id="@+id/ll_login_body"
@@ -86,7 +75,7 @@
                 android:background="@color/white"
                 android:drawableStart="@drawable/ic_small_safe"
                 android:drawablePadding="15dp"
-                android:hint="@string/common_code_input_hint"
+                android:hint="请输入密码"
                 android:inputType="number"
                 android:maxLength="@integer/sms_code_length"
                 android:paddingStart="20dp"
@@ -95,9 +84,13 @@
                 android:paddingBottom="18dp"
                 android:singleLine="true" />
 
-            <com.sam.widget.view.CountdownView
-                android:id="@+id/cv_password_forget_countdown"
-                style="@style/CountdownViewStyle" />
+            <TextView
+                android:id="@+id/password_forget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="20dp"
+                android:text="忘记密码"
+                android:textColor="#4E6EAF" />
 
         </LinearLayout>
 
@@ -148,15 +141,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/password_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:text="密码登录"
-            android:textColor="#22DBB1"
-            android:textSize="19sp" />
     </LinearLayout>
 
     <View
