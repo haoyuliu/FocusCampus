@@ -42,8 +42,18 @@ public class LoginRequestBean {
         this.verifcationCode = verifcationCode;
     }
 
+    public String getUserPwd() {
+        return userPwd;
+    }
+
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
+    }
+
     private String requestId;
 
     private String verifcationCode;
+
+    private String userPwd;
 
 }
