@@ -149,5 +149,12 @@ public class NetApiConstants {
      * 查找好友
      */
     public static final String GET_FIND_USER = "user/findUsers";
-
+    /**
+     * 重置密码
+     */
+    public static final String RESET_USER_PASSWORD = "user/resetUserPwd";
+    /**
+     * 账号密码登录接口
+     */
+    public static final String LOGIN_WITH_ACCOUNT = "user/loginWithUserCode";
 }

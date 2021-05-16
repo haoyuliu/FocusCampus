@@ -9,6 +9,7 @@ import com.sam.globalRentalCar.http.request.ConfirmOrderRequestBean;
 import com.sam.globalRentalCar.http.request.DeleteVideoRequestBean;
 import com.sam.globalRentalCar.http.request.HomeVideoLikeRequestBean;
 import com.sam.globalRentalCar.http.request.LoginRequestBean;
+import com.sam.globalRentalCar.http.request.LoginWithAccountRequestBean;
 import com.sam.globalRentalCar.http.request.ModifyMessageRequestBean;
 import com.sam.globalRentalCar.http.request.PayOrderRequestBean;
 import com.sam.globalRentalCar.http.request.UpLoadVideoRequestBean;
@@ -20,6 +21,7 @@ import com.sam.globalRentalCar.http.response.ConfirmOrderResponseBean;
 import com.sam.globalRentalCar.http.response.DeleteVideoResponseBean;
 import com.sam.globalRentalCar.http.response.FindUserListBean;
 import com.sam.globalRentalCar.http.response.FollowResponseBean;
+import com.sam.globalRentalCar.http.response.ForgetPassword;
 import com.sam.globalRentalCar.http.response.GetCarBrandListResponseBean;
 import com.sam.globalRentalCar.http.response.GetCarListResponseBean;
 import com.sam.globalRentalCar.http.response.GetCarTypeListResponseBean;
@@ -58,13 +60,31 @@ public interface RetrofitApi {
     Call<VerficationCodeBean> loadVerficationCode(@Query("phone") String phone);
 
     /**
-     * 根据验证码登录
+     * 根据验证码登录和注册接口使用
      *
      * @param loginRequestBean
      * @return
      */
     @POST(NetApiConstants.USER_LOGIN)
     Call<LoginBean> loadLogin(@Body LoginRequestBean loginRequestBean);
+
+    /**
+     * 根据账号密码登录
+     *
+     * @param loginWithAccountRequestBean
+     * @return
+     */
+    @POST(NetApiConstants.LOGIN_WITH_ACCOUNT)
+    Call<LoginBean> loginWithAccount(@Body LoginWithAccountRequestBean loginWithAccountRequestBean);
+
+    /**
+     * 重置密码
+     *
+     * @param loginWithAccountRequestBean
+     * @return
+     */
+    @POST(NetApiConstants.RESET_USER_PASSWORD)
+    Call<ForgetPassword> forgetLoginPassword(@Body LoginWithAccountRequestBean loginWithAccountRequestBean);
 
     /**
      * 获取首页视频列表

@@ -20,6 +20,7 @@ import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.constant.Constant;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.request.LoginRequestBean;
+import com.sam.globalRentalCar.http.request.LoginWithAccountRequestBean;
 import com.sam.globalRentalCar.http.response.LoginBean;
 import com.sam.globalRentalCar.utils.IpUtils;
 import com.sam.globalRentalCar.utils.SPUtils;
@@ -46,12 +47,15 @@ public final class AccountLoginActivity extends MyActivity
 
     @BindView(R.id.et_user_phone)
     EditText mPhoneView;
+
     @BindView(R.id.et_user_code)
     EditText mCodeView;
+
     @BindView(R.id.password_forget)
     TextView mForgetTextView;
+
     @BindView(R.id.btn_login_commit)
-    Button mCommitView;
+    Button mLoginCommitView;
 
     @BindView(R.id.v_login_blank)
     View mBlankView;
@@ -86,6 +90,7 @@ public final class AccountLoginActivity extends MyActivity
 
             @Override
             public void onRightClick(View v) {
+                // 进入账号注册界面
                 startActivity(RegisterActivity.class);
             }
         });
@@ -138,16 +143,15 @@ public final class AccountLoginActivity extends MyActivity
                     return;
                 }
                 if (StringUtil.isEmpty(mCodeView.getText().toString())) {
-                    toast("请输入验证码");
+                    toast("请输入密码");
                     hideDialog();
                     return;
                 }
-                LoginRequestBean loginRequestBean = new LoginRequestBean();
-                loginRequestBean.setIp(IpUtils.getHostIP());
-                loginRequestBean.setPhone(mPhoneView.getText().toString());
-                loginRequestBean.setRequestId("400");
-                loginRequestBean.setVerifcationCode(mCodeView.getText().toString());
-                RetrofitClient.getRetrofitService().loadLogin(loginRequestBean)
+                LoginWithAccountRequestBean loginRequestBean = new LoginWithAccountRequestBean();
+                loginRequestBean.setIpAddress(IpUtils.getHostIP());
+                loginRequestBean.setAccount(mPhoneView.getText().toString());
+                loginRequestBean.setPwd(mCodeView.getText().toString());
+                RetrofitClient.getRetrofitService().loginWithAccount( loginRequestBean)
                         .enqueue(new Callback<LoginBean>() {
                             @Override
                             public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
