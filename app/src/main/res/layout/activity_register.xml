@@ -32,7 +32,7 @@
                 android:id="@+id/tv_register_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/register_title"
                 android:textColor="@color/black60"
                 android:textSize="23sp" />
@@ -42,7 +42,7 @@
                 style="@style/EditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:drawableStart="@drawable/ic_small_phone"
                 android:drawablePadding="15dp"
                 android:hint="@string/common_phone_input_hint"
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/shape_round_chose_car"
-                android:text="@string/login_text" />
+                android:text="注册" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,7 +119,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="登录即代表同意"
+                    android:text="注册登录即代表同意"
                     android:textSize="12sp" />
 
                 <TextView

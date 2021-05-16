@@ -13,17 +13,23 @@ import com.sam.widget.view.CountdownView;
 import butterknife.BindView;
 
 /**
- * desc   : 忘记密码
+ * desc   : 找回密码界面
  */
 public final class PasswordForgetActivity extends MyActivity {
 
-    @BindView(R.id.et_password_forget_phone)
-    EditText mPhoneView;
-    @BindView(R.id.et_password_forget_code)
+    @BindView(R.id.et_forget_password_phone)
+    EditText mPhoneForgetView;
+
+    @BindView(R.id.et_forget_phone_code)
     EditText mCodeView;
+
     @BindView(R.id.cv_password_forget_countdown)
     CountdownView mCountdownView;
-    @BindView(R.id.btn_password_forget_commit)
+
+    @BindView(R.id.et_forget_password1)
+    EditText mPhoneForgetPasswordView;
+
+    @BindView(R.id.btn_reset_commit)
     Button mCommitView;
 
     @Override
@@ -33,14 +39,14 @@ public final class PasswordForgetActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        InputTextHelper.with(this)
-                .addView(mPhoneView)
+      /*  InputTextHelper.with(this)
+                .addView(mPhoneForgetView)
                 .addView(mCodeView)
                 .setMain(mCommitView)
-                .setListener(helper -> mPhoneView.getText().toString().length() == 11 && mCodeView.getText().toString().length() == 4)
+                .setListener(helper -> mPhoneForgetView.getText().toString().length() == 11 && mCodeView.getText().toString().length() == 4)
                 .build();
 
-        setOnClickListener(R.id.cv_password_forget_countdown, R.id.btn_password_forget_commit);
+        setOnClickListener(R.id.cv_password_forget_countdown, R.id.btn_reset_commit);*/
     }
 
     @Override
@@ -53,7 +59,7 @@ public final class PasswordForgetActivity extends MyActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.cv_password_forget_countdown:
-                if (mPhoneView.getText().toString().length() != 11) {
+                if (mPhoneForgetView.getText().toString().length() != 11) {
                     toast(R.string.common_phone_input_error);
                     return;
                 }
@@ -64,9 +70,9 @@ public final class PasswordForgetActivity extends MyActivity {
                     return;
                 }
                 break;
-            case R.id.btn_password_forget_commit:
+            case R.id.btn_reset_commit:
                 if (true) {
-                    PasswordResetActivity.start(getActivity(), mPhoneView.getText().toString(), mCodeView.getText().toString());
+                    PasswordResetActivity.start(getActivity(), mPhoneForgetView.getText().toString(), mCodeView.getText().toString());
                     finish();
                     return;
                 }

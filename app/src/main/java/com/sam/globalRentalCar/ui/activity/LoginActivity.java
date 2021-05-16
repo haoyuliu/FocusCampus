@@ -264,7 +264,6 @@ public final class LoginActivity extends MyActivity
                 break;
             case R.id.password_login:
                 //进入账号密码登录界面
-                //隐私协议
                 startActivity(new Intent(LoginActivity.this, AccountLoginActivity.class));
                 break;
             default:

@@ -11,6 +11,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.aop.SingleClick;
 import com.sam.globalRentalCar.common.MyActivity;
+import com.sam.globalRentalCar.constant.Constant;
 import com.sam.globalRentalCar.helper.InputTextHelper;
 import com.sam.widget.view.CountdownView;
 
@@ -38,12 +39,6 @@ public final class RegisterActivity extends MyActivity {
     @BindView(R.id.btn_register_commit)
     AppCompatButton mCommitView;
 
-    @BindView(R.id.user_protocol)
-    TextView mUserProtocol;
-
-    @BindView(R.id.privacy_protocol)
-    TextView mPrivacyProtocol;
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_register;
@@ -53,7 +48,7 @@ public final class RegisterActivity extends MyActivity {
     protected void initView() {
         // 给这个 View 设置沉浸式，避免状态栏遮挡
         ImmersionBar.setTitleBar(this, mTitleView);
-        setOnClickListener(R.id.cv_register_countdown, R.id.btn_register_commit);
+        setOnClickListener(R.id.cv_register_countdown, R.id.btn_register_commit, R.id.privacy_protocol, R.id.user_protocol);
     }
 
     @Override
@@ -91,6 +86,14 @@ public final class RegisterActivity extends MyActivity {
                     finish();
                     return;
                 }
+                break;
+            case R.id.user_protocol:
+                // 用户协议
+                BrowserActivity.start(RegisterActivity.this, Constant.USER_PROTOTAL);
+                break;
+            case R.id.privacy_protocol:
+                //隐私协议
+                BrowserActivity.start(RegisterActivity.this, Constant.USER_PROTOTAL);
                 break;
             default:
                 break;

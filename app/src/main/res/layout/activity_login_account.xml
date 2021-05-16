@@ -12,11 +12,10 @@
     tools:layoutAnimation="@null">
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/account_login_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:backButton="true"
-        app:barStyle="transparent"
-        app:leftIcon="@drawable/close"
         app:rightColor="#333333"
         app:rightSize="16sp"
         app:rightTitle="注册"

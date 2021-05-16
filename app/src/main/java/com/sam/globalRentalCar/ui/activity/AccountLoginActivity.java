@@ -5,10 +5,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
+import com.hjq.bar.OnTitleBarListener;
+import com.hjq.bar.TitleBar;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.sam.globalRentalCar.R;
@@ -18,14 +21,12 @@ import com.sam.globalRentalCar.constant.Constant;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.request.LoginRequestBean;
 import com.sam.globalRentalCar.http.response.LoginBean;
-import com.sam.globalRentalCar.http.response.VerficationCodeBean;
 import com.sam.globalRentalCar.utils.IpUtils;
 import com.sam.globalRentalCar.utils.SPUtils;
 import com.sam.rentalcar.wxapi.WXEntryActivity;
 import com.sam.umeng.Platform;
 import com.sam.umeng.UmengClient;
 import com.sam.umeng.UmengLogin;
-import com.sam.widget.view.CountdownView;
 
 import java.net.HttpURLConnection;
 
@@ -35,17 +36,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * desc   : 账号登录界面
+ * desc   : 账号密码登录界面
  */
 public final class AccountLoginActivity extends MyActivity
         implements UmengLogin.OnLoginListener {
+
+    @BindView(R.id.account_login_title)
+    TitleBar mTitleBarAccountTitle;
 
     @BindView(R.id.et_user_phone)
     EditText mPhoneView;
     @BindView(R.id.et_user_code)
     EditText mCodeView;
-    @BindView(R.id.cv_password_forget_countdown)
-    CountdownView mCountdownView;
+    @BindView(R.id.password_forget)
+    TextView mForgetTextView;
     @BindView(R.id.btn_login_commit)
     Button mCommitView;
 
@@ -64,13 +68,28 @@ public final class AccountLoginActivity extends MyActivity
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_login;
+        return R.layout.activity_login_account;
     }
 
     @Override
     protected void initView() {
+        mTitleBarAccountTitle.setOnTitleBarListener(new OnTitleBarListener() {
+            @Override
+            public void onLeftClick(View v) {
 
-        setOnClickListener(R.id.cv_password_forget_countdown, R.id.btn_login_commit, R.id.iv_login_qq, R.id.iv_login_wx, R.id.privacy_protocol, R.id.user_protocol);
+            }
+
+            @Override
+            public void onTitleClick(View v) {
+
+            }
+
+            @Override
+            public void onRightClick(View v) {
+                startActivity(RegisterActivity.class);
+            }
+        });
+        setOnClickListener(R.id.password_forget, R.id.btn_login_commit, R.id.iv_login_qq, R.id.iv_login_wx, R.id.privacy_protocol, R.id.user_protocol);
     }
 
     @Override
@@ -143,7 +162,7 @@ public final class AccountLoginActivity extends MyActivity
                                             SPUtils.getInstance(AccountLoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
                                             SPUtils.getInstance(AccountLoginActivity.this).put("NickName", response.body().getData().getNickName());
                                             SPUtils.getInstance(AccountLoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
-                                            SPUtils.getInstance(AccountLoginActivity.this).put("userSex", response.body().getData().getUserSex()+"");
+                                            SPUtils.getInstance(AccountLoginActivity.this).put("userSex", response.body().getData().getUserSex() + "");
                                             SPUtils.getInstance(AccountLoginActivity.this).put("userDesc", response.body().getData().getUserDesc());
                                             SPUtils.getInstance(AccountLoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
                                             SPUtils.getInstance(AccountLoginActivity.this).put("userLocation", response.body().getData().getUserLocation());
@@ -177,37 +196,9 @@ public final class AccountLoginActivity extends MyActivity
                         });
 
                 break;
-            case R.id.cv_password_forget_countdown:
-                if (mPhoneView.getText().toString().length() != 11) {
-                    toast(R.string.common_phone_input_error);
-                    return;
-                }
-
-
-                // 获取验证码
-                RetrofitClient.getRetrofitService().loadVerficationCode(mPhoneView.getText().toString()).enqueue(new Callback<VerficationCodeBean>() {
-                    @Override
-                    public void onResponse(Call<VerficationCodeBean> call, Response<VerficationCodeBean> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
-                            toast("验证码以发送" + response.message());
-                            if (response.body().getTraceId() == null) {
-                                traceId = "111";
-                                return;
-                            }
-                            traceId = response.body().getData();
-                            mCountdownView.start();
-                        } else {
-                            toast("验证码获取失败" + response.message());
-                            mCountdownView.stop();
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<VerficationCodeBean> call, Throwable t) {
-                        toast("验证码获取失败" + t.getMessage().toString());
-                    }
-                });
+            case R.id.password_forget:
+                // 进入忘记密码界面
+                startActivity(new Intent(AccountLoginActivity.this, PasswordForgetActivity.class));
                 break;
             case R.id.iv_login_qq:
             case R.id.iv_login_wx:
