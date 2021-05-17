@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dueeeke.videoplayer.player.VideoView;
 import com.sam.globalRentalCar.R;
+import com.sam.globalRentalCar.action.StatusAction;
 import com.sam.globalRentalCar.bean.VideoListBean;
 import com.sam.globalRentalCar.common.MyFragment;
 import com.sam.globalRentalCar.controller.TikTokController;
@@ -23,6 +24,7 @@ import com.sam.globalRentalCar.videoplayer.TikTokAdapter;
 import com.sam.globalRentalCar.videoplayer.Utils;
 import com.sam.globalRentalCar.videoplayer.ViewPagerLayoutManager;
 import com.sam.globalRentalCar.widget.CommentDialog;
+import com.sam.globalRentalCar.widget.HintLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -30,6 +32,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,7 +40,7 @@ import retrofit2.Response;
 /**
  * 首页中的推荐页面
  */
-public class RecommendFragment extends MyFragment<HomeActivity> {
+public class RecommendFragment extends MyFragment<HomeActivity> implements StatusAction {
     private int pageIndex = 1;
     private int pageSize = 20;
     private TikTokController mController;
@@ -51,6 +54,9 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
     private int mIndex;
     // 播放器
     private VideoView mVideoView;
+
+    @BindView(R.id.hl_status_hint)
+    HintLayout mHintLayout;
 
     public static RecommendFragment newInstance() {
         return new RecommendFragment();
@@ -116,6 +122,7 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
     }
 
     private void getVideoData(boolean isRefresh) {
+        showLoading();
         RetrofitClient.getRetrofitService().loadHomeVideoListData(SPUtils.getInstance(getContext()).getString("token"), pageIndex, pageSize).enqueue(new Callback<VideoListBean>() {
             @Override
             public void onResponse(Call<VideoListBean> call, Response<VideoListBean> response) {
@@ -136,7 +143,9 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
                         } else {
                             toast("没有更多数据");
                         }
+                        showEmpty();
                     } else {
+                        showComplete();
                         if (isRefresh) {
                             mVideoList = responseList;
                         } else {
@@ -214,6 +223,12 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
                     mSmartRefreshLayout.finishLoadMore(true);
                 }
                 toast("获取视频数据失败");
+                showError(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getVideoData(true);
+                    }
+                });
             }
         });
 
@@ -249,5 +264,10 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
     public void onPause() {
         super.onPause();
         mVideoView.pause();
+    }
+
+    @Override
+    public HintLayout getHintLayout() {
+        return mHintLayout;
     }
 }

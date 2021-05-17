@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dueeeke.videoplayer.player.VideoView;
 import com.sam.globalRentalCar.R;
+import com.sam.globalRentalCar.action.StatusAction;
+import com.sam.globalRentalCar.adapter.StatusAdapter;
 import com.sam.globalRentalCar.bean.VideoListBean;
 import com.sam.globalRentalCar.common.MyFragment;
 import com.sam.globalRentalCar.controller.TikTokController;
@@ -23,6 +25,7 @@ import com.sam.globalRentalCar.videoplayer.TikTokAdapter;
 import com.sam.globalRentalCar.videoplayer.Utils;
 import com.sam.globalRentalCar.videoplayer.ViewPagerLayoutManager;
 import com.sam.globalRentalCar.widget.CommentDialog;
+import com.sam.globalRentalCar.widget.HintLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -30,6 +33,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,7 +42,7 @@ import retrofit2.Response;
  * 首页中的关注的人fragment
  * 这个默认第一次不加载，当对用户可见的时候再去加载
  */
-public class CurrentLocationFragment extends MyFragment<HomeActivity> {
+public class CurrentLocationFragment extends MyFragment<HomeActivity> implements StatusAction {
     public static final String TAG = "CurrentLocationFragment";
     private int pageIndex = 1;
     private int pageSize = 20;
@@ -55,6 +59,11 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
     private VideoView mVideoView;
     //初始化变量
     private boolean isFirstLoad = true;
+
+    @BindView(R.id.hl_status_hint)
+    HintLayout mHintLayout;
+
+    private StatusAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -77,6 +86,8 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         //getVideoData(true);
         mRecyclerView.scrollToPosition(mIndex);
         isFirstLoad = true;
+
+        mAdapter = new StatusAdapter(getContext());
     }
 
     @Override
@@ -118,6 +129,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
     }
 
     private void getVideoData(boolean isRefresh) {
+        showLoading();
         RetrofitClient.getRetrofitService().loadHomeFollowedVideoListData(SPUtils.getInstance(getContext()).getString("token"),
                 pageIndex).enqueue(new Callback<VideoListBean>() {
             @Override
@@ -132,6 +144,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
                 VideoListBean videoListBean = response.body();
                 Log.d(TAG, response.code() + "" + response.body());
                 if (videoListBean.getCode().equals("200")) {
+                    hideDialog();
                     List<VideoListBean.DataBean> responseList = response.body().getData();
                     if (responseList.size() == 0) {
                         if (isRefresh) {
@@ -139,7 +152,9 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
                         } else {
                             Toast.makeText(getContext(), "没有更多数据", Toast.LENGTH_SHORT).show();
                         }
+                        showEmpty();
                     } else {
+                        showComplete();
                         if (isRefresh) {
                             mVideoList = responseList;
                         } else {
@@ -207,7 +222,13 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
 
             @Override
             public void onFailure(Call<VideoListBean> call, Throwable t) {
-                Toast.makeText(getContext(), "获取评论数据失败", Toast.LENGTH_SHORT).show();
+                showError(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getVideoData(true);
+                    }
+                });
+                Toast.makeText(getContext(), "获取数据失败", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -226,6 +247,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
         }
         if (isFirstLoad && isVisibleToUser) {
             // 对用户可见并且是第一次加载的时候
+            showLoading();
             getVideoData(true);
             mVideoView.start();
             //改变变量的值
@@ -252,5 +274,10 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> {
     public void onPause() {
         super.onPause();
         mVideoView.pause();
+    }
+
+    @Override
+    public HintLayout getHintLayout() {
+        return mHintLayout;
     }
 }
