@@ -136,6 +136,7 @@ public final class RegisterActivity extends MyActivity {
                 LoginRequestBean loginRequestBean = new LoginRequestBean();
                 loginRequestBean.setIp(IpUtils.getHostIP());
                 loginRequestBean.setPhone(mRegisterPhoneView.getText().toString());
+                loginRequestBean.setRequestId("222");
                 loginRequestBean.setVerifcationCode(mRegisterCodeView.getText().toString());
                 loginRequestBean.setUserPwd(mRegisterPasswordView1.getText().toString());
                 RetrofitClient.getRetrofitService().loadLogin(loginRequestBean)
