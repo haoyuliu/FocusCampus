@@ -226,7 +226,7 @@ public final class PersonalDataActivity extends MyActivity {
                                 //toast(new SimpleDateFormat("yyyy年MM月dd日 kk:mm:ss").format(calendar.getTime()));
                                 mBirthdayView.setRightText(new SimpleDateFormat("yyyy年MM月dd日").format(calendar.getTime()));
                                 ModifyMessageRequestBean requestBean = new ModifyMessageRequestBean();
-                                requestBean.setUserBirthday(calendar.getTime() + "");
+                                requestBean.setUserBirthday(new SimpleDateFormat("yyyy年MM月dd日").format(calendar.getTime()));
                                 requestBean.setUserId(SPUtils.getInstance(PersonalDataActivity.this).getString("UserId"));
                                 modifyUserData(requestBean);
                             }
@@ -371,6 +371,12 @@ public final class PersonalDataActivity extends MyActivity {
                             toast("修改成功");
                             if (modifyMessageRequestBean.getHeadImg() != null) {
                                 SPUtils.getInstance(PersonalDataActivity.this).put("HeadImage", modifyMessageRequestBean.getHeadImg());
+                            }
+                            if (modifyMessageRequestBean.getUserBirthday() != null) {
+                                SPUtils.getInstance(PersonalDataActivity.this).put("userBirthday", modifyMessageRequestBean.getUserBirthday());
+                            }
+                            if (modifyMessageRequestBean.getUserLocation() != null) {
+                                SPUtils.getInstance(PersonalDataActivity.this).put("userLocation", modifyMessageRequestBean.getUserLocation());
                             }
                             SPUtils.getInstance(PersonalDataActivity.this).put("userSex", modifyMessageRequestBean.getUserSex());
                             GlideApp.with(getActivity())
