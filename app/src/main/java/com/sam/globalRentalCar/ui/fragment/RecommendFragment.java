@@ -184,7 +184,8 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
                                                     CommentDialog commentDialog = new CommentDialog();
                                                     commentDialog.setData(response.body().getData());
                                                     commentDialog.setVideoid(mVideoList.get(position).getVideoId());
-                                                    commentDialog.setUserid(mVideoList.get(position).getUserId());
+                                                    String userId = SPUtils.getInstance(getActivity()).getString("UserId");
+                                                    commentDialog.setUserid(Long.valueOf(userId));
                                                     commentDialog.show(getChildFragmentManager(), "");
                                                 } else {
                                                     toast("获取评论数据失败");
@@ -229,10 +230,8 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
             return;
         if (isVisibleToUser) {
             mVideoView.start();
-            //toast("推荐播放");
         } else {
             mVideoView.pause();
-            //toast("推荐暂停");
         }
     }
 
@@ -241,10 +240,8 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
         super.onHiddenChanged(hidden);
         if (hidden) {
             mVideoView.pause();
-            //toast("推荐暂停");
         } else {
             mVideoView.start();
-            // toast("推荐播放");
         }
     }
 
@@ -252,6 +249,5 @@ public class RecommendFragment extends MyFragment<HomeActivity> {
     public void onPause() {
         super.onPause();
         mVideoView.pause();
-        // toast("关注暂停");
     }
 }

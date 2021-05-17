@@ -1,5 +1,6 @@
 package com.sam.globalRentalCar.videoplayer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -134,14 +135,14 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                     //取消点赞
                     holder.mLottieAnimationView.setVisibility(INVISIBLE);
                     holder.homeIconFont.setTextColor(holder.thumb.getContext().getResources().getColor(R.color.white));
-                    likeViewPostLike(blike, position);
+                    likeViewPostLike(blike, position, holder.thumb.getContext());
                 } else {
                     //Glide.with(holder.thumb.getContext()).load(R.mipmap.red_xin).into(holder.mImageViewXin);
                     //点赞
                     holder.mLottieAnimationView.setVisibility(VISIBLE);
                     holder.mLottieAnimationView.playAnimation();
                     holder.homeIconFont.setTextColor(holder.thumb.getContext().getResources().getColor(R.color.color_FF0041));
-                    likeViewPostLike(blike, position);
+                    likeViewPostLike(blike, position, holder.thumb.getContext());
                 }
             }
         });
@@ -201,11 +202,12 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         recordLayout.startAnimation(rotateAnimation);
     }
 
-    private void likeViewPostLike(boolean blike, int position) {
+    private void likeViewPostLike(boolean blike, int position, Context context) {
         HomeVideoLikeRequestBean homeVideoLikeRequestBean = new HomeVideoLikeRequestBean();
         homeVideoLikeRequestBean.setBlike(blike);
         homeVideoLikeRequestBean.setVideoId(videos.get(position).getVideoId() + "");
-        //homeVideoLikeRequestBean.setUserId();
+        String UserId = SPUtils.getInstance(context).getString("UserId");
+        homeVideoLikeRequestBean.setUserId(UserId + "");
         RetrofitClient.getRetrofitService().postVideoLike(homeVideoLikeRequestBean).enqueue(new Callback<HomeVideoLikeResponseBean>() {
             @Override
             public void onResponse(Call<HomeVideoLikeResponseBean> call, Response<HomeVideoLikeResponseBean> response) {

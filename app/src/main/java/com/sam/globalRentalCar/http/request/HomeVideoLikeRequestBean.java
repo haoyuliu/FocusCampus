@@ -23,7 +23,7 @@ public class HomeVideoLikeRequestBean {
     private String content;
     private String createTime;
     private int id;
-    private int userId;
+    private String userId;
     private String userImg;
     private String videoId;
 
@@ -59,11 +59,11 @@ public class HomeVideoLikeRequestBean {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
