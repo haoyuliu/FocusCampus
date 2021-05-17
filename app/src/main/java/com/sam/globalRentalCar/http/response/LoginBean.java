@@ -94,7 +94,7 @@ public class LoginBean {
         private String nickName;
         private String headImg;
         private String phone;
-        private String userSex;
+        private int userSex;
         private String userDesc;
         private String userBirthday;
         private String userLocation;
@@ -160,11 +160,11 @@ public class LoginBean {
             this.phone = phone;
         }
 
-        public String getUserSex() {
+        public int getUserSex() {
             return userSex;
         }
 
-        public void setUserSex(String userSex) {
+        public void setUserSex(int userSex) {
             this.userSex = userSex;
         }
 

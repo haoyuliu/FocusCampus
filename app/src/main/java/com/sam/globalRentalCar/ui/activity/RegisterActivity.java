@@ -42,6 +42,7 @@ public final class RegisterActivity extends MyActivity {
 
     @BindView(R.id.et_register_phone)
     EditText mRegisterPhoneView;
+
     @BindView(R.id.cv_register_countdown)
     CountdownView mCountdownView;
 
@@ -152,7 +153,7 @@ public final class RegisterActivity extends MyActivity {
                                             SPUtils.getInstance(RegisterActivity.this).put("HeadImage", response.body().getData().getHeadImg());
                                             SPUtils.getInstance(RegisterActivity.this).put("NickName", response.body().getData().getNickName());
                                             SPUtils.getInstance(RegisterActivity.this).put("UserId", response.body().getData().getUserId() + "");
-                                            SPUtils.getInstance(RegisterActivity.this).put("userSex", response.body().getData().getUserSex() + "");
+                                            SPUtils.getInstance(RegisterActivity.this).put("userSex", response.body().getData().getUserSex());
                                             SPUtils.getInstance(RegisterActivity.this).put("userDesc", response.body().getData().getUserDesc() + "");
                                             SPUtils.getInstance(RegisterActivity.this).put("userBirthday", response.body().getData().getUserBirthday() + "");
                                             SPUtils.getInstance(RegisterActivity.this).put("userLocation", response.body().getData().getUserLocation() + "");

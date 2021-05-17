@@ -151,7 +151,7 @@ public final class AccountLoginActivity extends MyActivity
                 loginRequestBean.setIpAddress(IpUtils.getHostIP());
                 loginRequestBean.setAccount(mPhoneView.getText().toString());
                 loginRequestBean.setPwd(mCodeView.getText().toString());
-                RetrofitClient.getRetrofitService().loginWithAccount( loginRequestBean)
+                RetrofitClient.getRetrofitService().loginWithAccount(loginRequestBean)
                         .enqueue(new Callback<LoginBean>() {
                             @Override
                             public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
@@ -166,7 +166,7 @@ public final class AccountLoginActivity extends MyActivity
                                             SPUtils.getInstance(AccountLoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
                                             SPUtils.getInstance(AccountLoginActivity.this).put("NickName", response.body().getData().getNickName());
                                             SPUtils.getInstance(AccountLoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
-                                            SPUtils.getInstance(AccountLoginActivity.this).put("userSex", response.body().getData().getUserSex() + "");
+                                            SPUtils.getInstance(AccountLoginActivity.this).put("userSex", response.body().getData().getUserSex());
                                             SPUtils.getInstance(AccountLoginActivity.this).put("userDesc", response.body().getData().getUserDesc());
                                             SPUtils.getInstance(AccountLoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
                                             SPUtils.getInstance(AccountLoginActivity.this).put("userLocation", response.body().getData().getUserLocation());

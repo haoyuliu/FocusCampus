@@ -107,13 +107,24 @@ public final class PersonalDataActivity extends MyActivity {
         if (SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc") != null) {
             mSignatureView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc"));
         }
-        if (SPUtils.getInstance(PersonalDataActivity.this).getString("userSex").equals("1")) {
+        int userSex = SPUtils.getInstance(PersonalDataActivity.this).getInt("userSex");
+        if (userSex == 1) {
             mSexView.setRightText("女");
         } else {
             mSexView.setRightText("男");
         }
-        mBirthdayView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userBirthday"));
-        mAddressView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userLocation"));
+        String userBirthday = SPUtils.getInstance(PersonalDataActivity.this).getString("userBirthday");
+        if (userBirthday != null) {
+            mBirthdayView.setRightText(userBirthday);
+        } else {
+            mBirthdayView.setRightText("请选择出生日期");
+        }
+        String userLocation = SPUtils.getInstance(PersonalDataActivity.this).getString("userLocation");
+        if (userLocation != null) {
+            mAddressView.setRightText(userLocation);
+        } else {
+            mAddressView.setRightText("请选择");
+        }
     }
 
     @SingleClick
@@ -161,10 +172,10 @@ public final class PersonalDataActivity extends MyActivity {
 
                             @Override
                             public void onSelected(BaseDialog dialog, HashMap<Integer, String> data) {
-                              //  toast("确定了：" + data.toString());
+                                //  toast("确定了：" + data.toString());
                                 Set<Integer> integers = data.keySet();
                                 for (Integer integerSex : integers) {
-                                   // toast("确定了：" + integerSex);
+                                    // toast("确定了：" + integerSex);
                                     mSex = integerSex;
                                 }
                                 ModifyMessageRequestBean requestBean = new ModifyMessageRequestBean();
@@ -203,7 +214,7 @@ public final class PersonalDataActivity extends MyActivity {
                         .setListener(new DateDialog.OnListener() {
                             @Override
                             public void onSelected(BaseDialog dialog, int year, int month, int day) {
-                              //  toast(year + getString(R.string.common_year) + month + getString(R.string.common_month) + day + getString(R.string.common_day));
+                                //  toast(year + getString(R.string.common_year) + month + getString(R.string.common_month) + day + getString(R.string.common_day));
 
                                 // 如果不指定时分秒则默认为现在的时间
                                 Calendar calendar = Calendar.getInstance();
@@ -214,6 +225,10 @@ public final class PersonalDataActivity extends MyActivity {
                                 //toast("时间戳：" + calendar.getTimeInMillis());
                                 //toast(new SimpleDateFormat("yyyy年MM月dd日 kk:mm:ss").format(calendar.getTime()));
                                 mBirthdayView.setRightText(new SimpleDateFormat("yyyy年MM月dd日").format(calendar.getTime()));
+                                ModifyMessageRequestBean requestBean = new ModifyMessageRequestBean();
+                                requestBean.setUserBirthday(calendar.getTime() + "");
+                                requestBean.setUserId(SPUtils.getInstance(PersonalDataActivity.this).getString("UserId"));
+                                modifyUserData(requestBean);
                             }
 
                             @Override
@@ -239,6 +254,10 @@ public final class PersonalDataActivity extends MyActivity {
                                 mCity = city;
                                 mArea = area;
                                 mAddressView.setRightText(address);
+                                ModifyMessageRequestBean requestBean = new ModifyMessageRequestBean();
+                                requestBean.setUserLocation(address);
+                                requestBean.setUserId(SPUtils.getInstance(PersonalDataActivity.this).getString("UserId"));
+                                modifyUserData(requestBean);
                             }
                         })
                         .show();
@@ -287,7 +306,7 @@ public final class PersonalDataActivity extends MyActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                       // Toast.makeText(PersonalDataActivity.this, "onsucceed ------------------" + info.getFilePath(), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(PersonalDataActivity.this, "onsucceed ------------------" + info.getFilePath(), Toast.LENGTH_SHORT).show();
                         ModifyMessageRequestBean requestBean = new ModifyMessageRequestBean();
                         requestBean.setHeadImg(imageURL);
                         requestBean.setUserId(SPUtils.getInstance(PersonalDataActivity.this).getString("UserId"));
@@ -300,7 +319,7 @@ public final class PersonalDataActivity extends MyActivity {
             @Override
             public void onUploadFailed(UploadFileInfo info, String code, String message) {
                 Log.d("图片上传", "失败" + code + "message" + message);
-               // Toast.makeText(PersonalDataActivity.this, "onfailed ------------------ " + info.getFilePath() + " " + code + " " + message, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(PersonalDataActivity.this, "onfailed ------------------ " + info.getFilePath() + " " + code + " " + message, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -310,7 +329,7 @@ public final class PersonalDataActivity extends MyActivity {
 
             @Override
             public void onUploadTokenExpired() {
-               // Toast.makeText(PersonalDataActivity.this, "onExpired ------------- ", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(PersonalDataActivity.this, "onExpired ------------- ", Toast.LENGTH_SHORT).show();
 
                 uploader.resumeWithAuth(uploadAuth);
             }
@@ -322,13 +341,13 @@ public final class PersonalDataActivity extends MyActivity {
 
             @Override
             public void onUploadRetryResume() {
-               // Toast.makeText(PersonalDataActivity.this, "onUploadRetryResume ------------- ", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(PersonalDataActivity.this, "onUploadRetryResume ------------- ", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onUploadStarted(UploadFileInfo uploadFileInfo) {
                 Log.d("图片上传", "开始");
-               // Toast.makeText(PersonalDataActivity.this, "onUploadStarted ------------- ", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(PersonalDataActivity.this, "onUploadStarted ------------- ", Toast.LENGTH_SHORT).show();
 
                 uploader.setUploadAuthAndAddress(uploadFileInfo, uploadAuth, uploadAddress);
             }
