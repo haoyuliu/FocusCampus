@@ -99,6 +99,24 @@ public class UserProductionOrLoveBean implements Serializable {
         private Object status;
         private Object createTime;
         private int id;
+        private boolean blike;
+        private boolean bfollow;
+
+        public boolean isBlike() {
+            return blike;
+        }
+
+        public void setBlike(boolean blike) {
+            this.blike = blike;
+        }
+
+        public boolean isBfollow() {
+            return bfollow;
+        }
+
+        public void setBfollow(boolean bfollow) {
+            this.bfollow = bfollow;
+        }
 
         public long getUserId() {
             return userId;

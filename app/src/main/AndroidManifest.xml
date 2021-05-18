@@ -290,7 +290,7 @@
         <activity
             android:name=".ui.activity.PersonalHomeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.UpLoadVedioActivity"
