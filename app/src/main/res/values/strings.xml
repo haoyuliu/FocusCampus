@@ -264,6 +264,7 @@
     <item name="rect_view" type="id"></item>
 
     <string name="str_tiktok_1">抖音 (RecyclerView)</string>
+    <string name="setting_feedback">意见反馈</string>
 
 
 </resources>

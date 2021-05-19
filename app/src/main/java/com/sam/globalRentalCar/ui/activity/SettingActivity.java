@@ -26,6 +26,10 @@ public final class SettingActivity extends MyActivity
     @BindView(R.id.sb_setting_cache)
     SettingBar mCleanCacheView;
 
+    @BindView(R.id.sb_feedback)
+    SettingBar mFeedbackView;
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_setting;
@@ -34,7 +38,7 @@ public final class SettingActivity extends MyActivity
     @Override
     protected void initView() {
         setOnClickListener(R.id.sb_setting_update, R.id.sb_setting_agreement,
-                R.id.sb_setting_cache, R.id.sb_setting_exit);
+                R.id.sb_setting_cache, R.id.sb_setting_exit, R.id.sb_feedback);
     }
 
     @Override
@@ -122,6 +126,10 @@ public final class SettingActivity extends MyActivity
 
                     return;
                 }
+                break;
+            case R.id.sb_feedback:
+                // 意见反馈
+                startActivity(FeedBackActivity.class);
                 break;
             default:
                 break;

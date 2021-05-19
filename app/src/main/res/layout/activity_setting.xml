@@ -65,6 +65,12 @@
         android:layout_height="wrap_content"
         app:bar_leftText="@string/setting_cache"
         app:bar_rightIcon="@drawable/ico_go_black" />
+    <com.sam.widget.layout.SettingBar
+        android:id="@+id/sb_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/setting_feedback"
+        app:bar_rightIcon="@drawable/ico_go_black" />
 
     <com.sam.widget.layout.SettingBar
         android:layout_width="match_parent"

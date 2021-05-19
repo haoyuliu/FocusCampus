@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".ui.activity.ModifyNickNameActivity">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/feedback_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rightColor="@color/color_check_home"
+        app:rightTitle="反馈"
+        app:titleSize="18sp"
+        app:rightSize="14sp"
+        app:title="意见反馈" />
+
+    <EditText
+        android:id="@+id/modify_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="15.5dp"
+        android:layout_marginRight="15.5dp"
+        android:background="@drawable/shape_modify_signature"
+        android:gravity="start"
+        android:hint="填写你要反馈的内容"
+        android:paddingLeft="5dp"
+        android:paddingTop="@dimen/dp_10" />
+
+</LinearLayout>
