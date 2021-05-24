@@ -19,7 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * desc   : 租车页面
+ * desc   : 校园页面
  */
 public final class RentalCarFragment extends MyFragment<HomeActivity> {
     @BindView(R.id.ll_rental_car)
@@ -90,17 +90,21 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_rental_car:
+                toast("敬请期待");
                 //租车服务
                 //startActivity(RentalCarActivity.class);
                 break;
             case R.id.ll_buy_car:
                 //新车购买
+                toast("敬请期待");
                 break;
             case R.id.ll_maintain:
+                toast("敬请期待");
                 // 维修服务
                 break;
             case R.id.ll_financial:
                 // 金融服务
+                toast("敬请期待");
                 break;
             default:
                 break;
