@@ -104,8 +104,11 @@ public final class PersonalDataActivity extends MyActivity {
         String address = mProvince + mCity + mArea;
         mAddressView.setRightText(address);
         mNameView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("NickName"));
-        if (SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc") != null) {
+        String userDesc = SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc");
+        if (userDesc != null && userDesc.equals("")) {
             mSignatureView.setRightText(SPUtils.getInstance(PersonalDataActivity.this).getString("userDesc"));
+        } else {
+            mSignatureView.setRightText("请设置签名信息");
         }
         int userSex = SPUtils.getInstance(PersonalDataActivity.this).getInt("userSex");
         if (userSex == 1) {
@@ -114,13 +117,13 @@ public final class PersonalDataActivity extends MyActivity {
             mSexView.setRightText("男");
         }
         String userBirthday = SPUtils.getInstance(PersonalDataActivity.this).getString("userBirthday");
-        if (userBirthday != null) {
+        if (userBirthday != null && userDesc.equals("")) {
             mBirthdayView.setRightText(userBirthday);
         } else {
             mBirthdayView.setRightText("请选择出生日期");
         }
         String userLocation = SPUtils.getInstance(PersonalDataActivity.this).getString("userLocation");
-        if (userLocation != null) {
+        if (userLocation != null && userDesc.equals("")) {
             mAddressView.setRightText(userLocation);
         } else {
             mAddressView.setRightText("请选择");
