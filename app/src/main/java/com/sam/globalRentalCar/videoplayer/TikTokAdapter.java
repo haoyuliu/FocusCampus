@@ -158,7 +158,8 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                     return;
                 }
                 holder.mFollowImageView.setVisibility(View.GONE);
-                RetrofitClient.getRetrofitService().FocusUser(token, videos.get(position).getUserId() + "", 0 + "").enqueue(new Callback<FollowResponseBean>() {
+                // 1表示关注
+                RetrofitClient.getRetrofitService().FocusUser(token, videos.get(position).getUserId() + "", 1 + "").enqueue(new Callback<FollowResponseBean>() {
                     @Override
                     public void onResponse(Call<FollowResponseBean> call, Response<FollowResponseBean> response) {
                         FollowResponseBean followResponseBean = response.body();
