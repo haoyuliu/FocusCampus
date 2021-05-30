@@ -48,13 +48,13 @@ import static android.view.animation.Animation.INFINITE;
 @Deprecated
 public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolder> {
 
-    private List<VideoListBean.DataBean> videos;
+    private List<VideoListBean.DataBean> mVideos;
     private ItemCommentOnClickInterface itemOnClickInterface;
 
     private boolean isClick = false;
 
     public void setVideos(List<VideoListBean.DataBean> videos) {
-        this.videos = videos;
+        this.mVideos = videos;
     }
 
     public TikTokAdapter() {
@@ -71,8 +71,8 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
 
     @Override
     public void onBindViewHolder(final VideoHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: " + position + videos.toString());
-        VideoListBean.DataBean item = videos.get(position);
+        Log.d(TAG, "onBindViewHolder: " + position + mVideos.toString());
+        VideoListBean.DataBean item = mVideos.get(position);
         Glide.with(holder.thumb.getContext())
                 .load(item.getVideoImageUrl())
                 .placeholder(android.R.color.white)
@@ -100,14 +100,14 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         holder.mCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onBindViewHolderItem " + videos.get(position).toString());
+                Log.d(TAG, "onBindViewHolderItem " + mVideos.get(position).toString());
                 Intent intent = new Intent(holder.thumb.getContext(), PersonalHomeActivity.class);
                 intent.putExtra("userId", item.getUserId() + "");
                 intent.putExtra("HeadImage", item.getHeadImg());
                 intent.putExtra("NickName", item.getNickName());
                 intent.putExtra("isFoucs", item.isBfollow());
                 intent.putExtra("huid", item.getHxuid());
-                Log.d(TAG, "id" + videos.get(position).getId() + "HeadImage" + item.getHeadImg() + "NickName" + item.getNickName());
+                Log.d(TAG, "id" + mVideos.get(position).getId() + "HeadImage" + item.getHeadImg() + "NickName" + item.getNickName());
                 holder.thumb.getContext().startActivity(intent);
             }
         });
@@ -129,7 +129,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                     holder.thumb.getContext().startActivity(intent);
                     return;
                 }
-                boolean blike = videos.get(position).isBlike();
+                boolean blike = mVideos.get(position).isBlike();
                 if (blike) {
                     //Glide.with(holder.thumb.getContext()).load(R.mipmap.white_xin).into(holder.mImageViewXin);
                     //取消点赞
@@ -159,7 +159,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 }
                 holder.mFollowImageView.setVisibility(View.GONE);
                 // 1表示关注
-                RetrofitClient.getRetrofitService().FocusUser(token, videos.get(position).getUserId() + "", 1 + "").enqueue(new Callback<FollowResponseBean>() {
+                RetrofitClient.getRetrofitService().FocusUser(token, mVideos.get(position).getUserId() + "", 1 + "").enqueue(new Callback<FollowResponseBean>() {
                     @Override
                     public void onResponse(Call<FollowResponseBean> call, Response<FollowResponseBean> response) {
                         FollowResponseBean followResponseBean = response.body();
@@ -206,7 +206,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
     private void likeViewPostLike(boolean blike, int position, Context context) {
         HomeVideoLikeRequestBean homeVideoLikeRequestBean = new HomeVideoLikeRequestBean();
         homeVideoLikeRequestBean.setBlike(blike);
-        homeVideoLikeRequestBean.setVideoId(videos.get(position).getVideoId() + "");
+        homeVideoLikeRequestBean.setVideoId(mVideos.get(position).getVideoId() + "");
         String UserId = SPUtils.getInstance(context).getString("UserId");
         homeVideoLikeRequestBean.setUserId(UserId + "");
         RetrofitClient.getRetrofitService().postVideoLike(homeVideoLikeRequestBean).enqueue(new Callback<HomeVideoLikeResponseBean>() {
@@ -247,8 +247,8 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
 
     @Override
     public int getItemCount() {
-        if (videos.size() > 0 && videos != null) {
-            return videos.size();
+        if (mVideos.size() > 0 && mVideos != null) {
+            return mVideos.size();
         } else {
             return 0;
         }

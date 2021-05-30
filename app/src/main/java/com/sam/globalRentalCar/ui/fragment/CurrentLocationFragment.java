@@ -99,7 +99,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> implements
                 pageIndex = 1;
                 mVideoList.clear();
                 getVideoData(true);
-                Log.d("RecommendFragment", "onRefreshPageIndex----->" + pageIndex);
+                Log.d(TAG, "onRefreshPageIndex----->" + pageIndex);
             }
         });
         mCurrentRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -108,7 +108,7 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> implements
                 // 上拉加载更多
                 pageIndex++;
                 getVideoData(false);
-                Log.d("RecommendFragment", "onLoadMorePageIndex----->" + pageIndex);
+                Log.d(TAG, "onLoadMorePageIndex----->" + pageIndex);
             }
         });
     }
@@ -146,18 +146,26 @@ public class CurrentLocationFragment extends MyFragment<HomeActivity> implements
                 if (videoListBean.getCode().equals("200")) {
                     hideDialog();
                     List<VideoListBean.DataBean> responseList = response.body().getData();
-                    if (responseList.size() == 0) {
+                    if (responseList.size() == 0 && mVideoList.size() == 0) {
                         if (isRefresh) {
                             Toast.makeText(getContext(), "暂时没有数据", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getContext(), "没有更多数据", Toast.LENGTH_SHORT).show();
                         }
                         showEmpty();
+                    } else if (responseList.size() == 0) {
+                        if (isRefresh) {
+                            Toast.makeText(getContext(), "暂时没有数据", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "没有更多数据", Toast.LENGTH_SHORT).show();
+                        }
+                        showComplete();
                     } else {
                         showComplete();
                         if (isRefresh) {
                             mVideoList = responseList;
                         } else {
+                            Log.d(TAG, "pageindex----->" + pageIndex);
                             mVideoList.addAll(responseList);
                         }
                         mRecyclerView.setOnFlingListener(null);
