@@ -34,6 +34,9 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
     @BindView(R.id.ll_financial)
     LinearLayout mLinearLayoutFinanical;
 
+    @BindView(R.id.ll_query)
+    LinearLayout mLinearLayoutQuery;
+
     public static RentalCarFragment newInstance() {
         return new RentalCarFragment();
     }
@@ -45,12 +48,12 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.ll_rental_car, R.id.ll_buy_car, R.id.ll_maintain, R.id.ll_financial);
+        setOnClickListener(R.id.ll_rental_car, R.id.ll_buy_car, R.id.ll_maintain, R.id.ll_financial,R.id.ll_query);
     }
 
     @Override
     protected void initData() {
-       /* // 开关
+        // 开关
         RetrofitClient.getRetrofitService().getSwitch().enqueue(new Callback<SwitchResponseBean>() {
             @Override
             public void onResponse(Call<SwitchResponseBean> call, Response<SwitchResponseBean> response) {
@@ -58,20 +61,26 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
                 if (body.getCode().equals("200")) {
                     if (!body.isData()) {
                         //打开
+                        mLinearLayoutRentalCar.setVisibility(View.VISIBLE);
                         mLinearLayoutBuyCar.setVisibility(View.VISIBLE);
                         mLinearLayoutMaintain.setVisibility(View.VISIBLE);
                         mLinearLayoutFinanical.setVisibility(View.VISIBLE);
+                        mLinearLayoutQuery.setVisibility(View.GONE);
                     } else {
                         //隐藏
+                        mLinearLayoutRentalCar.setVisibility(View.GONE);
                         mLinearLayoutBuyCar.setVisibility(View.GONE);
                         mLinearLayoutMaintain.setVisibility(View.GONE);
                         mLinearLayoutFinanical.setVisibility(View.GONE);
+                        mLinearLayoutQuery.setVisibility(View.VISIBLE);
                     }
                 } else {
                     //隐藏
+                    mLinearLayoutRentalCar.setVisibility(View.GONE);
                     mLinearLayoutBuyCar.setVisibility(View.GONE);
                     mLinearLayoutMaintain.setVisibility(View.GONE);
                     mLinearLayoutFinanical.setVisibility(View.GONE);
+                    mLinearLayoutQuery.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -81,7 +90,6 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
 
             }
         });
-*/
     }
 
 
@@ -105,6 +113,10 @@ public final class RentalCarFragment extends MyFragment<HomeActivity> {
             case R.id.ll_financial:
                 // 金融服务
                 toast("敬请期待");
+                break;
+            case R.id.ll_query:
+                // 违章查询
+                BrowserActivity.start(getContext(), Constant.QUERY_REGULATIONS_URL);
                 break;
             default:
                 break;

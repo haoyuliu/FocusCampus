@@ -73,7 +73,7 @@ public class CommentDialog extends BaseBottomSheetDialog {
                     return;
                 }
                 requestBean.setContent(mEditTextComment.getText().toString());
-                requestBean.setId(SPUtils.getInstance(getContext()).getString("UserId"));
+                //requestBean.setId(SPUtils.getInstance(getContext()).getString("UserId"));
                 requestBean.setUserId(mUserId);
                 requestBean.setVideoId(mvideoId);
                 RetrofitClient.getRetrofitService().postVideoCommon(requestBean).enqueue(new Callback<VideoCommentResponseBean>() {
@@ -83,6 +83,10 @@ public class CommentDialog extends BaseBottomSheetDialog {
                         if (commentResponseBean.getCode().equals("200")) {
                             Toast.makeText(getContext(), "评论成功", Toast.LENGTH_SHORT).show();
                             commentAdapter.notifyDataSetChanged();
+                            CommentListBean.DataBean dataBean = new CommentListBean.DataBean();
+                            dataBean.setContent(mEditTextComment.getText().toString());
+                            dataBean.setUserId(mUserId);
+                            datas.add(dataBean);
                         } else {
                             Toast.makeText(getContext(), "评论失败", Toast.LENGTH_SHORT).show();
                         }
