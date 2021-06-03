@@ -34,19 +34,17 @@ public class FansAdapter extends BaseRvAdapter<FansBean.DataBean, FansAdapter.Fa
         //holder.ivHead.setImageResource(userBean.getHeadImg());
         Glide.with(holder.itemView.getContext()).load(userBean.getHeadImg()).into(holder.ivHead);
         holder.tvNickname.setText(userBean.getNickName());
-        //holder.tvFocus.setText(userBean.getFollowed() ? "已关注" : "关注");
-/*
+        holder.tvFocus.setText(userBean.getFollowed() == 1 ? "已关注" : "关注");
+
         holder.tvFocus.setOnClickListener(v -> {
-            if (!userBean.isFocused()) {
+            if (userBean.getFollowed() != 1) {
                 holder.tvFocus.setText("已关注");
                 holder.tvFocus.setBackgroundResource(R.drawable.shape_round_halfwhite);
             } else {
                 holder.tvFocus.setText("关注");
                 holder.tvFocus.setBackgroundResource(R.drawable.shape_round_red);
             }
-
-            userBean.setFocused(!userBean.isFocused());
-        });*/
+        });
     }
 
     @NonNull
