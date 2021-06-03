@@ -85,6 +85,7 @@
             android:textColor="@color/white" />
 
         <ImageView
+           android:visibility="invisible"
             android:id="@+id/iv_video_share"
             android:layout_width="35dp"
             android:layout_height="35dp"

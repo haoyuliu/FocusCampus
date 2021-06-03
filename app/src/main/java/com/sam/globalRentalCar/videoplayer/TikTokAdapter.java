@@ -178,12 +178,12 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                 });
             }
         });
-        holder.mImageViewShare.setOnClickListener(new View.OnClickListener() {
+      /*  holder.mImageViewShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //分享
             }
-        });
+        });*/
 
         // 图标动态展示
         setRotateAnim(holder.mRecordLayout);
@@ -291,7 +291,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
             homeRlLke = itemView.findViewById(R.id.home_rl_like);
             homeIconFont = itemView.findViewById(R.id.home_iv_like);
             mLottieAnimationView = itemView.findViewById(R.id.home_lottie_anim);
-            mImageViewShare = itemView.findViewById(R.id.iv_video_share);
+           // mImageViewShare = itemView.findViewById(R.id.iv_video_share);
             mRecordLayout = itemView.findViewById(R.id.rl_record_view);
             mCircleBottomView = itemView.findViewById(R.id.iv_head_anim_bottom);
             itemView.setTag(this);

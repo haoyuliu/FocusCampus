@@ -1,6 +1,7 @@
 package com.sam.globalRentalCar.ui.fragment;
 
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.sdk.android.vod.upload.common.utils.StringUtil;
 import com.dueeeke.videoplayer.player.VideoView;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.action.StatusAction;
@@ -17,6 +19,7 @@ import com.sam.globalRentalCar.controller.TikTokController;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.response.CommentListBean;
 import com.sam.globalRentalCar.ui.activity.HomeActivity;
+import com.sam.globalRentalCar.ui.activity.LoginActivity;
 import com.sam.globalRentalCar.utils.SPUtils;
 import com.sam.globalRentalCar.videoplayer.OnViewPagerListener;
 import com.sam.globalRentalCar.videoplayer.PreloadManager;
@@ -182,31 +185,40 @@ public class RecommendFragment extends MyFragment<HomeActivity> implements Statu
                         mTikTokAdapter.setItemOnClickInterface(new TikTokAdapter.ItemCommentOnClickInterface() {
                             @Override
                             public void onItemClick(int position) {
-                                // 获取评论数据
-                                RetrofitClient.getRetrofitService().getCommentList(mVideoList.get(position).getVideoId(), "1", "10")
-                                        .enqueue(new Callback<CommentListBean>() {
-                                            @Override
-                                            public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
-                                                CommentListBean commentListBean = response.body();
+                                String token = SPUtils.getInstance(getContext()).getString("token");
+                                if (StringUtil.isEmpty(token)) {
+                                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                                    getContext().startActivity(intent);
+                                    return;
+                                } else {
+                                    // 获取评论数据
+                                    RetrofitClient.getRetrofitService().getCommentList(mVideoList.get(position).getVideoId(), "1", "10")
+                                            .enqueue(new Callback<CommentListBean>() {
+                                                @Override
+                                                public void onResponse(Call<CommentListBean> call, Response<CommentListBean> response) {
+                                                    CommentListBean commentListBean = response.body();
 
-                                                if (commentListBean.getCode().equals("200")) {
-                                                    CommentDialog commentDialog = new CommentDialog();
-                                                    commentDialog.setData(response.body().getData());
-                                                    commentDialog.setVideoid(mVideoList.get(position).getVideoId());
-                                                    String userId = SPUtils.getInstance(getActivity()).getString("UserId");
-                                                    commentDialog.setUserid(Long.valueOf(userId));
-                                                    commentDialog.show(getChildFragmentManager(), "");
-                                                } else {
-                                                    toast("获取评论数据失败");
+                                                    if (commentListBean.getCode().equals("200")) {
+                                                        CommentDialog commentDialog = new CommentDialog();
+                                                        commentDialog.setData(response.body().getData());
+                                                        commentDialog.setVideoid(mVideoList.get(position).getVideoId());
+                                                        String userId = SPUtils.getInstance(getActivity()).getString("UserId");
+                                                        if (userId != null) {
+                                                            commentDialog.setUserid(Long.valueOf(userId));
+                                                        }
+                                                        commentDialog.show(getChildFragmentManager(), "");
+                                                    } else {
+                                                        toast("获取评论数据失败");
+                                                    }
+
                                                 }
 
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<CommentListBean> call, Throwable t) {
-                                                toast("获取评论数据失败");
-                                            }
-                                        });
+                                                @Override
+                                                public void onFailure(Call<CommentListBean> call, Throwable t) {
+                                                    toast("获取评论数据失败");
+                                                }
+                                            });
+                                }
                             }
                         });
                     }

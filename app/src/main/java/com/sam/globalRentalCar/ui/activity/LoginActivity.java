@@ -85,7 +85,7 @@ public final class LoginActivity extends MyActivity
         mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
             @Override
             public void onLeftClick(View v) {
-
+                finish();
             }
 
             @Override

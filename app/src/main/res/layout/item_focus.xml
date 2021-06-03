@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="20dp"
+    android:paddingTop="10dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_focus_head"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@mipmap/head1"
+        app:es_shape_type="round" />
+
+    <TextView
+        android:id="@+id/tv_focus_nickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_weight="1"
+        android:textSize="15sp"
+        tools:text="一个人的表演" />
+
+    <TextView
+        android:id="@+id/tv_focus_focus"
+        android:layout_width="100dp"
+        android:layout_height="32dp"
+        android:background="@drawable/shape_round_red"
+        android:gravity="center"
+        android:text="关注"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+</LinearLayout>

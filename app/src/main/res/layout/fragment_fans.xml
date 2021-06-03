@@ -5,9 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.FansFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_fans"
+    <com.sam.globalRentalCar.widget.HintLayout
+        android:id="@+id/hl_status_hint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_fans"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.sam.globalRentalCar.widget.HintLayout>
 </RelativeLayout>
