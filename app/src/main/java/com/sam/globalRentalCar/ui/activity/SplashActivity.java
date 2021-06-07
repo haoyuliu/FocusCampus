@@ -1,19 +1,11 @@
 package com.sam.globalRentalCar.ui.activity;
 
-import android.Manifest;
 import android.os.Handler;
-import android.view.View;
 
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
-import com.hjq.permissions.OnPermission;
-import com.hjq.permissions.XXPermissions;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.common.MyActivity;
-
-import java.util.List;
-
-import butterknife.BindView;
 
 /**
  * desc   : 闪屏界面
@@ -28,20 +20,7 @@ public final class SplashActivity extends MyActivity {
     @Override
     protected void initView() {
         new Handler().postDelayed(() -> {
-            // 权限的申请
-
-            XXPermissions.with(this).permission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE).request(new OnPermission() {
-                @Override
-                public void hasPermission(List<String> granted, boolean all) {
-                    startActivity(HomeActivity.class);
-                    finish();
-                }
-
-                @Override
-                public void noPermission(List<String> denied, boolean quick) {
-                    XXPermissions.gotoPermissionSettings(SplashActivity.this);
-                }
-            });
+            startActivity(HomeActivity.class);
         }, 3000);
     }
 

@@ -279,7 +279,7 @@ public final class PersonalDataActivity extends MyActivity {
                 .enqueue(new Callback<GetUpLoadImageResponseBean>() {
                     @Override
                     public void onResponse(Call<GetUpLoadImageResponseBean> call, Response<GetUpLoadImageResponseBean> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                        if (response.body().getCode().equals("200")) {
 
                             imageId = response.body().getData().getImageId();
                             uploadAuth = response.body().getData().getUploadAuth();
