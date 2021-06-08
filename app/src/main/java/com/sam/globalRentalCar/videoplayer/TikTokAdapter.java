@@ -51,7 +51,9 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
     private List<VideoListBean.DataBean> mVideos;
     private ItemCommentOnClickInterface itemOnClickInterface;
 
-    private boolean isClick = false;
+    private int flag = 1;
+
+    private boolean isLike = false;
 
     public void setVideos(List<VideoListBean.DataBean> videos) {
         this.mVideos = videos;
@@ -130,13 +132,15 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                     return;
                 }
                 boolean blike = mVideos.get(position).isBlike();
-                if (blike) {
+                if (flag == 1) {
+                    flag = 0;
                     //Glide.with(holder.thumb.getContext()).load(R.mipmap.white_xin).into(holder.mImageViewXin);
                     //取消点赞
                     holder.mLottieAnimationView.setVisibility(INVISIBLE);
                     holder.homeIconFont.setTextColor(holder.thumb.getContext().getResources().getColor(R.color.white));
                     likeViewPostLike(blike, position, holder.thumb.getContext());
                 } else {
+                    flag = 1;
                     //Glide.with(holder.thumb.getContext()).load(R.mipmap.red_xin).into(holder.mImageViewXin);
                     //点赞
                     holder.mLottieAnimationView.setVisibility(VISIBLE);
@@ -291,7 +295,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
             homeRlLke = itemView.findViewById(R.id.home_rl_like);
             homeIconFont = itemView.findViewById(R.id.home_iv_like);
             mLottieAnimationView = itemView.findViewById(R.id.home_lottie_anim);
-           // mImageViewShare = itemView.findViewById(R.id.iv_video_share);
+            // mImageViewShare = itemView.findViewById(R.id.iv_video_share);
             mRecordLayout = itemView.findViewById(R.id.rl_record_view);
             mCircleBottomView = itemView.findViewById(R.id.iv_head_anim_bottom);
             itemView.setTag(this);
