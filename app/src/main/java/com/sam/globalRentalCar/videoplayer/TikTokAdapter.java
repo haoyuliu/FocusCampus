@@ -51,7 +51,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
     private List<VideoListBean.DataBean> mVideos;
     private ItemCommentOnClickInterface itemOnClickInterface;
 
-    private int flag = 1;
+    private int flag = 0;
 
     private boolean isLike = false;
 
@@ -91,9 +91,11 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
         boolean blike = item.isBlike();
         if (blike) {
             // 默认是非点赞状态
+            flag = 1;
             holder.mLottieAnimationView.setVisibility(VISIBLE);
             holder.homeIconFont.setTextColor(holder.thumb.getContext().getResources().getColor(R.color.color_FF0041));
         } else {
+            flag = 0;
             holder.mLottieAnimationView.setVisibility(INVISIBLE);
             holder.homeIconFont.setTextColor(holder.thumb.getContext().getResources().getColor(R.color.white));
         }
@@ -146,7 +148,7 @@ public class TikTokAdapter extends RecyclerView.Adapter<TikTokAdapter.VideoHolde
                     holder.mLottieAnimationView.setVisibility(VISIBLE);
                     holder.mLottieAnimationView.playAnimation();
                     holder.homeIconFont.setTextColor(holder.thumb.getContext().getResources().getColor(R.color.color_FF0041));
-                    likeViewPostLike(blike, position, holder.thumb.getContext());
+                    likeViewPostLike(!blike, position, holder.thumb.getContext());
                 }
             }
         });
