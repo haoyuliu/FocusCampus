@@ -94,7 +94,7 @@ public final class AccountLoginActivity extends MyActivity
                 startActivity(RegisterActivity.class);
             }
         });
-        setOnClickListener(R.id.password_forget, R.id.btn_login_commit, R.id.iv_login_qq, R.id.iv_login_wx, R.id.privacy_protocol, R.id.user_protocol);
+        setOnClickListener(R.id.password_forget, R.id.btn_login_commit, R.id.iv_login_qq, R.id.iv_login_wx);
     }
 
     @Override
@@ -221,15 +221,6 @@ public final class AccountLoginActivity extends MyActivity
                 }
                 UmengClient.login(this, platform, this);
                 break;
-            case R.id.user_protocol:
-                // 用户协议
-                BrowserActivity.start(AccountLoginActivity.this, Constant.USER_PROTOTAL);
-                break;
-            case R.id.privacy_protocol:
-                //隐私协议
-                BrowserActivity.start(AccountLoginActivity.this, Constant.USER_PROTOTAL);
-                break;
-
             default:
                 break;
         }

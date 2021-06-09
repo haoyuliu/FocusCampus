@@ -395,7 +395,7 @@ public final class DialogActivity extends MyActivity {
                 break;
             case R.id.btn_dialog_custom:
                 // 自定义对话框
-                new BaseDialog.Builder(this)
+               /* new BaseDialog.Builder(this)
                         .setContentView(R.layout.dialog_custom)
                         //.setText(id, "我是预设置的文本")
                         .setOnClickListener(R.id.btn_dialog_custom_ok, (BaseDialog.OnClickListener<ImageView>) (dialog, view) -> dialog.dismiss())
@@ -406,7 +406,7 @@ public final class DialogActivity extends MyActivity {
                             toast("按键代码：" + event.getKeyCode());
                             return false;
                         })
-                        .show();
+                        .show();*/
                 break;
             default:
                 break;

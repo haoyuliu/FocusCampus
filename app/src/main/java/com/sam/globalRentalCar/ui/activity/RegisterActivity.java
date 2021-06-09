@@ -66,7 +66,7 @@ public final class RegisterActivity extends MyActivity {
     protected void initView() {
         // 给这个 View 设置沉浸式，避免状态栏遮挡
         ImmersionBar.setTitleBar(this, mTitleView);
-        setOnClickListener(R.id.cv_register_countdown, R.id.btn_register_commit, R.id.privacy_protocol, R.id.user_protocol);
+        setOnClickListener(R.id.cv_register_countdown, R.id.btn_register_commit);
     }
 
     @Override
@@ -187,14 +187,6 @@ public final class RegisterActivity extends MyActivity {
                             }
                         });
 
-                break;
-            case R.id.user_protocol:
-                // 用户协议
-                BrowserActivity.start(RegisterActivity.this, Constant.USER_PROTOTAL);
-                break;
-            case R.id.privacy_protocol:
-                //隐私协议
-                BrowserActivity.start(RegisterActivity.this, Constant.USER_PROTOTAL);
                 break;
             default:
                 break;

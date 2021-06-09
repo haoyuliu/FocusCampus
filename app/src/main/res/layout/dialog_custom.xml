@@ -1,22 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center">
+    android:layout_margin="10dp"
+    android:background="@drawable/privacy_dialog_rounded_corner"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="250dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="用户隐私政策和权限说明"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/bg_custom_dialog" />
+        android:layout_marginTop="10dp"
+        android:text="欢迎使用焦点校园，我们通过《焦点校园用户协议》和《焦点校园隐私协议》帮助您了解我们所收集的个人信息。" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btn_dialog_custom_ok"
-        android:layout_width="150dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_custom_dialog" />
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录即代表同意"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/user_protocol"
+            android:onClick="userProtocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《焦点校园用户协议》"
+            android:textColor="#4D6DAF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="和" />
+
+        <TextView
+            android:id="@+id/privacy_protocol"
+            android:onClick="privacyProtocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《焦点校园隐私协议》"
+            android:textColor="#4D6DAF" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:text="拍摄照片和录制视频：当你使用录制视频功能的时候，需要开启此权限。如果您不开启此功能，将无法实时拍摄或图片上传等功能；" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:text="麦克风权限：当你使用视频拍摄功能的时候，需要开启麦克风权限，如果您不开启此权限，将无法使用录音等相关的功能。" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btm_no"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/privacy_dialog_rounded_corner"
+            android:text="暂不使用" />
+
+        <Button
+            android:id="@+id/btn_dialog_custom_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/privacy_dialog_rounded_corner"
+            android:text="同意"
+            android:textColor="#4D6DAF" />
+    </LinearLayout>
+
+</LinearLayout>
