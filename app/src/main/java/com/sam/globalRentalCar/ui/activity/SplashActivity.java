@@ -35,7 +35,6 @@ public final class SplashActivity extends MyActivity {
     private void showPrivacyDialog() {
         new BaseDialog.Builder(this)
                 .setContentView(R.layout.dialog_custom)
-                //.setText(id, "我是预设置的文本")
                 .setOnClickListener(R.id.btn_dialog_custom_ok, (BaseDialog.OnClickListener<Button>) (dialog, view) -> doOther())
                 .setOnClickListener(R.id.btm_no, (BaseDialog.OnClickListener<Button>) (dialog, view) -> finish())
                 .setCancelable(false)
