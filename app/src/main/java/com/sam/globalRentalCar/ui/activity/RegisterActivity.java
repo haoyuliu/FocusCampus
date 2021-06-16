@@ -95,7 +95,8 @@ public final class RegisterActivity extends MyActivity {
                 RetrofitClient.getRetrofitService().loadVerficationCode(mRegisterPhoneView.getText().toString()).enqueue(new Callback<VerficationCodeBean>() {
                     @Override
                     public void onResponse(Call<VerficationCodeBean> call, Response<VerficationCodeBean> response) {
-                        if (response.code() == HttpURLConnection.HTTP_OK) {
+                        VerficationCodeBean verficationCodeBean = response.body();
+                        if (verficationCodeBean.getCode().equals("200")) {
                             toast("验证码以发送" + response.message());
                             if (response.body().getTraceId() == null) {
                                 traceId = "111";
@@ -105,7 +106,7 @@ public final class RegisterActivity extends MyActivity {
                             mCountdownView.start();
                         } else {
                             toast("验证码获取失败" + response.message());
-                            mCountdownView.stop();
+                           // mCountdownView.stop();
                         }
 
                     }
@@ -113,6 +114,7 @@ public final class RegisterActivity extends MyActivity {
                     @Override
                     public void onFailure(Call<VerficationCodeBean> call, Throwable t) {
                         toast("验证码获取失败" + t.getMessage().toString());
+                        //mCountdownView.stop();
                     }
                 });
                 break;
