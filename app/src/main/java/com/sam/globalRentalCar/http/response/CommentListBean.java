@@ -78,8 +78,18 @@ public class CommentListBean {
 
         private long userId;
         private int videoId;
+        private String userNickName;
         private String content;
         private String userImg;
+
+        public String getUserNickName() {
+            return userNickName;
+        }
+
+        public void setUserNickName(String userNickName) {
+            this.userNickName = userNickName;
+        }
+
         private String createTime;
         private int id;
         private boolean like;

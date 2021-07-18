@@ -32,7 +32,7 @@ public class CommentAdapter extends BaseRvAdapter<CommentListBean.DataBean, Comm
     protected void onBindData(CommentViewHolder holder, CommentListBean.DataBean commentBean, int position) {
         //holder.ivHead.setImageResource(commentBean.getUserImg());
         Glide.with(holder.itemView.getContext()).load(commentBean.getUserImg()).into(holder.ivHead);
-        holder.tvNickname.setText(commentBean.getUserId() + "");
+        holder.tvNickname.setText(commentBean.getUserNickName() + "");
         holder.tvContent.setText(commentBean.getContent());
        // holder.tvLikecount.setText(commentBean.);
 
