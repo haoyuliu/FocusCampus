@@ -1,11 +1,10 @@
 package com.sam.globalRentalCar.http.response;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * 重置密码
  */
 public class ForgetPassword {
+
     /**
      * success : true
      * data : 设置成功
@@ -14,15 +13,10 @@ public class ForgetPassword {
      * traceId : null
      */
 
-    @SerializedName("success")
     private Boolean success;
-    @SerializedName("data")
     private String data;
-    @SerializedName("msg")
     private String msg;
-    @SerializedName("code")
     private String code;
-    @SerializedName("traceId")
     private Object traceId;
 
     public Boolean getSuccess() {

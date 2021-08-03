@@ -37,6 +37,7 @@ import cat.ereza.customactivityoncrash.config.CaocConfig;
  * desc   : 项目中的 Application 基类
  */
 public final class MyApplication extends Application {
+    public static final String TAG = "MyApplication";
 
     private static MyApplication mInstance;
 
@@ -44,12 +45,10 @@ public final class MyApplication extends Application {
 
     @Override
     public void onCreate() {
+        Log.d(TAG, "onCreate()");
         mInstance = this;
         super.onCreate();
-        initSDK(this);
-        initEaseUi();
-        // 初始化七牛云短视频sdk
-        initShortVideo();
+        //initSDK(this);
         setContext(getApplicationContext());
     }
 
@@ -69,15 +68,15 @@ public final class MyApplication extends Application {
         return this;
     }
 
-    private void initShortVideo() {
-        PLShortVideoEnv.init(getApplicationContext());
+    private static void initShortVideo(Application application) {
+        PLShortVideoEnv.init(application);
     }
 
     public static MyApplication getInstance() {
         return mInstance;
     }
 
-    private void initEaseUi() {
+    private static void initEaseUi(Application application) {
         EMOptions options = new EMOptions();
         // 设置Appkey，如果配置文件已经配置，这里可以不用设置
         // options.setAppKey("lzan13#hxsdkdemo");
@@ -103,7 +102,7 @@ public final class MyApplication extends Application {
         // options.setMipushConfig(MLConstants.ML_MI_APP_ID, MLConstants.ML_MI_APP_KEY);
 
         // 调用初始化方法初始化sdk
-        EaseUI.getInstance().init(this, null);
+        EaseUI.getInstance().init(application, null);
 
         //设置头像圆角
         EaseAvatarOptions easeAvatarOptions = new EaseAvatarOptions();
@@ -131,7 +130,7 @@ public final class MyApplication extends Application {
 
                 //easeUser.setAvatar(e);
                 //直接从存下下来的EaseUser里面获取
-                return MyEMUserHelper.getEaseUser(getContext(),username);
+                return MyEMUserHelper.getEaseUser(getContext(), username);
                 //return getus
             }
         });
@@ -143,6 +142,10 @@ public final class MyApplication extends Application {
      * 初始化一些第三方框架
      */
     public static void initSDK(Application application) {
+        Log.d(TAG, "initSDK");
+        initEaseUi(application);
+        // 初始化七牛云短视频sdk
+        initShortVideo(application);
         // 友盟统计、登录、分享 SDK
         UmengClient.init(application);
 

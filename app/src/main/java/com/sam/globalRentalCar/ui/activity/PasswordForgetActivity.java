@@ -141,12 +141,12 @@ public class PasswordForgetActivity extends MyActivity {
                                 int Code = Integer.parseInt(response.body().getCode());
                                 if (Code == HttpURLConnection.HTTP_OK) {
                                     hideDialog();
-                                    toast("重置密码成功" + response.message());
+                                    toast(response.body().getData());
                                     startActivity(com.sam.globalRentalCar.ui.activity.AccountLoginActivity.class);
                                     finish();
                                 } else {
                                     hideDialog();
-                                    toast("重置密码失败" + response.message());
+                                    toast(response.body().getData());
                                 }
 
                             }

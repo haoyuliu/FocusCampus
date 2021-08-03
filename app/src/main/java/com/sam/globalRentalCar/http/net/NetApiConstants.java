@@ -152,7 +152,7 @@ public class NetApiConstants {
     /**
      * 重置密码
      */
-    public static final String RESET_USER_PASSWORD = "user/resetUserPwd";
+    public static final String RESET_USER_PASSWORD = "user/setUserPwd";
     /**
      * 账号密码登录接口
      */

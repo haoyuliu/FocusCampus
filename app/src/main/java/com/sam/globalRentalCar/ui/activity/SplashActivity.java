@@ -9,6 +9,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.sam.base.BaseDialog;
 import com.sam.globalRentalCar.R;
 import com.sam.globalRentalCar.common.MyActivity;
+import com.sam.globalRentalCar.common.MyApplication;
 import com.sam.globalRentalCar.constant.Constant;
 import com.sam.globalRentalCar.utils.SPUtils;
 
@@ -46,6 +47,7 @@ public final class SplashActivity extends MyActivity {
     }
 
     private void doOther() {
+        MyApplication.initSDK(getApplication());
         startActivity(HomeActivity.class);
         SPUtils.getInstance(SplashActivity.this).put("isSign", true);
     }
