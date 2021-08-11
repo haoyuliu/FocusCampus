@@ -28,7 +28,8 @@ public final class SplashActivity extends MyActivity {
         if (!isSign) {
             showPrivacyDialog();
         } else {
-            startActivity(HomeActivity.class);
+            doOther();
+//            startActivity(HomeActivity.class);
         }
 
     }

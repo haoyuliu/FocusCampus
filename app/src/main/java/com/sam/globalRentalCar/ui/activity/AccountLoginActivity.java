@@ -162,21 +162,13 @@ public final class AccountLoginActivity extends MyActivity
                                         @Override
                                         public void onSuccess() {
                                             hideDialog();
-                                            SPUtils.getInstance(AccountLoginActivity.this).put("token", response.body().getData().getToken());
-                                            SPUtils.getInstance(AccountLoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
-                                            SPUtils.getInstance(AccountLoginActivity.this).put("NickName", response.body().getData().getNickName());
-                                            SPUtils.getInstance(AccountLoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
-                                            SPUtils.getInstance(AccountLoginActivity.this).put("userSex", response.body().getData().getUserSex());
-                                            SPUtils.getInstance(AccountLoginActivity.this).put("userDesc", response.body().getData().getUserDesc());
-                                            SPUtils.getInstance(AccountLoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
-                                            SPUtils.getInstance(AccountLoginActivity.this).put("userLocation", response.body().getData().getUserLocation());
-                                            startActivity(HomeActivity.class);
+
                                         }
 
                                         @Override
                                         public void onError(int i, String s) {
                                             hideDialog();
-                                            toast("登录失败" + s.toString());
+//                                            toast("登录失败" + s.toString());
                                         }
 
                                         @Override
@@ -184,7 +176,15 @@ public final class AccountLoginActivity extends MyActivity
                                             showDialog();
                                         }
                                     });
-
+                                    SPUtils.getInstance(AccountLoginActivity.this).put("token", response.body().getData().getToken());
+                                    SPUtils.getInstance(AccountLoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
+                                    SPUtils.getInstance(AccountLoginActivity.this).put("NickName", response.body().getData().getNickName());
+                                    SPUtils.getInstance(AccountLoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
+                                    SPUtils.getInstance(AccountLoginActivity.this).put("userSex", response.body().getData().getUserSex());
+                                    SPUtils.getInstance(AccountLoginActivity.this).put("userDesc", response.body().getData().getUserDesc());
+                                    SPUtils.getInstance(AccountLoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday());
+                                    SPUtils.getInstance(AccountLoginActivity.this).put("userLocation", response.body().getData().getUserLocation());
+                                    startActivity(HomeActivity.class);
                                 } else {
                                     hideDialog();
                                     toast("登录失败" + response.message());

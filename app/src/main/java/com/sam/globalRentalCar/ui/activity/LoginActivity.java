@@ -167,21 +167,21 @@ public final class LoginActivity extends MyActivity
                                         @Override
                                         public void onSuccess() {
                                             hideDialog();
-                                            SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
-                                            SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
-                                            SPUtils.getInstance(LoginActivity.this).put("NickName", response.body().getData().getNickName());
-                                            SPUtils.getInstance(LoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
-                                            SPUtils.getInstance(LoginActivity.this).put("userSex", response.body().getData().getUserSex());
-                                            SPUtils.getInstance(LoginActivity.this).put("userDesc", response.body().getData().getUserDesc() + "");
-                                            SPUtils.getInstance(LoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday() + "");
-                                            SPUtils.getInstance(LoginActivity.this).put("userLocation", response.body().getData().getUserLocation() + "");
-                                            startActivity(com.sam.globalRentalCar.ui.activity.HomeActivity.class);
+//                                            SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
+//                                            SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
+//                                            SPUtils.getInstance(LoginActivity.this).put("NickName", response.body().getData().getNickName());
+//                                            SPUtils.getInstance(LoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
+//                                            SPUtils.getInstance(LoginActivity.this).put("userSex", response.body().getData().getUserSex());
+//                                            SPUtils.getInstance(LoginActivity.this).put("userDesc", response.body().getData().getUserDesc() + "");
+//                                            SPUtils.getInstance(LoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday() + "");
+//                                            SPUtils.getInstance(LoginActivity.this).put("userLocation", response.body().getData().getUserLocation() + "");
+//                                            startActivity(com.sam.globalRentalCar.ui.activity.HomeActivity.class);
                                         }
 
                                         @Override
                                         public void onError(int i, String s) {
                                             hideDialog();
-                                            toast("登录失败" + s.toString());
+//                                            toast("登录失败" + s.toString());
                                         }
 
                                         @Override
@@ -189,7 +189,15 @@ public final class LoginActivity extends MyActivity
                                             showDialog();
                                         }
                                     });
-
+                                    SPUtils.getInstance(LoginActivity.this).put("token", response.body().getData().getToken());
+                                    SPUtils.getInstance(LoginActivity.this).put("HeadImage", response.body().getData().getHeadImg());
+                                    SPUtils.getInstance(LoginActivity.this).put("NickName", response.body().getData().getNickName());
+                                    SPUtils.getInstance(LoginActivity.this).put("UserId", response.body().getData().getUserId() + "");
+                                    SPUtils.getInstance(LoginActivity.this).put("userSex", response.body().getData().getUserSex());
+                                    SPUtils.getInstance(LoginActivity.this).put("userDesc", response.body().getData().getUserDesc() + "");
+                                    SPUtils.getInstance(LoginActivity.this).put("userBirthday", response.body().getData().getUserBirthday() + "");
+                                    SPUtils.getInstance(LoginActivity.this).put("userLocation", response.body().getData().getUserLocation() + "");
+                                    startActivity(com.sam.globalRentalCar.ui.activity.HomeActivity.class);
                                 } else {
                                     hideDialog();
                                     toast("登录失败" + response.message());
