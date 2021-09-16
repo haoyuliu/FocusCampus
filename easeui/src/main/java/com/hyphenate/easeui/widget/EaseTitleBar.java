@@ -5,9 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hyphenate.easeui.R;
 
@@ -38,7 +40,7 @@ public class EaseTitleBar extends RelativeLayout{
         init(context, null);
     }
     
-    private void init(Context context, AttributeSet attrs){
+    private void init(final Context context, AttributeSet attrs){
         LayoutInflater.from(context).inflate(R.layout.ease_widget_title_bar, this);
         leftLayout = (RelativeLayout) findViewById(R.id.left_layout);
         leftImage = (ImageView) findViewById(R.id.left_image);
@@ -46,7 +48,12 @@ public class EaseTitleBar extends RelativeLayout{
         rightImage = (ImageView) findViewById(R.id.right_image);
         titleView = (TextView) findViewById(R.id.title);
         titleLayout = (RelativeLayout) findViewById(R.id.root);
-        
+        findViewById(R.id.tv_jubao).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"举报成功！",Toast.LENGTH_SHORT).show();
+            }
+        });
         parseStyle(context, attrs);
     }
     

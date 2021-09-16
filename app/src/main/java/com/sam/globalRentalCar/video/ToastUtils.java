@@ -56,7 +56,7 @@ public class ToastUtils {
                 ToastUtils.s(context, "MUXER 启动失败, 请检查视频格式");
                 break;
             default:
-                ToastUtils.s(context, "错误码： " + errorCode);
+//                ToastUtils.s(context, "错误码： " + errorCode);
         }
     }
 }

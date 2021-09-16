@@ -16,7 +16,6 @@ import com.sam.globalRentalCar.action.SwipeAction;
 import com.sam.globalRentalCar.action.TitleBarAction;
 import com.sam.globalRentalCar.action.ToastAction;
 import com.sam.globalRentalCar.ui.dialog.WaitDialog;
-import com.sam.umeng.UmengClient;
 
 import butterknife.ButterKnife;
 
@@ -175,17 +174,6 @@ public abstract class MyActivity extends BaseActivity
         onBackPressed();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        UmengClient.onResume(this);
-    }
-
-    @Override
-    protected void onPause() {
-        UmengClient.onPause(this);
-        super.onPause();
-    }
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {

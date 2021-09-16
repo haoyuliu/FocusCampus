@@ -9,7 +9,6 @@ import com.hjq.bar.TitleBar;
 import com.sam.base.BaseFragment;
 import com.sam.globalRentalCar.action.TitleBarAction;
 import com.sam.globalRentalCar.action.ToastAction;
-import com.sam.umeng.UmengClient;
 
 import butterknife.ButterKnife;
 
@@ -127,12 +126,10 @@ public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A>
         super.onResume();
         // 重新初始化状态栏
         statusBarConfig().init();
-        UmengClient.onResume(this);
     }
 
     @Override
     public void onPause() {
-        UmengClient.onPause(this);
         super.onPause();
     }
 

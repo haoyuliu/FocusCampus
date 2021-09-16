@@ -29,6 +29,8 @@
         android:textColor="@color/black_deep"
         android:textSize="20sp" />
 
+
+
     <RelativeLayout
         android:id="@+id/right_layout"
         android:layout_width="50dp"
@@ -43,5 +45,12 @@
             android:layout_centerInParent="true"
             android:scaleType="centerInside" />
     </RelativeLayout>
-
+    <TextView
+        android:id="@+id/tv_jubao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="举报"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/right_layout"
+        android:layout_marginRight="5dp"/>
 </RelativeLayout>

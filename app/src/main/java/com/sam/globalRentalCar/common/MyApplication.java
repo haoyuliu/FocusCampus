@@ -24,7 +24,6 @@ import com.sam.globalRentalCar.helper.ActivityStackManager;
 import com.sam.globalRentalCar.ui.activity.CrashActivity;
 import com.sam.globalRentalCar.ui.activity.HomeActivity;
 import com.sam.globalRentalCar.utils.SPUtils;
-import com.sam.umeng.UmengClient;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -146,8 +145,8 @@ public final class MyApplication extends Application {
         initEaseUi(application);
         // 初始化七牛云短视频sdk
         initShortVideo(application);
-        // 友盟统计、登录、分享 SDK
-        UmengClient.init(application);
+//        // 友盟统计、登录、分享 SDK
+//        UmengClient.init(application);
 
         // 吐司工具类
         ToastUtils.init(application);

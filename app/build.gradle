@@ -81,9 +81,9 @@ android {
     // 友盟多渠道打包
     android.productFlavors {
         tencent {}  // 应用宝
-        baidu {}    // 百度
-        xiaomi {}   // 小米
-        huawei {}   // 华为
+//        baidu {}    // 百度
+//        xiaomi {}   // 小米
+//        huawei {}   // 华为
 
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [channel: name]
@@ -110,7 +110,7 @@ dependencies {
     // 自定义 View
     implementation project(':widget')
     // 友盟隔离
-    implementation project(':umeng')
+//    implementation project(':umeng')
 
     // Dex 分包，解决 64k 方法问题
     //implementation 'androidx.multidex:multidex:2.0.1'

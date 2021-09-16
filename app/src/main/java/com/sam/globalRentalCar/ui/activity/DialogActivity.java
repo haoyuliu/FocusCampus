@@ -23,7 +23,6 @@ import com.sam.globalRentalCar.ui.dialog.ToastDialog;
 import com.sam.globalRentalCar.ui.dialog.UpdateDialog;
 import com.sam.globalRentalCar.ui.dialog.WaitDialog;
 import com.sam.globalRentalCar.ui.popup.MenuPopup;
-import com.sam.umeng.UmengClient;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -416,8 +415,8 @@ public final class DialogActivity extends MyActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // 友盟分享回调
-        UmengClient.onActivityResult(this, requestCode, resultCode, data);
+//        // 友盟分享回调
+//        UmengClient.onActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override

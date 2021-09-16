@@ -3,6 +3,7 @@ package com.sam.globalRentalCar.ui.activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -67,6 +68,8 @@ public final class RegisterActivity extends MyActivity {
         // 给这个 View 设置沉浸式，避免状态栏遮挡
         ImmersionBar.setTitleBar(this, mTitleView);
         setOnClickListener(R.id.cv_register_countdown, R.id.btn_register_commit);
+        findViewById(R.id.tv_user_protocol).setOnClickListener(v -> BrowserActivity.start(this, Constant.USER_PROTOTAL));
+        findViewById(R.id.tv_privacy_protocol).setOnClickListener(v -> BrowserActivity.start(this, Constant.USER_PROTOTAL));
     }
 
     @Override
@@ -120,6 +123,11 @@ public final class RegisterActivity extends MyActivity {
                 break;
             case R.id.btn_register_commit:
                 showDialog();
+                if (!((CheckBox)findViewById(R.id.cb_check)).isChecked()){
+                    toast("请同意隐私协议");
+                    hideDialog();
+                    return;
+                }
                 if (mRegisterPhoneView.getText().toString().length() != 11) {
                     toast(R.string.common_phone_input_error);
                     hideDialog();
