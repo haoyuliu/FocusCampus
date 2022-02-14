@@ -192,7 +192,7 @@ dependencies {
     implementation 'com.billy.android:smart-swipe-x:1.1.0'
 
     // 日志调试：https://github.com/getActivity/Logcat
-    debugImplementation 'com.github.getActivity:Logcat:9.6'
+//    debugImplementation 'com.github.getActivity:Logcat:9.6'
 
     // 内存泄漏：https://github.com/square/leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0'

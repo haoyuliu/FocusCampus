@@ -2,7 +2,10 @@ package com.sam.globalRentalCar.ui.activity;
 
 import android.content.Intent;
 import android.os.Build;
+import android.os.Looper;
+import android.os.MessageQueue;
 import android.util.Log;
+import android.util.Printer;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -51,8 +54,6 @@ public class HomeActivity extends MyActivity {
     RadioButton rbHome;
     @BindView(R.id.rbRentalCar)
     RadioButton rbRentalCar;
-    @BindView(R.id.rbTakePhoto)
-    RadioButton rbTakePhoto;
     @BindView(R.id.rbMessage)
     RadioButton rbMessage;
     @BindView(R.id.rbMine)
@@ -132,7 +133,6 @@ public class HomeActivity extends MyActivity {
                     if (isPermissionOK()) {
                         jumpToCaptureActivity();
                     }
-                    rbHome.setChecked(true);
                 }
 
             default:
@@ -204,8 +204,7 @@ public class HomeActivity extends MyActivity {
                 // 进行内存优化，销毁掉所有的界面
                 ActivityStackManager.getInstance().finishAllActivities();
                 // 销毁进程（注意：调用此 API 可能导致当前 Activity onDestroy 方法无法正常回调）
-                System.exit(0);
-
+                finish();
             }, 300);
         } else {
             toast(R.string.home_exit_hint);

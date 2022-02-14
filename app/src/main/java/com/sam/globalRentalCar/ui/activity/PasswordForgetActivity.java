@@ -86,7 +86,7 @@ public class PasswordForgetActivity extends MyActivity {
                         public void onResponse(Call<VerficationCodeBean> call, Response<VerficationCodeBean> response) {
                             VerficationCodeBean verficationCodeBean = response.body();
                             if (verficationCodeBean.getCode().equals("200")) {
-                                toast("验证码以发送" + response.message());
+                                toast("验证码已发送" + response.message());
                                 if (response.body().getTraceId() == null) {
                                     traceId = "111";
                                     return;

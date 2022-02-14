@@ -51,6 +51,7 @@ public final class SplashActivity extends MyActivity {
         MyApplication.initSDK(getApplication());
         startActivity(HomeActivity.class);
         SPUtils.getInstance(SplashActivity.this).put("isSign", true);
+        finish();
     }
 
     @Override

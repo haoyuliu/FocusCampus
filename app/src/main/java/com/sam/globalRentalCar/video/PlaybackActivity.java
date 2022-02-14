@@ -28,6 +28,7 @@ import com.alibaba.sdk.android.vod.upload.VODUploadClientImpl;
 import com.alibaba.sdk.android.vod.upload.model.UploadFileInfo;
 import com.alibaba.sdk.android.vod.upload.model.VodInfo;
 import com.sam.globalRentalCar.R;
+import com.sam.globalRentalCar.common.MyActivity;
 import com.sam.globalRentalCar.http.net.RetrofitClient;
 import com.sam.globalRentalCar.http.request.UpLoadVideoRequestBean;
 import com.sam.globalRentalCar.http.request.upLoadAfterRequestBean;
@@ -45,7 +46,7 @@ import retrofit2.Response;
 /**
  * 视频发布页面
  */
-public class PlaybackActivity extends AppCompatActivity implements MediaController.MediaPlayerControl {
+public class PlaybackActivity extends MyActivity implements MediaController.MediaPlayerControl {
 
     private static final String TAG = "PlaybackActivity";
     private static final String MP4_PATH = "MP4_PATH";
@@ -83,10 +84,12 @@ public class PlaybackActivity extends AppCompatActivity implements MediaControll
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_playback);
+    protected int getLayoutId() {
+        return R.layout.activity_playback;
+    }
 
+    @Override
+    protected void initView() {
         mUploadBtn = (Button) findViewById(R.id.upload_btn);
         mEditTextDesc = findViewById(R.id.up_desc);
         mUploadBtn.setText(R.string.upload);
@@ -157,6 +160,11 @@ public class PlaybackActivity extends AppCompatActivity implements MediaControll
         mMediaController = new MediaController(this);
         mMediaController.setMediaPlayer(this);
         mMediaController.setAnchorView(mSurfaceView);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     private void makeUpVideoPlayingSize() {
@@ -434,9 +442,9 @@ public class PlaybackActivity extends AppCompatActivity implements MediaControll
                                     public void onResponse(Call<upLoadAfterResponseBean> call, Response<upLoadAfterResponseBean> response) {
                                         Log.d("文件保存", "code" + response.code());
                                         if (response.code() == HttpURLConnection.HTTP_OK) {
-                                            Toast.makeText(PlaybackActivity.this, "保存成功" + response.message(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(PlaybackActivity.this, "上传成功" + response.message(), Toast.LENGTH_SHORT).show();
                                         }
-
+                                        finish();
                                     }
 
                                     @Override

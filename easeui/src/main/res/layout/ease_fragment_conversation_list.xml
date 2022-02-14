@@ -6,7 +6,7 @@
     android:background="@color/common_bg"
     android:orientation="vertical">
 
-    <com.hyphenate.easeui.widget.EaseTitleBar
+    <View
         android:layout_width="match_parent"
         android:layout_height="25dp" />
 

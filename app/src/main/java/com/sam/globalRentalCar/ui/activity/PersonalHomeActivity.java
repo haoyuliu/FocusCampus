@@ -1,5 +1,7 @@
 package com.sam.globalRentalCar.ui.activity;
 
+import static com.hyphenate.easeui.EaseConstant.CHATTYPE_SINGLE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -110,7 +112,7 @@ public class PersonalHomeActivity extends MyActivity {
                         if (Integer.parseInt(followResponseBean.getCode()) == HttpURLConnection.HTTP_OK) {
                             Log.d("getFollowData", intent.getStringExtra("userId") + "userId");
                             Log.d("getFollowData", follow + "点击");
-                            toast(followResponseBean.getMsg());
+                            toast("关注成功");
                             mPersonalHomeFocus.setText("已关注");
                             follow = 0;
                         } else {
@@ -159,7 +161,7 @@ public class PersonalHomeActivity extends MyActivity {
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 // 需要传递环信ID
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, getIntent().getStringExtra("huid"));
-                intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
+                intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, CHATTYPE_SINGLE);
                 startActivity(intent);
 
             }

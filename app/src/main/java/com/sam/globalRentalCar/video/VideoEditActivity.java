@@ -1206,6 +1206,7 @@ public class VideoEditActivity extends AppCompatActivity implements PLVideoSaveL
         Log.i(TAG, "save edit success filePath: " + filePath);
         mProcessingDialog.dismiss();
         PlaybackActivity.start(VideoEditActivity.this, filePath);
+        finish();
     }
 
     /**

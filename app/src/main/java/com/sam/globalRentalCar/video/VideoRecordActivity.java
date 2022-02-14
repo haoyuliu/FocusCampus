@@ -441,7 +441,7 @@ public class VideoRecordActivity extends AppCompatActivity implements PLRecordSt
                     @Override
                     public void onResult(List<LocalMedia> result) {
                         // onResult CallbacK
-                        String path = result.get(0).getPath();
+                        String path = result.get(0).getRealPath();
 
                         // getRealPathFromUri(VideoRecordActivity.this,path);
                         Intent intent = new Intent(VideoRecordActivity.this, PlaybackActivity.class);
@@ -479,7 +479,6 @@ public class VideoRecordActivity extends AppCompatActivity implements PLRecordSt
                 mSwitchFlashBtn.setActivated(mFlashEnabled);
                 mRecordBtn.setEnabled(true);
                 refreshSeekBar();
-                ToastUtils.s(VideoRecordActivity.this, "可以开始拍摄咯");
             }
         });
     }
